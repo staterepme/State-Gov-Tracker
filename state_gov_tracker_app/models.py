@@ -30,9 +30,12 @@ class Official(models.Model):
     active = models.BooleanField()
     state = models.ForeignKey(State)
     chamber = models.CharField(max_length=200)
+    district = models.ForeignKey(District)
     party = models.ForeignKey(Party)
     transparencydata_id = models.CharField(max_length=200)
     photo_url = models.CharField(max_length=200)
+    facebook = models.CharField(max_length=200)
+    twitter = models.CharField(max_length=200)
 
     def __unicode__(self):
         return self.leg_id
@@ -45,9 +48,12 @@ class Official(models.Model):
         return self.active
         return self.state
         return self.chamber
+        return self.district
         return self.party
         return self.transparencydata_id
         return self.photo_url
+        return self.facebook
+        return self.twitter
 
 
 
