@@ -45,12 +45,11 @@ def download_first_tweets(input_file, num_tweets=20):
 				print "Could Not Get Twitter for member %s\n" %(member['twitter'])
 				continue
 			for tweet in user_tl:
-				text = tweet[0].encode('utf-8', 'ignore')
 				# text = text.replace(',',';')
 				dict_list.append({'legid':member['legid'],
-					'text':text,
-					'timestamp':tweet[1].encode('utf-8', 'ignore'),
-					'tweet_id':tweet[2].encode('utf-8', 'ignore')})
+					'text':tweet[0],
+					'timestamp':tweet[1],
+					'tweet_id':tweet[2]})
 	return dict_list
 
 def month2num(month):
@@ -92,10 +91,10 @@ def add_tweets_to_db(list_of_dictionary_tweets):
 		if tweet['tweet_id'] in existing_tweets:
 			continue
 		else:
-			new_tweet = official_tweets(legid=unicode(tweet['legid'], errors='replace'),
-				tweet=unicode(tweet['text'], errors='replace'),
-				tweet_id=unicode(tweet['tweet_id'], errors='replace'),
-				timestamp=unicode(tweet['timestamp'], errors='replace'))
+			new_tweet = official_tweets(legid=tweet['legid'],
+				tweet=tweet['text'],
+				tweet_id=tweet['tweet_id'],
+				timestamp=tweet['timestamp'])
 			session.add(new_tweet)
 			session.commit()
 
