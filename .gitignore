@@ -1,2 +1,4 @@
 *.swp
 *.db
+*.pyc
+*login_credentials.py
