@@ -103,7 +103,7 @@ ROOT_URLCONF = 'StateGovTracker_Django.urls'
 WSGI_APPLICATION = 'StateGovTracker_Django.wsgi.application'
 
 TEMPLATE_DIRS = (
-	'/Users/nies/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/templates',
+	'/home/christopher/Documents/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

@@ -3,6 +3,8 @@ import datetime
 import urllib,httplib2, mimetypes,os,sys,re,random,string
 from django.shortcuts import render_to_response
 from subprocess import call
+from login_credentials import *
+
 try:
 	import json
 except ImportError:
@@ -21,7 +23,7 @@ def search(request):
 		loc = request.GET['q'].replace(' ','+')
 	else:
 		loc = '755+N.+26th+St.+Philadelphia+PA'
-	json_response = login('christophernies@gmail.com', 'Congress1!')
+	json_response = login(azavea_login, azavea_password)
 	token = json_response['token']
 	uid = str(json_response['user'])
 	official_response = get_official(loc, uid, token)
@@ -39,9 +41,7 @@ def link(text, url):
 ####SETTINGS####
 http = httplib2.Http()
 url_base = 'http://cicero.azavea.com/v3.1'
-users = {'christophernies@gmail.com':'Congress1!'}
-fb_app_id = '503590929669292'
-fb_app_secret = '9b3287b8287efbd4b18150173a9188d4'
+
 
 
 def encode_multipart (file_path, fields):
