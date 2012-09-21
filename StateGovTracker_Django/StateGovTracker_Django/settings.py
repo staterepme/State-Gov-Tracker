@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/nies/Documents/StateGovTracker_Django/stategovtracker_django.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/Users/nies/State-Gov-Tracker/StateGovTracker_Django/stategovtracker_django.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -103,7 +103,7 @@ ROOT_URLCONF = 'StateGovTracker_Django.urls'
 WSGI_APPLICATION = 'StateGovTracker_Django.wsgi.application'
 
 TEMPLATE_DIRS = (
-	'/Users/nies/Documents/StateGovTracker_Django/StateGovTracker_Django/templates',
+	'/Users/nies/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
