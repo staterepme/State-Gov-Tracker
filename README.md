@@ -16,7 +16,11 @@ create dev.db in the top level of the repo directory
 Modify State-Gov-Tracker/state_gov_tracker/settings.py
 - DATABASES= { 'NAME': 'PATH_TO_dev.db' }
 
+Modify /State-Gov-Tracker/data_scripts/load_database.py
+- Line 9 to location of database with representative information
+
 TEMPLATE_DIRS
+
 
 Load tables into database:
 
