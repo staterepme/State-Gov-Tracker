@@ -1,9 +1,50 @@
-{% extends "base.html" %}
+<link rel="stylesheet" type="text/css" href="/media/styles.css" />
+<link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap.css" />
+<style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project name</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-{% block content %}
+    <div class="container">
 
-This is the home page
+      <h1>Welcome to State-Gov-Tracker</h1>
+      <p>We have command line scripts done to:
+      <br>
+      <ul>
+      	<li>Get a token from Cicero</li>
+      	<li>Get a user's address, pass it to Cicero, and get information back for who their legislators are</li>
+      	<li>Get that official's Facebook posts, Twitter tweets, and a geo-specific Google News search for their name</li>
+      <ul>
+      <br>
+      We Also have a database schema, wireframes, and a collected database of sponsorships and votes, gathered through the Sunlight OpenStates API. We made that our own database so we can serve results to the user quicker.
+      <br>
+      We need to: Make a UI and working website with Django and twitter bootstrap.
+      </p>
+
+    </div>
+
+This is the home from a template
 {{ official }}
 
-{% endblock %}
+<button class="btn btn-large btn-primary" type="button">Large button</button>
 

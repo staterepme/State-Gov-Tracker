@@ -7,6 +7,8 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     # Examples:
+    url(r'^current_time/', 'state_gov_tracker_app.views.current_datetime'),
+    url(r'^twitter_test/', 'state_gov_tracker_app.views.twitter_view'),
     url(r'^$', 'state_gov_tracker_app.views.home', name='home'),
     # url(r'^state_gov_tracker/', include('state_gov_tracker.foo.urls')),
 
