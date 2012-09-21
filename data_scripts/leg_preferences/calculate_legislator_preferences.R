@@ -13,7 +13,7 @@ vote_sub <- votes[,1:3]
 
 # Get Member Table
 mem_info <- dbReadTable(conn, "officials")
-party_data <- cbind(mem_info$legid, mem_info$party)
+mem_data <- data.frame(cbind(mem_info$legid, mem_info$party, mem_info$chamber))
 
 # Reshape Votes so that each row is a legislator and column is a vote
 votes_wide <- reshape(vote_sub, idvar="legid", timevar="bill_id", direction="wide")
@@ -38,9 +38,19 @@ id1 <- ideal(rc,
 # Combine Ideal Points with Party Data #
 ideal_scores <- cbind(votes_wide[,1], id1$xbar)
 ideal_scores <- data.frame(ideal_scores, row.names=NULL)
-party_df <- data.frame(party_data)
-combined <- merge(party_df, ideal_scores, by.x = "X1", by.y = "V1")
-parties <- combined$X2
 
-qplot(combined$D1, ..density.., data=combined, geom="density", fill="#FF6666", colour = "black", title="Aggregate")
+transform(ideal_scores, D1 = as.numeric(as.character(D1)))
 
+# Transform Variables into correct formats
+ideal_scores$D1 <- as.numeric(levels(ideal_scores$D1))[ideal_scores$D1]
+combined <- merge(mem_data, ideal_scores, by.x = "X1", by.y = "V1")
+combined$X2 <- as.factor(combined$X2)
+combined$X3 <- as.factor(combined$X3)
+
+for (i in 1:length(combined$D1)) {
+    combined$D1[i] <- -1*combined$D1[i]
+}
+
+# Generate Kernel Density Plots #
+dist <- ggplot(combined, aes(x=D1)) + geom_density(alpha=.2, fill="#FF6666") 
+dist + facet_grid(X2 ~ X3)
