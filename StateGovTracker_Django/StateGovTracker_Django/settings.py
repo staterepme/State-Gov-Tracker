@@ -56,7 +56,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/Users/nies/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/templates/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -67,6 +67,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+	"/Users/nies/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -103,7 +104,7 @@ ROOT_URLCONF = 'StateGovTracker_Django.urls'
 WSGI_APPLICATION = 'StateGovTracker_Django.wsgi.application'
 
 TEMPLATE_DIRS = (
-	'/home/christopher/Documents/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/templates',
+	'/Users/nies/State-Gov-Tracker/StateGovTracker_Django/StateGovTracker_Django/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

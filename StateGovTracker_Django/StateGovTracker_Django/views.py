@@ -11,11 +11,45 @@ except ImportError:
 	import simplejson as json
 
 def MyRep(request):
-	rep_result = search(request)
-	return HttpResponse(rep_result)
+	rep_id = search(request)
+	rep_name = name(rep_id)
+	rep_picture = picture(rep_id)
+	rep_bio = bio(rep_id)
+	rep_news = news(rep_id)
+	rep_twitter = twitter(rep_id)
+	rep_facebook = facebook(rep_id)
+	rep_votes = votes(rep_id)	
+#	return HttpResponse(rep_result)
+	return render_to_response('search_results.html',{"rep_name": rep_name, "rep_picture": rep_picture, "rep_bio":rep_bio, 
+	"rep_news":rep_news, "rep_twitter":rep_twitter, "rep_facebook":rep_facebook, "rep_votes":rep_votes})
+	
+def name(rep_id):
+	name = "name!"
+	return name
+def picture(rep_id):
+	picture = "picture"
+	return picture
+def bio(rep_id):
+	bio = "bio!"
+	return bio
+def news(rep_id):
+	news = "news!"
+	return news
+def twitter(rep_id):
+	twitter = "twitter!"
+	return twitter
+def facebook(rep_id):
+	facebook = "facebook!"
+	return facebook
+def votes(rep_id):
+	votes = "votes!"
+	return votes
+	
+def search_results(request):
+	return render_to_response('search_results.html')
 
 def main2():
-	z = '755+N.+26th+St.+Philadelphia+PA'
+	z = '340+N.+12th+St.+Philadelphia+PA'
 	request = search(z)
 
 def search(request):
@@ -98,7 +132,8 @@ def get_official(loc, uid, token):
 
 def official_info(official_dict, x):
 #	return 'Your representative is: ' + str(official_dict['response'])
-	return 'Your representative is: ' + official_dict['response']['results']['candidates'][0]['officials'][x]['first_name'] + ' ' + official_dict['response']['results']['candidates'][0]['officials'][x]['last_name'] + '\n'
+#	return 'Your representative is: ' + official_dict['response']['results']['candidates'][0]['officials'][x]['first_name'] + ' ' + official_dict['response']['results']['candidates'][0]['officials'][x]['last_name'] + '\n'
+	return official_dict['response']['results']['candidates'][0]['officials'][x]['first_name'] + ' ' + official_dict['response']['results']['candidates'][0]['officials'][x]['last_name']
 #	print 'Your representative\'s address is: \n' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_1']) + '\n'+ str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_2']) + '\n'+ str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['city']) + ', ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['state']) + ' ' +str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['postal_code'])
 #	print 'Your representative\'s phone number is: ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['phone_1'])
 #	print 'Your representative\'s URL is: ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['urls'][0])
