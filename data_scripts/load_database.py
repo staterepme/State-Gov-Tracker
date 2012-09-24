@@ -14,7 +14,13 @@ class official_tweets(Base):
     __table__ = Table('official_tweets', Base.metadata, autoload=True, autoload_with=engine)
 
 class legis_news(Base):
-	__table__ = Table('pa_legis_news', Base.metadata, autoload=True, autoload_with=engine)	
+	__table__ = Table('pa_legis_news', Base.metadata, autoload=True, autoload_with=engine)
+
+class social_media_ids(Base):
+	__table__ = Table('legs_socialmedia', Base.metadata, autoload=True, autoload_with=engine)	
+
+class official_posts(Base):
+	__table__ = Table('fb_data', Base.metadata, autoload=True, autoload_with=engine)
 
 def loadSession():
     metadata = Base.metadata
