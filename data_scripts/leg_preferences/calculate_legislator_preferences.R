@@ -39,8 +39,6 @@ id1 <- ideal(rc,
 ideal_scores <- cbind(votes_wide[,1], id1$xbar)
 ideal_scores <- data.frame(ideal_scores, row.names=NULL)
 
-transform(ideal_scores, D1 = as.numeric(as.character(D1)))
-
 # Transform Variables into correct formats
 ideal_scores$D1 <- as.numeric(levels(ideal_scores$D1))[ideal_scores$D1]
 combined <- merge(mem_data, ideal_scores, by.x = "X1", by.y = "V1")

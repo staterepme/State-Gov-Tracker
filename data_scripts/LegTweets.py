@@ -33,7 +33,6 @@ def download_first_tweets(input_file, num_tweets=20):
 	Calls to the twitter API for each member,
 	downloading their last 20 tweets and returns them into a dictionary.
 	"""
-
 	member_data = csv.DictReader(open(input_file), delimiter=',')
 	counter = 0
 	dict_list = []
