@@ -14,7 +14,9 @@ Clone the repo (`git clone https://github.com/jasonblanchard/State-Gov-Tracker.g
 create dev.db in the top level of the repo directory
 
 Modify State-Gov-Tracker/state_gov_tracker/settings.py
-- DATABASES= { 'NAME': 'PATH_TO_dev.db' }
+- DATABASES= { 'NAME': 'PATH_TO_dev.db' } # you can get this from our dropbox
+- MEDIA_ROOT = '' #the absolute path to your state_gov_tracker_app/templates/media folder
+- TEMPLATE_DIRS = ( '' ) # absolute path to your state_gov_tracker_app/templates folder
 
 Modify /State-Gov-Tracker/data_scripts/load_database.py
 - Line 9 to location of database with representative information
