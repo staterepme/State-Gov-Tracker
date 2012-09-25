@@ -21,7 +21,6 @@ def facebook_token(app_id, app_secret):
 	a = content.rfind('=')
 	return content[a+1:len(content)]
 
-	
 def facebook_news_feed(app_id, app_secret, rep_FB_ID):
 	http = httplib2.Http()
 	content = {}
@@ -31,10 +30,13 @@ def facebook_news_feed(app_id, app_secret, rep_FB_ID):
 	response, content = http.request(url, 'GET', headers=headers)
 	content = json.loads(content)
 	messages = []
-	for entry in content['data']:
-		if 'message' in entry:
-			entry['created_time'].replace
-			messages.append(entry)
+	try:
+		for entry in content['data']:
+			if 'message' in entry:
+				entry['created_time'].replace
+				messages.append(entry)
+	except:
+		print "Could not get data from %s" %(rep_FB_ID)
 	return messages
 
 def get_facebook_ids():
@@ -80,7 +82,7 @@ def downloaded_posts():
 	fb_post_ids = []
 	for post in session.query(official_posts).all():
 		fb_post_ids.append(post.post_id)
-	return fb_posts_ids
+	return fb_post_ids
 
 def add_posts_to_db(list_of_dictionary_posts):
 	existing_posts = downloaded_posts()
@@ -89,15 +91,15 @@ def add_posts_to_db(list_of_dictionary_posts):
 			continue
 		else:
 			new_post = official_posts(legid=post['legid'],
-				post=post['text'],
+				post=post['message'],
 				post_id=post['id'],
-				timestamp=post['timestamp'])
+				timestamp=post['created_time'])
 			session.add(new_post)
 			session.commit()
 
 if __name__ == '__main__':
 	pp = pprint.PrettyPrinter(indent=4)
 	mem_list = get_facebook_ids()
-	print mem_list[:2]
-	new_posts = download_fb_posts(fb_app_id, fb_app_secret, mem_list[:2])
+	print mem_list
+	new_posts = download_fb_posts(fb_app_id, fb_app_secret, mem_list)
 	add_posts_to_db(new_posts)
