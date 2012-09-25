@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, mapper
 
 # Change Path to Database #
-engine = create_engine('sqlite:////Users/christbr1985/Dropbox/CongressMonitor/StateGovTracker.db')
+engine = create_engine('sqlite:////home/christopher/Dropbox/CongressMonitor/StateGovTracker.db')
 
 Base = declarative_base()
 
