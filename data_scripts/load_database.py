@@ -22,6 +22,9 @@ class social_media_ids(Base):
 class official_posts(Base):
 	__table__ = Table('fb_data', Base.metadata, autoload=True, autoload_with=engine)
 
+class official_info(Base):
+	__table__ = Table('officials', Base.metadata, autoload=True, autoload_with=engine)
+
 def loadSession():
     metadata = Base.metadata
     Session = sessionmaker(bind=engine)
