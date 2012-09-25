@@ -1,6 +1,22 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
+''' Uncomment these when you're ready to integrate stuff from Chris's project
+from StateGovTracker_Django.views import home
+from StateGovTracker_Django.views import MyRep
+from StateGovTracker_Django.views import search_form
+from StateGovTracker_Django.views import search
+from StateGovTracker_Django.views import search_results
+
+
+urlpatterns = patterns('',
+	('^$', search_form),
+    ('^MyRep$', MyRep),
+    ('^search$', search_form),
+    ('^searches$', search_results),
+)
+'''
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
