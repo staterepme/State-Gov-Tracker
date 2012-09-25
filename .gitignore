@@ -3,4 +3,4 @@
 *.pyc
 *login_credentials.py
 *.DS_Store
-*state_gov_tracker/settings.py
+*settings.py
