@@ -45,4 +45,4 @@ def gather_news_feeds(list_of_member_tuples, num_results):
 
 if __name__ == '__main__':
     member_search_list = get_search_terms()
-    print gather_news_feeds(member_search_list[:2], 2)
+    print gather_news_feeds(member_search_list[:10], 2)

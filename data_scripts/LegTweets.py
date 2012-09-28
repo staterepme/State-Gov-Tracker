@@ -98,7 +98,8 @@ def add_tweets_to_db(list_of_dictionary_tweets):
 			session.commit()
 
 def add_oembed_codes():
-	for entry in session.query(official_tweets).filter(official_tweets.oembed==None).all():
+	for entry in session.query(official_tweets).filter(official_tweets.oembed==None).order_by(official_tweets.timestamp.desc()).all():
+		# print entry.timestamp
 		entry.oembed = getOembed(entry.tweet_id)
 		session.add(entry)
 		session.commit()
@@ -111,4 +112,4 @@ if __name__ == '__main__':
 	# print getOembed('233584713019817984')
 	new_tweets = download_first_tweets('./legs_socialmedia.csv', num_tweets=20)
 	add_tweets_to_db(new_tweets)
-	# add_oembed_codes()
+	add_oembed_codes()

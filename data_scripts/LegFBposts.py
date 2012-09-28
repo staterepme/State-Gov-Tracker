@@ -52,21 +52,31 @@ def parse_facebook_info(line):
 	"""Facebook id's right now include more than what we need, this 
 	function parses that line and returns exactly what we need."""
 	if 'pages' in line:
-		search_term = 'pages/'
+		print line
+		search_term = r"facebook\.com/pages/.*?/(\d+)"
+		match = re.search(search_term, line)
+		fb_id = match.group(1)
 	elif 'profile' in line:
 		search_term = 'id='
+		a = line.rfind(search_term)
+		fb_id = line[a+len(search_term):len(line)].rstrip()
 	else:
 		search_term = 'facebook.com/'
-	a = line.rfind(search_term)
-	fb_id = line[a+len(search_term):len(line)].rstrip()
+		a = line.rfind(search_term)
+		fb_id = line[a+len(search_term):len(line)].rstrip()
 	return fb_id
 
 def download_fb_posts(app_id, app_secret, list_of_fb_ids):
 	"""Downloads most recent facebook posts, returns a list of dictionary entries"""
 	dict_list = []
+	counter = 0
 	for member_tuple in list_of_fb_ids:
+		# counter += 1
+		# if counter > 2:
+		# 	break
 		posts = facebook_news_feed(app_id, app_secret, member_tuple[1])
 		for post in posts:
+			# print post
 			post[u'legid'] = member_tuple[0]
 			post[u'created_time'] = fix_fb_timestamp(post[u'created_time'])
 			dict_list.append(post)
@@ -100,6 +110,6 @@ def add_posts_to_db(list_of_dictionary_posts):
 if __name__ == '__main__':
 	pp = pprint.PrettyPrinter(indent=4)
 	mem_list = get_facebook_ids()
-	print mem_list
+	# print mem_list
 	new_posts = download_fb_posts(fb_app_id, fb_app_secret, mem_list)
 	add_posts_to_db(new_posts)
