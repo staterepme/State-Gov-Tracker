@@ -1,12 +1,13 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
-''' Uncomment these when you're ready to integrate stuff from Chris's project
-from StateGovTracker_Django.views import home
-from StateGovTracker_Django.views import MyRep
-from StateGovTracker_Django.views import search_form
-from StateGovTracker_Django.views import search
-from StateGovTracker_Django.views import search_results
+#Uncomment these when you're ready to integrate stuff from Chris's project
+#in chris's these were all from StateGovTracker_Django.views import *
+from state_gov_tracker_app.views import home
+from state_gov_tracker_app.views import MyRep
+from state_gov_tracker_app.views import search_form
+from state_gov_tracker_app.views import search
+from state_gov_tracker_app.views import search_results
 
 
 urlpatterns = patterns('',
@@ -35,3 +36,4 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
+'''

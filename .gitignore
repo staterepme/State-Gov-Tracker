@@ -3,3 +3,5 @@
 *.pyc
 *login_credentials.py
 *.DS_Store
+
+StateGovTracker_Django
