@@ -9,6 +9,57 @@
 
 from django.db import models
 
+class FbData(models.Model):
+    legid = models.TextField(blank=True) # This field type is a guess.
+    timestamp = models.TextField(blank=True) # This field type is a guess.
+    post = models.TextField(blank=True)
+    post_id = models.TextField(blank=True)
+    row_pk = models.IntegerField(primary_key=True)
+    class Meta:
+        db_table = u'fb_data'
+
+class LegsSocialmedia(models.Model):
+    legid = models.TextField(primary_key=True, blank=True) # This field type is a guess.
+    twitter = models.TextField(blank=True) # This field type is a guess.
+    facebook = models.TextField(blank=True) # This field type is a guess.
+    class Meta:
+        db_table = u'legs_socialmedia'
+
+class OfficialPersonalPages(models.Model):
+    legid = models.TextField(primary_key=True, blank=True) # This field type is a guess.
+    fullname = models.TextField(blank=True) # This field type is a guess.
+    chamber = models.TextField(blank=True) # This field type is a guess.
+    district = models.IntegerField(null=True, blank=True)
+    party = models.TextField(blank=True) # This field type is a guess.
+    ga_homepage = models.TextField(blank=True) # This field type is a guess.
+    personal_homepage = models.TextField(blank=True) # This field type is a guess.
+    press_release_url = models.TextField(blank=True) # This field type is a guess.
+    notes = models.TextField(blank=True) # This field type is a guess.
+    class Meta:
+        db_table = u'official_personal_pages'
+
+class OfficialPressReleases(models.Model):
+    pr_legid = models.TextField(blank=True)
+    pr_url = models.TextField(blank=True)
+    pr_date = models.TextField(blank=True)
+    pr_html = models.TextField(blank=True)
+    pr_text = models.TextField(blank=True)
+    pr_title = models.TextField(blank=True)
+    pr_key = models.IntegerField(primary_key=True)
+    pr_md5 = models.TextField(unique=True, blank=True) # This field type is a guess.
+    class Meta:
+        db_table = u'official_press_releases'
+
+class OfficialTweets(models.Model):
+    legid = models.TextField(blank=True) # This field type is a guess.
+    tweet = models.TextField(blank=True) # This field type is a guess.
+    tweet_key = models.IntegerField(primary_key=True)
+    tweet_id = models.TextField(blank=True)
+    oembed = models.TextField(blank=True)
+    timestamp = models.TextField(blank=True)
+    class Meta:
+        db_table = u'official_tweets'
+
 class Officials(models.Model):
     legid = models.TextField(primary_key=True, blank=True) # This field type is a guess.
     fullname = models.TextField(blank=True) # This field type is a guess.
@@ -26,33 +77,9 @@ class Officials(models.Model):
     photourl = models.TextField(blank=True) # This field type is a guess.
     createdat = models.TextField(blank=True) # This field type is a guess.
     updatedat = models.TextField(blank=True) # This field type is a guess.
+    homepage = models.TextField(blank=True)
     class Meta:
         db_table = u'officials'
-
-class FbData(models.Model):
-    legid = models.TextField(blank=True) # This field type is a guess.
-    row_pk = models.IntegerField(blank=False, primary_key=True)
-    post_id = models.TextField(blank=True) # This field type is a guess.
-    timestamp = models.TextField(blank=True) # This field type is a guess.
-    post = models.TextField(blank=True) # This field type is a guess.
-    class Meta:
-        db_table = u'fb_data'
-
-class LegsSocialmedia(models.Model):
-    legid = models.TextField(primary_key=True, blank=True) # This field type is a guess.
-    twitter = models.TextField(blank=True) # This field type is a guess.
-    facebook = models.TextField(blank=True) # This field type is a guess.
-    class Meta:
-        db_table = u'legs_socialmedia'
-
-class OfficialTweets(models.Model):
-    legid = models.TextField(blank=True) # This field type is a guess.
-    tweet = models.TextField(blank=True) # This field type is a guess.
-    timestamp = models.TextField(blank=True) # This field type is a guess.
-    tweet_key = models.IntegerField(primary_key=True)
-    class Meta:
-        db_table = u'official_tweets'
-
 
 class PaBills(models.Model):
     state = models.TextField(blank=True) # This field type is a guess.
@@ -82,7 +109,7 @@ class PaLegisNews(models.Model):
 
 class PaLegisSponsors(models.Model):
     legid = models.TextField(blank=True) # This field type is a guess.
-    bill_id = models.ForeignKey(PaBills, blank=True) # This field type is a guess.
+    bill_id = models.TextField(blank=True) # This field type is a guess.
     type = models.TextField(blank=True) # This field type is a guess.
     yeas = models.TextField(blank=True) # This field type is a guess.
     nays = models.TextField(blank=True) # This field type is a guess.
