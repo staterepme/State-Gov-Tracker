@@ -6,12 +6,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, mapper
 
 # Change Path to Database #
-engine = create_engine('sqlite:////home/christopher/Dropbox/CongressMonitor/StateGovTracker.db')
+engine = create_engine('sqlite:////users/christbr1985/Dropbox/CongressMonitor/StateGovTracker.db')
 
 Base = declarative_base()
 
 class official_tweets(Base):
     __table__ = Table('official_tweets', Base.metadata, autoload=True, autoload_with=engine)
+
+class official_webpages(Base):
+    __table__ = Table('official_personal_pages', Base.metadata, autoload=True, autoload_with=engine)
 
 class legis_news(Base):
 	__table__ = Table('pa_legis_news', Base.metadata, autoload=True, autoload_with=engine)
