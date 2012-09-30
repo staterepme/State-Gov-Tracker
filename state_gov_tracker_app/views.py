@@ -1,5 +1,5 @@
 # Create your views here.
-from state_gov_tracker_app.models import Officials, OfficialTweets
+from state_gov_tracker_app.models import *
 import urllib,httplib2, mimetypes,os,sys,re,random,string
 from state_gov_tracker_app.login_credentials import *
 from django.shortcuts import render_to_response
@@ -7,6 +7,7 @@ from django.template import Context, loader
 from state_gov_tracker_app.models import *
 from django.http import HttpResponse
 from subprocess import call
+
 import datetime
 try:
 	import json
@@ -21,7 +22,8 @@ def WhichRep(request):
 	upper = search(request, 'UPPER')
 	lower = search(request, 'LOWER')
 	upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
-	lower_object = Officials.objects.filter(district=upper['district_id']).filter(chamber="lower")[0].legid
+	lower['legid'] = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0].legid
+	upper['fbdata'] = FbData.objects.all()
 	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+')})
 #	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.filter(district=upper['district_id'])})
 
