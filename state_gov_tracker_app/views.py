@@ -20,7 +20,10 @@ url_base = 'http://cicero.azavea.com/v3.1'
 def WhichRep(request):
 	upper = search(request, 'UPPER')
 	lower = search(request, 'LOWER')
-	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.all()})
+	upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
+	lower_object = Officials.objects.filter(district=upper['district_id']).filter(chamber="lower")[0].legid
+	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+')})
+#	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.filter(district=upper['district_id'])})
 
 def profile(request):
 	official = search(request, request.GET['h'])
@@ -73,7 +76,7 @@ def get_officials(loc, uid, token, upper_or_lower):
 def official_info(official_dict, x):
 	results = {}
 	results['district_id'] = official_dict['response']['results']['candidates'][0]['officials'][x]['office']['district']['district_id']
-	results['district'] = official_dict['response']['results']['candidates'][0]['officials'][x]['office']['chamber']['name']
+	results['chamber'] = official_dict['response']['results']['candidates'][0]['officials'][x]['office']['chamber']['name']
 	results['first_name'] = official_dict['response']['results']['candidates'][0]['officials'][x]['first_name']
 	results['last_name'] = official_dict['response']['results']['candidates'][0]['officials'][x]['last_name']
 	results['address'] = str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_1']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_2']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['city']) + ', ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['state']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['postal_code'])
