@@ -39,28 +39,36 @@ def get_urls_with_prs_counter(first_url):
 
 def dl_rss(url, party='Democratic'):
 	"""Takes url to media/press release page and finds the rss feed there"""
-	if party == 'Democratic':
-		links = get_prs_from_url(url, '//tr/td/a')
-		feed_id = None
-		for url in links:
-			match = re.search(r'RSS_reader_Member\.asp\?Feed=(\d+)', url)
-			if (match):
-				feed_id = match.group(1)
-		rss_feed = feedparser.parse('http://www.pahouse.com/pr/xml/%s.xml' %(feed_id))
-	if party == 'Republican':
-		links = get_prs_from_url(url, '//div[@id="NewsRSS"]/a')
-		rss_feed = feedparser.parse(links[0])
-	for entry in rss_feed['entries']:
-		print entry['title']
-		print parse_dates(entry['published'])
-		print entry['link']
-
+	try:	
+		if party == 'Democratic':
+			links = get_prs_from_url(url, '//tr/td/a')
+			for url in links:
+				match = re.search(r'RSS_reader_Member\.asp\?Feed=(\d+)', url)
+				if (match):
+					feed_id = match.group(1)
+			rss_feed = feedparser.parse('http://www.pahouse.com/pr/xml/%s.xml' %(feed_id))
+		if party == 'Republican':
+			links = get_prs_from_url(url, '//div[@id="NewsRSS"]')
+			try:
+				rss_feed = feedparser.parse(links[0])
+			except:
+				rss_feed = feedparser.parse(links[1])
+			# print rss_feed
+		list_of_pr_dicts = []
+		for entry in rss_feed['entries']:
+			# print entry
+			if entry['link'] == None:
+				continue
+			list_of_pr_dicts.append({"title":entry['title'], "datestamp":parse_dates(entry['published']), "url":entry['link']})
+		return list_of_pr_dicts
+	except:
+		print "Could not get RSS Feed for %s.\nHere are the links:%s" %(url, links)
 
 def parse_dates(date_string, method=1):
 	if method==1:
 		"""Example string - Tue, 16 Nov 2010 19:27:00 -0500"""
 		date_split = date_string.split(" ")
-		return "%s-%02d-%02d %s" %(date_split[3], int(month2num(date_split[2])), int(date_split[1]), date_split[4])
+		return "%s-%02d-%02d" %(date_split[3], int(month2num(date_split[2])), int(date_split[1]))
 
 def month2num(month):
     """Takes month and translates it to a number"""
@@ -122,9 +130,10 @@ def get_prs_from_url(url, path):
 		for element in html_tree.xpath(path):
 			for links in element.iterlinks():
 				link_list.append(links[2])
+		print link_list
 		return list(set(link_list))
 	except:
-		print "Could not get %s" %(url)
+		print "Could not get links from %s" %(url)
 		return []
 			
 class official_prs(Base):
@@ -132,29 +141,56 @@ class official_prs(Base):
 	__table__ = Table('official_personal_pages', Base.metadata, autoload=True, autoload_with=engine)
 	def get_pr_urls(self):
 		"""Find pages that have links to press releases, download press release pages"""
-		if self.chamber == 'upper' and self.party == 'Republican':
-			self.urls =  get_urls_with_prs_repsen(self.press_release_url)
-		elif self.chamber == 'upper' and self.party == 'Democratic':
-			self.urls = get_urls_with_prs_counter(self.press_release_url)
-		self.all_prs = []
-		for url in self.urls:
-			self.all_prs.extend(get_prs_from_url(url, settings_dict[self.chamber][self.party]['xpath']))
-			if self.legid in ['PAL000016', 'PAL000266', 'PAL000227']:
-				self.all_prs.extend(get_prs_from_url(url, '//h4/a'))
-		self.all_prs = list(set(self.all_prs))
+		if self.chamber == 'upper':
+			if self.party == 'Republican':
+				self.urls =  get_urls_with_prs_repsen(self.press_release_url)
+			elif self.party == 'Democratic':
+				self.urls = get_urls_with_prs_counter(self.press_release_url)
+			self.all_prs = []
+			for url in self.urls:
+				self.all_prs.extend(get_prs_from_url(url, settings_dict[self.chamber][self.party]['xpath']))
+				if self.legid in ['PAL000016', 'PAL000266', 'PAL000227']:
+					self.all_prs.extend(get_prs_from_url(url, '//h4/a'))
+			self.all_prs = list(set(self.all_prs))
+		if self.chamber == 'lower':
+			self.all_prs = dl_rss(self.press_release_url, party=self.party)
 	def add_pr_urls_to_db(self):
 		"""Take list of press release links, creates an md5 hash, checks to see if hash already in database, if not, then add link to database."""
 		list_of_md5s = existing_url_md5s()
-		for url in self.all_prs:
-			if md5(url).hexdigest() in list_of_md5s:
-				continue
-			else:
-				new_pr = press_release(pr_legid=self.legid,
-					pr_md5=md5(url).hexdigest(),
-					pr_url=url)
-				session.add(new_pr)
-				session.commit()
-
+		if self.all_prs != None:
+			if self.chamber == 'upper':
+				for url in self.all_prs:
+					if md5(url).hexdigest() in list_of_md5s:
+						continue
+					else:
+						new_pr = press_release(pr_legid=self.legid,
+							pr_md5=md5(url).hexdigest(),
+							pr_url=url)
+						try:
+							session.add(new_pr)
+							session.commit()
+						except:
+							session.rollback()
+							print "Could not commit %s" %(new_pr.url)
+							pass
+			if self.chamber == 'lower':
+				for entry in self.all_prs:
+					if md5(entry['url']).hexdigest() in list_of_md5s:
+						continue
+					else:
+						new_pr = press_release(pr_legid=self.legid,
+							pr_md5=md5(entry['url']).hexdigest(),
+							pr_url=entry['url'],
+							pr_date=entry['datestamp'])
+						try:
+							session.add(new_pr)
+							session.commit()
+						except:
+							session.rollback()
+							print "Could not commit %s" %(self.fullname)
+							pass
+		else:
+			print "Could not find any press releases for %s" %(self.fullname)
 def existing_url_md5s():
 	md5_list = []
 	for pr in session.query(press_release).all():
@@ -173,4 +209,14 @@ if __name__ == '__main__':
 	# 		print off.press_release_url
 	# 	off.add_pr_urls_to_db()
 
-	print dl_rss('http://www.repsaccone.com/latestnews.aspx', party="Republican")
+	### Download Press Releases for State House ###
+	for off in session.query(official_prs).filter(official_prs.chamber=='lower').filter(official_prs.party=="Republican").all():
+		print off.fullname
+		off.get_pr_urls()
+		# print off.all_prs
+		# if len(off.all_prs) < 15:
+		# 	print off.fullname
+		# 	print off.press_release_url
+		off.add_pr_urls_to_db()
+
+	# print dl_rss('http://www.repsaccone.com/latestnews.aspx', party="Republican")
