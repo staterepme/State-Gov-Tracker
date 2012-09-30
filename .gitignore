@@ -3,5 +3,8 @@
 *.pyc
 *login_credentials.py
 *.DS_Store
+<<<<<<< HEAD
 
 StateGovTracker_Django
+=======
+>>>>>>> f28983fe8b91dfc5812fb0ae6d2f628f01d7a6fc
