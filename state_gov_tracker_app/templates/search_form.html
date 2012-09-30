@@ -11,14 +11,13 @@
 	position:fixed;
 	top:100px;
 	right:650px;
-	background-image:url('http://farm3.staticflickr.com/2040/2392125726_29fb17ae2a_o_d.jpg');
-
+	background-image:url('{{ STATIC_URL }}static/Harrisburg.jpg');
 	}
 	</style>
 </head>
 <body>
 	<center><H2><font face="Helvetica">Welcome to MyRep.is! Enter your address below:</font></H2><br></center>
-    <center><form action="/MyRep" method="get">
+    <center><form action="/results" method="get">
         <input type="text" name="q" size=100>
         <input type="submit" value="Who's my rep?">
     </form></center>
