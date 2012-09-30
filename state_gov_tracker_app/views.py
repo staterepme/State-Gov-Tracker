@@ -1,13 +1,13 @@
 # Create your views here.
-from django.http import HttpResponse
-from django.template import Context, loader
 from state_gov_tracker_app.models import Officials, OfficialTweets
-import datetime
 import urllib,httplib2, mimetypes,os,sys,re,random,string
-from django.shortcuts import render_to_response
-from subprocess import call
 from state_gov_tracker_app.login_credentials import *
-
+from django.shortcuts import render_to_response
+from django.template import Context, loader
+from state_gov_tracker_app.models import *
+from django.http import HttpResponse
+from subprocess import call
+import datetime
 try:
 	import json
 except ImportError:
@@ -20,7 +20,7 @@ url_base = 'http://cicero.azavea.com/v3.1'
 def WhichRep(request):
 	upper = search(request, 'UPPER')
 	lower = search(request, 'LOWER')
-	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+')})
+	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.all()})
 
 def profile(request):
 	official = search(request, request.GET['h'])
@@ -72,19 +72,12 @@ def get_officials(loc, uid, token, upper_or_lower):
 
 def official_info(official_dict, x):
 	results = {}
+	results['district_id'] = official_dict['response']['results']['candidates'][0]['officials'][x]['office']['district']['district_id']
+	results['district'] = official_dict['response']['results']['candidates'][0]['officials'][x]['office']['chamber']['name']
 	results['first_name'] = official_dict['response']['results']['candidates'][0]['officials'][x]['first_name']
 	results['last_name'] = official_dict['response']['results']['candidates'][0]['officials'][x]['last_name']
 	results['address'] = str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_1']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_2']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['city']) + ', ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['state']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['postal_code'])
 	results['phone'] = str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['phone_1'])
-#	return official_dict['response']['results']['candidates']
-#	return official_dict['response']['results']['candidates'][0]['officials'][x]['first_name'] \
-#	+ ' ' + official_dict['response']['results']['candidates'][0]['officials'][x]['last_name'] \
-#	+ 	' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_1']) \
-#	+ '\n'+ str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_2']) \
-#	+ '\n'+ str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['city']) \
-#	+ ', ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['state']) \
-#	+ ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['postal_code']) \
-#	+ ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['phone_1'])	
 	return results
 	
 def name(rep_id):
