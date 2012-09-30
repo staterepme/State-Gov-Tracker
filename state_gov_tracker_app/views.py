@@ -24,8 +24,8 @@ def WhichRep(request):
 	upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
 	lower['legid'] = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0].legid
 #	upper['fbdata'] = Officials.objects.all()
-#	upper['fbdata'] = FbData.objects.get(pk='1')
-	upper['fbdata'] = LegsSocialmedia.objects.get(legid=upper['legid'])
+#	upper['fbdata'] = FbData.objects.all()
+	upper['fbdata'] = LegsSocialmedia.objects.get(legid=upper['legid']).legid
 #	upper['fbdata'] = OfficialTweets.objects.all()
 #	upper['fbdata'] = PaBills.objects.all()
 #	upper['fbdata'] = PaLegisNews.objects.all()
