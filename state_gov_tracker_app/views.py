@@ -74,7 +74,7 @@ def search(request):
 		loc = request.GET['q'].replace(' ','+')
 	else:
 		loc = '755+N.+26th+St.+Philadelphia+PA'
-	json_response = login(azavea_login, azavea_password)
+	json_response = login(cicero_user, cicero_password)
 	token = json_response['token']
 	uid = str(json_response['user'])
 	official_response = get_official(loc, uid, token)
