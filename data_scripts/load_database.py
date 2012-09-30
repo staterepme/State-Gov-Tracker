@@ -10,6 +10,9 @@ engine = create_engine('sqlite:////users/christbr1985/Dropbox/CongressMonitor/St
 
 Base = declarative_base()
 
+class press_release(Base):
+    """docstring for press_releases"""
+    __table__ = Table('official_press_releases', Base.metadata, autoload=True, autoload_with=engine)        
 class official_tweets(Base):
     __table__ = Table('official_tweets', Base.metadata, autoload=True, autoload_with=engine)
 
