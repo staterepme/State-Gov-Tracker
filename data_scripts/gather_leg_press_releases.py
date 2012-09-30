@@ -12,7 +12,7 @@ import threading, urllib2, mechanize
 from lxml.html import parse, make_links_absolute
 from StringIO import StringIO
 from load_database import *
-import csv
+import csv, feedparser
 from urlparse import urlparse
 from hashlib import md5
 
@@ -36,6 +36,49 @@ def get_urls_with_prs_counter(first_url):
 		except:
 			link_exist = False
 	return link_array
+
+def dl_rss(url, party='Democratic'):
+	"""Takes url to media/press release page and finds the rss feed there"""
+	if party == 'Democratic':
+		links = get_prs_from_url(url, '//tr/td/a')
+		feed_id = None
+		for url in links:
+			match = re.search(r'RSS_reader_Member\.asp\?Feed=(\d+)', url)
+			if (match):
+				feed_id = match.group(1)
+		rss_feed = feedparser.parse('http://www.pahouse.com/pr/xml/%s.xml' %(feed_id))
+	if party == 'Republican':
+		links = get_prs_from_url(url, '//div[@id="NewsRSS"]/a')
+		rss_feed = feedparser.parse(links[0])
+	for entry in rss_feed['entries']:
+		print entry['title']
+		print parse_dates(entry['published'])
+		print entry['link']
+
+
+def parse_dates(date_string, method=1):
+	if method==1:
+		"""Example string - Tue, 16 Nov 2010 19:27:00 -0500"""
+		date_split = date_string.split(" ")
+		return "%s-%02d-%02d %s" %(date_split[3], int(month2num(date_split[2])), int(date_split[1]), date_split[4])
+
+def month2num(month):
+    """Takes month and translates it to a number"""
+    month = month.strip()
+    month = month.lower()
+    monthDict = {"jan":1,
+                "feb":2,
+                "mar":3,
+                "apr":4,
+                "may":5,
+                "jun":6,
+                "jul":7,
+                "aug":8,
+                "sep":9,
+                "oct":10,
+                "nov":11,
+                "dec":12}
+    return monthDict[month[:3]]
 
 def parse_to_base(url):
 	parsed_url = urlparse(url)
@@ -90,7 +133,6 @@ class official_prs(Base):
 	def get_pr_urls(self):
 		"""Find pages that have links to press releases, download press release pages"""
 		if self.chamber == 'upper' and self.party == 'Republican':
-			# return self.fullname
 			self.urls =  get_urls_with_prs_repsen(self.press_release_url)
 		elif self.chamber == 'upper' and self.party == 'Democratic':
 			self.urls = get_urls_with_prs_counter(self.press_release_url)
@@ -120,12 +162,15 @@ def existing_url_md5s():
 	return md5_list
 
 if __name__ == '__main__':
-	for off in session.query(official_prs).filter(official_prs.chamber=='upper').filter(official_prs.party=='Republican').all():
-		# print off.fullname
-		off.get_pr_urls()
-		# print off.all_prs
-		if len(off.all_prs) < 15:
-			print off.fullname
-			print off.press_release_url
-		off.add_pr_urls_to_db()
-	# print get_prs_from_url('http://www.senatorfarnese.com/media/press-releases/page/4', '//h2')
+	
+	### Download Press Releases for State Senate ###
+	# for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
+	# 	# print off.fullname
+	# 	off.get_pr_urls()
+	# 	# print off.all_prs
+	# 	if len(off.all_prs) < 15:
+	# 		print off.fullname
+	# 		print off.press_release_url
+	# 	off.add_pr_urls_to_db()
+
+	print dl_rss('http://www.repsaccone.com/latestnews.aspx', party="Republican")
