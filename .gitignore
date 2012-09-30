@@ -2,6 +2,7 @@
 *.db
 *.pyc
 *login_credentials.py
+*settings.py
 <<<<<<< HEAD
 *.DS_Store
 <<<<<<< HEAD
