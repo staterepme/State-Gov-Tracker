@@ -3,8 +3,8 @@
 # in same directory as this file
 
 ## Cicero Credentials ##
-cicero_user = 'christophernies@gmail.com'
-cicero_password = 'Congress1!'
+cicero_user = 
+cicero_password = 
 
 ## Twitter Credentials ##
 # Chris Brown's Twitter Keys and Tokens #
