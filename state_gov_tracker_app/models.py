@@ -35,7 +35,6 @@ class FbData(models.Model):
     post_id = models.TextField(blank=True) # This field type is a guess.
     timestamp = models.TextField(blank=True) # This field type is a guess.
     post = models.TextField(blank=True) # This field type is a guess.
-    text = models.TextField(blank=True) # This field type is a guess.
     class Meta:
         db_table = u'fb_data'
 
