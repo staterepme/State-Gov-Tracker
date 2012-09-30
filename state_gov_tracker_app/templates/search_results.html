@@ -9,13 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}static/index.css">
 </head>
 <body>
-	<div id="Header">{{ rep_name }}</div>
-	<div id="Bio">{{ rep_picture }}<center><b>{{ rep_address }}</b></center><p>{{ rep_bio }}</div>
-	<div id="Info">
-		<div id="News">{{ rep_news }}</div>
-		<div id="Actions">{{ rep_votes }}</div>
-		<div id="Twitter">{{ rep_twitter }}</div>
-		<div id="Facebook">{{ rep_facebook }}</div>
-	</div>
+	<div id="upper"><a href="/profile?q={{loc}}&h=UPPER">{{upper.first_name}} {{ upper.last_name}}</a><br>{{upper.address}}<br>{{upper.phone}}</div>
+	<div id="lower"><a href="/profile?q={{loc}}&h=LOWER">{{lower.first_name}} {{ lower.last_name}}</a><br>{{lower.address}}<br>{{lower.phone}}</div>
 </body>
 </html>
