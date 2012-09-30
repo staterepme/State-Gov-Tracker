@@ -17,13 +17,19 @@ except ImportError:
 ####SETTINGS####
 http = httplib2.Http()
 url_base = 'http://cicero.azavea.com/v3.1'
-	
+
 def WhichRep(request):
 	upper = search(request, 'UPPER')
 	lower = search(request, 'LOWER')
 	upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
 	lower['legid'] = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0].legid
-	upper['fbdata'] = FbData.objects.all()
+#	upper['fbdata'] = Officials.objects.all()
+#	upper['fbdata'] = FbData.objects.get(pk='1')
+	upper['fbdata'] = LegsSocialmedia.objects.get(legid=upper['legid'])
+#	upper['fbdata'] = OfficialTweets.objects.all()
+#	upper['fbdata'] = PaBills.objects.all()
+#	upper['fbdata'] = PaLegisNews.objects.all()
+#	upper['fbdata'] = PaLegisVotes.objects.all()
 	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+')})
 #	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.filter(district=upper['district_id'])})
 
