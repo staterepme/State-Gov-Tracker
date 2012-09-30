@@ -30,8 +30,9 @@ class Officials(models.Model):
         db_table = u'officials'
 
 class FbData(models.Model):
-    legid = models.ForeignKey(Officials, primary_key=True, blank=True) # This field type is a guess.
-    twitter = models.TextField(blank=True) # This field type is a guess.
+    legid = models.TextField(blank=True) # This field type is a guess.
+    row_pk = models.IntegerField(blank=False, primary_key=True)
+    post_id = models.TextField(blank=True) # This field type is a guess.
     timestamp = models.TextField(blank=True) # This field type is a guess.
     post = models.TextField(blank=True) # This field type is a guess.
     text = models.TextField(blank=True) # This field type is a guess.
@@ -39,14 +40,14 @@ class FbData(models.Model):
         db_table = u'fb_data'
 
 class LegsSocialmedia(models.Model):
-    legid = models.ForeignKey(Officials, primary_key=True, blank=True) # This field type is a guess.
+    legid = models.TextField(primary_key=True, blank=True) # This field type is a guess.
     twitter = models.TextField(blank=True) # This field type is a guess.
     facebook = models.TextField(blank=True) # This field type is a guess.
     class Meta:
         db_table = u'legs_socialmedia'
 
 class OfficialTweets(models.Model):
-    legid = models.ForeignKey(Officials, blank=True) # This field type is a guess.
+    legid = models.TextField(blank=True) # This field type is a guess.
     tweet = models.TextField(blank=True) # This field type is a guess.
     timestamp = models.TextField(blank=True) # This field type is a guess.
     tweet_key = models.IntegerField(primary_key=True)
@@ -68,7 +69,7 @@ class PaBills(models.Model):
         db_table = u'pa_bills'
 
 class PaLegisNews(models.Model):
-    legid = models.ForeignKey(Officials, blank=True) # This field type is a guess.
+    legid = models.TextField(blank=True) # This field type is a guess.
     title = models.TextField(blank=True) # This field type is a guess.
     link = models.TextField(blank=True) # This field type is a guess.
     summary = models.TextField(blank=True) # This field type is a guess.
@@ -81,7 +82,7 @@ class PaLegisNews(models.Model):
         db_table = u'pa_legis_news'
 
 class PaLegisSponsors(models.Model):
-    legid = models.ForeignKey(Officials, blank=True) # This field type is a guess.
+    legid = models.TextField(blank=True) # This field type is a guess.
     bill_id = models.ForeignKey(PaBills, blank=True) # This field type is a guess.
     type = models.TextField(blank=True) # This field type is a guess.
     yeas = models.TextField(blank=True) # This field type is a guess.
@@ -91,7 +92,7 @@ class PaLegisSponsors(models.Model):
         db_table = u'pa_legis_sponsors'
 
 class PaLegisVotes(models.Model):
-    legid = models.ForeignKey(PaBills, blank=True) # This field type is a guess.
+    legid = models.TextField(blank=True) # This field type is a guess.
     bill_id = models.TextField(blank=True) # This field type is a guess.
     vote = models.IntegerField(null=True, blank=True)
     date = models.TextField(blank=True) # This field type is a guess.
