@@ -6,7 +6,7 @@
 <<<<<<< HEAD
 *.DS_Store
 <<<<<<< HEAD
-
+*settings.py
 StateGovTracker_Django
 =======
 >>>>>>> f28983fe8b91dfc5812fb0ae6d2f628f01d7a6fc
