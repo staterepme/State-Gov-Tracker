@@ -30,4 +30,7 @@ Load tables into database:
 `python manage.py syncdb`
 
 
+This is Nick Testing Git.
+
+
 
