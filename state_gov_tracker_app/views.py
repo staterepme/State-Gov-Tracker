@@ -40,6 +40,23 @@ def WhichRep(request):
 		else:
 			lower_posts = 'No Facebook posts have been collected for this representative'
 	lower['fbdata'] = lower_posts
+	
+	upper_tweets = []
+	lower_tweets = []
+	
+	for x in range(5):
+		if len(OfficialTweets.objects.all().order_by('timestamp').filter(legid=upper['legid'])) > 0:
+			upper_tweets.append(OfficialTweets.objects.all().filter(legid=upper['legid'])[x].tweet)
+		else:
+			upper_tweets = 'No Tweets have been collected for this representative'
+	upper['tweets'] = upper_tweets	
+
+	for x in range(5):
+		if len(OfficialTweets.objects.all().order_by('timestamp').filter(legid=lower['legid'])) > 0:
+			lower_tweets.append(OfficialTweets.objects.all().filter(legid=lower['legid'])[x].tweet)
+		else:
+			lower_tweets = 'No Tweets have been collected for this representative'
+	lower['tweets'] = lower_tweets	
 
 #	upper['fbdata'] = LegsSocialmedia.objects.get(legid=upper['legid']).legid
 #	upper['fbdata'] = OfficialTweets.objects.all()

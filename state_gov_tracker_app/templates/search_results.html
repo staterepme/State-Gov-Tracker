@@ -10,7 +10,10 @@
 </head>
 <body>
 	<div id="upper"><a href="/profile?q={{loc}}&h=UPPER">{{upper.first_name}} {{ upper.last_name}}</a><br>{{upper.address}}<br>{{upper.phone}}</div>
+	<div id="fb_upper">{{ upper.fbdata }}</div><p><p>
+	<div id="twitter_upper">{{ upper.tweets }}</div><p><p>
 	<div id="lower"><a href="/profile?q={{loc}}&h=LOWER">{{lower.first_name}} {{ lower.last_name}}</a><br>{{lower.address}}<br>{{lower.phone}}</div>
-	<div id="Officials">{{ lower.fbdata }}</div>
+	<div id="fb_lower">{{ lower.fbdata }}</div>
+	<div id="twitter_lower">{{ lower.tweets }}</div><p><p>
 </body>
 </html>
