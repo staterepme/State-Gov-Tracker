@@ -52,7 +52,7 @@ def parse_facebook_info(line):
 	"""Facebook id's right now include more than what we need, this 
 	function parses that line and returns exactly what we need."""
 	if 'pages' in line:
-		print line
+		# print line
 		search_term = r"facebook\.com/pages/.*?/(\d+)"
 		match = re.search(search_term, line)
 		fb_id = match.group(1)
