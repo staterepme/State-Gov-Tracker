@@ -30,7 +30,7 @@ def WhichRep(request):
 #	upper['fbdata'] = PaBills.objects.all()
 #	upper['fbdata'] = PaLegisNews.objects.all()
 #	upper['fbdata'] = PaLegisVotes.objects.all()
-	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+')})
+	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "upper_legid":upper['legid'], "lower_legid":lower['legid']})
 #	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.filter(district=upper['district_id'])})
 
 def profile(request):
