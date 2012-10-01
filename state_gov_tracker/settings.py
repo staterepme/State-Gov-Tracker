@@ -1,4 +1,4 @@
-# Django settings for HelloWorld project.
+# Django settings for state_gov_tracker project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/nies/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/christopher/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -45,18 +45,18 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '' # was /Users/Jason/State-Gov-Tracker/state_gov_tracker_app/templates/media, put your real folder here
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/Users/nies/Documents/State-Gov-Tracker/state_gov_tracker_app/templates/'
+STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -67,7 +67,6 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	"/Users/nies/Documents/State-Gov-Tracker/state_gov_tracker_app/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -79,7 +78,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'a&amp;0+30%r2cp20=g-gb+9$6@r@q%b)2n+t%qitx3zwz3*gz8wq8'
+SECRET_KEY = '3&amp;j0kghoj=t+*x+0tvqz=*5fph0bm#n5qogel+vj5^#q!2f*ik'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -104,10 +103,11 @@ ROOT_URLCONF = 'state_gov_tracker.urls'
 WSGI_APPLICATION = 'state_gov_tracker.wsgi.application'
 
 TEMPLATE_DIRS = (
-	'/Users/nies/Documents/State-Gov-Tracker/state_gov_tracker_app/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    # this was /Users/Jason/State-Gov-Tracker/state_gov_tracker_app/templates
+    ''
 )
 
 INSTALLED_APPS = (
@@ -121,6 +121,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'state_gov_tracker_app',
+    'bootstrap'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -128,6 +130,7 @@ INSTALLED_APPS = (
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

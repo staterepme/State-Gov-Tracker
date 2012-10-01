@@ -39,32 +39,16 @@ def WhichRep(request):
 			lower_posts.append(FbData.objects.all().filter(legid=lower['legid'])[x].post)
 		else:
 			lower_posts = 'No Facebook posts have been collected for this representative'
+	
 	lower['fbdata'] = lower_posts
-	
-	upper_tweets = []
-	lower_tweets = []
-	
-	for x in range(5):
-		if len(OfficialTweets.objects.all().order_by('timestamp').filter(legid=upper['legid'])) > 0:
-			upper_tweets.append(OfficialTweets.objects.all().filter(legid=upper['legid'])[x].tweet)
-		else:
-			upper_tweets = 'No Tweets have been collected for this representative'
-	upper['tweets'] = upper_tweets	
-
-	for x in range(5):
-		if len(OfficialTweets.objects.all().order_by('timestamp').filter(legid=lower['legid'])) > 0:
-			lower_tweets.append(OfficialTweets.objects.all().filter(legid=lower['legid'])[x].tweet)
-		else:
-			lower_tweets = 'No Tweets have been collected for this representative'
-	lower['tweets'] = lower_tweets	
-
-#	upper['fbdata'] = LegsSocialmedia.objects.get(legid=upper['legid']).legid
-#	upper['fbdata'] = OfficialTweets.objects.all()
-#	upper['fbdata'] = PaBills.objects.all()
-#	upper['fbdata'] = PaLegisNews.objects.all()
-#	upper['fbdata'] = PaLegisVotes.objects.all()
+	lower['tweets'] = OfficialTweets.objects.filter(legid=lower['legid']).order_by('-timestamp')[:5]
+	upper['tweets'] =  OfficialTweets.objects.filter(legid=upper['legid']).order_by('-timestamp')[:5]
 	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "upper_legid":upper['legid'], "lower_legid":lower['legid']})
-#	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "loc":request.GET['q'].replace(' ','+'), "officials":Officials.objects.filter(district=upper['district_id'])})
+
+def pa_tweets(request):
+	"""Request for pa-tweets page, contains the last 30 tweets by members of the General Assembly"""
+	tweet_list =  OfficialTweets.objects.order_by('-timestamp')[:30]
+	return render_to_response('pa-tweets.html', {"tweet_list":tweet_list})
 
 def profile(request):
 	official = search(request, request.GET['h'])

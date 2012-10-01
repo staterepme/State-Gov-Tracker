@@ -10,7 +10,7 @@ from state_gov_tracker_app.views import search_form
 from state_gov_tracker_app.views import search
 #from state_gov_tracker_app.views import search_results
 from state_gov_tracker_app.views import WhichRep
-from state_gov_tracker_app.views import profile
+from state_gov_tracker_app.views import profile, pa_tweets
 
 
 urlpatterns = patterns('',
@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     ('^results$', WhichRep),
     ('^MyRep$', MyRep),
     ('^profile$', profile),
+    ('^pa-tweets$', pa_tweets),
 )
 '''
 
