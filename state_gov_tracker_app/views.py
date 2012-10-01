@@ -50,9 +50,12 @@ def pa_tweets(request):
 	tweet_list =  OfficialTweets.objects.order_by('-timestamp')[:30]
 	return render_to_response('pa-tweets.html', {"tweet_list":tweet_list})
 
-def profile(request):
-	official = search(request, request.GET['h'])
-	return render_to_response('profile.html', {'official' : official})
+def profile(request, profile_legid):
+	tweet_list = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
+	print profile_legid
+	official = {}
+	official_object = Officials.objects.filter(legid=profile_legid)
+	return render_to_response('profile.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')

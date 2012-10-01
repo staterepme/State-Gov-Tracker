@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 	('^$', search_form),
     ('^results$', WhichRep),
     ('^MyRep$', MyRep),
-    ('^profile$', profile),
+    ('^profile/(.*)$', profile),
     ('^pa-tweets$', pa_tweets),
 )
 '''

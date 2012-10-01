@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/christopher/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
+        'NAME': '/Users/christbr1985/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.

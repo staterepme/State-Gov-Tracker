@@ -9,12 +9,23 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}static/index.css">
 </head>
 <body>
-	<div id="Header">{{ official.first_name }} {{official.last_name}}</div>
+	<div id="Header">{{ official.fullname }} {{ legid }}</div>
 	<div id="Bio">{{ official.picture }}<center><b>{{ official.address }}</b></center><p>{{ official.bio }}</div>
 	<div id="Info">
 		<div id="News">{{ official.news }}</div>
 		<div id="Actions">{{ official.votes }}</div>
 		<div id="Twitter">{{ official.twitter }}</div>
+			<ul>
+				{% if tweet_list %}
+					{% autoescape off %}
+					{% for tweet in tweet_list %}
+			    		<li>{{ tweet.oembed }}</li>
+					{% endfor %}
+					{% endautoescape %}
+				{% else %}
+					<li>No Tweets!</li>
+				{% endif %}
+			</ul>
 		<div id="Facebook">{{ official.facebook	 }}</div>
 	</div>
 </body>
