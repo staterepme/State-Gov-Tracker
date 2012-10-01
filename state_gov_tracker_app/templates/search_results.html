@@ -9,11 +9,17 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}static/index.css">
 </head>
 <body>
+<<<<<<< HEAD
 	<div id="upper"><a href="/profile?q={{loc}}&h=UPPER">{{upper.first_name}} {{ upper.last_name}}</a><br>{{upper.address}}<br>{{upper.phone}}</div>
 	<div id="fb_upper">{{ upper.fbdata }}</div><p><p>
 	<div id="twitter_upper">{{ upper.tweets }}</div><p><p>
 	<div id="lower"><a href="/profile?q={{loc}}&h=LOWER">{{lower.first_name}} {{ lower.last_name}}</a><br>{{lower.address}}<br>{{lower.phone}}</div>
 	<div id="fb_lower">{{ lower.fbdata }}</div>
 	<div id="twitter_lower">{{ lower.tweets }}</div><p><p>
+=======
+	<div id="upper"><a href="/profile/{{upper_legid}}">{{upper.first_name}} {{ upper.last_name}}</a><br>{{upper.address}}<br>{{upper.phone}}</div>
+	<div id="lower"><a href="/profile/{{lower_legid}}">{{lower.first_name}} {{ lower.last_name}}</a><br>{{lower.address}}<br>{{lower.phone}}</div>
+	<div id="Officials">{{ upper.fbdata }}</div>
+>>>>>>> 1f3d9826a60fe23a98fa0083e8be749cc1e1fe15
 </body>
 </html>
