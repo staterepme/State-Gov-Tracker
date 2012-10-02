@@ -13,7 +13,7 @@ Clone the repo (`git clone https://github.com/jasonblanchard/State-Gov-Tracker.g
 
 Copy `StateGovTracker.db` from dropbox file to project directory
 
-Modify settings.py and point the `DATABASES name` to your local `StateGovTracker.db` file
+Copy `settings_example.py` to `settings.py`. Modify `settings.py` and point the `DATABASES name` to your local `StateGovTracker.db` file
 
 `cd` top level project directory and run `python manage.py runserver`. If it complains about dependencies, install them.
 
