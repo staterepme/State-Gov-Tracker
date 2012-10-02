@@ -30,7 +30,7 @@
     	<div class="search_results">
             <article>
                 <h2>Senator</h2>
-                <a href="/profile/{{upper_legid}}"><img src="images/dinniman_senator.jpg" width="200" height="270" border="0" alt="" title=""></a>
+                <a href="/profile/{{upper_legid}}"><img src="{{ upper.image }}" width="200" height="270" border="0" alt="" title=""></a>
                 <h3>{{upper.first_name}} {{ upper.last_name}}</a><br><br></h3>
                 <p>{{upper.address}}</p>
                 <p>{{upper.phone}}</p>
@@ -38,7 +38,7 @@
             </article>
             <article>
                 <h2>Representative</h2>
-                <a href="/profile/{{lower_legid}}"><img src="images/kampf_rep.jpg" width="200" height="270" border="0" alt="" title=""></a>
+                <a href="/profile/{{lower_legid}}"><img src="{{ lower.image }}" width="200" height="270" border="0" alt="" title=""></a>
                 <h3>{{lower.first_name}} {{lower.last_name}}</a><br><br></h3>
                 <p>{{lower.address}}</p>
                 <p>{{lower.phone}}</p>

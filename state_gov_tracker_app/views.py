@@ -43,6 +43,10 @@ def WhichRep(request):
 	lower['fbdata'] = lower_posts
 	lower['tweets'] = OfficialTweets.objects.filter(legid=lower['legid']).order_by('-timestamp')[:5]
 	upper['tweets'] =  OfficialTweets.objects.filter(legid=upper['legid']).order_by('-timestamp')[:5]
+
+        upper['image'] = Officials.objects.get(legid=upper['legid']).photourl
+        lower['image'] = Officials.objects.get(legid=lower['legid']).photourl
+
 	return render_to_response('intermediate.html',{"upper": upper, "lower": lower, "upper_legid":upper['legid'], "lower_legid":lower['legid']})
 
 def pa_tweets(request):
