@@ -1,7 +1,7 @@
 #!/usr/local/bin/python
 
 from datetime import date, timedelta
-from sqlalchemy import create_engine, Table, and_, func, not_
+from sqlalchemy import create_engine, Table, and_, func, not_, Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, mapper
 
@@ -30,6 +30,9 @@ class official_posts(Base):
 
 class official_info(Base):
 	__table__ = Table('officials', Base.metadata, autoload=True, autoload_with=engine)
+
+class pa_bills(Base):
+    __table__ = Table('pa_bills', Base.metadata, autoload=True, autoload_with=engine)
 
 def loadSession():
     metadata = Base.metadata
