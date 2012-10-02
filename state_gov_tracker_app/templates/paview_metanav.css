@@ -1,0 +1,87 @@
+.metanav-pa {
+  position :relative;
+}
+.metanav-pa a.logo {
+  position : absolute;
+  z-index : 1;
+  background : white;
+  top : 5px;
+  left : 10px;
+  border-radius : 5px;
+  -webkit-border-radius : 5px;
+  -moz-border-radius : 5px;
+  box-shadow : 0px 0px 15px #888;
+  -webkit-box-shadow : 0px 0px 15px #888;
+  -moz-box-shadow : 0px 0px 15px #888;
+  height : 59px;
+  width : 59px;
+}
+.metanav-pa .mbar {
+  border-top:2px solid grey;
+  border-bottom:2px solid grey;
+  box-shadow: 0 0 10px 0px #777 inset;
+  -moz-box-shadow: 0 0 10px 0px #777 inset;
+  -webkit-box-shadow: 0 0 10px 0px #777 inset;
+  position: absolute;
+  width: 100%;
+  top: 20px;
+  left: 0px;
+  font-size : 103%;
+  font-family : Amaranth, Helvetica, Arial, sans-serif;
+}
+.metanav-pa .mbar {
+  margin: 0px;
+  padding:0px;       
+  list-style:none;
+  text-align : right;
+}
+.metanav-pa .mbar li{
+  display: inline-block;
+  padding: 3px 10px;
+}
+
+.metanav-pa .mbar li a {
+  text-decoration:none;
+  color : #DDD;
+}
+.metanav-pa .mbar li a.active {
+  color : crimson;
+}
+.metanav-pa .mbar li a.mnav:hover {
+  color : #00dd00;
+  text-shadow : 0px 0px 15px yellow;
+}
+
+.metanav-pa .mbar li.appname {
+  float : left;
+}
+.metanav-pa .mbar li a.appname {
+  text-decoration:none;
+  margin: 0px 0px 0px 75px;
+  color: #00dd00;
+}
+
+.mbar span.mnav {
+  cursor : pointer;
+}
+.mbar ul.popup {
+  list-style : none;
+  margin : 4px 0px 0px 0px;
+  padding : 0px;
+  position : absolute;
+  display : none;
+  border : 1px solid gray;
+  text-align : left;
+  background-color : white;
+  box-shadow : 0 0 10px 0px #AAA;
+  -moz-box-shadow : 0 0 10px 0px #AAA;
+  -webkit-box-shadow : 0 0 10px 0px #AAA;
+}
+.mbar ul.popup li {
+  margin : 3px;
+  padding : 0px;
+  display : block;
+}
+.mbar ul.popup li:hover {
+  background-color : #EEE;
+}

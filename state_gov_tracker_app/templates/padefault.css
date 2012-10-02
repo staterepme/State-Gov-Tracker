@@ -1,0 +1,13 @@
+legend {
+  color : crimson;
+  font-size : small;
+  font-weight : bold;
+}
+fieldset {
+  border : 2px #AAA solid;
+  border-radius : 5px;
+}
+label {
+  font-size : small;
+  font-weight : bold;
+}

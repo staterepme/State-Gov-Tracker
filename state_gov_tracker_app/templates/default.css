@@ -1,0 +1,1133 @@
+/* This file is auto-generated, don't edit this file */
+
+/*** @import static_asset(bootstrap:static/normalize.css); ***/
+/*! normalize.css 2011-08-31T22:02 UTC · http://github.com/necolas/normalize.css */
+
+/* =============================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+/*
+ * Corrects block display not defined in IE6/7/8/9 & FF3
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+
+/*
+ * Corrects inline-block display not defined in IE6/7/8/9 & FF3
+ */
+
+audio,
+canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+/*
+ * Prevents modern browsers from displaying 'audio' without controls
+ */
+
+audio:not([controls]) {
+    display: none;
+}
+
+/*
+ * Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4
+ * Known issue: no IE6 support
+ */
+
+[hidden] {
+    display: none;
+}
+
+
+/* =============================================================================
+   Base
+   ========================================================================== */
+
+/*
+ * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
+ *    http://clagnut.com/blog/348/#c790
+ * 2. Keeps page centred in all browsers regardless of content height
+ * 3. Prevents iOS text size adjust after orientation change, without disabling user zoom
+ *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ */
+
+html {
+    font-size: 100%; /* 1 */
+    overflow-y: scroll; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 3 */
+    -ms-text-size-adjust: 100%; /* 3 */
+}
+
+/*
+ * Addresses margins handled incorrectly in IE6/7
+ */
+
+body, div {
+    margin: 0;
+    padding : 0px;
+}
+
+/* 
+ * Addresses font-family inconsistency between 'textarea' and other form elements.
+ */
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: sans-serif;
+}
+
+
+/* =============================================================================
+   Links
+   ========================================================================== */
+
+a {
+    color: #00e;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+/*
+ * Addresses outline displayed oddly in Chrome
+ */
+
+a:focus {
+    outline: thin dotted;
+}
+
+/*
+ * Improves readability when focused and also mouse hovered in all browsers
+ * people.opera.com/patrickl/experiments/keyboard/test
+ */
+
+a:hover,
+a:active {
+    outline: 0;
+}
+
+
+/* =============================================================================
+   Typography
+   ========================================================================== */
+
+/*
+ * Addresses styling not present in IE7/8/9, S5, Chrome
+ */
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+/*
+ * Addresses style set to 'bolder' in FF3/4, S4/5, Chrome
+*/
+
+b, 
+strong { 
+    font-weight: bold; 
+}
+
+blockquote {
+    margin: 1em 40px;
+}
+
+/*
+ * Addresses styling not present in S5, Chrome
+ */
+
+dfn {
+    font-style: italic;
+}
+
+/*
+ * Addresses styling not present in IE6/7/8/9
+ */
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+/*
+ * Corrects font family set oddly in IE6, S4/5, Chrome
+ * en.wikipedia.org/wiki/User:Davidgothberg/Test59
+ */
+
+pre,
+code,
+kbd,
+samp {
+    _font-family: monospace, serif;
+    _font-family: 'courier new', monospace;
+}
+
+/*
+ * Improves readability of pre-formatted text in all browsers
+ */
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/*
+ * 1. Addresses CSS quotes not supported in IE6/7
+ * 2. Addresses quote property not supported in S4
+ */
+
+/* 1 */
+
+q {
+    quotes: none;
+}
+
+/* 2 */
+
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+small {
+    font-size: 75%;
+}
+
+/*
+ * Prevents sub and sup affecting line-height in all browsers
+ * gist.github.com/413930
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+
+/* =============================================================================
+   Lists
+   ========================================================================== */
+
+ul,
+ol {
+    margin: 1em 0;
+    padding: 0 0 0 40px;
+}
+
+dd {
+    margin: 0 0 0 40px;
+}
+
+nav ul,
+nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+
+/* =============================================================================
+   Embedded content
+   ========================================================================== */
+
+/*
+ * 1. Removes border when inside 'a' element in IE6/7/8/9, F3
+ * 2. Improves image quality when scaled in IE7
+ *    code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ */
+
+img {
+    border: 0; /* 1 */
+    -ms-interpolation-mode: bicubic; /* 2 */
+}
+
+/*
+ * Corrects overflow displayed oddly in IE9 
+ */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+
+/*
+ * Addresses margin not present in IE6/7/8/9, S5, O11
+ */
+
+figure {
+    margin: 0;
+}
+
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+
+/*
+ * Corrects margin displayed oddly in IE6/7
+ */
+
+form {
+    margin: 0;
+}
+
+/*
+ * Define consistent margin and padding
+ */
+
+fieldset {
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+/*
+ * 1. Corrects color not being inherited in IE6/7/8/9
+ * 2. Corrects alignment displayed oddly in IE6/7
+ */
+
+legend {
+    border: 0; /* 1 */
+    *margin-left: -7px; /* 2 */
+}
+
+/*
+ * 1. Corrects font size not being inherited in all browsers
+ * 2. Addresses margins set differently in IE6/7, F3/4, S5, Chrome
+ * 3. Improves appearance and consistency in all browsers
+ */
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%; /* 1 */
+    margin: 0; /* 2 */
+    vertical-align: baseline; /* 3 */
+    *vertical-align: middle; /* 3 */
+}
+
+/*
+ * 1. Addresses FF3/4 setting line-height using !important in the UA stylesheet
+ * 2. Corrects inner spacing displayed oddly in IE6/7
+ */
+
+button,
+input {
+    line-height: normal; /* 1 */
+    *overflow: visible;  /* 2 */
+}
+
+/*
+ * Corrects overlap and whitespace issue for buttons and inputs in IE6/7
+ * Known issue: reintroduces inner spacing
+ */
+
+table button,
+table input {
+    *overflow: auto;
+}
+
+/*
+ * 1. Improves usability and consistency of cursor style between image-type 'input' and others
+ * 2. Corrects inability to style clickable 'input' types in iOS
+ */
+
+button,
+html input[type="button"], 
+input[type="reset"], 
+input[type="submit"] {
+    cursor: pointer; /* 1 */
+    -webkit-appearance: button; /* 2 */
+}
+
+/*
+ * 1. Addresses box sizing set to content-box in IE8/9
+ * 2. Addresses excess padding in IE8/9
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/*
+ * 1. Addresses appearance set to searchfield in S5, Chrome
+ * 2. Addresses box sizing set to border-box in S5, Chrome (include -moz to future-proof)
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+
+/*
+ * Corrects inner padding displayed oddly in S5, Chrome on OSX
+ */
+
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/*
+ * Corrects inner padding and border displayed oddly in FF3/4
+ * www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/*
+ * 1. Removes default vertical scrollbar in IE6/7/8/9
+ * 2. Improves readability and alignment in all browsers
+ */
+
+textarea {
+    overflow: auto; /* 1 */
+    vertical-align: top; /* 2 */
+}
+
+
+/* =============================================================================
+   Tables
+   ========================================================================== */
+
+/* 
+ * Remove most spacing between table cells
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size : 100%;
+}
+table td, table th {
+    padding : 0px;
+}
+
+
+/* =============================================================================
+   Pluggdapps
+   ========================================================================== */
+
+/* Highlight Editable elements */
+[contenteditable="true"] {
+    border : 1px dotted gray;
+}
+
+/*** @import static_asset(bootstrap:static/clsshortcuts.css); ***/
+.m5 { margin : 5px; }
+.ml5 { margin-left : 5px; }
+.mr5 { margin-right : 5px; }
+.mt5 { margin-top : 5px; }
+.mt10 { margin-top : 10px; }
+.ml10 { margin-left : 10px; }
+.mr10 { margin-right : 10px; }
+.ml20 { margin-left : 20px; }
+.p3 { padding : 3px; }
+.p5 { padding : 5px; }
+.pb5 { padding-bottom : 5px; }
+
+.w100 { width : 100% }
+.undrln { text-decoration : underline }
+.nodec { text-decoration : none }
+.posr { position : relative }
+.floatr { float : right }
+.floatl { float : left }
+.fgblue { color : blue; }
+.fgblack { color : black; }
+.fggray { color : gray; }
+.fgred { color : red; }
+.fggreen { color : green; }
+.fgcrimson { color : crimson; }
+.bglblue { background-color : lightBlue; }
+.pointer { cursor : pointer; }
+.vmiddle { vertical-align : middle; }
+.vtop { vertical-align : top; }
+.calign { text-align : center }
+.ralign { text-align : right }
+.lalign { text-align : left }
+.fntitalic { font-style : italic }
+.fntbold { font-weight : bold }
+.fntxsmall { font-size : x-small }
+.fntsmall { font-size : small }
+.fntmedium { font-size : medium }
+.fntnormal { font-weight : normal }
+.fnt120 { font-size : 120% }
+.fnt110 { font-size : 110% }
+.dispnone { display : none }
+.disptable { display : table }
+.disptr { display : table-row }
+.disptd { display : table-cell }
+.dispinln { display : inline }
+.br5 {
+  -moz-border-radius : 5px;
+  border-radius : 5px;
+  -webkit-border-radius : 5px;
+}
+
+/*** @import static_asset(bootstrap:static/paview_metanav.css); ***/
+.metanav-pa {
+  position :relative;
+}
+.metanav-pa a.logo {
+  position : absolute;
+  z-index : 1;
+  background : white;
+  top : 5px;
+  left : 10px;
+  border-radius : 5px;
+  -webkit-border-radius : 5px;
+  -moz-border-radius : 5px;
+  box-shadow : 0px 0px 15px #888;
+  -webkit-box-shadow : 0px 0px 15px #888;
+  -moz-box-shadow : 0px 0px 15px #888;
+  height : 59px;
+  width : 59px;
+}
+.metanav-pa .mbar {
+  border-top:2px solid grey;
+  border-bottom:2px solid grey;
+  box-shadow: 0 0 10px 0px #777 inset;
+  -moz-box-shadow: 0 0 10px 0px #777 inset;
+  -webkit-box-shadow: 0 0 10px 0px #777 inset;
+  position: absolute;
+  width: 100%;
+  top: 20px;
+  left: 0px;
+  font-size : 103%;
+  font-family : Amaranth, Helvetica, Arial, sans-serif;
+}
+.metanav-pa .mbar {
+  margin: 0px;
+  padding:0px;       
+  list-style:none;
+  text-align : right;
+}
+.metanav-pa .mbar li{
+  display: inline-block;
+  padding: 3px 10px;
+}
+
+.metanav-pa .mbar li a {
+  text-decoration:none;
+  color : #DDD;
+}
+.metanav-pa .mbar li a.active {
+  color : crimson;
+}
+.metanav-pa .mbar li a.mnav:hover {
+  color : #00dd00;
+  text-shadow : 0px 0px 15px yellow;
+}
+
+.metanav-pa .mbar li.appname {
+  float : left;
+}
+.metanav-pa .mbar li a.appname {
+  text-decoration:none;
+  margin: 0px 0px 0px 75px;
+  color: #00dd00;
+}
+
+.mbar span.mnav {
+  cursor : pointer;
+}
+.mbar ul.popup {
+  list-style : none;
+  margin : 4px 0px 0px 0px;
+  padding : 0px;
+  position : absolute;
+  display : none;
+  border : 1px solid gray;
+  text-align : left;
+  background-color : white;
+  box-shadow : 0 0 10px 0px #AAA;
+  -moz-box-shadow : 0 0 10px 0px #AAA;
+  -webkit-box-shadow : 0 0 10px 0px #AAA;
+}
+.mbar ul.popup li {
+  margin : 3px;
+  padding : 0px;
+  display : block;
+}
+.mbar ul.popup li:hover {
+  background-color : #EEE;
+}
+
+/*** @import static_asset(bootstrap:static/paview_menupane.css); ***/
+div.menupane-pa {
+  font-size : 103%;
+  font-family : Amaranth, Helvetica, Arial, sans-serif;
+}
+div.menupane-pa ul {
+  list-style : none;
+  padding : 0px 0px 0px 10px;
+  margin : 0px;
+  text-align : left;
+}
+div.menupane-pa li {
+  margin : 3px 0px;
+  padding-left : 3px;
+}
+div.menupane-pa li.menutitle {
+  background-color: #444;
+  margin-top : 10px;
+}
+div.menupane-pa li.menutitle:nth-child(1) {
+  margin-top : 0px;
+}
+div.menupane-pa li a {
+  text-decoration : none;
+}
+div.menupane-pa li a:hover {
+  text-decoration : underline;
+}
+
+
+/*** @import static_asset(bootstrap:static/paview_ispec.css); ***/
+div.ispec-pa {
+}
+div.ispec-pa h2.specname {
+  color: crimson
+}
+div.ispec-pa div.specdoc {
+}
+
+div.ispec-pa h2.attrs    { }
+div.ispec-pa h3.attrname { margin-left : 1em; }
+div.ispec-pa div.attrdoc { margin-left : 3em; }
+
+div.ispec-pa h2.methods  { }
+div.ispec-pa h3.methsign { margin-left : 1em; }
+div.ispec-pa div.methdoc { margin-left : 3em; }
+
+div.ispec-pa h2.plugins {
+}
+div.ispec-pa table.plugins {
+}
+div.ispec-pa td.plugins {
+  border: 1px dotted gray; padding : 5px;
+}
+div.ispec-pa th.plugins {
+  border: 1px dotted gray; padding : 5px;
+}
+
+/*** @import static_asset(bootstrap:static/paview_iconfig.css); ***/
+div.iconfig-pa {
+}
+div.iconfig-pa .sectitle {
+  text-align : center;
+  background-color : #555;
+  color : yellow;
+}
+div.iconfig-pa ul {
+  list-style : none;
+  padding-left : 0px;
+}
+div.iconfig-pa li.spec {
+  margin : 5px;
+}
+div.iconfig-pa li.spec div.specname b {
+  color : burlyWood;
+  width : 10em;
+}
+div.iconfig-pa li.spec table.specval {
+  margin-left : 10px;
+}
+div.iconfig-pa li.spec table.specval td {
+  color : #CCC;
+  padding : 2px 10px;
+}
+div.iconfig-pa li.spec table.specval em.default {
+  font-size : small;
+}
+div.iconfig-pa li.spec table.specval span.saving {
+  visibility : hidden;
+  font-size : x-small;
+}
+div.iconfig-pa li.spec table.specval td:first-child {
+  color : #999;
+}
+div.iconfig-pa li.spec div.help {
+  font-style : italic;
+  color : gray;
+  margin-left : 20px;
+}
+
+/*** @import static_asset(bootstrap:static/paview_signin.css); ***/
+.signin-pa {
+  width : 25em;
+  margin : 0px auto;
+}
+.signin-pa tr td {
+  padding : 5px;
+}
+.signin-pa tr td:nth-child(1) {
+  text-align : right;
+}
+
+/*** @import static_asset(bootstrap:static/etx.css); ***/
+/************* EazyText skin *************/
+article.etpage {
+  white-space : normal
+}
+article.etblk {
+}
+
+/* Text styling */
+span.etmark {
+}
+strong.etmark {
+}
+em.etmark {
+}
+u.etmark {
+}
+sup.etmark {
+}
+sub.etmark {
+}
+strong.etmark > em.etmark {
+}
+strong.etmark > u.etmark {
+}
+em.etmark > u.etmark {
+}
+strong.etmark > em.etmark > u.etmark {
+}
+p.ettext {
+}
+
+/* headings */
+h1.ethd {
+  color : crimson;
+}
+h2.ethd {
+  color : crimson;
+}
+h3.ethd {
+  color : crimson;
+}
+h4.ethd {
+  color : crimson;
+}
+h5.ethd {
+  color : crimson;
+}
+h6.ethd {
+  color : crimson;
+}
+h1 a.ethdlink, h2 a.ethdlink, h3 a.ethdlink, h4 a.ethdlink, h5 a.ethdlink, h6 a.ethdlink {
+  color: #CCCCCC;
+  font-size: medium;
+  text-decoration: none;
+}
+h1 a.ethdlink:after, h2 a.ethdlink:after, h3 a.ethdlink:after,
+h4 a.ethdlink:after, h5 a.ethdlink:after, h6 a.ethdlink:after {
+  content: '¶';
+  color : #555;
+}
+
+/* sections */
+section.etsec-1 {
+}
+section.etsec-2 {
+}
+section.etsec-3 {
+}
+section.etsec-4 {
+}
+section.etsec-5 {
+}
+section.etsec-6 {
+}
+
+/* Small table */
+table.ettbl {
+  border-collapse: collapse;
+}
+tr.ettbl {
+}
+th.ettbl {
+  padding : 5px; border: 1px solid gray;
+}
+td.ettbl {
+  padding : 5px; border: 1px solid gray;
+}
+
+/* Big table */
+table.etbtbl {
+  border-collapse: collapse;
+}
+tr.etbtbl {
+}
+th.etbtbl {
+  padding : 5px;
+  border : 1px solid gray;
+}
+td.etbtbl {
+  padding : 5px;
+  border : 1px solid gray;
+}
+
+/* Horizontal rule */
+hr.ethorz {
+}
+
+/* List */
+ul.et {
+  padding-left : 20px;
+}
+ol.et {
+  padding-left : 20px;
+}
+li.et {
+  margin-left : 0px;
+  padding-left : 4px;
+}
+
+/* Definitions */
+dl.et {
+}
+dt.et {
+}
+dd.et {
+}
+
+/* Blockquote */
+blockquote.et.firstlevel {
+  border-left : 2px solid #d6d6d6;
+  padding-left : 5px
+}
+blockquote.et.innerlevel {
+  margin-left : 0px;
+  border-left : 2px solid #d6d6d6;
+  padding-left : 5px;
+}
+
+/* Links */
+img.et {
+}
+a.etlink {
+}
+a.etlink.anchor {
+}
+a.ethttpuri {
+}
+a.etwwwuri {
+}
+
+/* macro-anchor */
+a.etm-anchor {
+}
+
+/* macro-clear */
+div.etm-clear {
+  clear : both;
+}
+
+/* macro-image */
+div.etm-image {
+  margin    : 0px;
+  padding   : 0px;
+  border    : 0px;
+}
+
+/* macro-images */
+table.etm-images {
+  margin    : 10px;
+  padding   : 0px;
+  border    : 0px;
+}
+table.etm-images tr {
+}
+table.etm-images td {
+}
+table.etm-images img {
+}
+
+/* macro-span */
+span.etm-span {
+  color   : gray;
+  padding : 2px;
+}
+
+/* macro-toc */
+details.etm-toc {
+  background-color : #555;
+  float : left;
+  margin : 10px 0px 0px 10px;
+  padding : 3px;
+  width : 20em;
+  border : 1px solid;
+  border-color : #666 #AAA #AAA #666;
+  border-radius : 5px;
+  -webkit-border-radius : 5px;
+  -moz-border-radius : 5px;
+  font-size : small;
+}
+details.etm-toc summary {
+  font-weight : bold;
+  color : yellow;
+  cursor : pointer;
+  margin-left : 5px;
+}
+details.etm-toc ul {
+  list-style : none;
+  padding : 5px;
+}
+details.etm-toc a {
+}
+details.etm-toc a.level-1 {
+  margin-left : 0em;
+}
+details.etm-toc a.level-2 {
+  margin-left : 0.7em;
+}
+details.etm-toc a.level-3 {
+  margin-left : 1.4em;
+}
+details.etm-toc a.level-4 {
+  margin-left : 2.1em;
+}
+details.etm-toc a.level-5 {
+  margin-left : 2.8em;
+}
+details.etm-toc a.level-6 {
+  margin-left : 3.5em;
+}
+
+/* extension-box */
+div.etext-box .box {
+  color         : gray;
+  border-top    : thin solid gray;
+  border-right  : thin solid gray;
+  border-bottom : thin solid gray;
+  border-left   : thin solid gray;
+}
+div.etext-box .boxtitle {
+  color          : black;
+  background     : #EEEEEE;
+  font-weight    : bold;
+  padding-top    : 3px;
+  padding-right  : 3px;
+  padding-bottom : 3px;
+  padding-left   : 3px;
+}
+div.etext-box .boxcont = {
+  padding-top    : 3px;
+  padding-right  : 3px;
+  padding-bottom : 3px;
+  padding-left   : 3px;
+}
+div.etext-box span.boxhide {
+  display: none;
+  float: right;
+  font-size : xx-small;
+  color: blue;
+  cursor: pointer;
+}
+div.etext-box span.boxshow {
+  display: none;
+  float: right;
+  font-size : xx-small;
+  color: blue;
+  cursor: pointer;
+}
+
+
+/* extension-code */
+div.etext-code {
+  width : 90%;
+  margin : 0 auto;
+  line-height   : 1.2em;
+}
+div.etext-code pre {
+  margin  : 5px 0px;
+}
+div.etext-code .highlighttable {
+  color : black;
+}
+div.etext-code .highlighttable td.linenos {
+  padding : 3px;
+  color : brown;
+  border-right : 1px dashed gray;
+}
+div.etext-code .highlighttable td.code {
+  padding : 3px
+}
+div.etext-code .highlight {
+  background-color : #CCC;
+}
+div.etext-code .codecont {
+  background-color : #CCC;
+  border : 1px dashed gray;
+}
+
+/* extension-frontpage */
+section.etext-frontpage div.frontpage {
+  text-align : center;
+}
+section.etext-frontpage div.info {
+  margin : 5px 0px;
+}
+section.etext-frontpage div.info div.key,
+section.etext-frontpage div.info div.val {
+  display : inline;
+  padding : 5px;
+}
+
+
+/* extension-html */
+div.etext-html .html {
+}
+
+/* extension-nested */
+div.etext-nested .nested {
+  background-color : transparent;
+}
+
+/* Templated tags */
+span.etttag.pre {
+  white-space : pre;
+  font-family : monospace;
+}
+abbr.etttag {
+}
+span.etttag.fixme {
+  border : 1px solid cadetBlue;
+  color : red;
+  padding: 1px;
+  font-family : monospace;
+}
+q.etttag {
+}
+q.etttag:before {
+  content : open-quote;
+}
+q.etttag:after {
+  content : close-quote;
+}
+span.etttag.smile {
+  font-size: x-large;
+  color: darkOrchid;
+  padding: 1px;
+  font-family : monospace;
+}
+span.etttag.sad {
+  font-size: x-large;
+  color: orangeRed;
+  padding: 1px;
+  font-family : monospace;
+}
+address.etttag {
+}
+span.etttag.fnt {
+}
+sup.etttag.footnote {
+}
+sup.etttag.footnote a {
+  text-decoration: none;
+}
+
+
+
+/************************** Style elements *********************/
+
+body.bootstrap {
+  margin : 0 auto;
+  max-width : 1100px;
+  min-width : 900px;
+  line-height: 1.3em;
+  word-spacing: 2px;
+  font-family : 'Open Sans', sans-serif;
+  background-color : #333;
+  color : #DDD;
+}
+a {
+  color : #81cfdb;
+}
+a:visited {
+  color : #817ddb;
+}
+
+div#page {
+  padding-top : 60px;
+  font-size : 90%
+}
+div.user {
+  font-size : small;
+}
+
+table#footer {
+  text-align : center;
+  border-collapse : separate;
+  width :100%;
+  margin-top : 20px;
+  border-top : 1px solid gray;
+}
+table#footer td.copyright {
+  font-size : small;
+  color : #AAA;
+  padding : 5px;
+  border-right : 1px solid black;
+}
+table#footer td.papowered {
+  padding : 5px;
+  border-left : 1px solid gray;
+}
+table#footer div.papowered {
+  font-family : 'Amaranth', sans-serif;
+  background-color : #333;
+  padding: 3px; color: #DDD;
+}
+table#footer div.papowered div.counts {
+  font-size : x-small;
+}
+table#footer div.stmt {
+  font-weight : bold;
+}
+table#footer div.papowered span.prop {
+  color: gray;
+}

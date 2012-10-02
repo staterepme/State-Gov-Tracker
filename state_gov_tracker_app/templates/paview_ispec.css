@@ -1,0 +1,26 @@
+div.ispec-pa {
+}
+div.ispec-pa h2.specname {
+  color: crimson
+}
+div.ispec-pa div.specdoc {
+}
+
+div.ispec-pa h2.attrs    { }
+div.ispec-pa h3.attrname { margin-left : 1em; }
+div.ispec-pa div.attrdoc { margin-left : 3em; }
+
+div.ispec-pa h2.methods  { }
+div.ispec-pa h3.methsign { margin-left : 1em; }
+div.ispec-pa div.methdoc { margin-left : 3em; }
+
+div.ispec-pa h2.plugins {
+}
+div.ispec-pa table.plugins {
+}
+div.ispec-pa td.plugins {
+  border: 1px dotted gray; padding : 5px;
+}
+div.ispec-pa th.plugins {
+  border: 1px dotted gray; padding : 5px;
+}

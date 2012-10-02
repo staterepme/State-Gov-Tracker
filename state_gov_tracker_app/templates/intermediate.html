@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Nick Weingartner Tracker - Intermediate Page</title>
-<link rel="stylesheet/less" href="css/style.less">
-<script src="js/less-1.3.0.min.js"></script>
+<title>Here are your Representatives!</title>
+<link rel="stylesheet/less" href="static/css/style.less">
+<script src="static/js/less-1.3.0.min.js"></script>
 </head>
 <body>
 <div id="wrapper"><!-- Being Wrapper -->
@@ -30,24 +30,19 @@
     	<div class="search_results">
             <article>
                 <h2>Senator</h2>
-                <a href="info.html"><img src="images/dinniman_senator.jpg" width="200" height="270" border="0" alt="" title=""></a>
-                <h3>Andrew E. Dinniman</h3>
-                <p>One North Church Street<br>West Chester, PA 19380</p>
-                <p>(610) 692-2112</p>
-                <p><a href="info.html">Learn more...</a></p>
-                
-                <!--<article class="tweet">
-                	<h3>Most Recent Tweet</h3>
-                	<p>Charlestown, Phoenixville, Spring City and Willistown get more than $50k in total PA Recycling Grants http://bit.ly/Oo9939</p>
-                </article>-->
+                <a href="/profile/{{upper_legid}}"><img src="images/dinniman_senator.jpg" width="200" height="270" border="0" alt="" title=""></a>
+                <h3>{{upper.first_name}} {{ upper.last_name}}</a><br><br></h3>
+                <p>{{upper.address}}</p>
+                <p>{{upper.phone}}</p>
+                <p><a href="/profile/{{upper_legid}}">Link to Profile Page!</a></p>
             </article>
             <article>
                 <h2>Representative</h2>
-                <a href="info.html"><img src="images/kampf_rep.jpg" width="200" height="270" border="0" alt="" title=""></a>
-                <h3>Warren Kampf</h3>
-                <p>2812A Egypt Road<br>Audubon, PA 19403</p>
-                <p>(610) 631-2865</p>
-                <p><a href="info.html">Learn more...</a></p>
+                <a href="/profile/{{lower_legid}}"><img src="images/kampf_rep.jpg" width="200" height="270" border="0" alt="" title=""></a>
+                <h3>{{lower.first_name}} {{ lower.last_name}}</a><br><br></h3>
+                <p>{{lower.address}}</p>
+                <p>{{lower.phone}}</p>
+                <p><a href="/profile/{{lower_legid}}">Learn more...</a></p>
             </article>
             <div class="clear"></div>
          </div>

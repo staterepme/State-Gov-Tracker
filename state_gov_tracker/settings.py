@@ -9,6 +9,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -56,7 +58,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/Users/christbr1985/State-Gov-Tracker/state_gov_tracker_app/templates/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -93,6 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -110,6 +113,8 @@ TEMPLATE_DIRS = (
     ''
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.static',)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,7 +127,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'state_gov_tracker_app',
-    'bootstrap'
+    'bootstrap',
+    'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging

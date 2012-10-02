@@ -43,7 +43,7 @@ def WhichRep(request):
 	lower['fbdata'] = lower_posts
 	lower['tweets'] = OfficialTweets.objects.filter(legid=lower['legid']).order_by('-timestamp')[:5]
 	upper['tweets'] =  OfficialTweets.objects.filter(legid=upper['legid']).order_by('-timestamp')[:5]
-	return render_to_response('search_results.html',{"upper": upper, "lower": lower, "upper_legid":upper['legid'], "lower_legid":lower['legid']})
+	return render_to_response('intermediate.html',{"upper": upper, "lower": lower, "upper_legid":upper['legid'], "lower_legid":lower['legid']})
 
 def pa_tweets(request):
 	"""Request for pa-tweets page, contains the last 30 tweets by members of the General Assembly"""
@@ -52,10 +52,11 @@ def pa_tweets(request):
 
 def profile(request, profile_legid):
 	tweet_list = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
-	print profile_legid
 	official = {}
-	official_object = Officials.objects.filter(legid=profile_legid)
-	return render_to_response('profile.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
+	official_object = Officials.objects.get(legid=profile_legid)
+	official["fullname"] = official_object.fullname
+	official["picture"] = official_object.photourl
+	return render_to_response('info.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')
@@ -83,7 +84,7 @@ def search(request, upper_or_lower):
 		return official_info(official_dict, x)
 
 def search_form(request):
-    return render_to_response('search_form.html')
+    return render_to_response('index.html')
 
 def login(username, password):
 	url = '/token/new.json'

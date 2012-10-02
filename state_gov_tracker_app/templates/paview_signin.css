@@ -1,0 +1,10 @@
+.signin-pa {
+  width : 25em;
+  margin : 0px auto;
+}
+.signin-pa tr td {
+  padding : 5px;
+}
+.signin-pa tr td:nth-child(1) {
+  text-align : right;
+}
