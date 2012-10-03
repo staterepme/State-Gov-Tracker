@@ -56,10 +56,13 @@
                 <article class="widget facebook">
                 	<h4>Recent Facebook Posts</h4>
                     <ul>
-                    	<li>Recently, I had the honor of being presented with a "key" to Atria Woodbridge Place in Kimberton. http://bit.ly/QV1JQX</li>
-                        <li>Recently, I had the honor of being presented with a "key" to Atria Woodbridge Place in Kimberton. http://bit.ly/QV1JQX</li>
-                        <li>Recently, I had the honor of being presented with a "key" to Atria Woodbridge Place in Kimberton. http://bit.ly/QV1JQX</li>
-                        <li>Recently, I had the honor of being presented with a "key" to Atria Woodbridge Place in Kimberton. http://bit.ly/QV1JQX</li>
+                    	{% if official.fb_posts %}
+                            {% for fb_post in official.fb_posts %}
+                                <li>{{ fb_post.post }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</li>
+                        {% endif %}
                     </ul>
                 </article>
                 

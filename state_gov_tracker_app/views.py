@@ -55,14 +55,14 @@ def pa_tweets(request):
 	return render_to_response('pa-tweets.html', {"tweet_list":tweet_list})
 
 def profile(request, profile_legid):
-	tweet_list = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
 	official = {}
 	official_object = Officials.objects.get(legid=profile_legid)
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
 	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
 	official['votes'] = get_recent_votes(profile_legid, num_to_get=2)
-	return render_to_response('info.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
+	official['fb_posts'] = get_recent_fb_posts(profile_legid)
+	return render_to_response('info.html', {'official': official, "legid":profile_legid})
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')
@@ -76,8 +76,17 @@ def MyRep(request):
 	return render_to_response('profile.html',{"rep_name": rep_name, "rep_picture": rep_picture, "rep_bio":rep_bio, 
 	"rep_news":rep_news, "rep_twitter":rep_twitter, "rep_facebook":rep_facebook, "rep_votes":rep_votes})
 
-vote = {'0':'Nay', '1':'Yea', '99':'Other'}
+def get_recent_fb_posts(legid_to_get, num_to_get=2):
+	fb_posts = FbData.objects.filter(legid=legid_to_get).order_by('-timestamp')[:num_to_get]
+	fb_list = []
+	for fb_post in fb_posts:
+		date = fb_post.timestamp.split(' ')[0]
+		post_id = fb_post.post_id.split('_')
+		link_to_post = 'https://www.facebook.com/%s/posts/%s' %(post_id[0], post_id[1])
+		fb_list.append({'date':date, 'post':fb_post.post, 'url':link_to_post})
+	return fb_list
 
+vote = {'0':'Nay', '1':'Yea', '99':'Other'}
 def get_recent_votes(legid_to_get, num_to_get=5):
 	"""Takes legislator id, returns list of most recent votes where each vote is a dictionary that contains keys for:
 		- title
