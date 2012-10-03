@@ -40,10 +40,15 @@
                 <article class="widget twitter">
                 	<h4>Recent Tweets</h4>
                     <ul>
-                    	<li>As a #prostatecancer survivor, I owe my health and quite possibly my life to early detection http://bit.ly/QV1JQX</li>
-                        <li>As a #prostatecancer survivor, I owe my health and quite possibly my life to early detection http://bit.ly/QV1JQX</li>
-                        <li>As a #prostatecancer survivor, I owe my health and quite possibly my life to early detection http://bit.ly/QV1JQX</li>
-                        <li>As a #prostatecancer survivor, I owe my health and quite possibly my life to early detection http://bit.ly/QV1JQX</li>
+                    	{% if official.tweets %}
+                            {% autoescape off %}
+                            {% for tweet in official.tweets %}
+                                <li>{{ tweet.oembed }}</li>
+                            {% endfor %}
+                            {% endautoescape %}
+                        {% else %}
+                            <li>We couldn't find any Tweets from your Representative. Contact them to encourage them to engage and inform their constituents with Twitter!</li>
+                        {% endif %}
                     </ul>
                 </article>
                 

@@ -60,6 +60,7 @@ def profile(request, profile_legid):
 	official_object = Officials.objects.get(legid=profile_legid)
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
+	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
 	return render_to_response('info.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
 
 def MyRep(request):
