@@ -141,3 +141,12 @@ class Votes(models.Model):
     session = models.TextField(blank=True) # This field type is a guess.
     class Meta:
         db_table = u'votes'
+
+class OfficialOffices(models.Model):
+    office_legid = models.TextField(blank=True) # This field type is a guess.
+    pk = models.IntegerField(primary_key=True)
+    address = models.TextField(blank=True)
+    phone = models.TextField(blank=True) # This field type is a guess.
+    name = models.TextField(blank=True)
+    class Meta:
+        db_table = u'official_offices'

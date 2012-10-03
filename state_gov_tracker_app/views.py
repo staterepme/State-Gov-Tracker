@@ -7,6 +7,8 @@ from django.template import Context, loader
 from state_gov_tracker_app.models import *
 from django.http import HttpResponse
 from subprocess import call
+from sunlight import openstates
+
 
 import datetime
 try:
@@ -57,12 +59,23 @@ def pa_tweets(request):
 def profile(request, profile_legid):
 	official = {}
 	official_object = Officials.objects.get(legid=profile_legid)
+	official["office_nums"] = get_offices(profile_legid)
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
 	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:2]
 	official['votes'] = get_recent_votes(profile_legid, num_to_get=2)
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
+
+def get_offices(legid_to_get):
+	leg_info = openstates.legislator_detail(legid_to_get)
+	return leg_info['offices']
+
+	# print len(offices)
+	# office_list = []
+	# for office in offices:
+	# 	officelist.append(office)
+	# return office_list
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')

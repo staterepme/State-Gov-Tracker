@@ -7,8 +7,15 @@
             <div class="profile">
             <div id="bio_left">
                 <a href="#"><img src="{{ official.picture }}" width="200" height="270" border="0" alt="" title=""></a>
-                <p>Address #1!<br>Address #2!</p>
-                <p>Phone Number!</p>
+                {% if official.office_nums %}
+                    {% for office in official.office_nums %}                            
+                        <p>{{ office.name }}<br>
+                        {{ office.address }}<br>
+                        {{ office.phone }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Sorry. Something went wrong and we couldn't find any addresses. We're working on a solution.</p>
+                {% endif %}
             </div>
             <div id="bio_right">
                 <p>INSERT BIOS - Known by the people of Chester and Montgomery counties simply as “Andy,” Senator Andrew E. Dinniman has been recognized as an advocate for communities and families through three decades in public service.</p>
