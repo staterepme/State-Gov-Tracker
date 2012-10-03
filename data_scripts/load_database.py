@@ -37,6 +37,9 @@ class pa_bills(Base):
 class votes(Base):
     __table__ = Table('votes', Base.metadata, autoload=True, autoload_with=engine)
 
+class legis_votes(Base):
+    __table__ = Table('pa_legis_votes', Base.metadata, autoload=True, autoload_with=engine)
+
 def loadSession():
     metadata = Base.metadata
     Session = sessionmaker(bind=engine)

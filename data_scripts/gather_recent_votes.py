@@ -55,10 +55,36 @@ def get_vote_detail(bill_id_to_lookup):
 		session.add(new_vote)
 	session.commit()
 
-def get_legis_votes(vote_id):
+def get_legis_votes():
 	"""Takes vote id and downloads legislator votes and puts them in DB"""
 	dl_votes = get_downloaded_votes()
-	dl_legis_votes = 
+	dl_legis_votes = get_downloaded_legis_votes()
+	votes_to_get = list(set(dl_votes)-set(dl_legis_votes))
+	print "Need to gather %s Votes" %(len(votes_to_get))
+	counter = 0
+	already_processed = []
+	for vote_id in votes_to_get:
+		if vote_id in already_processed:
+			continue
+		bill_id_to_lookup = session.query(votes).get(vote_id).bill_id
+		# print bill_id_to_lookup
+		bill_votes = sunlight.openstates.bill_detail(bill_id=bill_id_to_lookup, 
+		state="pa", session="2011-2012")['votes']
+		for vote in bill_votes:
+			counter += 1
+			if counter % 50 == 0:
+				print "Finished getting %s Votes" %(counter)
+			already_processed.append(vote['id'])
+			for yes_vote in vote['yes_votes']:
+				new_legis_vote_yes = legis_votes(legid=yes_vote['leg_id'], bill_id=bill_id_to_lookup, vote=1, date=vote['date'], vote_id=vote['id'])
+				session.add(new_legis_vote_yes)
+			for no_vote in vote['no_votes']:
+				new_legis_vote_no = legis_votes(legid=no_vote['leg_id'], bill_id=bill_id_to_lookup, vote=0, date=vote['date'], vote_id=vote['id'])
+				session.add(new_legis_vote_no)
+			for other_vote in vote['other_votes']:
+				new_legis_vote_other = legis_votes(legid=other_vote['leg_id'], bill_id=bill_id_to_lookup, vote=99, date=vote['date'], vote_id=vote['id'])
+				session.add(new_legis_vote_other)
+			session.commit()
 
 def add_bills_to_db():
 	dl_bills = get_downloaded_bills()
@@ -76,14 +102,9 @@ def add_bills_to_db():
 	session.commit()
 	print "Added a total of %s bills to database" %(counter)
 
-def add_vote_info_to_db(dl_bills):
-	dl_votes = get_downloaded_votes()
-	# for vote in dl_votes:
-		# if 
-
-
-if __name__ == '__main__':
+def add_vote_info_to_db():
 	dl_bills = get_downloaded_bills()
+	dl_votes = get_downloaded_votes()
 	print "Must get %s bills and all their votes." %(len(dl_bills))
 	counter = 0
 	for bill_id in dl_bills:
@@ -91,6 +112,14 @@ if __name__ == '__main__':
 		if counter % 50 == 0:
 			print "Finished getting %s" %(counter)
 		get_vote_detail(bill_id)
+
+if __name__ == '__main__':
+	# Add New Bills to DB #
 	# add_bills_to_db()
-	# pp.pprint(get_bill_detail('HB 1026'))
-	
+
+	# Download Vote Information for All Bills #
+	# add_vote_info_to_db()
+
+	# Download Legislator Vote Information #
+	# (How each individual actually voted) #
+	get_legis_votes()	
