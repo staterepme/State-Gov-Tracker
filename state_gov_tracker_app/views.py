@@ -25,9 +25,8 @@ def WhichRep(request):
 	lower = search(request, 'LOWER')
 	upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
 	lower['legid'] = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0].legid
-	
-        upper['image'] = Officials.objects.get(legid=upper['legid']).photourl
-        lower['image'] = Officials.objects.get(legid=lower['legid']).photourl
+	upper['image'] = Officials.objects.get(legid=upper['legid']).photourl
+	lower['image'] = Officials.objects.get(legid=lower['legid']).photourl
 
 	return render_to_response('intermediate.html',{"upper": upper, "lower": lower, "upper_legid":upper['legid'], "lower_legid":lower['legid']})
 
@@ -53,7 +52,15 @@ def profile(request, profile_legid):
 
 def get_offices(legid_to_get):
 	leg_info = openstates.legislator_detail(legid_to_get)
-	return leg_info['offices'], leg_info['email']
+	try:
+		email = leg_info['email']
+	except:
+		email = ''
+	try:
+		offices = leg_info['offices']
+	except:
+		offices = ''
+	return offices, email
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')

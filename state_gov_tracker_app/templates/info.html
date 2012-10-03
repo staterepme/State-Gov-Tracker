@@ -12,7 +12,9 @@
             <div id="bio_left">
                 <a href="#"><img src="{{ official.picture }}" width="200" height="270" border="0" alt="" title=""></a>
                 <h3>Contact Information</h3>
-                <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
+                {% if official.email %}
+                    <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
+                {% endif %}
                 {% if official.office_nums %}
                     {% for office in official.office_nums %}                            
                         <p>{{ office.name }}<br>
@@ -75,7 +77,7 @@
                                 <li>{{ fb_post.post }} ({{ fb_post.date }}) <a href="{{ fb_post.url }}">Link to Original Post</a></li>
                             {% endfor %}
                         {% else %}
-                            <li>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</li>
+                            We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!
                         {% endif %}
                     </ul>
                 </article>
