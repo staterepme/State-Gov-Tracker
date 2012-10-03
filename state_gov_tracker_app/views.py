@@ -61,6 +61,7 @@ def profile(request, profile_legid):
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
 	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
+	official['votes'] = get_recent_votes(profile_legid)
 	return render_to_response('info.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
 
 def MyRep(request):
@@ -95,7 +96,7 @@ def get_recent_votes(legid_to_get, num_to_get=5):
 			continue
 		bill_title = PaBills.objects.get(bill_id=leg_vote.bill_id).title
 		new_date = leg_vote.date.split(' ')[0]
-		vote_list.append({'bill':leg_vote.bill_id, 'date':new_date, 'vote':vote['%s' %(leg_vote.vote)], 'motion':vote_type, 'title':bill_title})
+		vote_list.append({'bill':leg_vote.bill_id, 'date':new_date, 'vote_yno':vote['%s' %(leg_vote.vote)], 'motion':vote_type, 'title':bill_title})
 	return vote_list[:num_to_get]
 
 def search(request, upper_or_lower):
