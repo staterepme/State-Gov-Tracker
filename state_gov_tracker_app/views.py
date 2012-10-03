@@ -56,10 +56,14 @@ def pa_tweets(request):
 	tweet_list =  OfficialTweets.objects.order_by('-timestamp')[:30]
 	return render_to_response('pa-tweets.html', {"tweet_list":tweet_list})
 
+position = {'upper':'Senator', 'lower':'Representative'}
+
 def profile(request, profile_legid):
 	official = {}
 	official_object = Officials.objects.get(legid=profile_legid)
-	official["office_nums"] = get_offices(profile_legid)
+	official["office_nums"], official['email'] = get_offices(profile_legid)
+	official['position'] = position[official_object.chamber]
+	official['district'] = official_object.district
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
 	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:2]
@@ -69,13 +73,7 @@ def profile(request, profile_legid):
 
 def get_offices(legid_to_get):
 	leg_info = openstates.legislator_detail(legid_to_get)
-	return leg_info['offices']
-
-	# print len(offices)
-	# office_list = []
-	# for office in offices:
-	# 	officelist.append(office)
-	# return office_list
+	return leg_info['offices'], leg_info['email']
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')
