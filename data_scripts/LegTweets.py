@@ -23,7 +23,7 @@ def get_official_timeline(handle, num_tweets):
 		tweet_list.append((entry['text'], convert_twitter_timestamp(entry['created_at']), entry['id_str']))
 	return tweet_list
 
-def download_first_tweets(input_file, num_tweets=20):
+def download_first_tweets(num_tweets=20):
 	"""
 	Takes input_file that is a .csv file delimited
 	with commas where the first column is the 
@@ -33,19 +33,18 @@ def download_first_tweets(input_file, num_tweets=20):
 	Calls to the twitter API for each member,
 	downloading their last 20 tweets and returns them into a dictionary.
 	"""
-	member_data = csv.DictReader(open(input_file), delimiter=',')
+	member_data = session.query(social_media_ids).all()
 	counter = 0
 	dict_list = []
 	for member in member_data:
-		if member['twitter'] != "":
+		if member.twitter != "":
 			try:
-				user_tl = get_official_timeline(member['twitter'], num_tweets)
+				user_tl = get_official_timeline(member.twitter, num_tweets)
 			except:
-				print "Could Not Get Twitter for member %s\n" %(member['twitter'])
+				print "Could Not Get Twitter for member %s\n%s" %(member.twitter, member.legid)
 				continue
 			for tweet in user_tl:
-				# text = text.replace(',',';')
-				dict_list.append({'legid':member['legid'],
+				dict_list.append({'legid':member.legid,
 					'text':tweet[0],
 					'timestamp':tweet[1],
 					'tweet_id':tweet[2]})
@@ -110,6 +109,6 @@ def getOembed(id_str):
 
 if __name__ == '__main__':
 	# print getOembed('233584713019817984')
-	new_tweets = download_first_tweets('./legs_socialmedia.csv', num_tweets=20)
+	new_tweets = download_first_tweets(num_tweets=20)
 	add_tweets_to_db(new_tweets)
 	add_oembed_codes()
