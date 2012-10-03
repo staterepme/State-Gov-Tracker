@@ -85,12 +85,13 @@ class PaBills(models.Model):
     state = models.TextField(blank=True) # This field type is a guess.
     session = models.TextField(blank=True) # This field type is a guess.
     chamber = models.TextField(blank=True) # This field type is a guess.
-    bill_id = models.TextField(primary_key=True, blank=True) # This field type is a guess.
-    title = models.TextField(blank=True) # This field type is a guess.
     created_at = models.TextField(blank=True) # This field type is a guess.
     updated_at = models.TextField(blank=True) # This field type is a guess.
     type = models.TextField(blank=True) # This field type is a guess.
     subjects = models.TextField(blank=True) # This field type is a guess.
+    title = models.TextField(blank=True)
+    pk = models.IntegerField(primary_key=True)
+    bill_id = models.TextField(blank=True)
     class Meta:
         db_table = u'pa_bills'
 
@@ -122,9 +123,22 @@ class PaLegisVotes(models.Model):
     bill_id = models.TextField(blank=True) # This field type is a guess.
     vote = models.IntegerField(null=True, blank=True)
     date = models.TextField(blank=True) # This field type is a guess.
-    yeas = models.TextField(blank=True) # This field type is a guess.
-    nays = models.TextField(blank=True) # This field type is a guess.
-    vote_key = models.IntegerField(primary_key=True)
+    vote_id = models.TextField() # This field type is a guess.
+    legis_vote_key = models.IntegerField(primary_key=True)
     class Meta:
         db_table = u'pa_legis_votes'
 
+class Votes(models.Model):
+    vote_id = models.TextField(primary_key=True) # This field type is a guess.
+    chamber = models.TextField(blank=True)
+    date = models.TextField(blank=True) # This field type is a guess.
+    motion = models.TextField(blank=True)
+    num_no = models.IntegerField(null=True, blank=True)
+    num_yes = models.IntegerField(null=True, blank=True)
+    num_other = models.IntegerField(null=True, blank=True)
+    type = models.TextField(blank=True)
+    bill_id = models.TextField(blank=True) # This field type is a guess.
+    status = models.TextField(blank=True) # This field type is a guess.
+    session = models.TextField(blank=True) # This field type is a guess.
+    class Meta:
+        db_table = u'votes'
