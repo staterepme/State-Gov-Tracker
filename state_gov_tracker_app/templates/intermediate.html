@@ -1,12 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Here are your Representatives!</title>
-<link rel="stylesheet/less" href="static/css/style.less">
-<script src="static/js/less-1.3.0.min.js"></script>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block page_content %}
+
 <div id="wrapper"><!-- Being Wrapper -->
 	<div id="main_container" class="internal"><!-- Begin Main Container -->
 	<header>
@@ -63,5 +58,5 @@
     
     </div><!-- End Main Container -->
 </div><!-- End Wrapper -->
-</body>
-</html>
+
+{% endblock %}
