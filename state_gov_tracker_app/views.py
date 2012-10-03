@@ -75,6 +75,29 @@ def MyRep(request):
 	return render_to_response('profile.html',{"rep_name": rep_name, "rep_picture": rep_picture, "rep_bio":rep_bio, 
 	"rep_news":rep_news, "rep_twitter":rep_twitter, "rep_facebook":rep_facebook, "rep_votes":rep_votes})
 
+vote = {'0':'Nay', '1':'Yea', '99':'Other'}
+
+def get_recent_votes(legid_to_get, num_to_get=5):
+	"""Takes legislator id, returns list of most recent votes where each vote is a dictionary that contains keys for:
+		- title
+		- bill (bill_id)
+		- vote (Yea, Nay, Other)
+		- date
+		- motion (passage, other, etc.)
+		"""
+	leg_votes = PaLegisVotes.objects.filter(legid=legid_to_get).order_by('-date')[:100]
+	vote_list = []
+	for leg_vote in leg_votes:
+		vote_type = Votes.objects.get(vote_id=leg_vote.vote_id).type
+		if vote_type == 'passage':
+			pass
+		else:
+			continue
+		bill_title = PaBills.objects.get(bill_id=leg_vote.bill_id).title
+		new_date = leg_vote.date.split(' ')[0]
+		vote_list.append({'bill':leg_vote.bill_id, 'date':new_date, 'vote':vote['%s' %(leg_vote.vote)], 'motion':vote_type, 'title':bill_title})
+	return vote_list[:num_to_get]
+
 def search(request, upper_or_lower):
 	if 'q' in request.GET:
 		loc = request.GET['q'].replace(' ','+')
