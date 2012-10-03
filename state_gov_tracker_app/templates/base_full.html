@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MyRep.is</title>
+<link rel="stylesheet/less" href="/static/css/style.less">
+<script src="/static/js/less-1.3.0.min.js"></script>
+</head>
+<body>
+
+<div id="wrapper"><!-- Being Wrapper -->
+        <div id="main_container" class="internal"><!-- Begin Main Container -->
+        <header>
+        <h1><a href="index.html">MyRep.is</a></h1>
+        <ul>
+        <li><a href="index.html">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <article id="search_again"><!-- Start Search Again -->
+        <!--<h3>Search at a Different Address</h3>-->
+            <form action="/results" method="get">
+                <input type="text" name="q"  placeholder="Search another address" class="field">
+                <input type="submit" value="Who's my rep?" class="button">
+            </form>
+        </article><!-- End Search Again -->
+    </header>
+
+
+     {% block page_content %}{% endblock %}
+
+    <footer>    
+    <article>
+        <a href="#"><img src="static/images/icons/facebook.png" width="45" alt="" title=""></a>
+            <a href="#"><img src="static/images/icons/twitter.png" width="45"  alt="" title=""></a>
+            <a href="#"><img src="static/images/icons/stumbleupon.png" width="45" alt="" title=""></a>
+        </article>
+        <article>
+        <p>MyRep.is is an open-source application aimed on benefiting the world.</p>
+            <p>Learn more <a href="#">here</a>.</p>
+        </article>
+        <div class="clear"></div>
+    </footer>   
+
+    </div><!-- End Main Container -->
+</div><!-- End Wrapper -->
+      
+
+
+
+</body>
+</html>
