@@ -61,7 +61,7 @@ def profile(request, profile_legid):
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
 	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:5]
-	official['votes'] = get_recent_votes(profile_legid)
+	official['votes'] = get_recent_votes(profile_legid, num_to_get=2)
 	return render_to_response('info.html', {'official': official, "tweet_list":tweet_list, "legid":profile_legid})
 
 def MyRep(request):
@@ -86,7 +86,7 @@ def get_recent_votes(legid_to_get, num_to_get=5):
 		- date
 		- motion (passage, other, etc.)
 		"""
-	leg_votes = PaLegisVotes.objects.filter(legid=legid_to_get).order_by('-date')[:100]
+	leg_votes = PaLegisVotes.objects.filter(legid=legid_to_get).order_by('-date')[:20]
 	vote_list = []
 	for leg_vote in leg_votes:
 		vote_type = Votes.objects.get(vote_id=leg_vote.vote_id).type
