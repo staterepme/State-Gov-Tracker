@@ -15,6 +15,8 @@ Copy `StateGovTracker.db` from dropbox file to project directory
 
 Copy `settings_example.py` to `settings.py`. Modify `settings.py` and point the `DATABASES name` to your local `StateGovTracker.db` file
 
+Install `python-sunlight` via pip - `pip install sunlight`. Register for an API-key at `http://services.sunlightlabs.com/accounts/register/`. Save the API key in `~/.sunlight.key`. For information see `http://python-sunlight.readthedocs.org/en/latest/index.html` for more information.
+
 `cd` top level project directory and run `python manage.py runserver`. If it complains about dependencies, install them.
 
 Once all the dependencies are installed, `python manage.py runserver` should work.
