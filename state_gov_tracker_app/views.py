@@ -25,27 +25,7 @@ def WhichRep(request):
 	lower = search(request, 'LOWER')
 	upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
 	lower['legid'] = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0].legid
-
-	upper_posts = []
-	lower_posts = []
 	
-	for x in range(5):
-		if len(FbData.objects.all().order_by('timestamp').filter(legid=upper['legid'])) > 0:
-			upper_posts.append(FbData.objects.all().filter(legid=upper['legid'])[x].post)
-		else:
-			upper_posts = 'No Facebook posts have been collected for this representative'
-	upper['fbdata'] = upper_posts
-
-	for x in range(5):
-		if len(FbData.objects.all().order_by('timestamp').filter(legid=lower['legid'])) > 0:
-			lower_posts.append(FbData.objects.all().filter(legid=lower['legid'])[x].post)
-		else:
-			lower_posts = 'No Facebook posts have been collected for this representative'
-	
-	lower['fbdata'] = lower_posts
-	lower['tweets'] = OfficialTweets.objects.filter(legid=lower['legid']).order_by('-timestamp')[:5]
-	upper['tweets'] =  OfficialTweets.objects.filter(legid=upper['legid']).order_by('-timestamp')[:5]
-
         upper['image'] = Officials.objects.get(legid=upper['legid']).photourl
         lower['image'] = Officials.objects.get(legid=lower['legid']).photourl
 
