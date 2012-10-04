@@ -91,6 +91,22 @@ body {
 	text-align:right;
 	font-weight:normal;
 	}
+	h3 {
+		font-size:13px;
+		font-style:italic;
+		color:white;
+		text-align:right;
+		margin:80px 0 0 0;
+		
+		a {
+			color:white;
+			text-decoration:none;
+		}
+		a:hover {
+					color:@green;
+					.transition(all 0.4s ease-in-out);
+		}
+	}
 	
 	form {
 	width:100%;
@@ -136,7 +152,7 @@ body {
 	header {
 		background: rgba(0, 0, 0, 0.5);
 		margin:0 0 10px 0;
-		min-height:50px;
+		height:70px;
 		padding:10px;
 		position:relative;
 		
@@ -149,32 +165,11 @@ body {
 				text-decoration:none;
 			}
 		}
-		ul {
-			font-size:22px;
-			list-style-type: circle;
-			
-			li {
-				display:inline-block;
-				margin:0 25px;
-				
-				a {
-					color:white;
-					text-decoration:none;
-				}
-				
-				a:hover {
-					color:@green;
-					.transition(all 0.4s ease-in-out);
-				}
-			}
-			li:first-child {
-				margin:0 25px 0 0;
-			}
-		}
+		
 		#search_again {
-			width:305px;
+			width:455px;
 			position:absolute;
-			top:32px;
+			top:30px;
 			right:20px;
 			
 			h3 {
@@ -184,7 +179,7 @@ body {
 			}
 			
 			 .field  {
-			width:190px;
+			width:330px;
 			font-size:12px;
 			.border-radius(10px);
 			height:17px;
@@ -365,7 +360,20 @@ body {
 			}
 		}
 		
+		#all_tweets {
+			width:850px;
+			margin:0 auto;
+			
+			.tweets_left {
+				width:400px;
+				float:left;
+			}
+			.tweets_right {
+				width:400px;
+				float:right;
+			}
 		
+		}
 	}
 }
 
@@ -376,6 +384,7 @@ footer {
 
 	article:first-child {
 		float:left;
+		margin-top:14px;
 		
 		img {
 			float:left;
@@ -394,6 +403,35 @@ footer {
 				color:@green;
 				font-style:italic;
 				text-decoration:none;
+			}
+		}
+		ul {
+			font-size:12px;
+			text-align:right;
+			
+			li {
+				display:inline-block;
+				margin:0 5px;
+				border-left:1px solid grey;
+				padding:0 10px 0 21px;
+				
+				a {
+					color:white;
+					text-decoration:none;
+				}
+				
+				a:hover {
+					color:@green;
+					.transition(all 0.4s ease-in-out);
+				}
+			}
+			li:first-child {
+				
+				border-left:0;
+			}
+			li:last-child {
+				padding-right:0;
+				margin-right:0;
 			}
 		}
 	}
