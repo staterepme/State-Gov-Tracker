@@ -283,12 +283,13 @@ def fix_dates():
 	session.commit()
 
 def add_texts_and_titles():
-	pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date != None)).all()
+	pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date != None, press_release.pr_title==None)).order_by(press_release.pr_date.desc()).all()
 	print "Processing %s press releases" %(len(pr_list))
 	counter = 0
-	for pr in session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date != None)).order_by(press_release.pr_date.desc()).all():
+	for pr in pr_list:
 		counter += 1
-		if counter % 10 == 0:
+		print pr.pr_key
+		if counter % 25 == 0:
 			print counter
 		try:
 			parsed_html = readabilify_text(pr.pr_html)
@@ -297,7 +298,9 @@ def add_texts_and_titles():
 			session.add(pr)
 		except:
 			pass
-		session.commit()
+		if counter == 5000:
+			break
+	session.commit()
 
 if __name__ == '__main__':
 	# test('http://www.senatorcosta.com/corbetts-shale-policy-falls-short')

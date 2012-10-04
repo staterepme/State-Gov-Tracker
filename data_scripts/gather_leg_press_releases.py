@@ -104,7 +104,7 @@ def get_urls_with_prs_repsen(first_url):
 			try:
 				urllib2.urlopen(link_pattern %(base_url, year, year))
 				link_list.append(link_pattern %(base_url, year, year))
-				print link_pattern %(base_url, year, year)
+				# print link_pattern %(base_url, year, year)
 			except:
 				pass
 	newlist = list(set(link_list))
@@ -130,7 +130,7 @@ def get_prs_from_url(url, path):
 		for element in html_tree.xpath(path):
 			for links in element.iterlinks():
 				link_list.append(links[2])
-		print link_list
+		# print link_list
 		return list(set(link_list))
 	except:
 		print "Could not get links from %s" %(url)
@@ -166,13 +166,14 @@ class official_prs(Base):
 						new_pr = press_release(pr_legid=self.legid,
 							pr_md5=md5(url).hexdigest(),
 							pr_url=url)
-						try:
-							session.add(new_pr)
-							session.commit()
-						except:
-							session.rollback()
-							print "Could not commit %s" %(new_pr.url)
-							pass
+						# try:
+						print url
+						session.add(new_pr)
+						session.commit()
+						# except:
+						# 	session.rollback()
+						# 	print "Could not commit %s" %(url)
+						# 	pass
 			if self.chamber == 'lower':
 				for entry in self.all_prs:
 					if md5(entry['url']).hexdigest() in list_of_md5s:
@@ -227,7 +228,7 @@ def dl_press_releases():
 	
 	## Get list of Press Releases and break it into chunks ##
 	print "Getting List of Press Releases"
-	for pr in session.query(press_release).filter(and_(press_release.pr_legid == "PAL000009")).order_by(func.random()).all():
+	for pr in session.query(press_release).filter(and_(press_release.pr_html==None)).order_by(func.random()).all():
 		pr_list.append(pr)
 	print "Need to download %s press releases" %(len(pr_list))
 	pr_chunked = chunks(pr_list, 50)
@@ -268,24 +269,35 @@ def dl_press_releases():
 
 if __name__ == '__main__':	
 	### Download Press Releases for State Senate ###
-	# for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
-	# 	# print off.fullname
-	# 	off.get_pr_urls()
-	# 	# print off.all_prs
-	# 	if len(off.all_prs) < 15:
-	# 		print off.fullname
-	# 		print off.press_release_url
-	# 	off.add_pr_urls_to_db()
+	print "Getting Press Release URLs for State Senate"
+	officials_to_get = session.query(official_prs).filter(official_prs.chamber=='upper').all()
+	print "%s Total Press Releases to Gather" %(len(officials_to_get))
+	counter = 0
+	for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
+		counter += 1
+		# print off.fullname
+		off.get_pr_urls()
+		# print off.all_prs
+		if len(off.all_prs) < 15:
+			print off.fullname
+			print off.press_release_url
+		off.add_pr_urls_to_db()
+		print "Gathered %s so far" %(counter)
 
 	### Download Press Releases for State House ###
-	# for off in session.query(official_prs).filter(official_prs.chamber=='lower').filter(official_prs.party=="Republican").all():
-	# 	print off.fullname
-	# 	off.get_pr_urls()
-	# 	# print off.all_prs
-	# 	# if len(off.all_prs) < 15:
-	# 	# 	print off.fullname
-	# 	# 	print off.press_release_url
-	# 	off.add_pr_urls_to_db()
+	print "Getting Press Release URLs for State House"
+	print "%s Total Press Releases to Gather" %(len(session.query(official_prs).filter(official_prs.chamber=='lower').all()))
+	counter = 0
+	for off in session.query(official_prs).filter(official_prs.chamber=='lower').all():
+		# print off.fullname
+		counter += 1
+		off.get_pr_urls()
+		# print off.all_prs
+		if len(off.all_prs) < 15:
+			print off.fullname
+			print off.press_release_url
+		off.add_pr_urls_to_db()
+		print "Gathered %s so far" %(counter)
 
 	### Download HTML for Press Releases ###
 	dl_press_releases()
