@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nick Weingartner Tracker</title>
+<link rel="stylesheet" href="css/colorbox.css">
+<link rel="stylesheet/less" href="css/style.less">
+<script src="js/less-1.3.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="js/jquery.colorbox-min.js"></script>
+<script>
+			$(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+				$(".group1").colorbox({rel:'group1'});
+				$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+				$(".inline").colorbox({inline:true, width:"50%"});
+	
+			});
+		</script>
+</head>
+<body>
+<div id="wrapper"><!-- Being Wrapper -->
+	<div id="main_container"><!-- Begin Main Container -->
+    	<section id="search">
+        <h1>Welcome to MyRep.is!</h1>
+        <h2>Enter your address below to find out who represents you:</h2>
+        	<form action="intermediate.html" method="get">
+				<input type="text" placeholder="Enter your address" class="field">
+				<a href="intermediate.html"><input type="submit" value="Who's my rep?" class="button"></a>
+    		</form>
+        <h3><a class="group1" href="images/pa_counties.png">(Or, you can use this colorful map!)</a></h3>
+        </section>
+    </div><!-- End Main Container -->
+</div><!-- End Wrapper -->
+</body>
+</html>
