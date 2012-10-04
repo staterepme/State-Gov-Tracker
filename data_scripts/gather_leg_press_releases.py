@@ -227,7 +227,7 @@ def dl_press_releases():
 	
 	## Get list of Press Releases and break it into chunks ##
 	print "Getting List of Press Releases"
-	for pr in session.query(press_release).filter(and_(press_release.pr_html == None)).order_by(func.random()).all():
+	for pr in session.query(press_release).filter(and_(press_release.pr_legid == "PAL000009")).order_by(func.random()).all():
 		pr_list.append(pr)
 	print "Need to download %s press releases" %(len(pr_list))
 	pr_chunked = chunks(pr_list, 50)
