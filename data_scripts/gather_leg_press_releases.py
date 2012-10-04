@@ -12,7 +12,7 @@ import threading, urllib2, mechanize
 from lxml.html import parse, make_links_absolute
 from StringIO import StringIO
 from load_database import *
-import csv, feedparser
+import csv, feedparser, threading, Queue
 from urlparse import urlparse
 from hashlib import md5
 
@@ -197,8 +197,76 @@ def existing_url_md5s():
 		md5_list.append(pr.pr_md5)
 	return md5_list
 
-if __name__ == '__main__':
+### Functions for Actually Downloading Scripts ###
+
+def chunks(l, n):
+	"""Splits a list (l) into chunks of size -n- and returns a list of chunks"""
+	return [l[i:i+n] for i in range(0, len(l), n)]
+
+def read_url(url, queue, index):
+    try:
+        data = urllib2.urlopen(url, timeout=30).read()
+    except:
+        print url
+        print "Could Not Fetch Page"
+        data = "Could Not Fetch Page"
+    # print('Fetched %s from %s' % (len(data), url))
+    queue.put((index,data))
+
+def fetch_parallel(urls_to_load):
+    result = Queue.Queue()
+    threads = [threading.Thread(target=read_url, args = (url[1], result, url[0])) for url in urls_to_load]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    return result
+
+def dl_press_releases():
+	pr_list = []
 	
+	## Get list of Press Releases and break it into chunks ##
+	print "Getting List of Press Releases"
+	for pr in session.query(press_release).filter(and_(press_release.pr_html == None)).order_by(func.random()).all():
+		pr_list.append(pr)
+	print "Need to download %s press releases" %(len(pr_list))
+	pr_chunked = chunks(pr_list, 50)
+	total_count = len(pr_list)
+	## Loop through Chunks ##
+	dl_count = 0
+	for pr_chunk in pr_chunked:
+		print "Getting press release # %s of %s total" %(dl_count, total_count)
+		urls_to_dl = []
+		pr_rows = []
+		counter = 0
+		for pr in pr_chunk:
+			urls_to_dl.append((counter, pr.pr_url))
+			counter += 1
+			pr_rows.append(pr)
+		# try:
+		dl_prs = fetch_parallel(urls_to_dl)
+		# except:
+			# continue
+		dl_count += 50
+		q_list = sorted(list(dl_prs.queue))
+		for element in q_list:
+			if element[1] == "Could Not Fetch Page":
+				pr_rows[element[0]].pr_html = "ERROR"
+			# html_notcoded = element[1].decode('utf-8', errors='ignore')
+			pr_rows[element[0]].pr_html = unicode(element[1], errors='ignore')
+		for pr_dld in pr_rows:
+			# try:
+			session.add(pr_dld)
+			session.commit()
+			# print pr_dld.pr_key
+			# except:
+			# 	session.rollback()
+			# 	pr_dld.pr_html="ERROR"
+			# 	session.add(pr_dld)
+			# 	print "Failed!"
+			# 	session.commit()
+
+if __name__ == '__main__':	
 	### Download Press Releases for State Senate ###
 	# for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
 	# 	# print off.fullname
@@ -210,13 +278,14 @@ if __name__ == '__main__':
 	# 	off.add_pr_urls_to_db()
 
 	### Download Press Releases for State House ###
-	for off in session.query(official_prs).filter(official_prs.chamber=='lower').filter(official_prs.party=="Republican").all():
-		print off.fullname
-		off.get_pr_urls()
-		# print off.all_prs
-		# if len(off.all_prs) < 15:
-		# 	print off.fullname
-		# 	print off.press_release_url
-		off.add_pr_urls_to_db()
+	# for off in session.query(official_prs).filter(official_prs.chamber=='lower').filter(official_prs.party=="Republican").all():
+	# 	print off.fullname
+	# 	off.get_pr_urls()
+	# 	# print off.all_prs
+	# 	# if len(off.all_prs) < 15:
+	# 	# 	print off.fullname
+	# 	# 	print off.press_release_url
+	# 	off.add_pr_urls_to_db()
 
-	# print dl_rss('http://www.repsaccone.com/latestnews.aspx', party="Republican")
+	### Download HTML for Press Releases ###
+	dl_press_releases()
