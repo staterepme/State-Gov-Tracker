@@ -36,6 +36,14 @@ def pa_tweets(request):
 	tweet_list_two = OfficialTweets.objects.order_by('-timestamp')[20:40]
 	return render_to_response('all_tweets.html', {"tweet_list_one":tweet_list_one, "tweet_list_two":tweet_list_two})
 
+def blog_page(request):
+	"""Returns blog page"""
+	return render_to_response('blog.html')
+
+def about_myrep(request):
+	"""Returns about page"""
+	return render_to_response('about.html')
+
 position = {'upper':'Senator', 'lower':'Representative'}
 
 def profile(request, profile_legid):
