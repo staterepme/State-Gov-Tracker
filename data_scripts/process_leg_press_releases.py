@@ -283,7 +283,7 @@ def fix_dates():
 	session.commit()
 
 def add_texts_and_titles():
-	pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date != None, press_release.pr_title==None)).order_by(press_release.pr_date.desc()).all()
+	pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date != None, press_release.pr_text==None)).order_by(press_release.pr_date.desc()).all()
 	print "Processing %s press releases" %(len(pr_list))
 	counter = 0
 	for pr in pr_list:
@@ -293,7 +293,8 @@ def add_texts_and_titles():
 			print counter
 		try:
 			parsed_html = readabilify_text(pr.pr_html)
-			pr.pr_title = parsed_html[0]
+			if pr.pr_title == None:
+				pr.pr_title = parsed_html[0]
 			pr.pr_text = parsed_html[1]
 			session.add(pr)
 		except:
@@ -309,4 +310,4 @@ if __name__ == '__main__':
 	# url = 'http://www.senatoranthonyhwilliams.com/grays-ferry-farmers-market-to-open-may-31'
 	# html_data = get_html(url)
 	# print readabilify_text(html_data)[0]
-	add_texts_and_titles()
+	# add_texts_and_titles()

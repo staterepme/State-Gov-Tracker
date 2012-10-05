@@ -182,7 +182,8 @@ class official_prs(Base):
 						new_pr = press_release(pr_legid=self.legid,
 							pr_md5=md5(entry['url']).hexdigest(),
 							pr_url=entry['url'],
-							pr_date=entry['datestamp'])
+							pr_date=entry['datestamp'],
+							pr_title=entry['title'])
 						try:
 							session.add(new_pr)
 							session.commit()
@@ -228,7 +229,7 @@ def dl_press_releases():
 	
 	## Get list of Press Releases and break it into chunks ##
 	print "Getting List of Press Releases"
-	for pr in session.query(press_release).filter(and_(press_release.pr_key>18897)).order_by(func.random()).all():
+	for pr in session.query(press_release).filter(and_(press_release.pr_html==None)).order_by(func.random()).all():
 		pr_list.append(pr)
 	print "Need to download %s press releases" %(len(pr_list))
 	pr_chunked = chunks(pr_list, 10)
@@ -285,7 +286,7 @@ if __name__ == '__main__':
 	# 	off.add_pr_urls_to_db()
 	# 	print "Gathered %s so far" %(counter)
 
-	### Download Press Releases for State House ###
+	# ### Download Press Releases for State House ###
 	# print "Getting Press Release URLs for State House"
 	# print "%s Total Press Releases to Gather" %(len(session.query(official_prs).filter(official_prs.chamber=='lower').all()))
 	# counter = 0
