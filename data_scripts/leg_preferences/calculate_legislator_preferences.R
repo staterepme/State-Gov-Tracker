@@ -64,14 +64,23 @@ id2 <- ideal(rc_lower_fixed,
              verbose=TRUE)
 
 # Combine Ideal Points with Party Data #
-ideal_scores <- cbind(votes_wide[,1], id1$xbar)
-ideal_scores <- data.frame(ideal_scores, row.names=NULL)
+ideal_scores_upper <- cbind(upper_wide[,1], id1$xbar)
+ideal_scores_upper <- data.frame(ideal_scores_upper, row.names=NULL)
+ideal_scores_lower <- cbind(lower_wide[,1], id2$xbar)
+ideal_scores_lower <- data.frame(ideal_scores_lower, row.names=NULL)
 
 # Transform Variables into correct formats
-ideal_scores$D1 <- as.numeric(levels(ideal_scores$D1))[ideal_scores$D1]
-combined <- merge(mem_data, ideal_scores, by.x = "X1", by.y = "V1")
-combined$X2 <- as.factor(combined$X2)
-combined$X3 <- as.factor(combined$X3)
+ideal_scores_upper$D1 <- as.numeric(levels(ideal_scores_upper$D1))[ideal_scores_upper$D1]
+combined_upper <- merge(upper_mem, ideal_scores_upper, by.x = "X1", by.y = "V1")
+ideal_scores_lower$D1 <- as.numeric(levels(ideal_scores_lower$D1))[ideal_scores_lower$D1]
+combined_lower <- merge(lower_mem, ideal_scores_lower, by.x = "X1", by.y = "V1")
+
+combined_upper$X2 <- as.factor(combined_upper$X2)
+combined_upper$X3 <- as.factor(combined_upper$X3)
+combined_lower$X2 <- as.factor(combined_lower$X2)
+combined_lower$X3 <- as.factor(combined_lower$X3)
+
+combined <- rbind(combined_upper, combined_lower)
 
 for (i in 1:length(combined$D1)) {
     combined$D1[i] <- -1*combined$D1[i]
