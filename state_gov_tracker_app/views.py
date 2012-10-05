@@ -50,7 +50,7 @@ def profile(request, profile_legid):
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
 
 	'''THIS LINE MUST BE CHANGED FOR PRODUCTION - THIS IS JUST TO GET IT TO WORK WITH REP BROWNLEE'''
-	official['press_release'] = OfficialPressReleases.objects.filter(pr_legid=profile_legid).order_by('-pr_date')[2:5]
+	official['press_release'] = get_press_releases(profile_legid)
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
 
 def get_offices(legid_to_get):
@@ -64,6 +64,27 @@ def get_offices(legid_to_get):
 	except:
 		offices = ''
 	return offices, email
+
+def get_press_releases(legid_to_get):
+	press_releases = OfficialPressReleases.objects.filter(pr_legid=legid_to_get).order_by('-pr_date')[:10]
+	relevant_prs = []
+	if len(press_releases) == 0:
+		return []
+	for pr in press_releases:
+		new_pr = {}
+		date_split = pr.pr_date.split('-')
+		if int(date_split[0]) > 2012:
+			continue
+		if pr.pr_title == None and pr.pr_text == None:
+			continue
+		if pr.pr_title != None:
+			new_pr['title'] = pr.pr_title
+		else:
+			new_pr['title'] = pr.pr_text
+		new_pr['url'] = pr.pr_url
+		new_pr['date'] = pr.pr_date
+		relevant_prs.append(new_pr)
+	return relevant_prs
 
 def MyRep(request):
 	rep_id = search(request, 'LOWER')
