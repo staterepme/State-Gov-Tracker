@@ -304,7 +304,7 @@ def add_texts_and_titles():
 
 if __name__ == '__main__':
 	# test('http://www.senatorcosta.com/corbetts-shale-policy-falls-short')
-	# find_date_all()
+	find_date_all()
 	# fix_dates()
 	# url = 'http://www.senatoranthonyhwilliams.com/grays-ferry-farmers-market-to-open-may-31'
 	# html_data = get_html(url)

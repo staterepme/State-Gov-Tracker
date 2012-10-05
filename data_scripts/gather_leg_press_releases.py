@@ -228,10 +228,10 @@ def dl_press_releases():
 	
 	## Get list of Press Releases and break it into chunks ##
 	print "Getting List of Press Releases"
-	for pr in session.query(press_release).filter(and_(press_release.pr_html==None)).order_by(func.random()).all():
+	for pr in session.query(press_release).filter(and_(press_release.pr_key>18897)).order_by(func.random()).all():
 		pr_list.append(pr)
 	print "Need to download %s press releases" %(len(pr_list))
-	pr_chunked = chunks(pr_list, 50)
+	pr_chunked = chunks(pr_list, 10)
 	total_count = len(pr_list)
 	## Loop through Chunks ##
 	dl_count = 0
@@ -248,13 +248,14 @@ def dl_press_releases():
 		dl_prs = fetch_parallel(urls_to_dl)
 		# except:
 			# continue
-		dl_count += 50
+		dl_count += 10
 		q_list = sorted(list(dl_prs.queue))
 		for element in q_list:
 			if element[1] == "Could Not Fetch Page":
 				pr_rows[element[0]].pr_html = "ERROR"
-			# html_notcoded = element[1].decode('utf-8', errors='ignore')
-			pr_rows[element[0]].pr_html = unicode(element[1], errors='ignore')
+				pr_rows[element[0]].pr_html = None
+			else:
+				pr_rows[element[0]].pr_html = unicode(element[1], errors='ignore')
 		for pr_dld in pr_rows:
 			# try:
 			session.add(pr_dld)
@@ -269,35 +270,31 @@ def dl_press_releases():
 
 if __name__ == '__main__':	
 	### Download Press Releases for State Senate ###
-	print "Getting Press Release URLs for State Senate"
-	officials_to_get = session.query(official_prs).filter(official_prs.chamber=='upper').all()
-	print "%s Total Press Releases to Gather" %(len(officials_to_get))
-	counter = 0
-	for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
-		counter += 1
-		# print off.fullname
-		off.get_pr_urls()
-		# print off.all_prs
-		if len(off.all_prs) < 15:
-			print off.fullname
-			print off.press_release_url
-		off.add_pr_urls_to_db()
-		print "Gathered %s so far" %(counter)
+	# print "Getting Press Release URLs for State Senate"
+	# officials_to_get = session.query(official_prs).filter(official_prs.chamber=='upper').all()
+	# print "%s Total Press Releases to Gather" %(len(officials_to_get))
+	# counter = 0
+	# for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
+	# 	counter += 1
+	# 	# print off.fullname
+	# 	off.get_pr_urls()
+	# 	# print off.all_prs
+	# 	if len(off.all_prs) < 15:
+	# 		print off.fullname
+	# 		print off.press_release_url
+	# 	off.add_pr_urls_to_db()
+	# 	print "Gathered %s so far" %(counter)
 
 	### Download Press Releases for State House ###
-	print "Getting Press Release URLs for State House"
-	print "%s Total Press Releases to Gather" %(len(session.query(official_prs).filter(official_prs.chamber=='lower').all()))
-	counter = 0
-	for off in session.query(official_prs).filter(official_prs.chamber=='lower').all():
-		# print off.fullname
-		counter += 1
-		off.get_pr_urls()
-		# print off.all_prs
-		if len(off.all_prs) < 15:
-			print off.fullname
-			print off.press_release_url
-		off.add_pr_urls_to_db()
-		print "Gathered %s so far" %(counter)
+	# print "Getting Press Release URLs for State House"
+	# print "%s Total Press Releases to Gather" %(len(session.query(official_prs).filter(official_prs.chamber=='lower').all()))
+	# counter = 0
+	# for off in session.query(official_prs).filter(official_prs.chamber=='lower').all():
+	# 	# print off.fullname
+	# 	counter += 1
+	# 	off.get_pr_urls()
+	# 	off.add_pr_urls_to_db()
+	# 	print "Gathered %s so far" %(counter)
 
 	### Download HTML for Press Releases ###
 	dl_press_releases()
