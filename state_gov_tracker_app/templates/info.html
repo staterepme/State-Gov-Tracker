@@ -34,10 +34,13 @@
                 <article class="widget news">
                 	<h4>Press Releases</h4>
                     <ul>
-                    	<li>9/30/12 - Dolor duis velit illum, dignissim duis, blandit eros.</li>
-                        <li>9/30/12 - Dolor duis velit illum, dignissim duis, blandit eros.</li>
-                        <li>9/30/12 - Dolor duis velit illum, dignissim duis, blandit eros.</li>
-                        <li>9/30/12 - Dolor duis velit illum, dignissim duis, blandit eros.</li>
+					{% if official.press_release %}
+                        {% for release in official.press_release %}                            
+                            <li>{{release.pr_date}} - {{release.pr_text|truncatechars:120}}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
+                    {% endif %}
                     </ul>
                 </article>
                 
@@ -61,7 +64,7 @@
                     	{% if official.tweets %}
                             {% autoescape off %}
                             {% for tweet in official.tweets %}
-                                {{ tweet.oembed }}
+                                <li>{{ tweet.timestamp }} - {{ tweet.tweet }}</li><br>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
