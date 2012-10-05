@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+{% extends "base_full.html" %}
+
+{% block page_content %}
+
+<section id="content"><!-- Start Main Content -->
+    <h1>Listen to all of your represenatives...</h1>
+	<article id="all_tweets"><!-- Begin All Tweets -->
+    	<div class="tweets_left">
+            {% if tweet_list_one %}
+                {% autoescape off %}
+                {% for tweet in tweet_list_one %}
+                    {{ tweet.oembed }}
+                {% endfor %}
+                {% endautoescape %}
+            {% else %}
+               We're sorry. Something went wrong and we couldn't find any recent tweets. We are working on a solution right now.
+            {% endif %}
+        </div>
+        <div class="tweets_right">
+        	{% if tweet_list_two %}
+                {% autoescape off %}
+                {% for tweet in tweet_list_two %}
+                    {{ tweet.oembed }}
+                {% endfor %}
+                {% endautoescape %}
+            {% else %}
+                We're sorry. Something went wrong and we couldn't find any recent tweets. We are working on a solution right now.
+            {% endif %}
+        </div>
+	<div class="clear"></div>
+    </article><!-- End All Tweets -->
+</section><!-- End Main Content -->
+    
+{% endblock %}
