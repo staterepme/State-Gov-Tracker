@@ -4,10 +4,10 @@
 
 <section id="content"><!-- Start Main Content -->
             <h1>{{ official.fullname }}</h1>
-            <article>
+       <!--      <article>
                 <h2>{{ official.position }}</h2>
                 <h2>District {{ official.district }}</h2>
-            </article>
+            </article> -->
             <div class="profile">
             <div id="bio_left">
                 <a href="#"><img src="{{ official.picture }}" width="200" height="270" border="0" alt="" title=""></a>
@@ -27,16 +27,13 @@
                 {% endif %}
             </div>
             <div id="bio_right">
-                <p>INSERT BIOS - Known by the people of Chester and Montgomery counties simply as “Andy,” Senator Andrew E. Dinniman has been recognized as an advocate for communities and families through three decades in public service.</p>
-                <p>That vision and leadership led to his 2006 election and 2008 reelection to the Pennsylvania Senate, representing Pennsylvania’s 19th District.</p>
-                <p>Prior to serving in the legislature, Senator Dinniman served for 15 years as a Chester County Commissioner, making him the longest-serving commissioner in county history. As Commissioner, Andy demonstrated a true commitment to the future of Chester County by taking on some of the region’s most difficult issues. He worked to found the Safe Harbor Homeless Shelter, the Chester County Gleaning Project and served as one of the principal architects of Landscapes, the county’s award-winning open space plan. Both as a commissioner and a state senator, Andy also has consistently opposed tax hikes and increases in spending.</p>
-                
+               <p>Conservative/Liberal Ranking:</p>
                 <article class="widget news">
                 	<h4>Press Releases</h4>
                     <ul>
 					{% if official.press_release %}
                         {% for release in official.press_release %}                            
-                            <li><a href="{{ release.url }}">{{release.date}}</a> - {{release.title|truncatechars:120}}</li>
+                            <li><a style="color:#36D600" href="{{ release.url }}">{{release.date}}</a> - {{release.title|truncatechars:120}}</li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
@@ -65,7 +62,7 @@
                     	{% if official.tweets %}
                             {% autoescape off %}
                             {% for tweet in official.tweets %}
-                                <li><a href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet|urlize }}</li>
+                                <li><a style="color:#36D600" href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet|urlize }}</li>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
@@ -79,7 +76,7 @@
                     <ul>
                     	{% if official.fb_posts %}
                             {% for fb_post in official.fb_posts %}
-                                <li>{{ fb_post.post|truncatechars:120|urlize }} ({{ fb_post.date }}) <a href="{{ fb_post.url }}">Link to Original Post</a></li>
+                                <li>{{ fb_post.post|truncatechars:120|urlize }}  <a style="color:#36D600" href="{{ fb_post.url }}">{{ fb_post.date }}</a></li>
                             {% endfor %}
                         {% else %}
                             We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!
