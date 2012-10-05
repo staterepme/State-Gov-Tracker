@@ -20,6 +20,9 @@ except ImportError:
 http = httplib2.Http()
 url_base = 'http://cicero.azavea.com/v3.1'
 
+pref_type = {'Republican':'Conservative', 'Democratic':'Liberal'}
+num_rank = {'upper':'50', 'lower':'200'}
+
 def WhichRep(request):
 	upper = search(request, 'UPPER')
 	lower = search(request, 'LOWER')
@@ -44,7 +47,7 @@ def about_myrep(request):
 	"""Returns about page"""
 	return render_to_response('about.html')
 
-position = {'upper':'Senator', 'lower':'Representative'}
+position = {'upper':'Senate', 'lower':'House'}
 
 def profile(request, profile_legid):
 	official = {}
@@ -54,10 +57,13 @@ def profile(request, profile_legid):
 	official['district'] = official_object.district
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
+	official["rank_type"] = pref_type[official_object.party]
+	official['num_rank'] = num_rank[official_object.chamber]
 	official['tweets'] = get_official_tweets(profile_legid)[:4]
 	official['votes'] = get_recent_votes(profile_legid, num_to_get=10)[:4]
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
 	official['press_release'] = get_press_releases(profile_legid)[:4]
+	official['rank'] = get_pref_rank(profile_legid, official_object.party, official_object.chamber)
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
 
 def get_official_tweets(legid_to_get):
@@ -69,6 +75,17 @@ def get_official_tweets(legid_to_get):
 		new_tweets.append({'tweet':t.tweet, 'timestamp':t.timestamp.split(' ')[0], 'url':url})
 	return new_tweets
 
+def get_pref_rank(legid_to_get, party_to_get, chamber_to_get):
+	if party_to_get == "Republican":
+		prefs = Preferences.objects.filter(party=party_to_get, chamber=chamber_to_get).order_by('-ideology')
+	else:
+		prefs = Preferences.objects.filter(party=party_to_get, chamber=chamber_to_get).order_by('-ideology')
+	counter = 0
+	for pref in prefs:
+		counter += 1
+		if pref.legid==legid_to_get:
+			break
+	return counter
 
 def get_offices(legid_to_get):
 	leg_info = openstates.legislator_detail(legid_to_get)

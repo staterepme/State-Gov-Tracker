@@ -9,6 +9,15 @@
 
 from django.db import models
 
+class Preferences(models.Model):
+    row_names = models.TextField(blank=True)
+    legid = models.TextField(blank=True, primary_key=True)
+    party = models.TextField(blank=True)
+    chamber = models.TextField(blank=True)
+    ideology = models.FloatField(null=True, blank=True)
+    class Meta:
+        db_table = u'preferences'
+
 class FbData(models.Model):
     legid = models.TextField(blank=True) # This field type is a guess.
     timestamp = models.TextField(blank=True) # This field type is a guess.
