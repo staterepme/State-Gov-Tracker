@@ -45,12 +45,12 @@ def profile(request, profile_legid):
 	official['district'] = official_object.district
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
-	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:2]
-	official['votes'] = get_recent_votes(profile_legid, num_to_get=2)
+	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:4]
+	official['votes'] = get_recent_votes(profile_legid, num_to_get=10)[:4]
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
 
 	'''THIS LINE MUST BE CHANGED FOR PRODUCTION - THIS IS JUST TO GET IT TO WORK WITH REP BROWNLEE'''
-	official['press_release'] = get_press_releases(profile_legid)
+	official['press_release'] = get_press_releases(profile_legid)[:4]
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
 
 def get_offices(legid_to_get):
@@ -98,7 +98,7 @@ def MyRep(request):
 	return render_to_response('profile.html',{"rep_name": rep_name, "rep_picture": rep_picture, "rep_bio":rep_bio, 
 	"rep_news":rep_news, "rep_twitter":rep_twitter, "rep_facebook":rep_facebook, "rep_votes":rep_votes})
 
-def get_recent_fb_posts(legid_to_get, num_to_get=2):
+def get_recent_fb_posts(legid_to_get, num_to_get=4):
 	fb_posts = FbData.objects.filter(legid=legid_to_get).order_by('-timestamp')[:num_to_get]
 	fb_list = []
 	for fb_post in fb_posts:

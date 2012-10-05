@@ -49,7 +49,7 @@
                     <ul>
                     {% if official.votes %}
                         {% for vote in official.votes %}                            
-                            <li>{{ vote.vote_yno }} : {{ vote.title }} ({{ vote.date }})</li>
+                            <li>{{ vote.vote_yno }} : {{ vote.title|truncatechars:120}} ({{ vote.date }})</li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
@@ -61,15 +61,17 @@
                 
                 <article class="widget twitter">
                 	<h4>Recent Tweets</h4>
+                    <ul>
                     	{% if official.tweets %}
                             {% autoescape off %}
                             {% for tweet in official.tweets %}
-                                <li>{{ tweet.timestamp }} - {{ tweet.tweet }}</li><br>
+                                <li>{{ tweet.timestamp }} - {{ tweet.tweet}}</li>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
                             <li>We couldn't find any Tweets from your Representative. Contact them to let them know they should use Twitter to keep their constituents informed about their activities and state politics!</li>
                         {% endif %}
+                    </ul>
                 </article>
                 
                 <article class="widget facebook">
@@ -77,7 +79,7 @@
                     <ul>
                     	{% if official.fb_posts %}
                             {% for fb_post in official.fb_posts %}
-                                <li>{{ fb_post.post }} ({{ fb_post.date }}) <a href="{{ fb_post.url }}">Link to Original Post</a></li>
+                                <li>{{ fb_post.post|truncatechars:120 }} ({{ fb_post.date }}) <a href="{{ fb_post.url }}">Link to Original Post</a></li>
                             {% endfor %}
                         {% else %}
                             We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!
