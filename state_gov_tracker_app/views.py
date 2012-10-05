@@ -48,6 +48,9 @@ def profile(request, profile_legid):
 	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:2]
 	official['votes'] = get_recent_votes(profile_legid, num_to_get=2)
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
+
+	'''THIS LINE MUST BE CHANGED FOR PRODUCTION - THIS IS JUST TO GET IT TO WORK WITH REP BROWNLEE'''
+	official['press_release'] = OfficialPressReleases.objects.filter(pr_legid=profile_legid).order_by('-pr_date')[2:5]
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
 
 def get_offices(legid_to_get):
