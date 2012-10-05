@@ -64,6 +64,7 @@ def profile(request, profile_legid):
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
 	official['press_release'] = get_press_releases(profile_legid)[:4]
 	official['rank'] = get_pref_rank(profile_legid, official_object.party, official_object.chamber)
+	official['website'] = official_object.homepage
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
 
 def get_official_tweets(legid_to_get):

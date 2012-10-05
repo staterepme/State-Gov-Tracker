@@ -11,7 +11,8 @@
             <div class="profile">
             <div id="bio_left">
                 <a href="#"><img src="{{ official.picture }}" width="200" height="270" border="0" alt="" title=""></a>
-                <h3>Contact Information</h3>
+                <H3><a href="{{official.website}}">Homepage</a></H3>
+				<h3>Contact Information</h3>
                 {% if official.email %}
                     <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
                 {% endif %}
