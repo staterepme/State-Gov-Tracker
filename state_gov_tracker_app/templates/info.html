@@ -65,7 +65,7 @@
                     	{% if official.tweets %}
                             {% autoescape off %}
                             {% for tweet in official.tweets %}
-                                <li>{{ tweet.timestamp }} - {{ tweet.tweet}}</li>
+                                <li><a href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet}}</li>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}

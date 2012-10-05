@@ -45,13 +45,21 @@ def profile(request, profile_legid):
 	official['district'] = official_object.district
 	official["fullname"] = official_object.fullname
 	official["picture"] = official_object.photourl
-	official['tweets'] = OfficialTweets.objects.filter(legid=profile_legid).order_by('-timestamp')[:4]
+	official['tweets'] = get_official_tweets(profile_legid)[:4]
 	official['votes'] = get_recent_votes(profile_legid, num_to_get=10)[:4]
 	official['fb_posts'] = get_recent_fb_posts(profile_legid)
-
-	'''THIS LINE MUST BE CHANGED FOR PRODUCTION - THIS IS JUST TO GET IT TO WORK WITH REP BROWNLEE'''
 	official['press_release'] = get_press_releases(profile_legid)[:4]
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
+
+def get_official_tweets(legid_to_get):
+	tweets = OfficialTweets.objects.filter(legid=legid_to_get).order_by('-timestamp')[:4]
+	new_tweets = []
+	twitter_id = LegsSocialmedia.objects.get(legid=legid_to_get).twitter
+	for t in tweets:
+		url = "https://twitter.com/%s/status/%s" %(twitter_id, t.tweet_id)
+		new_tweets.append({'tweet':t.tweet, 'timestamp':t.timestamp.split(' ')[0], 'url':url})
+	return new_tweets
+
 
 def get_offices(legid_to_get):
 	leg_info = openstates.legislator_detail(legid_to_get)
