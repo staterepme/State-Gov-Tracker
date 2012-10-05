@@ -36,7 +36,7 @@
                     <ul>
 					{% if official.press_release %}
                         {% for release in official.press_release %}                            
-                            <li>{{release.date}} - {{release.title|truncatechars:120}}</li>
+                            <li><a href="{{ release.url }}">{{release.date}}</a> - {{release.title|truncatechars:120}}</li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
