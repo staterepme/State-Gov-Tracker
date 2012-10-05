@@ -52,10 +52,11 @@ def parse_facebook_info(line):
 	"""Facebook id's right now include more than what we need, this 
 	function parses that line and returns exactly what we need."""
 	if 'pages' in line:
-		# print line
+		print line
 		search_term = r"facebook\.com/pages/.*?/(\d+)"
 		match = re.search(search_term, line)
 		fb_id = match.group(1)
+		print fb_id
 	elif 'profile' in line:
 		search_term = 'id='
 		a = line.rfind(search_term)
@@ -110,6 +111,6 @@ def add_posts_to_db(list_of_dictionary_posts):
 if __name__ == '__main__':
 	pp = pprint.PrettyPrinter(indent=4)
 	mem_list = get_facebook_ids()
-	# print mem_list
+	print mem_list
 	new_posts = download_fb_posts(fb_app_id, fb_app_secret, mem_list)
 	add_posts_to_db(new_posts)

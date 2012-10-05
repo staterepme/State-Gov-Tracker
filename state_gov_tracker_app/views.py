@@ -89,10 +89,12 @@ def get_press_releases(legid_to_get):
 		return []
 	for pr in press_releases:
 		new_pr = {}
+		if pr.pr_date == None:
+			continue
 		date_split = pr.pr_date.split('-')
 		if int(date_split[0]) > 2012:
 			continue
-		if pr.pr_title == None and pr.pr_text == None:
+		if pr.pr_title == "":
 			continue
 		if pr.pr_title != None:
 			new_pr['title'] = pr.pr_title
@@ -144,8 +146,18 @@ def get_recent_votes(legid_to_get, num_to_get=5):
 			continue
 		bill_title = PaBills.objects.get(bill_id=leg_vote.bill_id).title
 		new_date = leg_vote.date.split(' ')[0]
-		vote_list.append({'bill':leg_vote.bill_id, 'date':new_date, 'vote_yno':vote['%s' %(leg_vote.vote)], 'motion':vote_type, 'title':bill_title})
+		url = get_vote_url(leg_vote.bill_id)
+		vote_list.append({'bill':leg_vote.bill_id, 'date':new_date, 'vote_yno':vote['%s' %(leg_vote.vote)], 'motion':vote_type, 'title':bill_title, 'url':url})
 	return vote_list[:num_to_get]
+
+def get_vote_url(bill_id_to_lookup):
+	"""Calls to OpenStates API to grab bill URL"""
+	bill = openstates.bill_detail(bill_id=bill_id_to_lookup, 
+		state="pa", session="2011-2012")
+	if bill['sources'][0]['url']:
+		return bill['sources'][0]['url']
+	else:
+		return None
 
 def search(request, upper_or_lower):
 	if 'q' in request.GET:

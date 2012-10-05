@@ -46,7 +46,7 @@
                     <ul>
                     {% if official.votes %}
                         {% for vote in official.votes %}                            
-                            <li>{{ vote.vote_yno }} : {{ vote.title|truncatechars:120}} ({{ vote.date }})</li>
+                            <li>{{ vote.vote_yno }} : {{ vote.title|truncatechars:120}} - <a style="color:#36D600" href="{{ vote.url }}">{{ vote.date }}</a></li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
