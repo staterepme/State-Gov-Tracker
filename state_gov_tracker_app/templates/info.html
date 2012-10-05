@@ -62,7 +62,7 @@
                     	{% if official.tweets %}
                             {% autoescape off %}
                             {% for tweet in official.tweets %}
-                                <li><a style="color:#36D600" href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet|urlize }}</li>
+                                <li><a style="color:#36D600" href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet|urlizetrunc:30 }}</li>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
@@ -76,7 +76,7 @@
                     <ul>
                     	{% if official.fb_posts %}
                             {% for fb_post in official.fb_posts %}
-                                <li>{{ fb_post.post|truncatechars:120|urlize }}  <a style="color:#36D600" href="{{ fb_post.url }}">{{ fb_post.date }}</a></li>
+                                <li>{{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a style="color:#36D600" href="{{ fb_post.url }}">{{ fb_post.date }}</a></li>
                             {% endfor %}
                         {% else %}
                             We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!
