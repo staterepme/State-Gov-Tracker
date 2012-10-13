@@ -21,5 +21,10 @@ Install `python-sunlight` via pip - `pip install sunlight`. Register for an API-
 
 Once all the dependencies are installed, `python manage.py runserver` should work.
 
+License
+------------
+
+State-Gov-Tracker is an open-source, free application, covered under the GPLv3 License. Please fork and experiment with it!
+
 
 
