@@ -89,3 +89,9 @@ for (i in 1:length(combined$D1)) {
 # Generate Kernel Density Plots #
 dist <- ggplot(combined, aes(x=D1)) + geom_density(alpha=.2, fill="#FF6666") 
 dist + facet_grid(X2 ~ X3)
+
+colnames(combined) <- c("legid", "party", "chamber", "ideology")
+
+attributes(combined)
+
+dbWriteTable(conn, "preferences", combined, overwrite=TRUE)
