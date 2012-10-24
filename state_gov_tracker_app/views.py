@@ -59,10 +59,10 @@ def profile(request, profile_legid):
 	official["picture"] = official_object.photourl
 	official["rank_type"] = pref_type[official_object.party]
 	official['num_rank'] = num_rank[official_object.chamber]
-	official['tweets'] = get_official_tweets(profile_legid)[:4]
-	official['votes'] = get_recent_votes(profile_legid, num_to_get=10)[:4]
-	official['fb_posts'] = get_recent_fb_posts(profile_legid)
-	official['press_release'] = get_press_releases(profile_legid)[:4]
+	official['tweets'] = get_official_tweets(profile_legid)[:20]
+	official['votes'] = get_recent_votes(profile_legid)[:20]
+	official['fb_posts'] = get_recent_fb_posts(profile_legid)[:20]
+	official['press_release'] = get_press_releases(profile_legid)[:20]
 	official['rank'] = get_pref_rank(profile_legid, official_object.party, official_object.chamber)
 	official['website'] = official_object.homepage
 	official['ideology'] = Preferences.objects.get(legid=profile_legid).ideology
@@ -99,7 +99,7 @@ def get_kdensity_data(chamber_to_get):
 
 
 def get_official_tweets(legid_to_get):
-	tweets = OfficialTweets.objects.filter(legid=legid_to_get).order_by('-timestamp')[:4]
+	tweets = OfficialTweets.objects.filter(legid=legid_to_get).order_by('-timestamp')
 	new_tweets = []
 	twitter_id = LegsSocialmedia.objects.get(legid=legid_to_get).twitter
 	for t in tweets:
@@ -166,8 +166,8 @@ def MyRep(request):
 	return render_to_response('profile.html',{"rep_name": rep_name, "rep_picture": rep_picture, "rep_bio":rep_bio, 
 	"rep_news":rep_news, "rep_twitter":rep_twitter, "rep_facebook":rep_facebook, "rep_votes":rep_votes})
 
-def get_recent_fb_posts(legid_to_get, num_to_get=4):
-	fb_posts = FbData.objects.filter(legid=legid_to_get).order_by('-timestamp')[:num_to_get]
+def get_recent_fb_posts(legid_to_get):
+	fb_posts = FbData.objects.filter(legid=legid_to_get).order_by('-timestamp')
 	fb_list = []
 	for fb_post in fb_posts:
 		date = fb_post.timestamp.split(' ')[0]
@@ -177,7 +177,7 @@ def get_recent_fb_posts(legid_to_get, num_to_get=4):
 	return fb_list
 
 vote = {'0':'Nay', '1':'Yea', '99':'Other'}
-def get_recent_votes(legid_to_get, num_to_get=5):
+def get_recent_votes(legid_to_get):
 	"""Takes legislator id, returns list of most recent votes where each vote is a dictionary that contains keys for:
 		- title
 		- bill (bill_id)
@@ -197,7 +197,7 @@ def get_recent_votes(legid_to_get, num_to_get=5):
 		new_date = leg_vote.date.split(' ')[0]
 		url = get_vote_url(leg_vote.bill_id)
 		vote_list.append({'bill':leg_vote.bill_id, 'date':new_date, 'vote_yno':vote['%s' %(leg_vote.vote)], 'motion':vote_type, 'title':bill_title, 'url':url})
-	return vote_list[:num_to_get]
+	return vote_list
 
 def get_vote_url(bill_id_to_lookup):
 	"""Calls to OpenStates API to grab bill URL"""
