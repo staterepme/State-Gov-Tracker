@@ -111,7 +111,7 @@ def get_pref_rank(legid_to_get, party_to_get, chamber_to_get):
 	if party_to_get == "Republican":
 		prefs = Preferences.objects.filter(party=party_to_get, chamber=chamber_to_get).order_by('-ideology')
 	else:
-		prefs = Preferences.objects.filter(party=party_to_get, chamber=chamber_to_get).order_by('-ideology')
+		prefs = Preferences.objects.filter(party=party_to_get, chamber=chamber_to_get).order_by('ideology')
 	counter = 0
 	for pref in prefs:
 		counter += 1
