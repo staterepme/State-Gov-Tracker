@@ -271,31 +271,31 @@ def dl_press_releases():
 
 if __name__ == '__main__':	
 	### Download Press Releases for State Senate ###
-	# print "Getting Press Release URLs for State Senate"
-	# officials_to_get = session.query(official_prs).filter(official_prs.chamber=='upper').all()
-	# print "%s Total Press Releases to Gather" %(len(officials_to_get))
-	# counter = 0
-	# for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
-	# 	counter += 1
-	# 	# print off.fullname
-	# 	off.get_pr_urls()
-	# 	# print off.all_prs
-	# 	if len(off.all_prs) < 15:
-	# 		print off.fullname
-	# 		print off.press_release_url
-	# 	off.add_pr_urls_to_db()
-	# 	print "Gathered %s so far" %(counter)
+	print "Getting Press Release URLs for State Senate"
+	officials_to_get = session.query(official_prs).filter(official_prs.chamber=='upper').all()
+	print "%s Total Press Releases to Gather" %(len(officials_to_get))
+	counter = 0
+	for off in session.query(official_prs).filter(official_prs.chamber=='upper').all():
+		counter += 1
+		# print off.fullname
+		off.get_pr_urls()
+		# print off.all_prs
+		if len(off.all_prs) < 15:
+			print off.fullname
+			print off.press_release_url
+		off.add_pr_urls_to_db()
+		print "Gathered %s so far" %(counter)
 
 	# ### Download Press Releases for State House ###
-	# print "Getting Press Release URLs for State House"
-	# print "%s Total Press Releases to Gather" %(len(session.query(official_prs).filter(official_prs.chamber=='lower').all()))
-	# counter = 0
-	# for off in session.query(official_prs).filter(official_prs.chamber=='lower').all():
-	# 	# print off.fullname
-	# 	counter += 1
-	# 	off.get_pr_urls()
-	# 	off.add_pr_urls_to_db()
-	# 	print "Gathered %s so far" %(counter)
+	print "Getting Press Release URLs for State House"
+	print "%s Total Press Releases to Gather" %(len(session.query(official_prs).filter(official_prs.chamber=='lower').all()))
+	counter = 0
+	for off in session.query(official_prs).filter(official_prs.chamber=='lower').all():
+		# print off.fullname
+		counter += 1
+		off.get_pr_urls()
+		off.add_pr_urls_to_db()
+		print "Gathered %s so far" %(counter)
 
 	### Download HTML for Press Releases ###
 	dl_press_releases()

@@ -310,4 +310,4 @@ if __name__ == '__main__':
 	# url = 'http://www.senatoranthonyhwilliams.com/grays-ferry-farmers-market-to-open-may-31'
 	# html_data = get_html(url)
 	# print readabilify_text(html_data)[0]
-	# add_texts_and_titles()
+	add_texts_and_titles()
