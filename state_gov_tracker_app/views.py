@@ -65,8 +65,9 @@ def profile(request, profile_legid):
 	official['press_release'] = get_press_releases(profile_legid)[:4]
 	official['rank'] = get_pref_rank(profile_legid, official_object.party, official_object.chamber)
 	official['website'] = official_object.homepage
+	official['ideology'] = Preferences.objects.get(legid=profile_legid).ideology
 	graph_data = get_kdensity_data(chamber_to_get=official_object.chamber)
-	return render_to_response('info.html', {'official': official, "legid":profile_legid})
+	return render_to_response('info.html', {'official': official, "legid":profile_legid, "graph_data":graph_data})
 
 def get_kdensity_data(chamber_to_get):
 	kdensity_graph = {}
