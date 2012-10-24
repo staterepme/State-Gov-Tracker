@@ -65,7 +65,37 @@ def profile(request, profile_legid):
 	official['press_release'] = get_press_releases(profile_legid)[:4]
 	official['rank'] = get_pref_rank(profile_legid, official_object.party, official_object.chamber)
 	official['website'] = official_object.homepage
+	graph_data = get_kdensity_data(chamber_to_get=official_object.chamber)
 	return render_to_response('info.html', {'official': official, "legid":profile_legid})
+
+def get_kdensity_data(chamber_to_get):
+	kdensity_graph = {}
+
+	## Get Bounds of Graphs ##
+	y_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-curve')[0]
+	y_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('curve')[0]
+	x_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-preference')[0]
+	x_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('preference')[0]
+	kdensity_graph['y_max'] = float(y_results_desc.curve)
+	kdensity_graph['y_min'] = float(y_results_asc.curve)
+	kdensity_graph['x_max'] = float(x_results_desc.preference)
+	kdensity_graph['x_min'] = float(x_results_asc.preference)
+
+	## Get Party Data ##
+	# Democrats #
+	dem_points = PreferencesKdensity.objects.filter(party="Democratic", chamber=chamber_to_get).order_by('-preference')
+	dem_storage = []
+	for result in dem_points:
+		dem_storage.append({"x_axis":result.preference, "y_axis":result.curve})
+	kdensity_graph['dem'] = json.dumps(dem_storage)
+	# Republicans #
+	rep_points = PreferencesKdensity.objects.filter(party="Republican", chamber=chamber_to_get).order_by('-preference')
+	rep_storage = []
+	for result in rep_points:
+		rep_storage.append({"x_axis":result.preference, "y_axis":result.curve})
+	kdensity_graph['rep'] = json.dumps(rep_storage)
+	return kdensity_graph
+
 
 def get_official_tweets(legid_to_get):
 	tweets = OfficialTweets.objects.filter(legid=legid_to_get).order_by('-timestamp')[:4]
