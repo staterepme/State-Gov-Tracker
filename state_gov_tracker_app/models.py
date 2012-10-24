@@ -9,6 +9,15 @@
 
 from django.db import models
 
+class PreferencesKdensity(models.Model):
+    row_names = models.TextField(primary_key=True)
+    preference = models.FloatField(blank=True)
+    curve = models.FloatField(blank=True)
+    party = models.TextField(blank=True)
+    chamber = models.TextField(blank=True)
+    class Meta:
+        db_table = u'preferences_kdensity'
+
 class Preferences(models.Model):
     row_names = models.TextField(blank=True)
     legid = models.TextField(blank=True, primary_key=True)
