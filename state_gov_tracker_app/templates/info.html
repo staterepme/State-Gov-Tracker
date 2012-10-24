@@ -59,6 +59,7 @@
 
                         var dem_distribution = d3.select("svg")
                             .append("g")
+                            .attr("class", "dem_distribution")
                             .attr("width", width + margin)
                             .attr("height", height + margin);
 
@@ -76,10 +77,9 @@
                           });
 
                           rep_distribution.append("path")
-                            .attr("class", "rep")
+                            .attr("class", "rep_distribution")
                             .data([data])
                             .attr("d", area)
-                            .style("fill", "#F62817")
                         };
 
                         // Add Democrats from State Senate //
