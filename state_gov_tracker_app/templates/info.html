@@ -29,6 +29,10 @@
             </div>
             <div id="bio_right">
                <p>{{ official.rank_type }} Ranking: {{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
+               
+               <svg id="pref_distribution">
+               </svg>
+
                <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
                 <script>
                         var margin = 50,
@@ -47,19 +51,23 @@
                             .y1(function(d) { return y(d.y_axis); });
 
                         // add svg element to DOM, with desired size
-                        var svg = d3.select("#bio_right")
+                        var svg = d3.select("svg#pref_distribution")
                             .append("svg")
                             .attr("width", width + margin)
                             .attr("height", height + margin);
 
-                        var rep_distribution = d3.select("svg")
+                        var rep_distribution = d3.select("svg#pref_distribution")
                             .append("g")
                             .attr("width", width + margin)
                             .attr("height", height + margin);
 
-                        var dem_distribution = d3.select("svg")
+                        var dem_distribution = d3.select("svg#pref_distribution")
                             .append("g")
                             .attr("class", "dem_distribution")
+                            .attr("width", width + margin)
+                            .attr("height", height + margin);
+
+                        var bar = d3.select("svg#pref_distribution")
                             .attr("width", width + margin)
                             .attr("height", height + margin);
 
@@ -99,7 +107,7 @@
                         
                         // X Axis
                         var x_axis = d3.svg.axis().scale(x);
-                        d3.select("svg")
+                        d3.select("svg#pref_distribution")
                             .append("g")
                             .attr("class", "x axis")
                             .attr("transform", "translate(0," + (height) + ")")
@@ -108,10 +116,27 @@
                         // Y Axis
                         var y_axis = d3.svg.axis().scale(y).orient("left");
 
-                        d3.select("svg")
-                            .append("g")
-                            .attr("class", "y axis")
-                            .attr("transform", "translate(" + margin + ", 0)");
+                        // d3.select("svg#pref_distribution")
+                        //     .append("g")
+                        //     .attr("class", "y axis")
+                        //     .attr("marker-end", "url(#Triangle)")
+                        //     .attr("transform", "translate(" + margin + ", 0)");
+
+                        // svg.selectAll("text")
+                        //     .append("text")
+                        //     .attr("x", x)
+                        //     .attr("y", y)
+                        //     .attr("dx", -5)
+                        //     .attr("dy", ".36em")
+                        //     .attr("text-anchor", "end")
+                        //     .text(String);                        
+
+                        // d3.select(".x.axis")
+                        //     .append("text")
+                        //     .text("Liberal")
+                        //     .attr("text-anchor", "middle");
+                        //     // .attr("transform", "translate(40,30)");
+
 
                         d3.select(".x.axis")
                             .append("text")
@@ -129,7 +154,7 @@
 
                         var bw = 3;
 
-                        svg.selectAll("rect.bar")        //Select all not-yet-existing rects with class 'bar'
+                        bar.selectAll("rect.bar")        //Select all not-yet-existing rects with class 'bar'
                             .data(data)                  //Bind array of data values to the empty selection
                             .enter()                    //Returns the selection of new elements needed
                             .append("rect")              //Create a 'rect' for each one, and for each 'rect'…
@@ -144,6 +169,19 @@
                             .attr("height", function(d) {
                                 return y(0);          //  set height to height the data value
                             });
+
+                            // var lineArrow = d3.select("svg#pref_distribution")
+                            //     .append("g")
+                            //     .attr("stroke", "white")
+                            //     .attr("width", width + margin)
+                            //     .attr("height", height + margin);
+
+                            // var myLine = lineArrow.append("svg:line")
+                            //     .attr("x1", 80)
+                            //     .attr("y1", 50)
+                            //     .attr("x2", width-margin-30)
+                            //     .attr("y2", 50)
+                            //     .attr("marker-end", "url(#Triangle)");
                 </script>
                 <article class="widget news">
                 	<h4>Press Releases</h4>
