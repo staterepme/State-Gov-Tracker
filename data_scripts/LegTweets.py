@@ -23,7 +23,7 @@ def get_official_timeline(handle, num_tweets):
     return tweet_list
 
 
-def download_first_tweets(num_tweets=20):
+def download_first_tweets(num_tweets=100):
     """
     Takes input_file that is a .csv file delimited
     with commas where the first column is the
@@ -114,6 +114,6 @@ def getOembed(id_str):
 
 if __name__ == '__main__':
     # print getOembed('233584713019817984')
-    new_tweets = download_first_tweets(num_tweets=20)
+    new_tweets = download_first_tweets()
     add_tweets_to_db(new_tweets)
     add_oembed_codes()
