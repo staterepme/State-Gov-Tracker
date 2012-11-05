@@ -1,10 +1,9 @@
 # Create your views here.
-from state_gov_tracker_app.models import *
+from models import *
 import urllib,httplib2, mimetypes,os,sys,re,random,string
-from state_gov_tracker_app.login_credentials import *
+from login_credentials import *
 from django.shortcuts import render_to_response
 from django.template import Context, loader
-from state_gov_tracker_app.models import *
 from django.http import HttpResponse
 from subprocess import call
 from sunlight import openstates
