@@ -112,7 +112,9 @@ TEMPLATE_DIRS = (
     ''
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.static',)
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -122,9 +124,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
     'state_gov_tracker_app',
     'debug_toolbar',
     'tagging',
