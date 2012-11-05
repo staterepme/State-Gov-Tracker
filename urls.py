@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.defaults import *
+from django.contrib import admin
+admin.autodiscover()
 
 #Uncomment these when you're ready to integrate stuff from Chris's project
 #in chris's these were all from StateGovTracker_Django.views import *
@@ -20,7 +22,14 @@ urlpatterns = patterns('',
     ('^pa-tweets$', pa_tweets),
     ('^blog$', blog_page),
     ('^about$', about_myrep),
+    url(r'^weblog/', include('zinnia.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # Uncomment the next line to enable the admin:
+    url(r'^admin/', include(admin.site.urls)),
 )
+
 '''
 
 # Uncomment the next two lines to enable the admin:
