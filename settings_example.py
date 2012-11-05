@@ -127,6 +127,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'state_gov_tracker_app',
     'debug_toolbar',
+    'tagging',
+    'mptt',
+    'zinnia',
 )
 
 # A sample logging configuration. The only tangible logging
