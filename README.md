@@ -11,15 +11,15 @@ Installation Notes (very incomplete)
 ------------
 Clone the repo (`git clone https://github.com/jasonblanchard/State-Gov-Tracker.git`)
 
-Copy `StateGovTracker.db` from dropbox file to project directory
+Copy `StateGovTracker.db` from dropbox file to project directory.
 
 Copy `settings_example.py` to `settings.py`. Modify `settings.py` and point the `DATABASES name` to your local `StateGovTracker.db` file
 
-Install `python-sunlight` via pip - `pip install sunlight`. Register for an API-key at `http://services.sunlightlabs.com/accounts/register/`. Save the API key in `~/.sunlight.key`. For information see `http://python-sunlight.readthedocs.org/en/latest/index.html` for more information.
+Run `pip install -r requirements.txt` in project directory in order to install dependencies.
 
-`cd` top level project directory and run `python manage.py runserver`. If it complains about dependencies, install them.
+Register for an API-key for the Sunlight Foundation at `http://services.sunlightlabs.com/accounts/register/`. Save the API key in `~/.sunlight.key`. For information see `http://python-sunlight.readthedocs.org/en/latest/index.html`.
 
-Once all the dependencies are installed, `python manage.py runserver` should work.
+`cd` top level project directory and run `python manage.py runserver`.
 
 License
 ------------
