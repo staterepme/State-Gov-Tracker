@@ -1,3 +1,5 @@
 sunlight
 Django
 httplib2
+django-blog-zinnia
+PIL
