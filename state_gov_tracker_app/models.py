@@ -44,7 +44,7 @@ class LegsSocialmedia(models.Model):
         db_table = u'legs_socialmedia'
 
 class OfficialPersonalPages(models.Model):
-    legid = models.TextField(primary_key=True, blank=True) # This field type is a guess.
+    legid = models.CharField(max_length=100, primary_key=True, blank=True) # This field type is a guess.
     fullname = models.TextField(blank=True) # This field type is a guess.
     chamber = models.TextField(blank=True) # This field type is a guess.
     district = models.IntegerField(null=True, blank=True)
@@ -146,7 +146,7 @@ class PaLegisVotes(models.Model):
         db_table = u'pa_legis_votes'
 
 class Votes(models.Model):
-    vote_id = models.TextField(primary_key=True) # This field type is a guess.
+    vote_id = models.CharField(max_length=200, primary_key=True) # This field type is a guess.
     chamber = models.TextField(blank=True)
     date = models.TextField(blank=True) # This field type is a guess.
     motion = models.TextField(blank=True)
