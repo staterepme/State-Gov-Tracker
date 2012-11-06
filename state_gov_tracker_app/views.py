@@ -34,8 +34,8 @@ def WhichRep(request):
 
 def pa_tweets(request):
 	"""Request for pa-tweets page, contains the last 30 tweets by members of the General Assembly"""
-	tweet_list_one = OfficialTweets.objects.order_by('-timestamp')[:20]
-	tweet_list_two = OfficialTweets.objects.order_by('-timestamp')[20:40]
+	tweet_list_one = OfficialTweets.objects.order_by('-timestamp').exclude(oembed=None)[:20]
+	tweet_list_two = OfficialTweets.objects.order_by('-timestamp').exclude(oembed=None)[20:40]
 	return render_to_response('all_tweets.html', {"tweet_list_one":tweet_list_one, "tweet_list_two":tweet_list_two})
 
 def blog_page(request):
