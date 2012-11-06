@@ -1,14 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Nick Weingartner Tracker</title>
-<link rel="stylesheet" href="css/colorbox.css">
-<link rel="stylesheet/less" href="css/style.less">
-<script src="js/less-1.3.0.min.js"></script>
+{% extends "base_full.html" %}
 
-</head>
-<body>
+{% block page_content %}
+
 <div id="wrapper"><!-- Being Wrapper -->
 	<div id="main_container"><!-- Begin Main Container -->
     	<section id="search">
@@ -22,5 +15,5 @@
         </section>
     </div><!-- End Main Container -->
 </div><!-- End Wrapper -->
-</body>
-</html>
+
+{% endblock %}
