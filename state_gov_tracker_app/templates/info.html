@@ -222,6 +222,7 @@
                             {% endautoescape %}
                         {% else %}
                             <li>We couldn't find any Tweets from your Representative. Contact them to let them know they should use Twitter to keep their constituents informed about their activities and state politics!</li>
+                            <li>If you think there is a Twitter account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></li>
                         {% endif %}
                     </ul>
                 </article>
@@ -234,7 +235,8 @@
                                 <li>{{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a href="{{ fb_post.url }}">{{ fb_post.date }}</a></li>
                             {% endfor %}
                         {% else %}
-                            We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!
+                            <li>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</li>
+                            <li>If you think there is a Facebook account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></li>
                         {% endif %}
                     </ul>
                 </article>
