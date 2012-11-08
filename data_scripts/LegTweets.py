@@ -93,7 +93,7 @@ def add_tweets_to_db(list_of_dictionary_tweets):
             continue
         else:
             new_tweet = official_tweets(legid=tweet['legid'],
-                tweet=tweet['text'],
+                tweet=tweet['text'].encode('utf-8'),
                 tweet_id=tweet['tweet_id'],
                 timestamp=tweet['timestamp'])
             session.add(new_tweet)
@@ -110,7 +110,8 @@ def add_oembed_codes():
 
 def getOembed(id_str):
     oembed_dict = t.getOembedTweet(id=id_str)
-    return oembed_dict['html']
+    html_to_encode = oembed_dict['html']
+    return html_to_encode.encode('utf-8')
 
 if __name__ == '__main__':
     # print getOembed('233584713019817984')
