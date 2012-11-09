@@ -132,26 +132,43 @@
 
                         var position = {{ official.ideology }};
 
-                        var data = [{"value":position, "name":"Testing Name Hover!"}]
+                        var dataposition = [{"value":position}];
+
+                        var datalabel = [{"value":position, "name":"Ideal point of"}, {"value":position, "name":"{{ official.fullname }}"}]
 
                         var bw = 3;
 
-                        bar.selectAll("rect.bar")        //Select all not-yet-existing rects with class 'bar'
-                            .data(data)                  //Bind array of data values to the empty selection
-                            .enter()                    //Returns the selection of new elements needed
-                            .append("rect")              //Create a 'rect' for each one, and for each 'rect'…
-                            .attr("class", "bar")        //  assign a class of 'bar', so CSS styles will be applied
+                        bar.selectAll("rect.bar")
+                            .data(dataposition)
+                            .enter()
+                            .append("rect")
+                            .attr("class", "bar")
                             .attr("x", function(d) {
-                                return x(d.value)-1;           //  set x value to index value times bar width
+                                return x(d['value'])-1;
                             })
-                            .attr("width", bw-1)       //  set width to bar width minus 1 (for visual padding)
+                            .attr("width", bw-1)
                             .attr("y", function(d) {
-                                return height - y(0);      //  set y value to height minus the data value
+                                return height - y(0);
                             })
                             .attr("height", function(d) {
-                                return y(0);          //  set height to height the data value
+                                return y(0);
                             });
 
+                        // Label of bar //
+                        bar.selectAll("label")
+                            .data(datalabel)
+                            .enter()
+                            .append("text")
+                            .attr("x", function(d) {
+                                return x(d['value'])+3;
+                            })
+                            .attr("y", function(d, i) {
+                                return (i+1)*12;
+                            })
+                            .style("fill", "white")
+                            .text(function(d) {
+                                return (d['name']);
+                            });
                 </script>
                 <article class="widget news">
                 	<h4>Press Releases</h4>
