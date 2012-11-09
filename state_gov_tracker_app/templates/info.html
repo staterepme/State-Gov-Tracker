@@ -112,15 +112,23 @@
                         // Y Axis
                         var y_axis = d3.svg.axis().scale(y).orient("left");
 
+                        // X-Axis Titles //
                         d3.select(".x.axis")
                             .append("text")
                             .text("Liberal")
-                            .attr("transform", "translate(40,30)");
+                            .attr("transform", "translate(50,30)");
 
                         d3.select(".x.axis")
                             .append("text")
                             .text("Conservative")
-                            .attr("transform", "translate(595,30)");
+                            .attr("transform", "translate(630,30)")
+                            .attr("text-anchor", "end");
+
+                        d3.select(".x.axis")
+                            .append("text")
+                            .text("Distribution of Political Ideology")
+                            .attr("transform", "translate(340,40)")
+                            .attr("text-anchor", "middle");
 
                         var position = {{ official.ideology }};
 
