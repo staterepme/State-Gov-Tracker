@@ -4,10 +4,6 @@
 
 <section id="content"><!-- Start Main Content -->
             <h1>{{ official.fullname }}</h1>
-       <!--      <article>
-                <h2>{{ official.position }}</h2>
-                <h2>District {{ official.district }}</h2>
-            </article> -->
             <div class="profile">
             <div id="bio_left">
                 <a href="#"><img src="{{ official.picture }}" width="200" height="270" border="0" alt="" title=""></a>
@@ -28,8 +24,8 @@
                 {% endif %}
             </div>
             <div id="bio_right">
-               <p>{{ official.rank_type }} Ranking: {{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
-               
+                <h2> Political Ideology in the State {{ official.position }} </h2>
+               <p>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
                <svg id="pref_distribution">
                </svg>
 
