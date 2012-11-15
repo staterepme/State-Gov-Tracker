@@ -18,3 +18,5 @@ StateGovTracker_Django
 .DS_Store
 
 data_scripts/load_database.py
+
+state_gov_tracker_app/.DS_Store
