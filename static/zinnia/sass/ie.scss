@@ -1,8 +1,0 @@
-@import "blueprint";
-
-.zinnia {
-  @include blueprint-ie(true);
-  .container {
-    text-align: left
-  }
-}
