@@ -1,0 +1,14 @@
+& {
+  @include blueprint-typography(true);
+  @include blueprint-interaction;
+  background: transparent image-url("background.gif") repeat-x scroll left top;
+  a {
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+  li {
+    list-style-image: image-url("bullet.png");
+  }
+  img.help { cursor: help; }
+}
+
