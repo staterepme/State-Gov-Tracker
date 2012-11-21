@@ -4,12 +4,35 @@
 {% extends "base_full.html" %}
 
 {% block page_content %}
+{% load markup %}
+<section id="blog"><!-- Start Main Content -->
+    <div id="well">
+    <h2>Recent Posts</h2>
+        <ul>
+            {% for post in recentposts %}
+                <li><a href="#">- {{ post.title }}</a></li>
+            {% endfor %}
+    <h2>Recent News Articles</h2>
+              {% for link in links %}
+                <li><a href="{{ link.link }}" rel="tooltip" data-placement="top" data-original-title="{{ link.description }}">{{ link.title }}</a></li>
+              {% endfor %}
+        <ul>
+        <h2>Tags</h2>
+    </div>  
+    <div id="posts">
+        <h1>StateRep.Me Blog</h1>
+        <hr>
+        <hr>
+            {% for post in posts %}
+                <h2><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></h2>
+                <ul>
+                    <div class="blog-time">{{ post.created }}</div>
+                    <div class="body-blog">{{ post.body|markdown }}</div>
+                </ul>
+                <hr>
 
-<section id="content"><!-- Start Main Content -->
-    <h1>Blog Posts for StateRep.Me</h1>
-	<article style="color:#FFFFFF">
-        <h2>Coming Soon!</h2></p>    
-    </article>
+            {% endfor %}
+    </div>
 	<div class="clear"></div>
 </section><!-- End Main Content -->
     
