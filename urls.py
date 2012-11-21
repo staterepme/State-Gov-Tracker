@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.defaults import *
-from django.contrib import admin
-admin.autodiscover()
 
 #Uncomment these when you're ready to integrate stuff from Chris's project
 #in chris's these were all from StateGovTracker_Django.views import *
@@ -11,18 +9,22 @@ from state_gov_tracker_app.views import MyRep
 from state_gov_tracker_app.views import search_form
 from state_gov_tracker_app.views import search
 #from state_gov_tracker_app.views import search_results
-from state_gov_tracker_app.views import WhichRep, blog_page
+from state_gov_tracker_app.views import WhichRep
 from state_gov_tracker_app.views import profile, pa_tweets, about_myrep
+from blog.views import Blog, Article
+
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-	('^$', search_form),
+    ('^$', search_form),
     ('^results$', WhichRep),
     ('^MyRep$', MyRep),
     ('^profile/(.*)$', profile),
     ('^pa-tweets$', pa_tweets),
-    ('^blog$', blog_page),
     ('^about$', about_myrep),
-    url(r'^weblog/', include('zinnia.urls')),
+    url(r'blog$', Blog),
+    url(r'blog/post_num/(.*)$', Article),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
