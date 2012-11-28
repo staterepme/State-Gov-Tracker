@@ -145,7 +145,7 @@ class PaLegisVotes(models.Model):
     class Meta:
         db_table = u'pa_legis_votes'
 
-class Votes(models.Model):
+class LegisVotes(models.Model):
     vote_id = models.CharField(max_length=200, primary_key=True) # This field type is a guess.
     chamber = models.TextField(blank=True)
     date = models.TextField(blank=True) # This field type is a guess.
@@ -158,7 +158,7 @@ class Votes(models.Model):
     status = models.TextField(blank=True) # This field type is a guess.
     session = models.TextField(blank=True) # This field type is a guess.
     class Meta:
-        db_table = u'votes'
+        db_table = u'legis_votes'
 
 class OfficialOffices(models.Model):
     office_legid = models.TextField(blank=True) # This field type is a guess.
