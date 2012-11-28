@@ -14,7 +14,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/christbr1985/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
+        'NAME': '/home/christopher/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -58,7 +58,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/Users/christbr1985/State-Gov-Tracker/state_gov_tracker_app/static/'
+STATIC_ROOT = '/home/christopher/State-Gov-Tracker/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -66,6 +66,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    # '/home/christopher/State-Gov-Tracker/state_gov_tracker_app/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -105,6 +106,8 @@ ROOT_URLCONF = 'urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 
 TEMPLATE_DIRS = (
+    # Put path to blog template here #
+    '/home/christopher/State-Gov-Tracker/blog/'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -112,12 +115,9 @@ TEMPLATE_DIRS = (
     ''
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.static',
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'zinnia.context_processors.version',)
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -131,12 +131,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'state_gov_tracker_app',
-    'bootstrap',
     'debug_toolbar',
     'tagging',
     'mptt',
-    'zinnia',
-    'django.contrib.comments',
+    'blog',
+    'markdown',
+    'django.contrib.markup',
 )
 
 # A sample logging configuration. The only tangible logging
