@@ -250,7 +250,7 @@ def search(request, upper_or_lower):
 
 def search_form(request):
     user = request.user
-    return render_to_response('index.html', {'user': user.get_full_name()})
+    return render_to_response('index.html', {'user': user})
 
 
 def login(username, password):
