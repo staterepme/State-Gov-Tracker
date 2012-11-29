@@ -105,22 +105,6 @@ body {
 	text-align:right;
 	font-weight:normal;
 	}
-	h3 {
-		font-size:13px;
-		font-style:italic;
-		color:white;
-		text-align:right;
-		margin:80px 0 0 0;
-		
-		a {
-			color:white;
-			text-decoration:none;
-		}
-		a:hover {
-					color:@green;
-					.transition(all 0.4s ease-in-out);
-		}
-	}
 	
 	form {
 	width:100%;
@@ -158,6 +142,31 @@ body {
 	.transition(all 0.4s ease-in-out);
 	}
 	
+}
+
+.example-address {
+	background-color: rgba(0, 0, 0, .5);
+	width: auto;
+	height: 10px;
+	float: left;
+	margin-top: 5px;
+	padding: 7px;
+	.border-radius(20px);
+		p {
+		font-size:10px;
+		font-style:italic;
+		color:white;
+		text-align:left;
+		a {
+			color:@green;
+			text-decoration:none;
+		}
+		a:hover {
+					color:white;
+					.transition(all 0.4s ease-in-out);
+		}
+	}
+}
 }
 
 /* Intermediate Page */
