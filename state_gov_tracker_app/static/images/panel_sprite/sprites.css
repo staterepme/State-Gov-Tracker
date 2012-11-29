@@ -1,0 +1,40 @@
+.homepage_panel1a, .homepage_panel1b, .homepage_panel2a, .homepage_panel2b, .homepage_panel3a, .homepage_panel3b{
+	background: url(sprites.png) no-repeat;
+}
+
+.homepage_panel1a{
+	background-position: 0 0;
+	width: 407px;
+	height: 285px;
+}
+
+.homepage_panel1b{
+	background-position: -6px -291px ;
+	width: 407px;
+	height: 285px;
+}
+
+.homepage_panel2a{
+	background-position: -418px -2px ;
+	width: 407px;
+	height: 285px;
+}
+
+.homepage_panel2b{
+	background-position: -420px -291px ;
+	width: 407px;
+	height: 285px;
+}
+
+.homepage_panel3a{
+	background-position: -827px -6px ;
+	width: 407px;
+	height: 285px;
+}
+
+.homepage_panel3b{
+	background-position: -827px -291px ;
+	width: 407px;
+	height: 285px;
+}
+
