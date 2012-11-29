@@ -1,10 +1,14 @@
 <!DOCTYPE HTML>
 <html>
-<head>
 {% extends "base_full.html" %}
 
 {% block page_content %}
 {% load markup %}
+<script type='text/javascript'>
+    setInterval(function(){
+        $('#well').css({'height':(($('#posts').height()))-5+'px'});
+    }, 500);
+</script>
 <section id="blog"><!-- Start Main Content -->
     <div id="well">
     <h2>Recent Posts</h2>
