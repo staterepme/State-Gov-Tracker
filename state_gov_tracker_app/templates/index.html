@@ -26,7 +26,25 @@
         		<form action="/results" method="get">
             <input type="text" name="q" placeholder="Enter Your Address" class="field">
             <input type="submit" class="button" value="Who's my rep?">
-    		</form>
+        </form>
+
+        <a href="#myModal" role="button" class="btn" data-toggle="modal">How does this work?</a>
+
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <h3 id="myModalLabel">Modal header</h3>
+             </div>
+             <div class="modal-body">
+                 <p>One fine body…</p>
+             </div>
+             <div class="modal-footer">
+                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+             </div>
+         </div>
+
+
+
             <div class="example-address"><p>Example address: <a href="http://www.beta.staterep.me/results?q=1+Beaver+Stadium++University+Park%2C+PA+16802">1 Beaver Stadium  University Park, PA 16802</a></p></div> 
         </section>
 
