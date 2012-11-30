@@ -16,32 +16,33 @@
             <h1>Welcome to StateRep.Me</h1>
             <h2>Find and Monitor Your State Representatives in Pennsylvania</h2>
         </div>
-        <div class="img-panel">
-            <div class="panelleft"></div>
-            <div class="panelcenter"></div>
-            <div class="panelright"></div>
-        </div>
     	<section id="search">
+
+        <div class="help-modal">
+
+            <a href="#myModal" role="button" class="" data-toggle="modal">How does this work?</a>
+
+            <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                     <h3 id="myModalLabel">How does this work?</h3>
+                 </div>
+                 <div class="modal-body">
+                        <div class="panelleft help-image"></div>
+                        <div class="panelcenter help-image"></div>
+                        <div class="panelright help-image"></div>
+                 </div>
+                 <div class="modal-footer">
+                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                 </div>
+             </div>
+
+         </div>
         
         		<form action="/results" method="get">
             <input type="text" name="q" placeholder="Enter Your Address" class="field">
             <input type="submit" class="button" value="Who's my rep?">
         </form>
-
-        <a href="#myModal" role="button" class="" data-toggle="modal">How does this work?</a>
-
-        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                 <h3 id="myModalLabel">Modal header</h3>
-             </div>
-             <div class="modal-body">
-                 <p>One fine body…</p>
-             </div>
-             <div class="modal-footer">
-                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-             </div>
-         </div>
 
 
 
