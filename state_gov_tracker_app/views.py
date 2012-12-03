@@ -265,7 +265,7 @@ def login(username, password):
 
 
 def get_officials(loc, uid, token, upper_or_lower):
-    url = '/official?user=' + uid + '&token=' + token + '&search_loc=' + loc + '&search_country=US&district_type=STATE_' + upper_or_lower
+    url = '/official?user=' + uid + '&token=' + token + '&search_loc=' + loc + '&search_country=US&valid_on_or_before=2012-11-01&district_type=STATE_' + upper_or_lower
     headers = {'Content-type': 'application/x-www-form-urlencoded'}
     response, content = http.request(url_base + url, 'GET', headers=headers)
     return content
@@ -280,40 +280,6 @@ def official_info(official_dict, x):
     results['address'] = str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_1']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['address_2']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['city']) + ', ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['state']) + ' ' + str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['postal_code'])
     results['phone'] = str(official_dict['response']['results']['candidates'][0]['officials'][x]['addresses'][0]['phone_1'])
     return results
-
-
-def name(rep_id):
-    return rep_id
-
-
-def picture(rep_id):
-    picture = "picture"
-    return picture
-
-
-def bio(rep_id):
-    bio = "bio!"
-    return bio
-
-
-def news(rep_id):
-    news = "news!"
-    return news
-
-
-def twitter(rep_id):
-    twitter = "twitter!"
-    return twitter
-
-
-def facebook(rep_id):
-    facebook = "facebook!"
-    return facebook
-
-
-def votes(rep_id):
-    votes = "votes!"
-    return votes
 
 
 def encode_multipart(file_path, fields):
