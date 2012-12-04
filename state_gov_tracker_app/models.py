@@ -8,7 +8,11 @@
 # into your database.
 
 from django.db import models
-
+from sunlight import openstates
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 class PreferencesKdensity(models.Model):
     row_names = models.TextField(primary_key=True)
