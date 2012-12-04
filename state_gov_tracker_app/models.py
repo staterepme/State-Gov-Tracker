@@ -199,18 +199,6 @@ class PaLegisSponsors(models.Model):
         db_table = u'pa_legis_sponsors'
 
 
-class PaLegisVotes(models.Model):
-    legid = models.TextField(blank=True)  # This field type is a guess.
-    bill_id = models.TextField(blank=True)  # This field type is a guess.
-    vote = models.IntegerField(null=True, blank=True)
-    date = models.TextField(blank=True)  # This field type is a guess.
-    vote_id = models.TextField()  # This field type is a guess.
-    legis_vote_key = models.IntegerField(primary_key=True)
-
-    class Meta:
-        db_table = u'pa_legis_votes'
-
-
 class LegisVotes(models.Model):
     vote_id = models.CharField(max_length=200, primary_key=True)  # This field type is a guess.
     chamber = models.TextField(blank=True)
@@ -226,6 +214,27 @@ class LegisVotes(models.Model):
 
     class Meta:
         db_table = u'legis_votes'
+
+
+class PaLegisVotes(models.Model):
+    legid = models.TextField(blank=True)  # This field type is a guess.
+    bill_id = models.ForeignKey(PaBills)  # This field type is a guess.
+    vote = models.IntegerField(null=True, blank=True)
+    date = models.TextField(blank=True)  # This field type is a guess.
+    vote_id = models.ForeignKey(LegisVotes)  # This field type is a guess.
+    legis_vote_key = models.IntegerField(primary_key=True)
+
+    class Meta:
+        db_table = u'pa_legis_votes'
+
+    def voteurl(self):
+        """Calls to OpenStates API to grab bill URL"""
+        bill = openstates.bill_detail(bill_id=self.bill_id_id,
+            state="pa", session="2011-2012")
+        if bill['sources'][0]['url']:
+            self.url = bill['sources'][0]['url']
+        else:
+            self.url = None
 
 
 class OfficialOffices(models.Model):
