@@ -68,8 +68,10 @@ def profile(request, profile_legid):
     official['website'] = official_object.homepage
     official['ideology'] = Preferences.objects.get(legid=profile_legid).ideology
     graph_data = get_kdensity_data(chamber_to_get=official_object.chamber)
-    return render_to_response('info.html', {'official': official,
-        "legid": profile_legid, "graph_data": graph_data})
+    return render_to_response('info.html', {'official': official_object,
+        "legid": profile_legid,
+        "graph_data": graph_data,
+        "position": chamber})
 
 
 def get_kdensity_data(chamber_to_get):
