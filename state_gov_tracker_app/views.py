@@ -21,6 +21,10 @@ def WhichRep(request):
         "upperoffice": upper_office,
         "loweroffice": lower_office})
 
+####################
+## PA Tweets Page ##
+####################
+
 
 def pa_tweets(request):
     """Request for pa-tweets page, contains the last 30 tweets by members of the General Assembly"""
