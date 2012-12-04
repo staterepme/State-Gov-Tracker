@@ -26,14 +26,15 @@ num_rank = {'upper': '50', 'lower': '200'}
 def WhichRep(request):
     upper = search(request, 'UPPER')
     lower = search(request, 'LOWER')
-    upper['legid'] = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0].legid
-    lower['legid'] = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0].legid
-    upper['image'] = Officials.objects.get(legid=upper['legid']).photourl
-    lower['image'] = Officials.objects.get(legid=lower['legid']).photourl
-
-    return render_to_response('intermediate.html', {"upper": upper,
-        "lower": lower, "upper_legid": upper['legid'],
-        "lower_legid": lower['legid']})
+    upper_leg = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0]
+    lower_leg = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0]
+    upper_office = OfficialOffices.objects.filter(office_legid=upper_leg.legid).order_by('name').values()[0]
+    lower_office = OfficialOffices.objects.filter(office_legid=lower_leg.legid).order_by('name').values()[0]
+    return render_to_response('intermediate.html',
+        {"upper": upper_leg,
+        "lower": lower_leg,
+        "upperoffice": upper_office,
+        "loweroffice": lower_office})
 
 
 def pa_tweets(request):
