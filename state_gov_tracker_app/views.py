@@ -1,23 +1,12 @@
 # Create your views here.
 from models import *
-import urllib,httplib2, mimetypes,os,sys,re,random,string
-from login_credentials import *
 from django.shortcuts import render_to_response
-from django.template import Context, loader
-from django.http import HttpResponse
-from subprocess import call
-from sunlight import openstates
+from cicero_search import *
 
+########################################
+## Search by address, display results ##
+########################################
 
-import datetime
-try:
-    import json
-except ImportError:
-    import simplejson as json
-
-####SETTINGS####
-http = httplib2.Http()
-url_base = 'http://cicero.azavea.com/v3.1'
 
 def WhichRep(request):
     upper = search(request, 'UPPER')
