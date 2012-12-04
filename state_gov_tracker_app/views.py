@@ -54,12 +54,8 @@ def profile(request, profile_legid):
     official = {}
     official_object = Officials.objects.get(legid=profile_legid)
     official["office_nums"], official['email'] = get_offices(profile_legid)
-    official['position'] = position[official_object.chamber]
+    chamber = position[official_object.chamber]
     official['district'] = official_object.district
-    official["fullname"] = official_object.fullname
-    official["picture"] = official_object.photourl
-    official["rank_type"] = pref_type[official_object.party]
-    official['num_rank'] = num_rank[official_object.chamber]
     official['tweets'] = get_official_tweets(profile_legid)[:20]
     official['votes'] = get_recent_votes(profile_legid)[:20]
     official['fb_posts'] = get_recent_fb_posts(profile_legid)[:20]
