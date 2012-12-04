@@ -46,11 +46,6 @@ def pa_tweets(request):
         "tweet_list_two": tweet_list_two})
 
 
-def blog_page(request):
-    """Returns blog page"""
-    return render_to_response('blog.html')
-
-
 def about_myrep(request):
     """Returns about page"""
     return render_to_response('about.html')
