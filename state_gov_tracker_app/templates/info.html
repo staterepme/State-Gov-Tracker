@@ -14,8 +14,8 @@
                 {% if official.email %}
                     <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
                 {% endif %}
-                {% if official.office_nums %}
-                    {% for office in official.office_nums %}                            
+                {% if official.offices %}
+                    {% for office in official.offices %}                            
                         <p>{{ office.name }}<br>
                         {{ office.address }}<br>
                         {{ office.phone }}</p>
@@ -26,7 +26,7 @@
                 {% endif %}
             </div>
             <div id="bio_right">
-                <h2> Political Ideology in the State {{ official.position }} </h2>
+                <h2> Political Ideology in the State {{ official.chamber_name }} </h2>
                <p>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
                <svg id="pref_distribution">
                </svg>
@@ -132,7 +132,7 @@
                             .attr("transform", "translate(340,40)")
                             .attr("text-anchor", "middle");
 
-                        var position = {{ official.ideology }};
+                        var position = {{ ideology }};
 
                         var dataposition = [{"value":position}];
 
@@ -175,9 +175,9 @@
                 <article class="widget news">
                 	<h4>Press Releases</h4>
                     <ul>
-					{% if official.press_release %}
-                        {% for release in official.press_release %}                            
-                            <li><a href="{{ release.url }}">{{release.date}}</a> - {{release.title|truncatechars:120}}</li>
+					{% if press_releases %}
+                        {% for release in press_releases %}                            
+                            <li><a href="{{ release.pr_url }}">{{release.pr_date}}</a> - {{release.pr_title|truncatechars:120}}</li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
@@ -188,9 +188,9 @@
                 <article class="widget votes">
                 	<h4>Recent Votes</h4>
                     <ul>
-                    {% if official.votes %}
-                        {% for vote in official.votes %}                            
-                            <li>{{ vote.vote_yno }} : {{ vote.title|truncatechars:120}} - <a href="{{ vote.url }}">{{ vote.date }}</a></li>
+                    {% if votes %}
+                        {% for v in votes %}                            
+                            <li>{{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} - <a href="{{ v.url }}">{{ v.date|shorten_date }}</a></li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
@@ -203,10 +203,10 @@
                 <article class="widget twitter">
                 	<h4>Recent Tweets</h4>
                     <ul>
-                    	{% if official.tweets %}
+                    	{% if tweets %}
                             {% autoescape off %}
-                            {% for tweet in official.tweets %}
-                                <li><a href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet|urlizetrunc:30 }}</li>
+                            {% for tweet in tweets %}
+                                <li><a href="{{ tweet.url }}">{{ tweet.shorttimestamp }}</a> - {{ tweet.tweet|urlizetrunc:30 }}</li>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
@@ -219,9 +219,9 @@
                 <article class="widget facebook">
                 	<h4>Recent Facebook Posts</h4>
                     <ul>
-                    	{% if official.fb_posts %}
-                            {% for fb_post in official.fb_posts %}
-                                <li>{{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a href="{{ fb_post.url }}">{{ fb_post.date }}</a></li>
+                    	{% if fb_posts %}
+                            {% for fb_post in fb_posts %}
+                                <li>{{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a href="{{ fb_post.url }}">{{ fb_post.timestamp|shorten_date }}</a></li>
                             {% endfor %}
                         {% else %}
                             <li>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</li>
