@@ -93,6 +93,12 @@ class OfficialTweets(models.Model):
     oembed = models.TextField(blank=True)
     timestamp = models.TextField(blank=True)
 
+    def form_url(self, twitter_id):
+        self.url = "https://twitter.com/%s/status/%s" % (twitter_id, self.tweet_id)
+
+    def short_timestamp(self):
+        self.shorttimestamp = self.timestamp.split(' ')[0]
+
     class Meta:
         db_table = u'official_tweets'
 
