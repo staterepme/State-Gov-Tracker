@@ -124,9 +124,34 @@ class Officials(models.Model):
 
     def help_vars(self):
         num_rank = {'upper': '50', 'lower': '200'}
+        position = {'upper': 'Senate', 'lower': 'House'}
         pref_type = {'Republican': 'Conservative', 'Democratic': 'Liberal'}
         self.rank_type = pref_type[self.party]
         self.num_rank = num_rank[self.chamber]
+        self.chamber_name = position[self.chamber]
+
+    def get_pref_rank(self):
+        if self.party == "Republican":
+            prefs = Preferences.objects.filter(party=self.party, chamber=self.chamber).order_by('-ideology')
+        else:
+            prefs = Preferences.objects.filter(party=self.party, chamber=self.chamber).order_by('ideology')
+        counter = 0
+        for pref in prefs:
+            counter += 1
+            if pref.legid == self.legid:
+                break
+        self.rank = counter
+
+    def get_offices(self):
+        leg_info = openstates.legislator_detail(self.legid)
+        try:
+            self.email = leg_info['email']
+        except:
+            self.email = ''
+        try:
+            self.offices = leg_info['offices']
+        except:
+            self.offices = ''
 
     class Meta:
         db_table = u'officials'
