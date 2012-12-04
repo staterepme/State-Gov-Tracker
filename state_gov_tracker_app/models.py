@@ -166,7 +166,7 @@ class PaBills(models.Model):
     type = models.TextField(blank=True)  # This field type is a guess.
     subjects = models.TextField(blank=True)  # This field type is a guess.
     title = models.TextField(blank=True)
-    bill_id = models.TextField(primary_key=True, blank=True)
+    bill_id = models.TextField(primary_key=True)
 
     class Meta:
         db_table = u'pa_bills'
