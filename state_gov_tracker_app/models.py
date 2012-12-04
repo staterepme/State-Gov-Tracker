@@ -246,3 +246,65 @@ class OfficialOffices(models.Model):
 
     class Meta:
         db_table = u'official_offices'
+
+####################################
+## Utility Functions for Views.py ##
+####################################
+
+## Filters Press Releases that have incorrect dates ##
+## and incorrect titles                             ##
+
+
+def filter_press_releases(press_releases):
+    relevant_prs = []
+    if len(press_releases) == 0:
+        return []
+    for pr in press_releases:
+        if pr.pr_date == None:
+            continue
+        date_split = pr.pr_date.split('-')
+        if int(date_split[0]) > 2012:
+            continue
+        if pr.pr_title == "":
+            continue
+        if pr.pr_title != None:
+            pr.pr_title = pr.pr_title
+        else:
+            pr.pr_title = pr.pr_text
+        relevant_prs.append(pr)
+    return relevant_prs
+
+## Grabs Kernel Density Graph Data ##
+
+
+def get_kdensity_data(chamber_to_get):
+    kdensity_graph = {}
+
+    ## Get Bounds of Graphs ##
+    y_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-curve')[0]
+    y_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('curve')[0]
+    x_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-preference')[0]
+    x_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('preference')[0]
+    kdensity_graph['y_max'] = float(y_results_desc.curve)
+    kdensity_graph['y_min'] = float(y_results_asc.curve)
+    kdensity_graph['x_max'] = float(x_results_desc.preference)
+    kdensity_graph['x_min'] = float(x_results_asc.preference)
+
+    ## Get Party Data ##
+    # Democrats #
+    dem_points = PreferencesKdensity.objects.filter(party="Democratic", chamber=chamber_to_get).order_by('-preference')
+    dem_storage = []
+    for result in dem_points:
+        dem_storage.append({"x_axis": result.preference,
+            "y_axis": result.curve})
+    kdensity_graph['dem'] = json.dumps(dem_storage)
+    # Republicans #
+    rep_points = PreferencesKdensity.objects.filter(party="Republican", chamber=chamber_to_get).order_by('-preference')
+    rep_storage = []
+    for result in rep_points:
+        rep_storage.append({"x_axis": result.preference,
+            "y_axis": result.curve})
+    kdensity_graph['rep'] = json.dumps(rep_storage)
+    return kdensity_graph
+
+## Search Functions for Cicero, etc. ##
