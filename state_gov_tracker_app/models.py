@@ -112,6 +112,12 @@ class Officials(models.Model):
     updatedat = models.TextField(blank=True)  # This field type is a guess.
     homepage = models.TextField(blank=True)
 
+    def help_vars(self):
+        num_rank = {'upper': '50', 'lower': '200'}
+        pref_type = {'Republican': 'Conservative', 'Democratic': 'Liberal'}
+        self.rank_type = pref_type[self.party]
+        self.num_rank = num_rank[self.chamber]
+
     class Meta:
         db_table = u'officials'
 
