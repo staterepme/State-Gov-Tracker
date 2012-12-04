@@ -20,3 +20,37 @@
     letter-spacing: 1px;
     margin-bottom: 5px;
 }
+
+#search-form {
+    margin-top: 100px;
+}
+
+.small-help-text a {
+    color: white;
+}
+
+.small-help-text {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 3px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 0.7em;
+}
+
+form.address-search {
+    margin: 10px 0;
+}
+
+.image-attribution {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+    margin-top: 200px;
+}
+
+.image-attribution a, a:visited {
+    color: white;
+}

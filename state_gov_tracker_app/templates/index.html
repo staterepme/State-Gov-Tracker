@@ -10,11 +10,11 @@
                 <p class="lead">Find and Monitor Your State Representatives in Pennsylvania</p>
             </div>
         </div>
-        <div class="span6" id="search">
+        <div class="span9" id="search-form">
 
             <div class="help-modal">
 
-            <div class="small-help-text"><p><a href="#myModal" role="button" class="" data-toggle="modal">How does this work?</a></p></div>
+            <span class="small-help-text"><a href="#myModal" role="button" class="" data-toggle="modal">How does this work?</a></span>
 
             <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
@@ -38,28 +38,23 @@
              </div>
 
          </div>
-    
-            <form action="/results" method="get">
-                <input type="text" name="q" placeholder="Enter Your Address" class="field">
-                <input type="submit" class="btn" value="Who's my rep?">
-            </form>
+
+        <form action="/results" method="get" class="form-inline address-search">
+            <input type="text" name="q" placeholder="Enter Your Address" class="input-xlarge">
+            <button type="submit" class="btn btn-primary">Who's my rep?</button>
+        </form>
 
 
 
-            <div class="small-help-text"><p>Example address: <a href="http://www.beta.staterep.me/results?q=1+Beaver+Stadium++University+Park%2C+PA+16802">1 Beaver Stadium  University Park, PA 16802</a></p></div> 
+            <span class="small-help-text">Example address: <a href="http://www.beta.staterep.me/results?q=1+Beaver+Stadium++University+Park%2C+PA+16802">1 Beaver Stadium  University Park, PA 16802</a></span> 
 
-            <div style="float:left;width:10000px;"></div>
-            <div style="float:left; margin-top:100px;width:97%;"></div>
-        <footer style="float: right; display:block;">
-            <div class="clear">
-                <article style="margin:0px;">
-                    <p style="text-align:left">Background Image Credit <br>Pennsylvania State Capitol Building<br><a href="http://www.flickr.com/photos/jason_burmeister/2392125726/">Jason Burmeister</a></p>
-                    <!--<a href="#"><img src="/static/images/icons/facebook.png" width="45" alt="" title=""></a>
-                    <a href="#"><img src="/static/images/icons/twitter.png" width="45"  alt="" title=""></a>
-                    <a href="#"><img src="/static/images/icons/stumbleupon.png" width="45" alt="" title=""></a>-->
-                </article>
+        <div class="clear">
+            <div class="row-fluid">
+                    <div class="span4 offset12 image-attribution">
+                        <p>Background Image Credit <br>Pennsylvania State Capitol Building<br><a href="http://www.flickr.com/photos/jason_burmeister/2392125726/">Jason Burmeister</a></p>
+                    </div>
             </div>
-        </footer>
+        </div>
     </div>
 </div><!-- End home page (I think) -->
 
