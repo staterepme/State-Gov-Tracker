@@ -19,10 +19,6 @@ except ImportError:
 http = httplib2.Http()
 url_base = 'http://cicero.azavea.com/v3.1'
 
-pref_type = {'Republican': 'Conservative', 'Democratic': 'Liberal'}
-num_rank = {'upper': '50', 'lower': '200'}
-
-
 def WhichRep(request):
     upper = search(request, 'UPPER')
     lower = search(request, 'LOWER')
