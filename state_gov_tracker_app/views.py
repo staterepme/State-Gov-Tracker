@@ -2,7 +2,7 @@
 from models import *
 from django.shortcuts import render_to_response
 from cicero_search import *
-
+from django.template import RequestContext, loader
 ########################################
 ## Search by address, display results ##
 ########################################
@@ -75,7 +75,8 @@ def profile(request, profile_legid):
         "votes": votes,
         "fb_posts": fb_posts,
         "press_releases": filtered_press_releases,
-        "ideology": ideology})
+        "ideology": ideology},
+        context_instance=RequestContext(request))
 
 ###############
 ## Home Page ##
