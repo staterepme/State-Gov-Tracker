@@ -20,3 +20,11 @@ StateGovTracker_Django
 data_scripts/load_database.py
 
 state_gov_tracker_app/.DS_Store
+
+env/bin/activate
+
+env/bin/activate.csh
+
+env/bin/activate.fish
+
+env/*
