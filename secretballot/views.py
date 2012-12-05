@@ -7,10 +7,12 @@ from django.db.models.base import ModelBase
 from django.contrib.contenttypes.models import ContentType
 from secretballot.models import Vote
 
-def vote(request, content_type, object_id, vote, can_vote_test=None,
+def vote(request, can_vote_test=None,
               redirect_url=None, template_name=None, template_loader=loader,
               extra_context=None, context_processors=None, mimetype=None):
-
+    content_type = request.POST['content_type']
+    object_id = request.POST['object_id']
+    vote = request.POST['vote']
     # get the token from a SecretBallotMiddleware 
     if not hasattr(request, 'secretballot_token'):
         raise ImproperlyConfigured('To use secretballot a SecretBallotMiddleware must be installed. (see secretballot/middleware.py)')
