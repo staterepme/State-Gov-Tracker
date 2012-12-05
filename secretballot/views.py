@@ -68,9 +68,12 @@ def vote(request, can_vote_test=None,
         t = template_loader.get_template(template_name)
         body = t.render(c)
     else:
-        votes = Vote.objects.filter(content_type=content_type,
-                                    object_id=object_id).count()
-        body = "{'num_votes':%d}" % votes
+        negative_votes = Vote.objects.filter(content_type=content_type,
+                                    object_id=object_id, vote=-1).count()
+        positive_votes = Vote.objects.filter(content_type=content_type,
+                                    object_id=object_id, vote=1).count()
+        votes = positive_votes-negative_votes
+        body = "%d" % votes
 
     return HttpResponse(body, mimetype=mimetype)
 
