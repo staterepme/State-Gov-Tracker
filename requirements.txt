@@ -1,5 +1,6 @@
 sunlight
 Django
 httplib2
-django-blog-zinnia
-PIL
+django-debug-toolbar
+django-admin-bootstrapped
+ipython
