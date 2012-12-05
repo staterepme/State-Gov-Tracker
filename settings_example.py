@@ -132,8 +132,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'state_gov_tracker_app',
     'debug_toolbar',
-    'tagging',
-    'mptt',
     'blog',
     'markdown',
     'django.contrib.markup',
