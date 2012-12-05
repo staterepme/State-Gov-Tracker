@@ -9,10 +9,12 @@
 
 from django.db import models
 from sunlight import openstates
+import secretballot
 try:
     import json
 except ImportError:
     import simplejson as json
+from django.contrib.contenttypes.models import ContentType
 
 class PreferencesKdensity(models.Model):
     row_names = models.TextField(primary_key=True)
