@@ -39,8 +39,8 @@ class Preferences(models.Model):
 
 
 class FbData(models.Model):
-    legid = models.TextField(blank=True)  # This field type is a guess.
-    timestamp = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.TextField(blank=True)
+    timestamp = models.TextField(blank=True)
     post = models.TextField(blank=True)
     post_id = models.TextField(blank=True)
     row_pk = models.IntegerField(primary_key=True)
@@ -50,24 +50,24 @@ class FbData(models.Model):
 
 
 class LegsSocialmedia(models.Model):
-    legid = models.TextField(primary_key=True, blank=True)  # This field type is a guess.
-    twitter = models.TextField(blank=True)  # This field type is a guess.
-    facebook = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.TextField(primary_key=True, blank=True)
+    twitter = models.TextField(blank=True)
+    facebook = models.TextField(blank=True)
 
     class Meta:
         db_table = u'legs_socialmedia'
 
 
 class OfficialPersonalPages(models.Model):
-    legid = models.CharField(max_length=100, primary_key=True, blank=True)  # This field type is a guess.
-    fullname = models.TextField(blank=True)  # This field type is a guess.
-    chamber = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.CharField(max_length=100, primary_key=True, blank=True)
+    fullname = models.TextField(blank=True)
+    chamber = models.TextField(blank=True)
     district = models.IntegerField(null=True, blank=True)
-    party = models.TextField(blank=True)  # This field type is a guess.
-    ga_homepage = models.TextField(blank=True)  # This field type is a guess.
-    personal_homepage = models.TextField(blank=True)  # This field type is a guess.
-    press_release_url = models.TextField(blank=True)  # This field type is a guess.
-    notes = models.TextField(blank=True)  # This field type is a guess.
+    party = models.TextField(blank=True)
+    ga_homepage = models.TextField(blank=True)
+    personal_homepage = models.TextField(blank=True)
+    press_release_url = models.TextField(blank=True)
+    notes = models.TextField(blank=True)
 
     class Meta:
         db_table = u'official_personal_pages'
@@ -81,15 +81,15 @@ class OfficialPressReleases(models.Model):
     pr_text = models.TextField(blank=True)
     pr_title = models.TextField(blank=True)
     pr_key = models.IntegerField(primary_key=True)
-    pr_md5 = models.TextField(unique=True, blank=True)  # This field type is a guess.
+    pr_md5 = models.TextField(unique=True, blank=True)
 
     class Meta:
         db_table = u'official_press_releases'
 
 
 class OfficialTweets(models.Model):
-    legid = models.TextField(blank=True)  # This field type is a guess.
-    tweet = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.TextField(blank=True)
+    tweet = models.TextField(blank=True)
     tweet_key = models.IntegerField(primary_key=True)
     tweet_id = models.TextField(blank=True)
     oembed = models.TextField(blank=True)
@@ -106,22 +106,22 @@ class OfficialTweets(models.Model):
 
 
 class Officials(models.Model):
-    legid = models.TextField(primary_key=True, blank=True)  # This field type is a guess.
-    fullname = models.TextField(blank=True)  # This field type is a guess.
-    firstname = models.TextField(blank=True)  # This field type is a guess.
-    middlename = models.TextField(blank=True)  # This field type is a guess.
-    lastname = models.TextField(blank=True)  # This field type is a guess.
-    suffixes = models.TextField(blank=True)  # This field type is a guess.
-    nickname = models.TextField(blank=True)  # This field type is a guess.
-    active = models.TextField(blank=True)  # This field type is a guess.
-    state = models.TextField(blank=True)  # This field type is a guess.
-    chamber = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.TextField(primary_key=True, blank=True)
+    fullname = models.TextField(blank=True)
+    firstname = models.TextField(blank=True)
+    middlename = models.TextField(blank=True)
+    lastname = models.TextField(blank=True)
+    suffixes = models.TextField(blank=True)
+    nickname = models.TextField(blank=True)
+    active = models.TextField(blank=True)
+    state = models.TextField(blank=True)
+    chamber = models.TextField(blank=True)
     district = models.IntegerField(null=True, blank=True)
-    party = models.TextField(blank=True)  # This field type is a guess.
-    transparencydataid = models.TextField(blank=True)  # This field type is a guess.
-    photourl = models.TextField(blank=True)  # This field type is a guess.
-    createdat = models.TextField(blank=True)  # This field type is a guess.
-    updatedat = models.TextField(blank=True)  # This field type is a guess.
+    party = models.TextField(blank=True)
+    transparencydataid = models.TextField(blank=True)
+    photourl = models.TextField(blank=True)
+    createdat = models.TextField(blank=True)
+    updatedat = models.TextField(blank=True)
     homepage = models.TextField(blank=True)
 
     def help_vars(self):
@@ -131,6 +131,7 @@ class Officials(models.Model):
         self.rank_type = pref_type[self.party]
         self.num_rank = num_rank[self.chamber]
         self.chamber_name = position[self.chamber]
+        self.ctype = "state_gov_tracker_app.Officials"
 
     def get_pref_rank(self):
         if self.party == "Republican":
@@ -158,15 +159,14 @@ class Officials(models.Model):
     class Meta:
         db_table = u'officials'
 
-
 class PaBills(models.Model):
-    state = models.TextField(blank=True)  # This field type is a guess.
-    session = models.TextField(blank=True)  # This field type is a guess.
-    chamber = models.TextField(blank=True)  # This field type is a guess.
-    created_at = models.TextField(blank=True)  # This field type is a guess.
-    updated_at = models.TextField(blank=True)  # This field type is a guess.
-    type = models.TextField(blank=True)  # This field type is a guess.
-    subjects = models.TextField(blank=True)  # This field type is a guess.
+    state = models.TextField(blank=True)
+    session = models.TextField(blank=True)
+    chamber = models.TextField(blank=True)
+    created_at = models.TextField(blank=True)
+    updated_at = models.TextField(blank=True)
+    type = models.TextField(blank=True)
+    subjects = models.TextField(blank=True)
     title = models.TextField(blank=True)
     bill_id = models.TextField(primary_key=True)
 
@@ -175,14 +175,14 @@ class PaBills(models.Model):
 
 
 class PaLegisNews(models.Model):
-    legid = models.TextField(blank=True)  # This field type is a guess.
-    title = models.TextField(blank=True)  # This field type is a guess.
-    link = models.TextField(blank=True)  # This field type is a guess.
-    summary = models.TextField(blank=True)  # This field type is a guess.
-    date = models.TextField(blank=True)  # This field type is a guess.
-    relevant = models.TextField(blank=True)  # This field type is a guess.
-    yeas = models.TextField(blank=True)  # This field type is a guess.
-    nays = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.TextField(blank=True)
+    title = models.TextField(blank=True)
+    link = models.TextField(blank=True)
+    summary = models.TextField(blank=True)
+    date = models.TextField(blank=True)
+    relevant = models.TextField(blank=True)
+    yeas = models.TextField(blank=True)
+    nays = models.TextField(blank=True)
     news_key = models.IntegerField(primary_key=True)
 
     class Meta:
@@ -190,11 +190,11 @@ class PaLegisNews(models.Model):
 
 
 class PaLegisSponsors(models.Model):
-    legid = models.TextField(blank=True)  # This field type is a guess.
-    bill_id = models.TextField(blank=True)  # This field type is a guess.
-    type = models.TextField(blank=True)  # This field type is a guess.
-    yeas = models.TextField(blank=True)  # This field type is a guess.
-    nays = models.TextField(blank=True)  # This field type is a guess.
+    legid = models.TextField(blank=True)
+    bill_id = models.TextField(blank=True)
+    type = models.TextField(blank=True)
+    yeas = models.TextField(blank=True)
+    nays = models.TextField(blank=True)
     sponsor_key = models.IntegerField(primary_key=True)
 
     class Meta:
@@ -202,28 +202,28 @@ class PaLegisSponsors(models.Model):
 
 
 class LegisVotes(models.Model):
-    vote_id = models.CharField(max_length=200, primary_key=True)  # This field type is a guess.
+    vote_id = models.CharField(max_length=200, primary_key=True)
     chamber = models.TextField(blank=True)
-    date = models.TextField(blank=True)  # This field type is a guess.
+    date = models.TextField(blank=True)
     motion = models.TextField(blank=True)
     num_no = models.IntegerField(null=True, blank=True)
     num_yes = models.IntegerField(null=True, blank=True)
     num_other = models.IntegerField(null=True, blank=True)
     type = models.TextField(blank=True)
-    bill_id = models.TextField(blank=True)  # This field type is a guess.
-    status = models.TextField(blank=True)  # This field type is a guess.
-    session = models.TextField(blank=True)  # This field type is a guess.
+    bill_id = models.TextField(blank=True)
+    status = models.TextField(blank=True)
+    session = models.TextField(blank=True)
 
     class Meta:
         db_table = u'legis_votes'
 
 
 class PaLegisVotes(models.Model):
-    legid = models.TextField(blank=True)  # This field type is a guess.
-    bill_id = models.ForeignKey(PaBills)  # This field type is a guess.
+    legid = models.TextField(blank=True)
+    bill_id = models.ForeignKey(PaBills)
     vote = models.IntegerField(null=True, blank=True)
-    date = models.TextField(blank=True)  # This field type is a guess.
-    vote_id = models.ForeignKey(LegisVotes)  # This field type is a guess.
+    date = models.TextField(blank=True)
+    vote_id = models.ForeignKey(LegisVotes)
     legis_vote_key = models.IntegerField(primary_key=True)
 
     class Meta:
@@ -240,21 +240,28 @@ class PaLegisVotes(models.Model):
 
 
 class OfficialOffices(models.Model):
-    office_legid = models.TextField(blank=True)  # This field type is a guess.
+    office_legid = models.TextField(blank=True)
     pk = models.IntegerField(primary_key=True)
     address = models.TextField(blank=True)
-    phone = models.TextField(blank=True)  # This field type is a guess.
+    phone = models.TextField(blank=True)
     name = models.TextField(blank=True)
 
     class Meta:
         db_table = u'official_offices'
+
+
+secretballot.enable_voting_on(Officials)
+secretballot.enable_voting_on(OfficialTweets)
+secretballot.enable_voting_on(PaLegisVotes)
+secretballot.enable_voting_on(FbData)
+secretballot.enable_voting_on(OfficialPressReleases)
 
 ####################################
 ## Utility Functions for Views.py ##
 ####################################
 
 ## Filters Press Releases that have incorrect dates ##
-## and incorrect titles                             ##
+## and incorrect titles                           
 
 
 def filter_press_releases(press_releases):
@@ -282,7 +289,7 @@ def filter_press_releases(press_releases):
 def get_kdensity_data(chamber_to_get):
     kdensity_graph = {}
 
-    ## Get Bounds of Graphs ##
+  
     y_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-curve')[0]
     y_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('curve')[0]
     x_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-preference')[0]
@@ -292,15 +299,15 @@ def get_kdensity_data(chamber_to_get):
     kdensity_graph['x_max'] = float(x_results_desc.preference)
     kdensity_graph['x_min'] = float(x_results_asc.preference)
 
-    ## Get Party Data ##
-    # Democrats #
+  
+  
     dem_points = PreferencesKdensity.objects.filter(party="Democratic", chamber=chamber_to_get).order_by('-preference')
     dem_storage = []
     for result in dem_points:
         dem_storage.append({"x_axis": result.preference,
             "y_axis": result.curve})
     kdensity_graph['dem'] = json.dumps(dem_storage)
-    # Republicans #
+  
     rep_points = PreferencesKdensity.objects.filter(party="Republican", chamber=chamber_to_get).order_by('-preference')
     rep_storage = []
     for result in rep_points:
