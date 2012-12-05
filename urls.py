@@ -9,16 +9,17 @@ from state_gov_tracker_app.views import search_form
 from state_gov_tracker_app.views import search
 #from state_gov_tracker_app.views import search_results
 from state_gov_tracker_app.views import WhichRep
+# from state_gov_tracker_app.views import RecordVote
 from state_gov_tracker_app.views import profile, pa_tweets, about_myrep
 from blog.views import Blog, Article
-
+from secretballot.views import vote
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     ('^$', search_form),
     ('^results$', WhichRep),
-    ('^profile/(.*)$', profile),
+    ('^profile/(PAL\d+)/?', profile),
     ('^pa-tweets$', pa_tweets),
     ('^about$', about_myrep),
     url(r'blog$', Blog),
@@ -28,6 +29,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^vote/$', vote), 
 )
 
 '''
