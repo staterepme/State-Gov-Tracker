@@ -38,7 +38,6 @@ def pa_tweets(request):
 ##  Profile Page  ##
 ####################
 
-
 def profile(request, profile_legid):
     official_object = Officials.objects.get(legid=profile_legid)
     official_object.get_offices()
@@ -52,7 +51,7 @@ def profile(request, profile_legid):
         tweet.short_timestamp()
 
     ## Get Votes ##
-    votes = PaLegisVotes.objects.filter(legid=profile_legid).filter(vote_id_id__type="passage").order_by('-date')[:20]
+    votes = PaLegisVotes.objects.filter(legid=profile_legid).order_by('-date')[:20]
     for vote in votes:
         vote.voteurl()
 
