@@ -4,6 +4,31 @@
 
 {% block page_content %}
 
+<script type="text/javascript">
+    function vote(vote_type, object_id, content_type) {
+        var postdata={
+          'vote':vote_type, 
+          'object_id':object_id,
+          'content_type':content_type,
+          'csrfmiddlewaretoken': "{{ csrf_token }}"
+        }
+        $.post("/vote/", postdata, 
+            function(data) {
+                id_selector = "#num_votes"+ '_' + object_id + '_' + content_type
+                id_sel = id_selector.replace(".","")
+                $(id_sel).text(data);
+
+                if(data < 0) {
+                    $(id_sel).css('color', '#ff0000')
+                }
+                else {
+                    $(id_sel).css('color', '#3333FF')
+                }
+           }
+        )
+    };
+</script>
+
 <section id="content"><!-- Start Main Content -->
             <h1>{{ official.fullname }}</h1>
             <div class="profile">
