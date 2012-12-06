@@ -230,15 +230,6 @@ class PaLegisVotes(models.Model):
     class Meta:
         db_table = u'pa_legis_votes'
 
-    def voteurl(self):
-        """Calls to OpenStates API to grab bill URL"""
-        bill = openstates.bill_detail(bill_id=self.bill_id_id,
-            state="pa", session="2011-2012")
-        if bill['sources'][0]['url']:
-            self.url = bill['sources'][0]['url']
-        else:
-            self.url = None
-
 
 class OfficialOffices(models.Model):
     office_legid = models.TextField(blank=True)
