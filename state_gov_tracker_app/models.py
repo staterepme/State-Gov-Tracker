@@ -280,32 +280,29 @@ def filter_press_releases(press_releases):
 
 def get_kdensity_data(chamber_to_get):
     kdensity_graph = {}
+    kdensity_data = PreferencesKdensity.objects.defer("chamber", "row_names").filter(chamber=chamber_to_get).iterator()
+    y_data = []
+    x_data = []
+    rep_data = []
+    dem_data = []
+    for data in kdensity_data:
+        y_data.append(data.curve)
+        x_data.append(data.preference)
+        if data.party == 'Republican':
+            rep_data.append({"x_axis": data.preference, "y_axis": data.curve})
+        else:
+            dem_data.append({"x_axis": data.preference, "y_axis": data.curve})
+    y_data.sort()
+    x_data.sort()
 
-  
-    y_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-curve')[0]
-    y_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('curve')[0]
-    x_results_desc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('-preference')[0]
-    x_results_asc = PreferencesKdensity.objects.filter(chamber=chamber_to_get).order_by('preference')[0]
-    kdensity_graph['y_max'] = float(y_results_desc.curve)
-    kdensity_graph['y_min'] = float(y_results_asc.curve)
-    kdensity_graph['x_max'] = float(x_results_desc.preference)
-    kdensity_graph['x_min'] = float(x_results_asc.preference)
+    kdensity_graph['y_max'] = y_data[-1]
+    kdensity_graph['y_min'] = y_data[0]
+    kdensity_graph['x_max'] = x_data[-1]
+    kdensity_graph['x_min'] = x_data[0]
 
-  
-  
-    dem_points = PreferencesKdensity.objects.filter(party="Democratic", chamber=chamber_to_get).order_by('-preference')
-    dem_storage = []
-    for result in dem_points:
-        dem_storage.append({"x_axis": result.preference,
-            "y_axis": result.curve})
-    kdensity_graph['dem'] = json.dumps(dem_storage)
-  
-    rep_points = PreferencesKdensity.objects.filter(party="Republican", chamber=chamber_to_get).order_by('-preference')
-    rep_storage = []
-    for result in rep_points:
-        rep_storage.append({"x_axis": result.preference,
-            "y_axis": result.curve})
-    kdensity_graph['rep'] = json.dumps(rep_storage)
+    kdensity_graph['dem'] = json.dumps(dem_data)
+
+    kdensity_graph['rep'] = json.dumps(rep_data)
     return kdensity_graph
 
 ## Search Functions for Cicero, etc. ##
