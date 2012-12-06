@@ -1,0 +1,13 @@
+## RGB Values for Palette of StateRep.Me ##
+
+-- Widgets --
+Press Releases:         155 78  40
+Recent Votes:           159 16  67
+Tweets:                 
+Facebook Posts:         159 16  67
+
+Link Color:             0   229 0
+
+-- Graph --
+Democrats:              50  103 145
+Republicans:            210 0   32
