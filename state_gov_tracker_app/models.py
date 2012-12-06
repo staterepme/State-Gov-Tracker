@@ -9,6 +9,7 @@
 
 from django.db import models
 from sunlight import openstates
+from datetime import date
 import secretballot
 try:
     import json
@@ -76,7 +77,7 @@ class OfficialPersonalPages(models.Model):
 class OfficialPressReleases(models.Model):
     pr_legid = models.TextField(blank=True)
     pr_url = models.TextField(blank=True)
-    pr_date = models.TextField(blank=True)
+    pr_date = models.DateField(blank=True)
     pr_html = models.TextField(blank=True)
     pr_text = models.TextField(blank=True)
     pr_title = models.TextField(blank=True)
@@ -271,7 +272,7 @@ def filter_press_releases(press_releases):
     for pr in press_releases:
         if pr.pr_date == None:
             continue
-        date_split = pr.pr_date.split('-')
+        date_split = pr.pr_date.timetuple()
         if int(date_split[0]) > 2012:
             continue
         if pr.pr_title == "":
