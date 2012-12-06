@@ -7,7 +7,7 @@ import re
 import string
 import simplejson as json
 import pprint
-from datetime import date
+from datetime import datetime
 pp = pprint.PrettyPrinter(indent=4)
 
 def facebook_token(app_id, app_secret):
@@ -130,7 +130,7 @@ def add_posts_to_db(list_of_dictionary_posts):
 
 if __name__ == '__main__':
     print "----------------------------"
-    print date.today()
+    print datetime.now()
     pp = pprint.PrettyPrinter(indent=4)
     mem_list = get_facebook_ids()
     print mem_list
