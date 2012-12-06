@@ -271,7 +271,7 @@ def filter_press_releases(press_releases):
         if pr.pr_title != None:
             pr.pr_title = pr.pr_title
         else:
-            pr.pr_title = pr.pr_text
+            pr.pr_title = "Sorry, we couldn't find the title"
         relevant_prs.append(pr)
     return relevant_prs
 
