@@ -40,12 +40,12 @@ api_table = {
         'url': '/statuses/user_timeline.json',
         'method': 'GET',
     },
-    
+
     'getOembedTweet': {
-	'url': '/statuses/oembed.json',
+    'url': '/statuses/oembed.json',
         'method': 'GET',
     },
-        
+
     # Interfacing with friends/followers
     'getUserMentions': {
         'url': '/statuses/mentions.json',
