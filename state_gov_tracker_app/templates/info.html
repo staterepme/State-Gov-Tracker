@@ -1,19 +1,46 @@
 {% extends "base_full.html" %}
 
+{% load profile_filters %}
+
 {% block page_content %}
+
+<script type="text/javascript">
+    function vote(vote_type, object_id, content_type) {
+        var postdata={
+          'vote':vote_type, 
+          'object_id':object_id,
+          'content_type':content_type,
+          'csrfmiddlewaretoken': "{{ csrf_token }}"
+        }
+        $.post("/vote/", postdata, 
+            function(data) {
+                id_selector = "#num_votes"+ '_' + object_id + '_' + content_type
+                id_sel = id_selector.replace(".","")
+                $(id_sel).text(data);
+
+                if(data < 0) {
+                    $(id_sel).css('color', '#ff0000')
+                }
+                else {
+                    $(id_sel).css('color', '#3333FF')
+                }
+           }
+        )
+    };
+</script>
 
 <section id="content"><!-- Start Main Content -->
             <h1>{{ official.fullname }}</h1>
             <div class="profile">
             <div id="bio_left">
-                <a href="#"><img src="{{ official.picture }}" width="200" height="270" border="0" alt="" title=""></a>
+                <a href="#"><img src="{{ official.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
                 <H3><a href="{{official.website}}">Homepage</a></H3>
 				<h3>Contact Information</h3>
                 {% if official.email %}
                     <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
                 {% endif %}
-                {% if official.office_nums %}
-                    {% for office in official.office_nums %}                            
+                {% if official.offices %}
+                    {% for office in official.offices %}                            
                         <p>{{ office.name }}<br>
                         {{ office.address }}<br>
                         {{ office.phone }}</p>
@@ -24,7 +51,7 @@
                 {% endif %}
             </div>
             <div id="bio_right">
-                <h2> Political Ideology in the State {{ official.position }} </h2>
+                <h2> Political Ideology in the State {{ official.chamber_name }} </h2>
                <p>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
                <svg id="pref_distribution">
                </svg>
@@ -130,7 +157,7 @@
                             .attr("transform", "translate(340,40)")
                             .attr("text-anchor", "middle");
 
-                        var position = {{ official.ideology }};
+                        var position = {{ ideology }};
 
                         var dataposition = [{"value":position}];
 
@@ -173,9 +200,13 @@
                 <article class="widget news">
                 	<h4>Press Releases</h4>
                     <ul>
-					{% if official.press_release %}
-                        {% for release in official.press_release %}                            
-                            <li><a href="{{ release.url }}">{{release.date}}</a> - {{release.title|truncatechars:120}}</li>
+					{% if press_releases %}
+                        {% for release in press_releases %}                            
+                            <li>
+                                (<a href="#" onclick="vote('1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">+1</a> | 
+                                <a href="#" onclick="vote('-1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">-1</a>) 
+                                {{release.pr_title|truncatechars:120}}. <a href="{{ release.pr_url }}">{{release.pr_date}}</a> - Total Votes <span id="num_votes_{{release.pk}}_state_gov_tracker_appOfficialPressReleases">{{ release.vote_total }}</span>
+                            </li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
@@ -186,9 +217,12 @@
                 <article class="widget votes">
                 	<h4>Recent Votes</h4>
                     <ul>
-                    {% if official.votes %}
-                        {% for vote in official.votes %}                            
-                            <li>{{ vote.vote_yno }} : {{ vote.title|truncatechars:120}} - <a href="{{ vote.url }}">{{ vote.date }}</a></li>
+                    {% if votes %}
+                        {% for v in votes %}                            
+                            <li>
+                                (<a href="#" onclick="vote('1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">+1</a> | 
+                                <a href="#" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">-1</a>) 
+                                {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} - <a href="{{ v.bill_id_id }}">{{ v.date|shorten_date }}</a> - Total Votes <span id="num_votes_{{v.pk}}_state_gov_tracker_appPaLegisVotes">{{ v.vote_total }}</li>
                         {% endfor %}
                     {% else %}
                         <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
@@ -201,10 +235,14 @@
                 <article class="widget twitter">
                 	<h4>Recent Tweets</h4>
                     <ul>
-                    	{% if official.tweets %}
+                    	{% if tweets %}
                             {% autoescape off %}
-                            {% for tweet in official.tweets %}
-                                <li><a href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - {{ tweet.tweet|urlizetrunc:30 }}</li>
+                            {% for tweet in tweets %}
+                                <li>
+                                (<a href="#" onclick="vote('1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');">+1</a> | 
+                                <a href="#" onclick="vote('-1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');">-1</a>) 
+                                {{ tweet.tweet|urlizetrunc:30 }} - 
+                                <a href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - Total Votes <span id="num_votes_{{tweet.pk}}_state_gov_tracker_appOfficialTweets">{{ tweet.vote_total }}</li>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
@@ -217,9 +255,12 @@
                 <article class="widget facebook">
                 	<h4>Recent Facebook Posts</h4>
                     <ul>
-                    	{% if official.fb_posts %}
-                            {% for fb_post in official.fb_posts %}
-                                <li>{{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a href="{{ fb_post.url }}">{{ fb_post.date }}</a></li>
+                    	{% if fb_posts %}
+                            {% for fb_post in fb_posts %}
+                                <li>
+                                (<a href="#" onclick="vote('1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');">+1</a> | 
+                                <a href="#" onclick="vote('-1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');">-1</a>) 
+                                    {{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a href="{{ fb_post.url }}">{{ fb_post.timestamp }}</a> - Total Votes <span id="num_votes_{{fb_post.pk}}_state_gov_tracker_appFbData">{{ fb_post.vote_total }}</li>
                             {% endfor %}
                         {% else %}
                             <li>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</li>

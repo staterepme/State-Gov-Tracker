@@ -13,12 +13,13 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/christopher/Dropbox/CongressMonitor/StateGovTracker.db',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dev_staterepme',                      # Or path to database file if using sqlite3. was /Home/Dropbox/CongressMonitor/StateGovTracker.db, you need to put your own path here.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'HOST': 'mysql.staterep.me',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+
     }
 }
 
@@ -97,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'secretballot.middleware.SecretBallotIpMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -132,11 +134,10 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'state_gov_tracker_app',
     'debug_toolbar',
-    'tagging',
-    'mptt',
     'blog',
     'markdown',
     'django.contrib.markup',
+    'secretballot',
 )
 
 # A sample logging configuration. The only tangible logging
