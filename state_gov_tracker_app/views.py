@@ -46,18 +46,18 @@ def profile(request, profile_legid):
 
     ## Get Tweets ##
     twitter_id = LegsSocialmedia.objects.get(legid=profile_legid).twitter
-    tweets = OfficialTweets.objects.defer("oembed").filter(legid=profile_legid).order_by('-timestamp').select_related()[:20]
+    tweets = OfficialTweets.objects.defer("oembed").filter(legid=profile_legid).order_by('-timestamp').select_related()[:10]
     for tweet in tweets:
         tweet.form_url(twitter_id)
 
     ## Get Votes ##
-    votes = PaLegisVotes.objects.filter(legid=profile_legid).order_by('-date').select_related()[:20]
+    votes = PaLegisVotes.objects.filter(legid=profile_legid).order_by('-date').select_related()[:10]
 
     ## Get FB Posts ##
-    fb_posts = FbData.objects.filter(legid=profile_legid).order_by('-timestamp').select_related()[:20]
+    fb_posts = FbData.objects.filter(legid=profile_legid).order_by('-timestamp').select_related()[:10]
 
     ## Get Press Releases ##
-    press_releases = OfficialPressReleases.objects.only("pr_title", "pr_date", "pr_url").filter(pr_legid=profile_legid).order_by('-pr_date').select_related()[:20]
+    press_releases = OfficialPressReleases.objects.only("pr_title", "pr_date", "pr_url").filter(pr_legid=profile_legid).order_by('-pr_date').select_related()[:10]
     filtered_press_releases = filter_press_releases(press_releases)
 
     ## Ideology and Graph Data ##
