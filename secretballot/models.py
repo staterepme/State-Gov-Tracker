@@ -13,7 +13,7 @@ class Vote(models.Model):
 
     # generic foreign key to the model being voted upon
     content_type = models.ForeignKey(ContentType)
-    object_id = models.TextField()
+    object_id = models.CharField(max_length=50)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     class Meta:
