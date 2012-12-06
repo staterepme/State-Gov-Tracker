@@ -8,7 +8,7 @@
 from twython_oembed import Twython
 from login_credentials import *
 from load_database import *
-
+from datetime import date
 t = Twython(app_key=twitter_app_key,
             app_secret=twitter_app_secret,
             oauth_token=twitter_oauth_token,
@@ -114,6 +114,8 @@ def getOembed(id_str):
     return html_to_encode.encode('utf-8')
 
 if __name__ == '__main__':
+    print "----------------------------"
+    print date.today()
     # print getOembed('233584713019817984')
     new_tweets = download_first_tweets()
     add_tweets_to_db(new_tweets)

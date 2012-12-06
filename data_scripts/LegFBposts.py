@@ -7,7 +7,8 @@ import re
 import string
 import simplejson as json
 import pprint
-
+from datetime import date
+pp = pprint.PrettyPrinter(indent=4)
 
 def facebook_token(app_id, app_secret):
     """
@@ -78,13 +79,19 @@ def download_fb_posts(app_id, app_secret, list_of_fb_ids):
     """Downloads most recent facebook posts, returns a list of dictionary
     entries"""
     dict_list = []
+    print "Downloading facebook posts for %s members right now" % (len(list_of_fb_ids))
+    counter = 0
     for member_tuple in list_of_fb_ids:
-        # counter += 1
+        counter += 1
+        print counter
         # if counter > 2:
         #   break
-        posts = facebook_news_feed(app_id, app_secret, member_tuple[1])
+        try:
+            posts = facebook_news_feed(app_id, app_secret, member_tuple[1])
+        except:
+            print "Could not get FB posts for %s" % (member_tuple)
         for post in posts:
-            # print post
+            # print pp.pprint(post)
             post[u'legid'] = member_tuple[0]
             post[u'created_time'] = fix_fb_timestamp(post[u'created_time'])
             dict_list.append(post)
@@ -106,18 +113,24 @@ def downloaded_posts():
 
 def add_posts_to_db(list_of_dictionary_posts):
     existing_posts = downloaded_posts()
+    print "This %s many posts to go through and %s posts already in DB" % (len(list_of_dictionary_posts), len(existing_posts))
+    counter = 0
     for post in list_of_dictionary_posts:
+        counter += 1
+        print counter
         if post['id'] in existing_posts:
             continue
         else:
             new_post = official_posts(legid=post['legid'],
-                post=post['message'],
+                post=post['message'].encode('utf-8'),
                 post_id=post['id'],
                 timestamp=post['created_time'])
             session.add(new_post)
             session.commit()
 
 if __name__ == '__main__':
+    print "----------------------------"
+    print date.today()
     pp = pprint.PrettyPrinter(indent=4)
     mem_list = get_facebook_ids()
     print mem_list
