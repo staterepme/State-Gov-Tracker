@@ -2,9 +2,9 @@
 <html>
 <head>
 {% extends "base_full.html" %}
-
 {% block page_content %}
 {% load markup %}
+{% load comments %}
 <section id="blog"><!-- Start Main Content -->
     <div id="well">
     <h2>Recent Posts</h2>
@@ -29,6 +29,8 @@
                 <div class="body-blog">{{ post.body|markdown }}</div>
             </ul>
             <hr>
+        {% get_comment_count for blog.post object_pk as comment_count %}
+        <p>{{ comment_count }} comments have been posted.</p>
     </div>
 	<div class="clear"></div>
 </section><!-- End Main Content -->
