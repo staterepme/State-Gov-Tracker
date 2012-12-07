@@ -43,30 +43,3 @@ def Article(request, post_num):
     except (InvalidPage, EmptyPage):
         posts = paginator.page(paginator.num_pages)
     return render_to_response("blog_post.html", {"post": post, "links": links, "recentposts": recent_posts})
-
-
-def CodeAndData(request):
-    """Page for Code and Data"""
-    recent_posts = Post.objects.all().order_by("-created")[:4]
-    links = LinksToRead.objects.all()
-    posts = Code.objects.all().order_by("-created")
-
-    return render_to_response("OtherContentTemplate.html", {"posts": posts, "links": links, "recentposts": recent_posts})
-
-
-def ProjectContent(request):
-    """Page for Projects that I'm Working on"""
-    recent_posts = Post.objects.all().order_by("-created")[:4]
-    links = LinksToRead.objects.all()
-    posts = Projects.objects.all()
-
-    return render_to_response("OtherContentTemplate.html", {"posts": posts, "links": links, "recentposts": recent_posts})
-
-
-def ResearchContent(request):
-    """Page for Projects that I'm Working on"""
-    recent_posts = Post.objects.all().order_by("-created")[:4]
-    links = LinksToRead.objects.all()
-    posts = Research.objects.all()
-
-    return render_to_response("OtherContentTemplate.html", {"posts": posts, "links": links, "recentposts": recent_posts})
