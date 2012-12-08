@@ -72,7 +72,6 @@ header {
 
 .footer-links {
     text-align: right;
-    padding-top: 20px;
 }
 
 .footer-links a, .footer-links a:visited {
@@ -124,6 +123,14 @@ form.address-search {
 
 .intermediate-info {
     text-align: center;
+}
+
+.intermediate-info img {
+    border: 4px solid rgba(0,0,0,0);
+}
+
+.intermediate-info img:hover {
+    border: 4px solid white;
 }
 
 section#content {
