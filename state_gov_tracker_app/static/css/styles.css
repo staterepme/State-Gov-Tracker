@@ -6,9 +6,13 @@ body {
     color: white;
 }
 
+a, a:visited {
+    color: #51A351;
+}
+
 .wrapper {
     width: 90%;
-    margin: 0 auto -60px;;
+    margin: 0 auto -80px;;
     min-height: 100%;
     height: auto !important;
     height: 100%;
@@ -47,11 +51,11 @@ header {
 }
 
 #push, #footer {
-    height: 60px;
+    height: 80px;
 }
 
 #footer {
-    background: black;
+    background: rgba(0, 0, 0, 0.5);
     width: 90%;
     margin: 0 auto;
     margin-top: 10px;
@@ -59,6 +63,20 @@ header {
 
 .footer-content {
     margin: 10px;
+    font-size: 0.87em;
+}
+
+.footer-content ul li {
+    display: inline;
+}
+
+.footer-links {
+    text-align: right;
+    padding-top: 20px;
+}
+
+.footer-links a, .footer-links a:visited {
+    color: white;
 }
 
 #search-form {
@@ -66,7 +84,7 @@ header {
 }
 
 .small-help-text a {
-    color: #51A351;;
+    color: #51A351;
 }
 
 .small-help-text {
@@ -91,7 +109,7 @@ form.address-search {
     margin-top: 200px;
 }
 
-.image-attribution a, a:visited {
+.image-attribution a, .image-attribution a:visited {
     color: #51A351;
 }
 
