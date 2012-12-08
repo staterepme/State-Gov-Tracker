@@ -1,10 +1,17 @@
+html, body {
+    height: 100%;
+}
+
 body {
     color: white;
 }
 
 .wrapper {
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto -60px;;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
 }
 
 header {
@@ -37,6 +44,21 @@ header {
 .home-header p {
     letter-spacing: 1px;
     margin-bottom: 5px;
+}
+
+#push, #footer {
+    height: 60px;
+}
+
+#footer {
+    background: black;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.footer-content {
+    margin: 10px;
 }
 
 #search-form {
@@ -89,3 +111,6 @@ form.address-search {
 section#content {
     margin-top: 10px;
 }
+
+
+
