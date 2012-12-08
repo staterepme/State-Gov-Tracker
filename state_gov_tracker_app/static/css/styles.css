@@ -126,11 +126,11 @@ form.address-search {
 }
 
 .intermediate-info img {
-    border: 4px solid rgba(0,0,0,0);
+    border: 4px solid white;
 }
 
 .intermediate-info img:hover {
-    border: 4px solid white;
+    border: 4px solid #51A351;;
 }
 
 section#content {
