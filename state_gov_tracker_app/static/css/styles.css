@@ -76,3 +76,16 @@ form.address-search {
 .header-title a {
     color: white;
 }
+
+#content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.intermediate-info {
+    text-align: center;
+}
+
+section#content {
+    margin-top: 10px;
+}

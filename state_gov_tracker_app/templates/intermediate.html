@@ -3,25 +3,27 @@
 {% block page_content %}
 
     <section id="content"><!-- Start Main Content -->
-        <h1>These are the people that represent you:</h1>
-    	<div class="search_results">
-            <article>
-                <h2>Senator</h2>
-                <a href="/profile/{{upper.legid}}"><img src="{{ upper.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
-                <h3>{{upper.fullname}}</a><br><br></h3>
-                <p>{{upperoffice.address|linebreaks}}</p>
-                <p>{{upperoffice.phone}}</p>
-                <p><a href="/profile/{{upper.legid}}">Learn more...</a></p>
-            </article>
-            <article>
-                <h2>Representative</h2>
-                <a href="/profile/{{lower.legid}}"><img src="{{ lower.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
-                <h3>{{lower.fullname}}</a><br><br></h3>
-                <p>{{loweroffice.address|linebreaks}}</p>
-                <p>{{loweroffice.phone}}</p>
-                <p><a href="/profile/{{lower.legid}}">Learn more...</a></p>
-            </article>
-            <div class="clear"></div>
+        <p class="lead">These are the people that represent you:</p>
+        <div class="search_results">
+            <div class="row-fluid intermediate-info-wrapper">
+                <div class="span6 intermediate-info">
+                    <h3>Senator</h3>
+                    <a href="/profile/{{upper.legid}}"><img src="{{ upper.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
+                    <h3>{{upper.fullname}}</a><br><br></h3>
+                    <p>{{upperoffice.address|linebreaks}}</p>
+                    <p>{{upperoffice.phone}}</p>
+                    <p><a href="/profile/{{upper.legid}}">Learn more...</a></p>
+                </div>
+                <div class="span6 intermediate-info">
+                    <h3>Representative</h3>
+                    <a href="/profile/{{lower.legid}}"><img src="{{ lower.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
+                    <h3>{{lower.fullname}}</a><br><br></h3>
+                    <p>{{loweroffice.address|linebreaks}}</p>
+                    <p>{{loweroffice.phone}}</p>
+                    <p><a href="/profile/{{lower.legid}}">Learn more...</a></p>
+                </div
+                <div class="clear"></div>
+            </div>
          </div>
     </section><!-- End Main Content -->
 
