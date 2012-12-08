@@ -1,0 +1,146 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    color: white;
+}
+
+a, a:visited {
+    color: #51A351;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0 auto -80px;;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.header-links li {
+    display: inline;
+}
+
+.search-again-form {
+    margin-bottom: 0px;
+    margin-top: 30px;
+    float: right;
+}
+
+.home-header {
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.home-header h1 {
+    margin-bottom: 0px;
+}
+
+.home-header p {
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+#push, #footer {
+    height: 80px;
+}
+
+#footer {
+    background: rgba(0, 0, 0, 0.5);
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.footer-content {
+    margin: 10px;
+    font-size: 0.87em;
+}
+
+.footer-content ul li {
+    display: inline;
+}
+
+.footer-links {
+    text-align: right;
+}
+
+.footer-links a, .footer-links a:visited {
+    color: white;
+}
+
+#search-form {
+    margin-top: 100px;
+}
+
+.small-help-text a {
+    color: #51A351;
+}
+
+.small-help-text {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 3px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 0.7em;
+}
+
+form.address-search {
+    margin: 10px 0;
+}
+
+.image-attribution {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+    margin-top: 200px;
+}
+
+.image-attribution a, .image-attribution a:visited {
+    color: #51A351;
+}
+
+.header-title a {
+    color: white;
+}
+
+#content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.intermediate-info {
+    text-align: center;
+}
+
+.intermediate-info img {
+    border: 4px solid white;
+}
+
+.intermediate-info img:hover {
+    border: 4px solid #51A351;;
+}
+
+section#content {
+    margin-top: 10px;
+}
+
+.modal-body {
+    color: #313131;
+}
+
+.modal-header {
+    color: #51A351;
+}
