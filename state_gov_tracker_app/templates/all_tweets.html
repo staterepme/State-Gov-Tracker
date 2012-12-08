@@ -7,8 +7,8 @@
 
 <section id="content"><!-- Start Main Content -->
     <h1>Listen to all of your represenatives...</h1>
-	<article id="all_tweets"><!-- Begin All Tweets -->
-    	<div class="tweets_left">
+	<div id="all_tweets"><!-- Begin All Tweets -->
+    	<div class="tweets">
             {% if tweet_list_one %}
                 {% autoescape off %}
                 {% for tweet in tweet_list_one %}
@@ -19,7 +19,7 @@
                We're sorry. Something went wrong and we couldn't find any recent tweets. We are working on a solution right now.
             {% endif %}
         </div>
-        <div class="tweets_right">
+        <div class="tweets">
         	{% if tweet_list_two %}
                 {% autoescape off %}
                 {% for tweet in tweet_list_two %}
@@ -31,7 +31,7 @@
             {% endif %}
         </div>
 	<div class="clear"></div>
-    </article><!-- End All Tweets -->
+    </div><!-- End All Tweets -->
 </section><!-- End Main Content -->
     
 {% endblock %}
