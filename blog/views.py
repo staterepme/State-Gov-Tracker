@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from models import *
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.template import RequestContext
 
 
 def Blog(request):
@@ -42,4 +43,4 @@ def Article(request, post_num):
         posts = paginator.page(page)
     except (InvalidPage, EmptyPage):
         posts = paginator.page(paginator.num_pages)
-    return render_to_response("blog_post.html", {"post": post, "links": links, "recentposts": recent_posts})
+    return render_to_response("blog_post.html", {"post": post, "links": links, "recentposts": recent_posts}, context_instance=RequestContext(request))
