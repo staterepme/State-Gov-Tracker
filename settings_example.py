@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'markdown',
     'django.contrib.markup',
     'secretballot',
+    'django.contrib.comments',
 )
 
 # A sample logging configuration. The only tangible logging
