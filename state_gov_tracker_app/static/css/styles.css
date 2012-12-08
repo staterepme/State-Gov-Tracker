@@ -137,4 +137,10 @@ section#content {
     margin-top: 10px;
 }
 
+.modal-body {
+    color: #313131;
+}
 
+.modal-header {
+    color: #51A351;
+}
