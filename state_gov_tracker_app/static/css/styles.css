@@ -72,3 +72,7 @@ form.address-search {
 .image-attribution a, a:visited {
     color: #51A351;
 }
+
+.header-title a {
+    color: white;
+}
