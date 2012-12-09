@@ -28,7 +28,6 @@
         )
     };
 </script>
-
 <section id="content"><!-- Start Main Content -->
     <div class="row-fluid">
          <h1>{{ official.fullname }}</h1>
@@ -65,12 +64,14 @@
 
                <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
                 <script>
+                    function draw_graph() {
                         var margin = 50,
-                            width = 680,
+                            side_margin = 20,
+                            width = $("#bio_right").width(),
                             height = 100;
 
                         // add x, y scales
-                        var x = d3.scale.linear().range([0+margin, width-margin]).domain([{{ graph_data.x_min }}, {{  graph_data.x_max  }}]);
+                        var x = d3.scale.linear().range([0+side_margin, width-side_margin]).domain([{{ graph_data.x_min }}, {{  graph_data.x_max  }}]);
                         var y = d3.scale.linear().range([height, 0]).domain([0, {{ graph_data.y_max }}]);
 
                         // map data to an area, use "monotone" interpolation
@@ -83,22 +84,22 @@
                         // add svg element to DOM, with desired size
                         var svg = d3.select("svg#pref_distribution")
                             .append("svg")
-                            .attr("width", width + margin)
+                            .attr("width", width)
                             .attr("height", height + margin);
 
                         var rep_distribution = d3.select("svg#pref_distribution")
                             .append("g")
-                            .attr("width", width + margin)
-                            .attr("height", height + margin);
+                            .attr("width", width)
+                            .attr("height", height);
 
                         var dem_distribution = d3.select("svg#pref_distribution")
                             .append("g")
                             .attr("class", "dem_distribution")
-                            .attr("width", width + margin)
-                            .attr("height", height + margin);
+                            .attr("width", width)
+                            .attr("height", height);
 
                         var bar = d3.select("svg#pref_distribution")
-                            .attr("width", width + margin)
+                            .attr("width", width)
                             .attr("height", height + margin);
 
                         // Add Republicans from State Senate //
@@ -150,18 +151,18 @@
                         d3.select(".x.axis")
                             .append("text")
                             .text("Liberal")
-                            .attr("transform", "translate(50,30)");
-
+                            .attr("transform", "translate("+0+side_margin+",30)");
+                        axis_label = width-side_margin;
                         d3.select(".x.axis")
                             .append("text")
                             .text("Conservative")
-                            .attr("transform", "translate(630,30)")
+                            .attr("transform", "translate("+axis_label+",30)")
                             .attr("text-anchor", "end");
-
+                        center_axis_label = width/2
                         d3.select(".x.axis")
                             .append("text")
                             .text("Distribution of Political Ideology")
-                            .attr("transform", "translate(340,40)")
+                            .attr("transform", "translate("+center_axis_label+",40)")
                             .attr("text-anchor", "middle");
 
                         var position = {{ ideology }};
@@ -204,6 +205,8 @@
                             .text(function(d) {
                                 return (d['name']);
                             });
+                        };
+                    draw_graph();
                 </script>
                 <div class="row-fluid">
                     <div class="span6 widget press-releases">
@@ -281,5 +284,10 @@
              <div class="clear"></div>
     </div>
     </section><!-- End Main Content -->
-
+<script type="text/javascript">
+    $(window).resize( function() {
+        $('#pref_distribution').empty();
+        draw_graph();
+    });
+</script>
 {% endblock %}
