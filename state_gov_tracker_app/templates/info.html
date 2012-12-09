@@ -211,72 +211,95 @@
                 <div class="row-fluid">
                     <div class="span6 widget press-releases">
                     	<h3>Press Releases</h3>
-                        <ul>
+                        <div class="leg_stuff">
     					{% if press_releases %}
-                            {% for release in press_releases %}                            
-                                <li>
-                                    (<a href="#" onclick="vote('1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">+1</a> | 
-                                    <a href="#" onclick="vote('-1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">-1</a>) 
-                                    {{release.pr_title|truncatechars:120}}. <a href="{{ release.pr_url }}">{{release.pr_date}}</a> - Total Votes <span id="num_votes_{{release.pk}}_state_gov_tracker_appOfficialPressReleases">{{ release.vote_total }}</span>
-                                </li>
+                            {% for release in press_releases %}
+                                <div class="activity-entry">
+                                    <div class="vote_div">
+                                        <i class="icon-arrow-up icon-white" onclick="vote('1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');"></i>
+                                        <span id="num_votes_{{release.pk}}_state_gov_tracker_appOfficialPressReleases">{{ release.vote_total }}</span>
+                                        <i class="icon-arrow-down icon-white" onclick="vote('-1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                        {{release.pr_title|truncatechars:120}}. <span class="leg_activity_nav"><a href="{{ release.pr_url }}">{{release.pr_date}}</a></span>
+                                    </div>
+                                </div>                        
                             {% endfor %}
                         {% else %}
-                            <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
+                            <p>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</p>
                         {% endif %}
-                        </ul>
+                    </div>
                     </div>
                     <div class="span6 widget votes">
                         <h3>Recent Votes</h3>
-                        <ul>
+                        <div class="leg_stuff">
                         {% if votes %}
-                            {% for v in votes %}                            
-                                <li>
-                                    (<a href="#" onclick="vote('1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">+1</a> | 
-                                    <a href="#" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">-1</a>) 
-                                    {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} - <a href="{{ v.bill_id_id }}">{{ v.date|shorten_date }}</a> - Total Votes <span id="num_votes_{{v.pk}}_state_gov_tracker_appPaLegisVotes">{{ v.vote_total }}</li>
+                            {% for v in votes %}
+                                <div class="activity-entry">
+                                    <div class="vote_div">
+                                        <i class="icon-arrow-up icon-white" onclick="vote('1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');"></i>
+                                        <span id="num_votes_{{v.pk}}_state_gov_tracker_appPaLegisVotes">{{ v.vote_total }}</span>
+                                        <i class="icon-arrow-down icon-white" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                        {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} <span class="leg_activity_nav"><a href="{{ v.bill_id_id }}">{{ v.date|shorten_date }}</a></span>
+                                    </div>
+                                </div>
                             {% endfor %}
                         {% else %}
-                            <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
+                            <p>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</p>
                         {% endif %}
                         </ul>
+                    </div>
                     </div>
                 </div>
                 <div class="row-fluid">                
                 <div class="span6 widget tweets">
                 	<h3>Recent Tweets</h3>
-                    <ul>
+                        <div class="leg_stuff">
                     	{% if tweets %}
                             {% autoescape off %}
                             {% for tweet in tweets %}
-                                <li>
-                                (<a href="#" onclick="vote('1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');">+1</a> | 
-                                <a href="#" onclick="vote('-1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');">-1</a>) 
-                                {{ tweet.tweet|urlizetrunc:30 }} - 
-                                <a href="{{ tweet.url }}">{{ tweet.timestamp }}</a> - Total Votes <span id="num_votes_{{tweet.pk}}_state_gov_tracker_appOfficialTweets">{{ tweet.vote_total }}</li>
+                                <div class="activity-entry">
+                                    <div class="vote_div">
+                                        <i class="icon-arrow-up icon-white" onclick="vote('1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');"></i>
+                                        <div style="text-align:center;" id="num_votes_{{tweet.pk}}_state_gov_tracker_appOfficialTweets">{{ tweet.vote_total }}</div>
+                                        <i class="icon-arrow-down icon-white" onclick="vote('-1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                    {{ tweet.tweet|urlizetrunc:30 }} | <span class="leg_activity_nav"><a href="{{ tweet.url }}">{{ tweet.timestamp }}</a></span>
+                                    </div>
+                                </div>
                             {% endfor %}
                             {% endautoescape %}
                         {% else %}
-                            <li>We couldn't find any Tweets from your Representative. Contact them to let them know they should use Twitter to keep their constituents informed about their activities and state politics!</li>
-                            <li>If you think there is a Twitter account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></li>
+                            <p>We couldn't find any Tweets from your Representative. Contact them to let them know they should use Twitter to keep their constituents informed about their activities and state politics!</p>
+                            <p>If you think there is a Twitter account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></p>
                         {% endif %}
-                    </ul>
+                        </div>
                 </div>
                 
                 <div class="span6 widget fb-posts">
                 	<h3>Recent Facebook Posts</h3>
-                    <ul>
+                    <div class="leg_stuff">
                     	{% if fb_posts %}
                             {% for fb_post in fb_posts %}
-                                <li>
-                                (<a href="#" onclick="vote('1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');">+1</a> | 
-                                <a href="#" onclick="vote('-1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');">-1</a>) 
-                                    {{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <a href="{{ fb_post.url }}">{{ fb_post.timestamp }}</a> - Total Votes <span id="num_votes_{{fb_post.pk}}_state_gov_tracker_appFbData">{{ fb_post.vote_total }}</li>
+                                <div class="activity-entry">
+                                    <div class="vote_div">
+                                        <i class="icon-arrow-up icon-white" onclick="vote('1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');"></i>
+                                        <span id="num_votes_{{fb_post.pk}}_state_gov_tracker_appFbData">{{ fb_post.vote_total }}</span>
+                                        <i class="icon-arrow-down icon-white" onclick="vote('-1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');"></i>
+                                    </div>
+                                    <div class="activity-text">
+                                        {{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <span class="leg_activity_nav"><a href="{{ fb_post.url }}">{{ fb_post.timestamp }}</a></span>
+                                    </div>
+                                </div>
                             {% endfor %}
                         {% else %}
-                            <li>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</li>
-                            <li>If you think there is a Facebook account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></li>
+                            <p>We couldn't find any Facebook Posts from your Representative. Contact them to let them know they should use Facebook to keep their constituents informed about their activities and state politics!</p>
+                            <p>If you think there is a Facebook account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></p>
                         {% endif %}
-                    </ul>
+                </div>
                 </div>
             </div>
             </div>
