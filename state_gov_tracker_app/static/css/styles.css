@@ -144,3 +144,30 @@ section#content {
 .modal-header {
     color: #51A351;
 }
+
+/* Profile/Info Pages */
+.widget {
+    padding: 5px;
+    height:240px;
+    overflow: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.press-releases {
+    background-color: #845029;
+}
+
+.votes {
+    background-color: #7e3443;
+}
+
+.tweets {
+    background-color: #426d9e;
+}
+
+.fb-posts {
+    background-color: #384b6a;
+}
