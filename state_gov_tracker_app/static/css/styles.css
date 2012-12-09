@@ -202,3 +202,10 @@ svg {
     fill:none;
     stroke:white;
 }
+
+h3 {
+    margin-top: -5px;
+    margin-bottom: 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+}
