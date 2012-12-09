@@ -149,11 +149,27 @@ section#content {
 .widget {
     padding: 5px;
     height:240px;
-    overflow: auto;
     margin-top: 5px;
     margin-bottom: 5px;
     -moz-border-radius: 6px;
     border-radius: 6px;
+}
+
+h3 {
+    margin-top: -5px;
+    margin-bottom: 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+}
+
+.icon-arrow-up {
+    cursor: hand;
+    cursor: pointer;
+}
+
+.icon-arrow-down {
+    cursor: hand;
+    cursor: pointer;
 }
 
 .press-releases {
@@ -171,6 +187,41 @@ section#content {
 .fb-posts {
     background-color: #384b6a;
 }
+
+.leg_stuff {
+    margin-top: -2px;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-right: 5px;
+    overflow: auto;
+    height: 200px;
+}
+
+.leg_activity_nav {
+    min-width: 150px;
+    font-size: 95%;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.activity-entry {
+    width: inherit;
+    min-height:50px;
+    margin-bottom:15px;
+}
+.vote_div {
+    float: left;
+    width: 20px;
+    /*height: 70px;*/
+    text-align: center;
+    /*margin-right: 8px;*/
+}
+
+.activity-text {
+    margin-left: 28px;
+}
+
+/* Ideology Graphs */
 
 svg {
   font: 10px sans-serif;
@@ -201,11 +252,4 @@ svg {
 .tick { 
     fill:none;
     stroke:white;
-}
-
-h3 {
-    margin-top: -5px;
-    margin-bottom: 0px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: lighter;
 }
