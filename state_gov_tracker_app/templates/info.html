@@ -30,27 +30,34 @@
 </script>
 
 <section id="content"><!-- Start Main Content -->
-            <h1>{{ official.fullname }}</h1>
+    <div class="row-fluid">
+         <h1>{{ official.fullname }}</h1>
+    </div>
+    <div class="row-fluid">
             <div class="profile">
-            <div id="bio_left">
-                <a href="#"><img src="{{ official.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
-                <H3><a href="{{official.website}}">Homepage</a></H3>
-				<h3>Contact Information</h3>
-                {% if official.email %}
-                    <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
-                {% endif %}
-                {% if official.offices %}
-                    {% for office in official.offices %}                            
-                        <p>{{ office.name }}<br>
-                        {{ office.address }}<br>
-                        {{ office.phone }}</p>
-                        <br>
-                    {% endfor %}
-                {% else %}
-                    <p>Sorry. Something went wrong and we couldn't find any addresses. We're working on a solution.</p>
-                {% endif %}
+            <div class="span3">
+                <div id="bio_left">
+                   <div style="text-align:center;">
+                   <img class="img-polaroid" src="{{ official.photourl }}" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
+                   </div>
+                    <H3><a href="{{official.website}}">Homepage</a></H3>
+    				<h3>Contact Information</h3>
+                    {% if official.email %}
+                        <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
+                    {% endif %}
+                    {% if official.offices %}
+                        {% for office in official.offices %}                            
+                            <p>{{ office.name }}<br>
+                            {{ office.address }}<br>
+                            {{ office.phone }}</p>
+                            <br>
+                        {% endfor %}
+                    {% else %}
+                        <p>Sorry. Something went wrong and we couldn't find any addresses. We're working on a solution.</p>
+                    {% endif %}
+                </div>
             </div>
-            <div id="bio_right">
+            <div class="span9" id="bio_right">
                 <h2> Political Ideology in the State {{ official.chamber_name }} </h2>
                <p>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
                <svg id="pref_distribution">
@@ -193,47 +200,47 @@
                                 return (i+1)*12;
                             })
                             .style("fill", "white")
+                            .style("z-index", "99999999")
                             .text(function(d) {
                                 return (d['name']);
                             });
                 </script>
-                <article class="widget news">
-                	<h4>Press Releases</h4>
-                    <ul>
-					{% if press_releases %}
-                        {% for release in press_releases %}                            
-                            <li>
-                                (<a href="#" onclick="vote('1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">+1</a> | 
-                                <a href="#" onclick="vote('-1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">-1</a>) 
-                                {{release.pr_title|truncatechars:120}}. <a href="{{ release.pr_url }}">{{release.pr_date}}</a> - Total Votes <span id="num_votes_{{release.pk}}_state_gov_tracker_appOfficialPressReleases">{{ release.vote_total }}</span>
-                            </li>
-                        {% endfor %}
-                    {% else %}
-                        <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
-                    {% endif %}
-                    </ul>
-                </article>
-                
-                <article class="widget votes">
-                	<h4>Recent Votes</h4>
-                    <ul>
-                    {% if votes %}
-                        {% for v in votes %}                            
-                            <li>
-                                (<a href="#" onclick="vote('1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">+1</a> | 
-                                <a href="#" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">-1</a>) 
-                                {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} - <a href="{{ v.bill_id_id }}">{{ v.date|shorten_date }}</a> - Total Votes <span id="num_votes_{{v.pk}}_state_gov_tracker_appPaLegisVotes">{{ v.vote_total }}</li>
-                        {% endfor %}
-                    {% else %}
-                        <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
-                    {% endif %}
-                    </ul>
-                </article>
-                
-                <div class="clear"></div>
-                
-                <article class="widget twitter">
-                	<h4>Recent Tweets</h4>
+                <div class="row-fluid">
+                    <div class="span6 widget press-releases">
+                    	<h3>Press Releases</h3>
+                        <ul>
+    					{% if press_releases %}
+                            {% for release in press_releases %}                            
+                                <li>
+                                    (<a href="#" onclick="vote('1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">+1</a> | 
+                                    <a href="#" onclick="vote('-1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');">-1</a>) 
+                                    {{release.pr_title|truncatechars:120}}. <a href="{{ release.pr_url }}">{{release.pr_date}}</a> - Total Votes <span id="num_votes_{{release.pk}}_state_gov_tracker_appOfficialPressReleases">{{ release.vote_total }}</span>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li>Sorry. Something went wrong and we couldn't find any press releases. We're working on a solution.</li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                    <div class="span6 widget votes">
+                        <h3>Recent Votes</h3>
+                        <ul>
+                        {% if votes %}
+                            {% for v in votes %}                            
+                                <li>
+                                    (<a href="#" onclick="vote('1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">+1</a> | 
+                                    <a href="#" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');">-1</a>) 
+                                    {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} - <a href="{{ v.bill_id_id }}">{{ v.date|shorten_date }}</a> - Total Votes <span id="num_votes_{{v.pk}}_state_gov_tracker_appPaLegisVotes">{{ v.vote_total }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>Sorry. Something went wrong and we couldn't find any votes. We're working on a solution.</li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row-fluid">                
+                <div class="span6 widget tweets">
+                	<h3>Recent Tweets</h3>
                     <ul>
                     	{% if tweets %}
                             {% autoescape off %}
@@ -250,10 +257,10 @@
                             <li>If you think there is a Twitter account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></li>
                         {% endif %}
                     </ul>
-                </article>
+                </div>
                 
-                <article class="widget facebook">
-                	<h4>Recent Facebook Posts</h4>
+                <div class="span6 widget fb-posts">
+                	<h3>Recent Facebook Posts</h3>
                     <ul>
                     	{% if fb_posts %}
                             {% for fb_post in fb_posts %}
@@ -267,12 +274,12 @@
                             <li>If you think there is a Facebook account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></li>
                         {% endif %}
                     </ul>
-                </article>
-                
+                </div>
             </div>
-    
+            </div>
+    </div>
              <div class="clear"></div>
-         </div>
+    </div>
     </section><!-- End Main Content -->
 
 {% endblock %}
