@@ -171,3 +171,34 @@ section#content {
 .fb-posts {
     background-color: #384b6a;
 }
+
+svg {
+  font: 10px sans-serif;
+}
+
+.dem_distribution {
+    fill: steelblue;
+}
+
+.rep_distribution {
+    fill: #F62817;
+}
+
+.bar {
+  fill: white;
+}
+
+.axis path{ fill:none;
+    stroke: white;
+}
+
+.axis {
+    font-size:8pt;
+    font-family:sans-serif;
+    fill: white;
+}
+
+.tick { 
+    fill:none;
+    stroke:white;
+}
