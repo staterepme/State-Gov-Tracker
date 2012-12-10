@@ -250,6 +250,38 @@ svg {
 }
 
 .tick { 
-    fill:none;
-    stroke:white;
+    fill: none;
+    stroke: white;
+}
+
+/* Blog */
+
+/* Hide Honeypot Field for Comments */
+#id_honeypot {
+    display: none;
+}
+
+.comment_post {
+    margin-top: 10px;
+    border-top: solid;
+    border-width: 1px;
+    border-color: #c0c0c0;
+}
+
+.submit_date {
+    text-align: right;
+}
+
+.comment_by {
+    font-family: Menlo, Monaco, 'Courier New', monospace;
+    text-transform:uppercase;
+}
+
+.comment_name {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.comment_text {
+    padding-left: 15px;
+    padding-right: 15px;
 }
