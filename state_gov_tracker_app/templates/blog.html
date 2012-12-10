@@ -9,8 +9,9 @@
         $('#well').css({'height':(($('#posts').height()))-5+'px'});
     }, 500);
 </script>
-<section id="blog"><!-- Start Main Content -->
-    <div id="well">
+<section id="content"><!-- Start Main Content -->
+    <div class="row-fluid">
+    <div id="well" class="span3">
     <h2>Recent Posts</h2>
         <ul>
             {% for post in recentposts %}
@@ -23,7 +24,7 @@
         <ul>
         <h2>Tags</h2>
     </div>  
-    <div id="posts">
+    <div id="posts" class="span9">
         <h1>StateRep.Me Blog</h1>
         <hr>
         <hr>
@@ -38,6 +39,7 @@
             {% endfor %}
     </div>
 	<div class="clear"></div>
+    </div>
 </section><!-- End Main Content -->
     
 {% endblock %}

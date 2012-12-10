@@ -5,8 +5,10 @@
 {% block page_content %}
 {% load markup %}
 {% load comments %}
-<section id="blog"><!-- Start Main Content -->
-    <div id="well">
+{% load humanize %}
+<section id="content"><!-- Start Main Content -->
+    <div class="row-fluid">
+    <div id="well" class="span3">
     <h2>Recent Posts</h2>
         <ul>
             {% for post in recentposts %}
@@ -19,7 +21,7 @@
         <ul>
         <h2>Tags</h2>
     </div>  
-    <div id="posts">
+    <div id="posts" class="span9">
         <h1>StateRep.Me Blog</h1>
         <hr>
         <hr>
@@ -30,11 +32,58 @@
             </ul>
             <hr>
         {% get_comment_count for post as comment_count %}
-        <p>{{ comment_count }} comments have been posted.</p>
-        {% render_comment_form for post %}
-        {% render_comment_list for post %}
-    </div>
+        <p>{{ comment_count }} Reader Comments</p>
+        <div id="comments" class="row-fluid">
+        {% get_comment_list for post as comment_list %}
+            {% for comment in comment_list %}
+                <div class="comment_post">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <span class="comment_by">POSTED BY: </span><span class="comment_name">{{ comment.name }}</span>
+                        </div>
+                        <div class="span8 submit_date">
+                            {{ comment.submit_date|naturalday }}
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 comment_text">
+                            {{ comment.comment|markdown }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if user.is_authenticated %}
+            {% get_comment_form for post as form %}
+            <div class="row-fluid">
+            <form class="span12" action="{% comment_form_target %}" method="POST">
+                {% csrf_token %}
+                <div class="control-group">
+                    <div class="controls">
+                        <textarea name="comment" placeholder="Enter your comment on the blogpost here..." class="span12" rows="3"></textarea>
+                    </div>
+                </div>
+                {# {{ form.comment }} #}
+                {{ form.honeypot }}
+                {{ form.content_type }}
+                {{ form.object_pk }}
+                {{ form.timestamp }}
+                {{ form.security_hash }}
+                {# <input type="hidden" name="next" value="{% url 'object_detail_view' object.id %}" /> #}
+                {# <input type="submit" value="Add comment" id="id_submit" /> #}
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" id="id_submit" class="btn btn-success">Add Comment</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        {% else %}
+            <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
+        {% endif %}
 	<div class="clear"></div>
+    </div>
+</div>
 </section><!-- End Main Content -->
     
 {% endblock %}
