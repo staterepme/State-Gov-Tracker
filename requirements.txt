@@ -4,3 +4,4 @@ httplib2
 django-debug-toolbar
 django-admin-bootstrapped
 ipython
+django-registration
