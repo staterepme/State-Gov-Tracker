@@ -121,6 +121,12 @@ form.address-search {
     padding: 10px;
 }
 
+.well {
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
 .intermediate-info {
     text-align: center;
 }
