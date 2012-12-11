@@ -17,13 +17,6 @@
                 id_selector = "#num_votes"+ '_' + object_id + '_' + content_type
                 id_sel = id_selector.replace(".","")
                 $(id_sel).text(data);
-
-                if(data < 0) {
-                    $(id_sel).css('color', '#ff0000')
-                }
-                else {
-                    $(id_sel).css('color', '#3333FF')
-                }
            }
         )
     };
