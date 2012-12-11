@@ -304,5 +304,3 @@ def get_kdensity_data(chamber_to_get):
 
     kdensity_graph['rep'] = json.dumps(rep_data)
     return kdensity_graph
-
-## Search Functions for Cicero, etc. ##
