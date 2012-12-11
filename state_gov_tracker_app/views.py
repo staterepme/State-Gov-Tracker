@@ -41,7 +41,7 @@ def pa_tweets(request):
 
 def profile(request, profile_legid):
     official_object = Officials.objects.only("fullname", "photourl", "party", "chamber").get(legid=profile_legid)
-    # official_object.get_offices()
+    official_object.get_offices()
     official_object.help_vars()
 
     ## Get Tweets ##
