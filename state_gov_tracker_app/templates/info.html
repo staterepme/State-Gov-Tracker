@@ -22,6 +22,7 @@
         )
     };
 </script>
+
 <section id="content"><!-- Start Main Content -->
     <div class="row-fluid">
          <h1>{{ official.fullname }}</h1>
@@ -32,22 +33,22 @@
                 <div id="bio_left">
                    <div style="text-align:center;">
                    <img class="img-polaroid" src="{{ official.photourl }}" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
-                   </div>
+                   <div style="margin-top:30px;"></div>
                     <H3><a href="{{official.website}}">Homepage</a></H3>
     				<h3>Contact Information</h3>
                     {% if official.email %}
-                        <p><a href="mailto:{{ official.email }}">E-Mail</a></p>
+                        <h4><a rel="tooltip" id="email" title="first tooltip" href="mailto:{{ official.email }}">E-Mail</a></h4>
                     {% endif %}
                     {% if official.offices %}
                         {% for office in official.offices %}                            
-                            <p>{{ office.name }}<br>
-                            {{ office.address }}<br>
-                            {{ office.phone }}</p>
-                            <br>
+                            <h3>{{ office.name }}</h3>
+                            <h4>{{ office.address }}</h4>
+                            <h4>{{ office.phone }}</h4>
                         {% endfor %}
                     {% else %}
                         <p>Sorry. Something went wrong and we couldn't find any addresses. We're working on a solution.</p>
                     {% endif %}
+                </div>
                 </div>
             </div>
             <div class="span9" id="bio_right">
