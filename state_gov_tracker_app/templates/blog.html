@@ -10,15 +10,10 @@
     <h2>Recent Posts</h2>
         <ul>
             {% for post in recentposts %}
-                <li><a href="#">- {{ post.title }}</a></li>
+                <li><a href="/blog/post_num/{{ post.id }}">- {{ post.title }}</a></li>
             {% endfor %}
-    <h2>Recent News Articles</h2>
-              {% for link in links %}
-                <li><a href="{{ link.link }}" rel="tooltip" data-placement="top" data-original-title="{{ link.description }}">{{ link.title }}</a></li>
-              {% endfor %}
-        <ul>
-        <h2>Tags</h2>
-    </div>  
+        </ul>
+    </div>
     <div id="posts" class="span9">
         <h1>StateRep.Me Blog</h1>
         <hr>
