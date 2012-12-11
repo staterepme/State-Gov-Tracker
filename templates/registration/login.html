@@ -1,0 +1,27 @@
+{% extends "registration/registration_base.html" %}
+{% block title %}Login{% endblock %}
+{% block page_content %}
+{% load bootstrap_tags %}
+
+
+<section id="content">
+    <div class="row-fluid">
+        <div class="span3 offset5">
+            {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <fieldset>
+            <legend>Login to Your Account</legend>
+            <form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+            {{ form|as_bootstrap }}
+            <p><a href="{% url auth_password_reset %}">Forgot your password?</a></p>
+            <p><a href="{% url registration_register %}">Need an account?</a></p>
+            <button type="submit" value="login" class="btn btn-success">Submit</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+            </fieldset>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

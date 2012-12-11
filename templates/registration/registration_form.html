@@ -1,0 +1,18 @@
+{% extends "registration/registration_base.html" %}
+{% load bootstrap_tags %}
+{% block title %}Register for an account{% endblock %}
+{% block page_content %}
+<section id="content">
+    <div class="row-fluid">
+        <div class="span3 offset5">
+            <fieldset>
+            <legend>Register for an account</legend>
+            <form method='post' action=''>{% csrf_token %}
+            {{ form|as_bootstrap }}
+            <button type="submit" class="btn btn-success">Send activation email</button>
+            </form>
+            </fieldset>
+        </div>
+    </div>
+</section>
+{% endblock %}

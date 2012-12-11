@@ -1,0 +1,13 @@
+{% extends "registration/registration_base.html" %}
+{% block title %}Activation complete{% endblock %}
+{% block content %}
+<section id="content">
+    <div class="row-fluid">
+        <div class="span3 offset5">
+        Thanks, activation complete!  You may now <a href='{% url auth_login %}'>login</a> using the username and password you set at registration.
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
