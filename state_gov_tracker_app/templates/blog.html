@@ -1,31 +1,32 @@
 <!DOCTYPE HTML>
 <html>
 {% extends "base_full.html" %}
-
+{% load comments %}
 {% block page_content %}
 {% load markup %}
+{% load humanize %}
 <section id="content"><!-- Start Main Content -->
     <div class="row-fluid">
     <div id="well" class="span3">
     <h2>Recent Posts</h2>
         <ul>
             {% for post in recentposts %}
-                <li><a href="/blog/post_num/{{ post.id }}">- {{ post.title }}</a></li>
+                <li><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></li>
             {% endfor %}
         </ul>
     </div>
     <div id="posts" class="span9">
-        <h1>StateRep.Me Blog</h1>
-        <hr>
-        <hr>
+        <div class="blog_header" class="span12"><h1>StateRep.Me Blog</h1></div>
             {% for post in posts %}
+            <div class="blog_post">
+                <div class="blog_title">
                 <h2><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></h2>
-                <ul>
-                    <div class="blog-time">{{ post.created }}</div>
-                    <div class="body-blog">{{ post.body|markdown }}</div>
-                </ul>
-                <hr>
-
+                <div class="blog_time">{{ post.created|naturalday }}</div>
+                </div>
+                <div class="body_blog">{{ post.body|markdown }}</div>
+                {% get_comment_count for post as comment_count %}
+                <p><a href="/blog/post_num/{{ post.id }}">{{ comment_count }} Reader Comments</a></p>
+            </div>
             {% endfor %}
     </div>
 	<div class="clear"></div>
