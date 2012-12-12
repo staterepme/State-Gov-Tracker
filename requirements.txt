@@ -5,3 +5,4 @@ django-debug-toolbar
 django-admin-bootstrapped
 ipython
 django-registration
+django-forms-bootstrap
