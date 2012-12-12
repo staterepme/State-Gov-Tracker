@@ -281,20 +281,87 @@ svg {
 
 .submit_date {
     text-align: right;
+    font-size: 16px;
+    font-weight: lighter;
 }
 
 .comment_by {
-    font-family: Menlo, Monaco, 'Courier New', monospace;
-    text-transform:uppercase;
+    font-size: 16px;
+    font-weight: lighter;
+    font-variant:small-caps;
 }
 
 .comment_name {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
 }
 
 .comment_text {
     padding-left: 15px;
     padding-right: 15px;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.comment_form_section {
+    margin-top: 20px;
+}
+
+.blog_header {
+    text-align: right;
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+.blog_header > h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 38.5px;
+    font-variant:small-caps;
+}
+
+#well {
+    padding: 20px;
+}
+
+#posts {
+    padding: 20px;
+}
+
+#posts > h2 {
+    font-weight: lighter;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.body_blog {
+    margin-bottom: 20px;
+}
+
+.body_blog > p {
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+.blog_post {
+    margin-top: 20px;
+    border: solid;
+    border-color: rgba(245, 245, 245, .5);
+    padding: 20px;
+    background: rgba(244, 244, 244, 1);
+    border-width: 3px;
+    box-shadow: inset 0 0 20px rgb(245, 245, 245);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    color: black;
+}
+
+.blog_time {
+    font-variant: small-caps;
+    margin-top: -15px;
+    text-align: left;
+    border-bottom: solid;
+    border-width: 1px;
+    width: 90px;
+    margin-bottom: 25px;
 }
 
 /* Registration Pages */
