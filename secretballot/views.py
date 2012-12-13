@@ -5,7 +5,7 @@ from django.http import (HttpResponse, HttpResponseRedirect, Http404,
 from django.db.models import get_model
 from django.db.models.base import ModelBase
 from django.contrib.contenttypes.models import ContentType
-from secretballot.models import Vote
+from models import Vote
 
 def vote(request, can_vote_test=None,
               redirect_url=None, template_name=None, template_loader=loader,

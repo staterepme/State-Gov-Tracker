@@ -24,7 +24,7 @@ def enable_voting_on(cls, manager_name='objects',
                     add_vote_name='add_vote',
                     remove_vote_name='remove_vote',
                     base_manager=None):
-    from secretballot.models import Vote
+    from models import Vote
     VOTE_TABLE = Vote._meta.db_table
 
     def add_vote(self, token, vote):
