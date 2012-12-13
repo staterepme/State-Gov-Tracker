@@ -4,7 +4,7 @@
 {% block page_content %}
 <section id="content">
     <div class="row-fluid">
-        <div class="span3 offset5">
+        <div class="span2">
             <fieldset>
             <legend>Register for an account</legend>
             <form method='post' action=''>{% csrf_token %}
@@ -12,6 +12,8 @@
             <button type="submit" class="btn btn-success">Send activation email</button>
             </form>
             </fieldset>
+            <a href="http://www.iubenda.com/privacy-policy/467777" class="iubenda-white iubenda-embed" title="Privacy Policy">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "http://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+
         </div>
     </div>
 </section>
