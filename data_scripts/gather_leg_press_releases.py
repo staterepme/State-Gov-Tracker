@@ -5,30 +5,31 @@
 # Project:  State Gov Track
 # Task:     Goes to press release pages, downloads all press releases
 
-from bs4 import BeautifulSoup
-from readability.readability import Document
-import html2text, re, os, requests
-import threading, urllib2, mechanize
+import re
+import threading
+import urllib2
 from lxml.html import parse, make_links_absolute
 from StringIO import StringIO
 from load_database import *
-import csv, feedparser, threading, Queue
+import feedparser
+import Queue
 from urlparse import urlparse
 from hashlib import md5
 
-settings_dict = {'upper':{'Republican':{'xpath':'//p/a'},'Democratic':{'xpath':'//h2/a'}}}
+settings_dict = {'upper': {'Republican': {'xpath': '//p/a'},
+    'Democratic': {'xpath': '//h2/a'}}}
+
 
 def get_urls_with_prs_counter(first_url):
     """Counter method for gathering more press releases"""
     link_array = []
     link_array.append(first_url)
     link_exist = True
-    nexturl = first_url
     counter = 1
     while link_exist == True:
         counter += 1
         if counter > 25:
-            break # Don't think there will be more than 25 pages of press releases
+            break  # Don't think there will be more than 25 pages of press releases
         try:
             urllib2.urlopen("%s/page/%s" %(first_url, counter))
             link_array.append("%s/page/%s" %(first_url, counter))
