@@ -1,3 +1,14 @@
+/*
 body {
     background: black url(../images/harrisburg.jpg) no-repeat top left;
 }
+    */
+
+#bg {
+    position: fixed; 
+    top: 0; left: 0;
+    max-width: none;
+    z-index: -2;
+}
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
