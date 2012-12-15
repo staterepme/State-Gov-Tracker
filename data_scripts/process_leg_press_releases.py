@@ -94,6 +94,7 @@ def month2num(month):
 
 
 def find_date_all():
+    """Took all the separate ways to find dates and wrapped them in a function """
     pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date == None)).all()
     print "Processing %s press releases" % (len(pr_list))
     counter = 0
