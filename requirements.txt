@@ -7,3 +7,4 @@ ipython
 django-registration
 django-forms-bootstrap
 django-tastypie
+django-haystack
