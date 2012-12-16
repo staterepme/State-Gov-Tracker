@@ -10,7 +10,7 @@
 from django.db import models
 from sunlight import openstates
 from datetime import date
-import state_rep_tracker.secretballot as secretballot
+import secretballot as secretballot
 try:
     import json
 except ImportError:
