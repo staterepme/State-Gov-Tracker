@@ -7,11 +7,10 @@
     	<section id="search">
         <h1>You've been Veto'd!</h1>
         <h2>Just kidding -- we can't find what you're looking for. Please search again!</h2>
-        	<form action="intermediate.html" method="get">
-				<input type="text" placeholder="Enter your address" class="field">
-				<a href="intermediate.html"><input type="submit" value="Who's my rep?" class="button"></a>
-    		</form>
-        <h3><a class="group1" href="images/pa_counties.png">(Or, you can use this colorful map instead!)</a></h3>
+        <form action="/results" method="get" class="form-inline address-search">
+            <input type="text" name="q" placeholder="Enter Your Address" class="input-xlarge">
+            <button type="submit" class="btn btn-success">Who's my rep?</button>
+        </form>
         </section>
     </div><!-- End Main Container -->
 </div><!-- End Wrapper -->

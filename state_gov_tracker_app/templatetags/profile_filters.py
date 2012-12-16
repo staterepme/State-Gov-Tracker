@@ -35,10 +35,12 @@ def content_type(object):
 def ct(object):
     return "%s%s" % (object._meta.app_label, object._meta.object_name)
 
+
 @register.filter
 def facebook_url(post_id_to_split):
     post_id = post_id_to_split.split('_')
     return 'https://www.facebook.com/%s/posts/%s' % (post_id[0], post_id[1])
+
 
 @register.filter
 def voteurl(id):
