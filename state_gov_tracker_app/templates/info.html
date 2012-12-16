@@ -216,7 +216,7 @@
                                         <i class="icon-thumbs-down icon-white" onclick="vote('-1', '{{release.pk}}', 'state_gov_tracker_app.OfficialPressReleases');"></i>
                                     </div>
                                     <div class="activity-text">
-                                        {{release.pr_title|truncatechars:120}}. <span class="leg_activity_nav"><a href="{{ release.pr_url }}">{{release.pr_date}}</a></span>
+                                        {{release.pr_title|truncatechars:120}}. <span class="leg_activity_nav"><a href="{{ release.pr_url }}" target="_blank">{{release.pr_date}}</a></span>
                                     </div>
                                 </div>                        
                             {% endfor %}
@@ -237,7 +237,7 @@
                                         <i class="icon-thumbs-down icon-white" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');"></i>
                                     </div>
                                     <div class="activity-text">
-                                        {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} <span class="leg_activity_nav"><a href="{{ v.bill_id_id|voteurl }}">{{ v.date|shorten_date }}</a></span>
+                                        {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} <span class="leg_activity_nav"><a href="{{ v.bill_id_id|voteurl }}" target="_blank">{{ v.date|shorten_date }}</a></span>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -262,7 +262,7 @@
                                         <i class="icon-thumbs-down icon-white" onclick="vote('-1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');"></i>
                                     </div>
                                     <div class="activity-text">
-                                    {{ tweet.tweet|urlizetrunc:30 }} | <span class="leg_activity_nav"><a href="{{ tweet.url }}">{{ tweet.timestamp }}</a></span>
+                                    {{ tweet.tweet|urlizetrunc:30 }} | <span class="leg_activity_nav"><a href="{{ tweet.url }}" target="_blank">{{ tweet.timestamp }}</a></span>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -288,7 +288,7 @@
                                         <i class="icon-thumbs-down icon-white" onclick="vote('-1', '{{fb_post.pk}}', 'state_gov_tracker_app.FbData');"></i>
                                     </div>
                                     <div class="activity-text">
-                                        {{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <span class="leg_activity_nav"><a href="{{ fb_post.post_id|facebook_url }}">{{ fb_post.timestamp }}</a></span>
+                                        {{ fb_post.post|truncatechars:120|urlizetrunc:30 }}  <span class="leg_activity_nav"><a href="{{ fb_post.post_id|facebook_url }}" target="_blank">{{ fb_post.timestamp }}</a></span>
                                     </div>
                                 </div>
                             {% endfor %}
