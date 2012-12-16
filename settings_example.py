@@ -148,7 +148,18 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
     'bootstrapform',
     'registration',
+    'haystack',
 )
+
+## Whoosh/Haystack Stuff ##
+
+import os
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 ## Registration Stuff ##
 
