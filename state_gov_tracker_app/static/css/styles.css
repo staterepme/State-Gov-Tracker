@@ -108,6 +108,27 @@ form.address-search {
     margin-top: 200px;
 }
 
+.image-attribution2 {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+}
+
+.cicero-attribution {
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+    margin-top: 500px;
+}
+
+.powered_by_cicero {
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
 .image-attribution a, .image-attribution a:visited {
     color: #51A351;
 }
