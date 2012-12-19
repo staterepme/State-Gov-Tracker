@@ -390,3 +390,9 @@ svg {
 legend {
     color: white;
 }
+
+/* Browse Legislators Page */
+.browse_nav {
+    border-bottom: solid;
+    border-width: 1px;
+}
