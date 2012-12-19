@@ -92,3 +92,16 @@ def search_form(request):
 def about_myrep(request):
     """Returns about page"""
     return render_to_response('about.html')
+
+########################
+## Browse Legislators ##
+########################
+
+
+def legislator_list(request):
+    """Returns page that has list of browse-able state legislators"""
+    upper_leg = Officials.objects.filter(chamber="upper").order_by('district')
+    lower_leg = Officials.objects.filter(chamber="lower").order_by('district')
+    return render_to_response('all_legislators.html',
+        {'senators': upper_leg,
+        'representatives': lower_leg})
