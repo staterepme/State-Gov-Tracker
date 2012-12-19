@@ -7,7 +7,7 @@ from django.conf.urls.defaults import *
 #from state_gov_tracker_app.views import home
 from state_gov_tracker_app.views import search_form
 #from state_gov_tracker_app.views import search_results
-from state_gov_tracker_app.views import WhichRep
+from state_gov_tracker_app.views import WhichRep, legislator_list
 # from state_gov_tracker_app.views import RecordVote
 from state_gov_tracker_app.views import profile, pa_tweets, about_myrep
 from blog.views import Blog, Article
@@ -37,7 +37,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),
-    url(r'^vote/$', vote), 
+    url(r'^vote/$', vote),
+    url(r'^browse_legislators/$', legislator_list),
 )
 
 '''
