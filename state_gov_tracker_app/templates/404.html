@@ -1,12 +1,11 @@
 {% extends "base_full.html" %}
 
 {% block page_content %}
-
+<section id="content"><!-- Start Main Content -->
 <div id="wrapper"><!-- Being Wrapper -->
 	<div id="main_container"><!-- Begin Main Container -->
     	<section id="search">
-        <h1>You've been Veto'd!</h1>
-        <h2>Just kidding -- we can't find what you're looking for. Please search again!</h2>
+        <h2>Sorry, we couldn't find what you're looking for. If you entered your address without a zipcode, try adding one to improve results.</h2>
         <form action="/results" method="get" class="form-inline address-search">
             <input type="text" name="q" placeholder="Enter Your Address" class="input-xlarge">
             <button type="submit" class="btn btn-success">Who's my rep?</button>
@@ -14,5 +13,5 @@
         </section>
     </div><!-- End Main Container -->
 </div><!-- End Wrapper -->
-
+</section>
 {% endblock %}
