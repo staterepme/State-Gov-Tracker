@@ -10,7 +10,7 @@ from state_gov_tracker_app.views import search_form
 from state_gov_tracker_app.views import WhichRep, legislator_list
 # from state_gov_tracker_app.views import RecordVote
 from state_gov_tracker_app.views import profile, pa_tweets, about_myrep
-from blog.views import Blog, Article
+from blog.views import Blog, Article, BlogPreview
 from secretballot.views import vote
 from django.contrib import admin
 from state_gov_tracker_app.api import PreferencesResource, PR_Resource
@@ -29,7 +29,8 @@ urlpatterns = patterns('',
     ('^profile/(PAL\d+)/?', profile),
     ('^pa-tweets$', pa_tweets),
     ('^about$', about_myrep),
-    url(r'blog$', Blog),
+    url(r'^blog$', Blog),
+    url(r'^preview/blog$', BlogPreview),
     url(r'blog/post_num/(.*)$', Article),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
