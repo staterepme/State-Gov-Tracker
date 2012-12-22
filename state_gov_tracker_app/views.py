@@ -62,7 +62,10 @@ def profile(request, profile_legid):
 
     ## Ideology and Graph Data ##
     official_object.get_pref_rank()
-    ideology = Preferences.objects.get(legid=profile_legid).ideology
+    try:
+        ideology = Preferences.objects.get(legid=profile_legid).ideology
+    except:
+        ideology = None
     graph_data = get_kdensity_data(chamber_to_get=official_object.chamber)
     return render_to_response('info.html',
         {'official': official_object,

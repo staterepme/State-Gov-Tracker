@@ -1,5 +1,5 @@
 from tastypie.resources import ModelResource
-from state_gov_tracker_app.models import Preferences, OfficialPressReleases
+from models import Preferences, OfficialPressReleases
 import datetime
 
 
