@@ -11,20 +11,21 @@
     <h2>Recent Posts</h2>
         <ul>
             {% for post in recentposts %}
-                <li><a href="/blog/post_num/{{ post.id }}">- {{ post.title }}</a></li>
+                <li><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></li>
             {% endfor %}
         </ul>
-    </div>  
+    </div>
+    {% if post %}
     <div id="posts" class="span9">
         <div class="blog_header" class="span12"><h1>StateRep.Me Blog</h1></div>
             <div class="blog_post">
-                <div class="blog_title">
-                <h2><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></h2>
-                <div class="blog_time">{{ post.created|naturalday }}</div>
-                </div>
-                <div class="body_blog">{{ post.body|markdown }}</div>
-                {% get_comment_count for post as comment_count %}
-                <p><a href="/blog/post_num/{{ post.id }}">{{ comment_count }} Reader Comments</a></p>
+                    <div class="blog_title">
+                    <h2><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></h2>
+                    <div class="blog_time">{{ post.created|naturalday }}</div>
+                    </div>
+                    <div class="body_blog">{{ post.body|markdown }}</div>
+                    {% get_comment_count for post as comment_count %}
+                    <p><a href="/blog/post_num/{{ post.id }}">{{ comment_count }} Reader Comments</a></p>
             </div>
         <div id="comments" class="row-fluid">
         <div class="blog_post">
@@ -80,5 +81,10 @@
 	<div class="clear"></div>
     </div>
 </div>
+{% else %}
+    <div id="posts" class="span9">
+    <h3>Sorry, there doesn't seem to be anything here. You can go back to other blog posts <a href="/blog">here</a>.</h3>
+    </div>
+{% endif %}
 </section><!-- End Main Content -->
 {% endblock %}
