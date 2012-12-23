@@ -41,7 +41,7 @@ def pa_tweets(request):
 
 def profile(request, profile_legid):
     official_object = Officials.objects.only("fullname", "photourl", "party", "chamber").get(legid=profile_legid)
-    official_object.get_offices()
+    # official_object.get_offices()
     official_object.help_vars()
 
     ## Get Tweets ##
@@ -49,6 +49,9 @@ def profile(request, profile_legid):
     tweets = OfficialTweets.objects.defer("oembed").filter(legid=profile_legid).order_by('-timestamp').select_related()[:10]
     for tweet in tweets:
         tweet.form_url(twitter_id)
+
+    ## Get Offices ##
+    offices = OfficialOffices.objects.filter(office_legid=profile_legid).values()
 
     ## Get Votes ##
     votes = PaLegisVotes.objects.filter(legid=profile_legid).order_by('-date').select_related()[:10]
@@ -75,7 +78,8 @@ def profile(request, profile_legid):
         "votes": votes,
         "fb_posts": fb_posts,
         "press_releases": filtered_press_releases,
-        "ideology": ideology},
+        "ideology": ideology,
+        "offices": offices},
         context_instance=RequestContext(request))
 
 ###############
