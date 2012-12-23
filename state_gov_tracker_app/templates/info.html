@@ -39,8 +39,8 @@
                     {% if official.email %}
                         <h4><a rel="tooltip" id="email" title="first tooltip" href="mailto:{{ official.email }}">E-Mail</a></h4>
                     {% endif %}
-                    {% if official.offices %}
-                        {% for office in official.offices %}                            
+                    {% if offices %}
+                        {% for office in offices %}                            
                             <h3>{{ office.name }}</h3>
                             <h4>{{ office.address }}</h4>
                             <h4>{{ office.phone }}</h4>
