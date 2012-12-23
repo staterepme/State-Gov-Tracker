@@ -165,6 +165,7 @@ class Officials(models.Model):
     class Meta:
         db_table = u'officials'
 
+
 class PaBills(models.Model):
     state = models.TextField(blank=True)
     session = models.TextField(blank=True)
@@ -175,6 +176,7 @@ class PaBills(models.Model):
     subjects = models.TextField(blank=True)
     title = models.TextField(blank=True)
     bill_id = models.TextField(primary_key=True)
+    bill_url = models.TextField()
 
     class Meta:
         db_table = u'pa_bills'
