@@ -39,5 +39,5 @@ def add_addresses_to_db():
         session.commit()
 
 if __name__ == '__main__':
-    # add_addresses_to_db()
+    add_addresses_to_db()
     pp.pprint(openstates.legislator_detail('PAL000001'))
