@@ -237,7 +237,7 @@
                                         <i class="icon-thumbs-down icon-white" onclick="vote('-1', '{{v.pk}}', 'state_gov_tracker_app.PaLegisVotes');"></i>
                                     </div>
                                     <div class="activity-text">
-                                        {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} <span class="leg_activity_nav"><a href="{{ v.bill_id_id|voteurl }}" target="_blank">{{ v.date|shorten_date }}</a></span>
+                                        {{ v.vote|num_to_vote }} : {{ v.bill_id.title|truncatechars:120 }} <span class="leg_activity_nav"><a href="{{ v.bill_id.bill_url }}" target="_blank">{{ v.date|shorten_date }}</a></span>
                                     </div>
                                 </div>
                             {% endfor %}
