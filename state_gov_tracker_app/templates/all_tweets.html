@@ -37,10 +37,10 @@
             <div class="pagination span12" style="text-align: center;">
                 <ul>
                     {% if tweets.has_previous %}
-                        <li><a href="?page={{ tweets.previous_page_number }}">Older Tweets</a></li>
+                        <li><a href="?page={{ tweets.previous_page_number }}">Newer Tweets</a></li>
                     {% endif %}
                     {% if tweets.has_next %}
-                        <li><a href="?page={{ tweets.next_page_number }}">Newer Tweets</a></li>
+                        <li><a href="?page={{ tweets.next_page_number }}">Older Tweets</a></li>
                     {% endif %}
                 </ul>
             </div>
