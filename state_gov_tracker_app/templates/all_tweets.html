@@ -33,6 +33,18 @@
             </div>
             <div class="clear"></div>
         </div>
+        <div class="row-fluid">
+            <div class="pagination span12" style="text-align: center;">
+                <ul>
+                    {% if tweets.has_previous %}
+                        <li><a href="?page={{ tweets.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    {% if tweets.has_next %}
+                        <li><a href="?page={{ tweets.next_page_number }}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     </div><!-- End All Tweets -->
 </section><!-- End Main Content -->
     
