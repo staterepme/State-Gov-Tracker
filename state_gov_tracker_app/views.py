@@ -3,6 +3,8 @@ from models import *
 from django.shortcuts import render_to_response
 from cicero_search import *
 from django.template import RequestContext, loader
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+
 ########################################
 ## Search by address, display results ##
 ########################################
@@ -28,11 +30,22 @@ def WhichRep(request):
 
 def pa_tweets(request):
     """Request for pa-tweets page, contains the last 30 tweets by members of the General Assembly"""
-    tweet_list_one = OfficialTweets.objects.order_by('-timestamp').exclude(oembed=None)[:20]
-    tweet_list_two = OfficialTweets.objects.order_by('-timestamp').exclude(oembed=None)[20:40]
+    tweet_list = OfficialTweets.objects.order_by('-timestamp').exclude(oembed=None)
+    paginator = Paginator(tweet_list, 40)  # Show 40 tweets per page
+
+    page = request.GET.get('page')
+    try:
+        page = int(request.GET.get("page", '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        tweets = paginator.page(page)
+    except (InvalidPage, EmptyPage):
+        tweets = paginator.page(paginator.num_pages)
+
     return render_to_response('all_tweets.html',
-        {"tweet_list_one": tweet_list_one,
-        "tweet_list_two": tweet_list_two})
+        {"tweets": tweets})
 
 ####################
 ##  Profile Page  ##
