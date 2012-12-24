@@ -10,9 +10,9 @@
     <div id="all_tweets"><!-- Begin All Tweets -->
         <div class="row-fluid">
             <div class="tweets span6">
-                {% if tweet_list_one %}
+                {% if tweets %}
                     {% autoescape off %}
-                    {% for tweet in tweet_list_one %}
+                    {% for tweet in tweets|slice:":20" %}
                         {{ tweet.oembed }}
                     {% endfor %}
                     {% endautoescape %}
@@ -21,9 +21,9 @@
                 {% endif %}
             </div>
             <div class="tweets span6">
-                    {% if tweet_list_two %}
+                {% if tweets %}
                     {% autoescape off %}
-                    {% for tweet in tweet_list_two %}
+                    {% for tweet in tweets|slice:"20:40" %}
                         {{ tweet.oembed }}
                     {% endfor %}
                     {% endautoescape %}
