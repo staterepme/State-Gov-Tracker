@@ -125,3 +125,12 @@ def legislator_list(request):
     return render_to_response('all_legislators.html',
         {'senators': upper_leg,
         'representatives': lower_leg})
+
+
+#################
+## At a Glance ##
+#################
+
+def at_a_glance(request):
+    """Primary Web Application for StateRep.Me"""
+    return render_to_response('at_a_glance.html')
