@@ -9,7 +9,7 @@
 
 from django.db import models
 from sunlight import openstates
-from datetime import date
+from datetime import date, timedelta
 
 try:
     import state_rep_tracker.secretballot as secretballot
@@ -311,3 +311,31 @@ def get_kdensity_data(chamber_to_get):
 
     kdensity_graph['rep'] = json.dumps(rep_data)
     return kdensity_graph
+
+
+## Logic to handle timelines ##
+
+def get_top_tweeters(date_length):
+    d = timedelta(days=date_length)
+    filter_date = date.today() - d
+    tweets = OfficialTweets.objects.only("legid").filter(timestamp__gte=filter_date)
+    tweet_count = {}
+    for tweet in tweets:
+        if tweet.legid in tweet_count:
+            tweet_count[tweet.legid] += 1
+        else:
+            tweet_count[tweet.legid] = 1
+
+    top_list = []
+    for counter, leg in enumerate(sorted(tweet_count, key=tweet_count.get, reverse=True)):
+        official = Officials.objects.only("lastname", "chamber").get(pk=leg)
+        if official.chamber == "upper":
+            title = "Sen."
+        else:
+            title = "Rep."
+        top_list.append({'legid': leg,
+            'count': tweet_count[leg],
+            'name': title + ' ' + official.lastname})
+        if counter > 8:
+            break
+    return top_list
