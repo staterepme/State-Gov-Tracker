@@ -396,3 +396,41 @@ legend {
     border-bottom: solid;
     border-width: 1px;
 }
+
+/* At A Glance Graph Elements */
+.line {
+  fill: none;
+  stroke: #426d9e;
+  stroke-width: 1.5px;
+}
+
+.circle {
+    fill: #426d9e;
+    stroke: #426d9e;
+}
+
+.total_tweets {
+    fill: #426d9e;
+}
+
+.graph_label {
+    color: white;
+}
+
+.at_a_glance_div {
+    padding: 5px;
+    height:400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.activity_stuff {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-right: 5px;
+    overflow: auto;
+    height: 390px;
+}
