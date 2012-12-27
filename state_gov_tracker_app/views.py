@@ -4,6 +4,9 @@ from django.shortcuts import render_to_response
 from cicero_search import *
 from django.template import RequestContext, loader
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from datetime import timedelta, date
+from django.db.models import Count
+import json
 
 ########################################
 ## Search by address, display results ##
@@ -133,4 +136,21 @@ def legislator_list(request):
 
 def at_a_glance(request):
     """Primary Web Application for StateRep.Me"""
-    return render_to_response('at_a_glance.html')
+    ## Get Tweets from Last 30 Days ##
+    today = date.today()
+    d = timedelta(days=30)
+    filter_date = today - d
+    tweets = OfficialTweets.objects.filter(timestamp__gte=filter_date).extra({'created': "date(timestamp)"}).values('created').annotate(created_count=Count('tweet_key')).order_by('-created')
+    tweet_list = []
+    for tweet in tweets:
+        x = tweet['created'].strftime("%Y-%m-%d")
+        y = tweet['created_count']
+        tweet_list.append({"date": x, "count": y})
+    top_tweeters = get_top_tweeters(7)
+    d = timedelta(days=2)
+    filter_date = date.today() - d
+    tweets = OfficialTweets.objects.filter(timestamp__gte=filter_date).order_by('-timestamp')
+    return render_to_response('at_a_glance.html',
+        {'tweet_list': json.dumps(tweet_list),
+        'top_tweeters': json.dumps(top_tweeters),
+        'tweets': tweets})
