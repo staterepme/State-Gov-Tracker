@@ -9,6 +9,7 @@ from twython_oembed import Twython
 from login_credentials import *
 from load_database import *
 from datetime import datetime
+from dateutil import tz
 t = Twython(app_key=twitter_app_key,
             app_secret=twitter_app_secret,
             oauth_token=twitter_oauth_token,
@@ -120,3 +121,20 @@ if __name__ == '__main__':
     new_tweets = download_first_tweets()
     add_tweets_to_db(new_tweets)
     add_oembed_codes()
+
+    ## Convert Tweet Timezones ##
+    # from_zone = tz.gettz('UTC')
+    # to_zone = tz.gettz('America/New_York')
+    # counter = 0
+    # for entry in session.query(official_tweets):
+    #     counter += 1
+    #     if (counter % 20) == 0:
+    #         session.commit()
+    #     print counter
+    #     old_tz = entry.timestamp
+    #     old_tz = old_tz.replace(tzinfo=from_zone)
+    #     eastern = old_tz.astimezone(to_zone)
+    #     print eastern
+    #     print old_tz
+    #     entry.timestamp = eastern.replace(tzinfo=None)
+    # session.commit()
