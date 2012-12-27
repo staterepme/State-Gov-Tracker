@@ -5,7 +5,7 @@ from django.conf.urls.defaults import *
 #Uncomment these when you're ready to integrate stuff from Chris's project
 #in chris's these were all from StateGovTracker_Django.views import *
 #from state_gov_tracker_app.views import home
-from state_gov_tracker_app.views import search_form
+from state_gov_tracker_app.views import search_form, at_a_glance
 #from state_gov_tracker_app.views import search_results
 from state_gov_tracker_app.views import WhichRep, legislator_list
 # from state_gov_tracker_app.views import RecordVote
@@ -40,6 +40,7 @@ urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),
     url(r'^vote/$', vote),
     url(r'^browse_legislators/$', legislator_list),
+    url(r'at_a_glance/$', at_a_glance,)
 )
 
 '''
