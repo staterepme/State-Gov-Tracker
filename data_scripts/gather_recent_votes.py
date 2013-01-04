@@ -48,7 +48,7 @@ def get_vote_detail(bill_id_to_lookup):
     second item is a dictionary with keys=leg_id and values=vote"""
     dl_votes = get_downloaded_votes()
     bill = sunlight.openstates.bill_detail(bill_id=bill_id_to_lookup,
-        state="pa", session="2011-2012")
+        state="pa", session="2012-2013")
     for vote in bill['votes']:
         if vote['vote_id'] in dl_votes:
             continue
@@ -75,7 +75,7 @@ def get_legis_votes():
         bill_id_to_lookup = session.query(votes).get(vote_id).bill_id
         # print bill_id_to_lookup
         bill_votes = sunlight.openstates.bill_detail(bill_id=bill_id_to_lookup,
-        state="pa", session="2011-2012")['votes']
+        state="pa", session="2012-2013")['votes']
         for vote in bill_votes:
             counter += 1
             if counter % 50 == 0:
