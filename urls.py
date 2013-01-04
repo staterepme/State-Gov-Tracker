@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),
     url(r'^vote/$', vote),
     url(r'^browse_legislators/$', legislator_list),
-    url(r'at_a_glance/$', at_a_glance,)
+    # url(r'at_a_glance/$', at_a_glance,)
 )
 
 '''
