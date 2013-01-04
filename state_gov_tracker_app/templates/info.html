@@ -32,7 +32,11 @@
             <div class="span3">
                 <div id="bio_left">
                    <div style="text-align:center;">
-                   <img class="img-polaroid" src="{{ official.photourl }}" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
+                    {% if official.photourl %}
+                       <img class="img-polaroid" src="{{ official.photourl }}" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
+                   {% else %}
+                       <img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
+                    {% endif %}
                    <div style="margin-top:30px;"></div>
                     <H3><a href="{{official.homepage}}">Homepage</a></H3>
     				<h3>Contact Information</h3>
