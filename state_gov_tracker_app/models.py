@@ -120,6 +120,8 @@ class Officials(models.Model):
     createdat = models.TextField(blank=True)
     updatedat = models.TextField(blank=True)
     homepage = models.TextField(blank=True)
+    twitter = models.TextField(blank=True)
+    facebook = models.TextField(blank=True)
 
     def help_vars(self):
         num_rank = {'upper': '50', 'lower': '200'}
