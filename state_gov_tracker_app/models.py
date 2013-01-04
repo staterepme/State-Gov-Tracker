@@ -55,15 +55,6 @@ class FbData(models.Model):
         db_table = u'fb_data'
 
 
-class LegsSocialmedia(models.Model):
-    legid = models.TextField(primary_key=True, blank=True)
-    twitter = models.TextField(blank=True)
-    facebook = models.TextField(blank=True)
-
-    class Meta:
-        db_table = u'legs_socialmedia'
-
-
 class OfficialPersonalPages(models.Model):
     legid = models.CharField(max_length=100, primary_key=True, blank=True)
     fullname = models.TextField(blank=True)
