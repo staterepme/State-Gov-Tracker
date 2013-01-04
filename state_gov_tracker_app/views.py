@@ -61,7 +61,7 @@ def profile(request, profile_legid):
     official_object.help_vars()
 
     ## Get Tweets ##
-    twitter_id = LegsSocialmedia.objects.get(legid=profile_legid).twitter
+    twitter_id = Officials.objects.get(legid=profile_legid).twitter
     tweets = OfficialTweets.objects.defer("oembed").filter(legid=profile_legid).order_by('-timestamp').select_related()[:10]
     for tweet in tweets:
         tweet.form_url(twitter_id)
