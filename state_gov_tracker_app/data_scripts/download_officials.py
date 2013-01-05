@@ -65,4 +65,3 @@ def update_active_status():
         openstates_detail = openstates.legislator_detail(leg.legid)
         leg.active = openstates_detail['active']
         leg.save()
-
