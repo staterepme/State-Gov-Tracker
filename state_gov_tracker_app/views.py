@@ -16,10 +16,14 @@ import json
 def WhichRep(request):
     upper = search(request, 'UPPER')
     lower = search(request, 'LOWER')
-    upper_leg = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper")[0]
-    lower_leg = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower")[0]
-    upper_office = OfficialOffices.objects.filter(office_legid=upper_leg.legid).order_by('name').values()[0]
-    lower_office = OfficialOffices.objects.filter(office_legid=lower_leg.legid).order_by('name').values()[0]
+    upper_leg = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper").filter(active="True")[0]
+    lower_leg = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower").filter(active="True")[0]
+    upper_office = OfficialOffices.objects.filter(office_legid=upper_leg.legid).order_by('name')
+    if upper_office:
+        upper_office = upper_office.values()[0]
+    lower_office = OfficialOffices.objects.filter(office_legid=lower_leg.legid).order_by('name')
+    if lower_office:
+        lower_office = lower_office.values()[0]
     return render_to_response('intermediate.html',
         {"upper": upper_leg,
         "lower": lower_leg,
