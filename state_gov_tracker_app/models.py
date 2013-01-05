@@ -8,8 +8,10 @@
 # into your database.
 
 from django.db import models
+from django.contrib import admin
 from sunlight import openstates
 from datetime import date, timedelta
+from django.forms import TextInput, Textarea
 
 try:
     import state_rep_tracker.secretballot as secretballot
@@ -122,6 +124,9 @@ class Officials(models.Model):
     homepage = models.TextField(blank=True)
     twitter = models.TextField(blank=True)
     facebook = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return self.fullname
 
     def help_vars(self):
         num_rank = {'upper': '50', 'lower': '200'}
@@ -306,6 +311,16 @@ def get_kdensity_data(chamber_to_get):
     return kdensity_graph
 
 
-## Logic to handle timelines ##
+## Admin Stuff ##
+class OfficialAdmin(admin.ModelAdmin):
+    search_fields = ["fullname"]
+    list_display = ('firstname', 'lastname', 'active', 'facebook', 'twitter')
+    list_filter = ['active', 'facebook', 'twitter']
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '240'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 540})},
+        models.IntegerField: {'widget': Textarea(attrs={'rows': 1, 'cols': 240})},
+    }
+    fields = ("fullname", "chamber", "district", "party", "facebook", "twitter", "homepage")
 
-
+admin.site.register(Officials, OfficialAdmin)
