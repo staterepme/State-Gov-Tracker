@@ -8,15 +8,17 @@ def encode_bing(origin_address,key):
 	b = geocoders.Bing(key)
 	try: 
 		place, (lat, lng) = b.geocode(origin_address)
-		places.append([place,lat,lng])
+		if place.find(', PA ') != -1:
+			places.append([place,lat,lng])
 	except ValueError:
 		for place, (lat, lng) in b.geocode(origin_address, exactly_one=False):
-			places.append([place,lat,lng])
+			if place.find(', PA ') != -1:
+				places.append([place,lat,lng])
 	except:
 		return 'No results found using Bing.'
 	return places
 
-print encode_bing('109 S. 13th St. Philly PA',bing_key)
+print encode_bing('	101 Main St. Hartford, CT',bing_key)
 
 # def encode_google(origin_address):
 # 	g = geocoders.Google()
