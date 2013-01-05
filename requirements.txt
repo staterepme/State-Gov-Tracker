@@ -1,4 +1,5 @@
 sunlight
+mysql-python
 Django
 httplib2
 django-debug-toolbar
