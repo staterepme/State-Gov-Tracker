@@ -43,7 +43,8 @@ def download_first_tweets(num_tweets=100):
     member_data = Officials.objects.filter(active='True').only('legid', 'twitter')
     dict_list = []
     for counter, member in enumerate(member_data):
-        if member.twitter != "":
+        print counter
+        if member.twitter != None and member.twitter != '':
             try:
                 user_tl = get_official_timeline(member.twitter, num_tweets)
             except:
