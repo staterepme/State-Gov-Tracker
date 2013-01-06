@@ -37,13 +37,8 @@ def get_official_timeline(handle, num_tweets):
 
 def download_first_tweets(num_tweets=100):
     """
-    Takes input_file that is a .csv file delimited
-    with commas where the first column is the
-    legislator ID, second column is their facebook
-    ID, and the third column is their twitter handle.
-
     Calls to the twitter API for each member,
-    downloading their last 20 tweets and returns them into a dictionary.
+    downloading their last 100 tweets and returns them into a dictionary.
     """
     member_data = Officials.objects.filter(active='True').only('legid', 'twitter')
     dict_list = []
