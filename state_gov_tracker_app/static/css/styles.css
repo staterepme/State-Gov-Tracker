@@ -434,3 +434,9 @@ legend {
     overflow: auto;
     height: 390px;
 }
+
+.center { 
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
