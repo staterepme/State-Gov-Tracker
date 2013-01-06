@@ -14,16 +14,30 @@ import json
 
 
 def WhichRep(request):
-    upper = search(request, 'UPPER')
-    lower = search(request, 'LOWER')
-    upper_leg = Officials.objects.filter(district=upper['district_id']).filter(chamber="upper").filter(active="True")[0]
-    lower_leg = Officials.objects.filter(district=lower['district_id']).filter(chamber="lower").filter(active="True")[0]
-    upper_office = OfficialOffices.objects.filter(office_legid=upper_leg.legid).order_by('name')
-    if upper_office:
-        upper_office = upper_office.values()[0]
-    lower_office = OfficialOffices.objects.filter(office_legid=lower_leg.legid).order_by('name')
-    if lower_office:
-        lower_office = lower_office.values()[0]
+    l = LegislatorFinder()
+    if 'q' in request.GET:
+        address = request.GET['q']
+        try:
+            l.geocode_address(address)
+        except ValueError:
+            place_list = [{'address': place[0], 'lat': place[1], 'lng': place[2]} for place in l.places]
+            return render_to_response('intermediate_error.html',
+                {'places': place_list})
+        except LookupError:
+            return render_to_response('intermediate_error.html')
+        l.find_leg_districts()
+    if 'lat' in request.GET:
+        l.find_leg_districts(lat=request.GET['lat'], lng=request.GET['lng'])
+    upper_leg = Officials.objects.filter(district=l.upper).filter(chamber="upper").filter(active="True")[0]
+    lower_leg = Officials.objects.filter(district=l.lower).filter(chamber="lower").filter(active="True")[0]
+    try:
+        upper_office = OfficialOffices.objects.filter(office_legid=upper_leg.legid).order_by('name').values()[0]
+    except:
+        upper_office = None
+    try:
+        lower_office = OfficialOffices.objects.filter(office_legid=lower_leg.legid).order_by('name').values()[0]
+    except:
+        lower_office = None
     return render_to_response('intermediate.html',
         {"upper": upper_leg,
         "lower": lower_leg,
