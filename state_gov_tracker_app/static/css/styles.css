@@ -129,6 +129,17 @@ form.address-search {
     background: rgba(255, 255, 255, 0.9);
 }
 
+.attribution {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.powered_by_bing {
+    width: 50px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
 .image-attribution a, .image-attribution a:visited {
     color: #51A351;
 }
