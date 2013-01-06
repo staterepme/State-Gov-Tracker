@@ -89,7 +89,7 @@ def downloaded_tweets():
     """Returns list of tweet IDs that have
     already been downloaded"""
     tweet_ids = []
-    for tweet in session.query(official_tweets).all():
+    for tweet in OfficialTweets.objects.only('tweet_id').all():
         tweet_ids.append(tweet.tweet_id)
     return tweet_ids
 
@@ -100,7 +100,7 @@ def add_tweets_to_db(list_of_dictionary_tweets):
         if tweet['tweet_id'] in existing_tweets:
             continue
         else:
-            new_tweet = official_tweets(legid=tweet['legid'],
+            new_tweet = OfficialTweets(legid=tweet['legid'],
                 tweet=tweet['text'].encode('utf-8'),
                 tweet_id=tweet['tweet_id'],
                 timestamp=tweet['timestamp'])
@@ -109,11 +109,9 @@ def add_tweets_to_db(list_of_dictionary_tweets):
 
 
 def add_oembed_codes():
-    for entry in session.query(official_tweets).filter(official_tweets.oembed == None).order_by(official_tweets.timestamp.desc()).all():
-        # print entry.timestamp
+    for entry in OfficialTweets.objects.filter(oembed=None).order_by('-timestamp'):
         entry.oembed = getOembed(entry.tweet_id)
-        session.add(entry)
-        session.commit()
+        entry.save()
 
 
 def getOembed(id_str):
