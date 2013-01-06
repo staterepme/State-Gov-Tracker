@@ -104,8 +104,7 @@ def add_tweets_to_db(list_of_dictionary_tweets):
                 tweet=tweet['text'].encode('utf-8'),
                 tweet_id=tweet['tweet_id'],
                 timestamp=tweet['timestamp'])
-            session.add(new_tweet)
-            session.commit()
+            new_tweet.save()
 
 
 def add_oembed_codes():
