@@ -45,9 +45,9 @@ def download_first_tweets(num_tweets=100):
     Calls to the twitter API for each member,
     downloading their last 20 tweets and returns them into a dictionary.
     """
-    member_data = session.query(social_media_ids).all()
+    member_data = Officials.objects.filter(active='True').only('legid', 'twitter')
     dict_list = []
-    for member in member_data:
+    for counter, member in enumerate(member_data):
         if member.twitter != "":
             try:
                 user_tl = get_official_timeline(member.twitter, num_tweets)
