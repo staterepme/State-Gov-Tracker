@@ -7,6 +7,8 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from datetime import timedelta, date
 from django.db.models import Count
 import json
+from JSON_exporter import get_top_tweeters
+
 
 ########################################
 ## Search by address, display results ##
@@ -51,8 +53,8 @@ def WhichRep(request):
 
 def pa_tweets(request):
     """Request for pa-tweets page, contains the last 30 tweets by members of the General Assembly"""
-    tweet_list = OfficialTweets.objects.order_by('-timestamp').exclude(oembed=None)
-    paginator = Paginator(tweet_list, 40)  # Show 40 tweets per page
+    tweets_oembed = OfficialTweets.objects.order_by('-timestamp').exclude(oembed="")
+    paginator = Paginator(tweets_oembed, 40)  # Show 40 tweets per page
 
     page = request.GET.get('page')
     try:
@@ -61,12 +63,25 @@ def pa_tweets(request):
         page = 1
 
     try:
-        tweets = paginator.page(page)
+        tweets_oembed = paginator.page(page)
     except (InvalidPage, EmptyPage):
-        tweets = paginator.page(paginator.num_pages)
+        tweets_oembed = paginator.page(paginator.num_pages)
+
+    today = date.today()
+    d = timedelta(days=30)
+    filter_date = today - d
+    tweets = OfficialTweets.objects.filter(timestamp__gte=filter_date).extra({'created': "date(timestamp)"}).values('created').annotate(created_count=Count('tweet_key')).order_by('-created')
+    tweet_list = []
+    for tweet in tweets:
+        x = tweet['created'].strftime("%Y-%m-%d")
+        y = tweet['created_count']
+        tweet_list.append({"date": x, "count": y})
+    top_tweeters = get_top_tweeters(7)
 
     return render_to_response('all_tweets.html',
-        {"tweets": tweets})
+        {'tweet_list': json.dumps(tweet_list),
+        'top_tweeters': json.dumps(top_tweeters),
+        "tweets": tweets_oembed})
 
 ####################
 ##  Profile Page  ##
