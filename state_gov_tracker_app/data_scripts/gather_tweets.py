@@ -108,7 +108,8 @@ def add_tweets_to_db(list_of_dictionary_tweets):
 
 
 def add_oembed_codes():
-    for entry in OfficialTweets.objects.filter(oembed=None).order_by('-timestamp'):
+    for counter, entry in enumerate(OfficialTweets.objects.filter(oembed='').order_by('-timestamp')):
+        print counter
         entry.oembed = getOembed(entry.tweet_id)
         entry.save()
 
