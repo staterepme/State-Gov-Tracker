@@ -1,4 +1,6 @@
 sunlight
+Twython
+mysql-python
 Django
 httplib2
 django-debug-toolbar

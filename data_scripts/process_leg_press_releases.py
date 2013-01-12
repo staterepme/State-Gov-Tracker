@@ -95,10 +95,10 @@ def month2num(month):
 
 def find_date_all():
     """Took all the separate ways to find dates and wrapped them in a function """
-    pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date == None)).all()
-    print "Processing %s press releases" % (len(pr_list))
+    # pr_list = session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date == None)).all()
+    # print "Processing %s press releases" % (len(pr_list))
     counter = 0
-    for pr in session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date == None)).order_by(func.random()).all():
+    for pr in session.query(press_release).filter(and_(press_release.pr_html != "", press_release.pr_html != "ERROR", press_release.pr_date == None)):
         counter += 1
         print counter
         if (re.search('senatorkitchen', pr.pr_url)):
@@ -279,7 +279,7 @@ def test(url):
 
 
 def fix_dates():
-    print len(session.query(press_release).all())
+    # print len(session.query(press_release).all())
     counter = 0
     for pr in session.query(press_release).all():
         if counter == 100:
@@ -321,7 +321,7 @@ def add_texts_and_titles():
 if __name__ == '__main__':
     # test('http://www.senatorcosta.com/corbetts-shale-policy-falls-short')
     find_date_all()
-    fix_dates()
+    # fix_dates()
     # url = 'http://www.senatoranthonyhwilliams.com/grays-ferry-farmers-market-to-open-may-31'
     # html_data = get_html(url)
     # print readabilify_text(html_data)[0]

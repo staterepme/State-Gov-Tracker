@@ -6,13 +6,177 @@
 {% block page_content %}
 
 <section id="content"><!-- Start Main Content -->
-    <h1>Listen to all of your represenatives...</h1>
     <div id="all_tweets"><!-- Begin All Tweets -->
         <div class="row-fluid">
-            <div class="tweets span6">
-                {% if tweet_list_one %}
+            <div class="span6" id="big_graph">
+                <h2>Tweets in the last month</h2>
+                <svg id="summary" style="height:350px; margin-top:-50px;"></svg>
+                <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+                <script type="text/javascript">
+                    function draw_graph(data) {
+                        var margin= 50,
+                        side_margin = 40,
+                        width = $("#big_graph").width(),
+                        height = 300;
+
+                        var x = d3.time.scale()
+                            .range([0+side_margin, width-side_margin]);
+
+                        var y = d3.scale.linear()
+                            .range([height, 0+margin]);
+
+                        var formatShortDate = d3.time.format("%m/%d")
+
+                        if(width<600)
+                        {
+                            var num_ticks = 4;
+                        }
+                        else
+                        {
+                            var num_ticks = 8;
+                        }
+
+                        var xAxis = d3.svg.axis()
+                            .scale(x)
+                            .orient("bottom")
+                            .ticks(num_ticks)
+                            .tickFormat(formatShortDate);
+                        
+                        var line = d3.svg.line()
+                            .x(function(d) { return x(d.date); })
+                            .y(function(d) { return y(d.count); });
+
+                        var svg = d3.select("svg#summary")
+                            .append("svg")
+                            .attr("width", width)
+                            .attr("height", height);
+
+                        var line_graph = d3.select("svg#summary")
+                            .append("g")
+                            .attr("width", width)
+                            .attr("height", height);
+
+                        var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+                        data.forEach(function(d) {
+                            d.date = parseDate(d.date);
+                            d.count =  +d.count;
+                        });
+
+                        x.domain(d3.extent(data, function(d) { return d.date; }));
+                        y.domain(d3.extent(data, function(d) { return d.count; }));
+
+                        var y_scale = d3.scale.linear()
+                            .range([height, margin])
+                            .domain(d3.extent(data, function(d) { return d.count; }));
+
+                        var yAxis = d3.svg.axis()
+                            .scale(y_scale)
+                            .orient("left")
+                            .ticks(5);
+
+                        line_graph.append("g")
+                          .attr("class", "x axis")
+                          .attr("transform", "translate(0," + height + ")")
+                          .call(xAxis);
+
+
+                        line_graph.append("g")
+                            .attr("class", "y axis")
+                            .attr("transform", "translate(" + 30 + ", 0 )")
+                            .call(yAxis);
+
+                        line_graph.append("path")
+                            .datum(data)
+                            .attr("class", "line")
+                            .attr("d", line);
+
+                        line_graph.selectAll("circle")
+                            .data(data)
+                            .enter()
+                            .append("circle")
+                            .attr("cx", function(d) {return x(d.date)})
+                            .attr("cy", function(d) {return y_scale(d.count)})
+                            .attr("r",3)
+                            .attr("class", "circle");
+                    };
+                </script>
+            </div>
+
+            <div class="span6" id="top_graph">
+                <h2>Most Tweets in Last 7 Days</h2>
+
+                <div id="top_legislators" style="height:350px; margin-top:-50px;"></div>
+                <script type="text/javascript">
+                    function draw_bars(data) {                    
+                        var margin= 50,
+                            side_margin = 40,
+                            width = $("#top_graph").width(),
+                            height = 300;
+
+                        var y = d3.scale.ordinal()
+                            .domain(data.map(function(d) { return d.legid; }))
+                            .rangeRoundBands([height, 0+margin], .1);
+
+                        var x = d3.scale.linear()
+                            .domain([0, d3.max(data, function(d) {return d.count})])
+                            .range([0, width-side_margin]);
+
+                        var xAxis = d3.svg.axis()
+                            .scale(x)
+                            .orient("bottom");
+
+                        var yAxis = d3.svg.axis()
+                            .scale(y)
+                            .orient("left");
+
+                        var svg = d3.select("#top_legislators")
+                            .append("svg")
+                                .attr("width", width)
+                                .attr("height", height + margin)
+                            .append("svg:g")
+                                .attr("transform", "translate(20,0)");
+
+                        svg.append("g")
+                            .attr("class", "x axis")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(xAxis);
+
+                        svg.selectAll("g.bar")
+                              .data(data)
+                            .enter().append("rect")
+                              .attr("class", "total_tweets")
+                              .attr("y", function(d) { return y(d.legid); })
+                              .attr("width", function(d) { return x(d.count); })
+                              // .attr("x", function(d) { return x(d.count); });
+                              .attr("height", y.rangeBand());
+
+                        svg.selectAll("g.text")
+                            .data(data)
+                            .enter().append("text")
+                            .attr("x", 0)
+                            .attr("y", function(d) {return y(d.legid); })
+                            .attr("dx", 1.5)
+                            .attr("dy", "1.75em")
+                            .attr("text-anchor", "start")
+                            .style("fill", "white")
+                            .text(function(d) {return d.name})
+                    };
+
+
                     {% autoescape off %}
-                    {% for tweet in tweet_list_one %}
+                        var bar_data = {{ top_tweeters }};
+                    {% endautoescape %}
+                    draw_bars(bar_data);
+                </script>
+            </div>
+        </div>
+        <h1>Listen to all of your representatives...</h1>
+        <div class="row-fluid">
+            <div class="tweets span6">
+                {% if tweets %}
+                    {% autoescape off %}
+                    {% for tweet in tweets|slice:":20" %}
                         {{ tweet.oembed }}
                     {% endfor %}
                     {% endautoescape %}
@@ -21,9 +185,9 @@
                 {% endif %}
             </div>
             <div class="tweets span6">
-                    {% if tweet_list_two %}
+                {% if tweets %}
                     {% autoescape off %}
-                    {% for tweet in tweet_list_two %}
+                    {% for tweet in tweets|slice:"20:40" %}
                         {{ tweet.oembed }}
                     {% endfor %}
                     {% endautoescape %}
@@ -33,7 +197,38 @@
             </div>
             <div class="clear"></div>
         </div>
+        <div class="row-fluid">
+            <div class="pagination span12" style="text-align: center;">
+                <ul>
+                    {% if tweets.has_previous %}
+                        <li><a href="?page={{ tweets.previous_page_number }}">Newer Tweets</a></li>
+                    {% endif %}
+                    {% if tweets.has_next %}
+                        <li><a href="?page={{ tweets.next_page_number }}">Older Tweets</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     </div><!-- End All Tweets -->
 </section><!-- End Main Content -->
-    
+
+<script type="text/javascript">
+    {% autoescape off %}
+        var data_points = {{ tweet_list }};
+    {% endautoescape %}
+    draw_graph(data_points);
+</script>
+
+<script type="text/javascript">
+    $(window).resize( function() {
+        $('#summary').empty();
+        {% autoescape off %}
+            var new_data = {{ tweet_list }};
+        {% endautoescape %}
+        draw_graph(new_data);
+        $('#top_legislators').empty();
+        draw_bars(bar_data);
+    });
+</script>
+
 {% endblock %}

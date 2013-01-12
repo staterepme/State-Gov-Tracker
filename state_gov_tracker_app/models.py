@@ -8,9 +8,16 @@
 # into your database.
 
 from django.db import models
+from django.contrib import admin
 from sunlight import openstates
-from datetime import date
-import secretballot as secretballot
+from datetime import date, timedelta
+from django.forms import TextInput, Textarea
+
+try:
+    import state_rep_tracker.secretballot as secretballot
+except:
+    import secretballot
+
 try:
     import json
 except ImportError:
@@ -48,15 +55,6 @@ class FbData(models.Model):
 
     class Meta:
         db_table = u'fb_data'
-
-
-class LegsSocialmedia(models.Model):
-    legid = models.TextField(primary_key=True, blank=True)
-    twitter = models.TextField(blank=True)
-    facebook = models.TextField(blank=True)
-
-    class Meta:
-        db_table = u'legs_socialmedia'
 
 
 class OfficialPersonalPages(models.Model):
@@ -124,6 +122,11 @@ class Officials(models.Model):
     createdat = models.TextField(blank=True)
     updatedat = models.TextField(blank=True)
     homepage = models.TextField(blank=True)
+    twitter = models.TextField(blank=True)
+    facebook = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return self.fullname
 
     def help_vars(self):
         num_rank = {'upper': '50', 'lower': '200'}
@@ -160,6 +163,16 @@ class Officials(models.Model):
     class Meta:
         db_table = u'officials'
 
+
+class LegsSocialmedia(models.Model):
+    legid = models.TextField(primary_key=True, blank=True)  # This field type is a guess.
+    twitter = models.TextField(blank=True)  # This field type is a guess.
+    facebook = models.TextField(blank=True)  # This field type is a guess.
+
+    class Meta:
+        db_table = u'legs_socialmedia'
+
+
 class PaBills(models.Model):
     state = models.TextField(blank=True)
     session = models.TextField(blank=True)
@@ -170,6 +183,7 @@ class PaBills(models.Model):
     subjects = models.TextField(blank=True)
     title = models.TextField(blank=True)
     bill_id = models.TextField(primary_key=True)
+    bill_url = models.TextField()
 
     class Meta:
         db_table = u'pa_bills'
@@ -304,3 +318,18 @@ def get_kdensity_data(chamber_to_get):
 
     kdensity_graph['rep'] = json.dumps(rep_data)
     return kdensity_graph
+
+
+## Admin Stuff ##
+class OfficialAdmin(admin.ModelAdmin):
+    search_fields = ["fullname"]
+    list_display = ('firstname', 'lastname', 'active', 'facebook', 'twitter', 'photourl')
+    list_filter = ['active', 'chamber']
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '240'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 540})},
+        models.IntegerField: {'widget': Textarea(attrs={'rows': 1, 'cols': 240})},
+    }
+    fields = ("fullname", "chamber", "district", "party", "facebook", "twitter", "homepage", "photourl")
+
+admin.site.register(Officials, OfficialAdmin)

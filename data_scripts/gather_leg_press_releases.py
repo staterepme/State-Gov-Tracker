@@ -38,23 +38,27 @@ def get_urls_with_prs_counter(first_url):
     return link_array
 
 
-def dl_rss(url, party='Democratic'):
+def dl_rss(url, party='Democratic', direct_link='No'):
     """Takes url to media/press release page and finds the rss feed there"""
     try:
-        if party == 'Democratic':
-            links = get_prs_from_url(url, '//tr/td/a')
-            for url in links:
-                match = re.search(r'RSS_reader_Member\.asp\?Feed=(\d+)', url)
-                if (match):
-                    feed_id = match.group(1)
-            rss_feed = feedparser.parse('http://www.pahouse.com/pr/xml/%s.xml' % (feed_id))
-        if party == 'Republican':
-            links = get_prs_from_url(url, '//div[@id="NewsRSS"]')
-            try:
-                rss_feed = feedparser.parse(links[0])
-            except:
-                rss_feed = feedparser.parse(links[1])
-            # print rss_feed
+        if direct_link == 'Yes':
+            rss_feed = feedparser.parse(url)
+        else:
+            if party == 'Democratic':
+                links = get_prs_from_url(url, '//tr/td/a')
+                for url in links:
+                    match = re.search(r'RSS_reader_Member\.asp\?Feed=(\d+)', url)
+                    if (match):
+                        feed_id = match.group(1)
+                        continue
+                rss_feed = feedparser.parse('http://www.pahouse.com/pr/xml/%s.xml' % (feed_id))
+            if party == 'Republican':
+                links = get_prs_from_url(url, '//div[@id="NewsRSS"]')
+                try:
+                    rss_feed = feedparser.parse(links[0])
+                except:
+                    rss_feed = feedparser.parse(links[1])
+                # print rss_feed
         list_of_pr_dicts = []
         for entry in rss_feed['entries']:
             # print entry
@@ -163,7 +167,11 @@ class official_prs(Base):
                     self.all_prs.extend(get_prs_from_url(url, '//h4/a'))
             self.all_prs = list(set(self.all_prs))
         if self.chamber == 'lower':
-            self.all_prs = dl_rss(self.press_release_url, party=self.party)
+            if self.press_release_url_dl:
+                # If there is a direct link to rss #
+                self.all_prs = dl_rss(self.press_release_url_dl, party=self.party, direct_link="Yes")
+            else:
+                self.all_prs = dl_rss(self.press_release_url, party=self.party)
 
     def add_pr_urls_to_db(self):
         """Take list of press release links, creates an md5 hash, checks to see if hash already in database, if not, then add link to database."""
@@ -191,6 +199,7 @@ class official_prs(Base):
                             pass
             if self.chamber == 'lower':
                 for entry in self.all_prs:
+                    counter += 1
                     if counter % 50 == 0:
                         print counter
                     md5_exists = session.query(press_release).filter(press_release.pr_md5 == md5(entry['url']).hexdigest()).first()
@@ -255,7 +264,7 @@ def dl_press_releases():
     for pr in session.query(press_release).filter(and_(press_release.pr_html == None)).order_by(func.random()).all():
         pr_list.append(pr)
     print "Need to download %s press releases" % (len(pr_list))
-    pr_chunked = chunks(pr_list, 10)
+    pr_chunked = chunks(pr_list, 15)
     total_count = len(pr_list)
     ## Loop through Chunks ##
     dl_count = 0
@@ -272,7 +281,7 @@ def dl_press_releases():
         dl_prs = fetch_parallel(urls_to_dl)
         # except:
             # continue
-        dl_count += 10
+        dl_count += 15
         q_list = sorted(list(dl_prs.queue))
         for element in q_list:
             if element[1] == "Could Not Fetch Page":
@@ -281,43 +290,43 @@ def dl_press_releases():
             else:
                 pr_rows[element[0]].pr_html = unicode(element[1], errors='ignore')
         for pr_dld in pr_rows:
-            # try:
-            session.add(pr_dld)
-            session.commit()
-            # print pr_dld.pr_key
-            # except:
-            #   session.rollback()
-            #   pr_dld.pr_html="ERROR"
-            #   session.add(pr_dld)
-            #   print "Failed!"
-            #   session.commit()
+            try:
+                session.add(pr_dld)
+                session.commit()
+                # print pr_dld.pr_key
+            except:
+                session.rollback()
+                pr_dld.pr_html = "ERROR"
+                session.add(pr_dld)
+                print "Failed!"
+                session.commit()
 
 
 if __name__ == '__main__':
     ### Download Press Releases for State Senate ###
-    print "Getting Press Release URLs for State Senate"
-    officials_to_get = session.query(official_prs).filter(official_prs.chamber == 'upper').all()
-    print "%s Total Press Releases to Check" % (len(officials_to_get))
-    counter = 0
-    for off in session.query(official_prs).filter(official_prs.chamber == 'upper').all():
-        counter += 1
-        print off.fullname
-        off.get_pr_urls()
-        print "Found %s Press Releases to check." % (len(off.all_prs))
-        off.add_pr_urls_to_db()
-        print "Gathered %s so far" % (counter)
+    # print "Getting Press Release URLs for State Senate"
+    # officials_to_get = session.query(official_prs).filter(official_prs.chamber == 'upper').all()
+    # print "%s Total Press Releases to Check" % (len(officials_to_get))
+    # counter = 0
+    # for off in session.query(official_prs).filter(official_prs.chamber == 'upper').all():
+    #     counter += 1
+    #     print off.fullname
+    #     off.get_pr_urls()
+    #     print "Found %s Press Releases to check." % (len(off.all_prs))
+    #     off.add_pr_urls_to_db()
+    #     print "Gathered %s so far" % (counter)
 
-    # ### Download Press Releases for State House ###
-    print "Getting Press Release URLs for State House"
-    print "%s Total Press Releases to Gather" % (len(session.query(official_prs).filter(official_prs.chamber == 'lower').all()))
-    counter = 0
-    for off in session.query(official_prs).filter(official_prs.chamber == 'lower').all():
-        print off.fullname
-        counter += 1
-        print "Found %s Press Releases to check." % (len(off.all_prs))
-        off.get_pr_urls()
-        off.add_pr_urls_to_db()
-        print "Gathered %s so far" % (counter)
+    ### Download Press Releases for State House ###
+    # print "Getting Press Release URLs for State House"
+    # print "%s Total Press Releases to Gather" % (len(session.query(official_prs).filter(official_prs.chamber == 'lower').all()))
+    # counter = 0
+    # for off in session.query(official_prs).filter(official_prs.chamber == 'lower').all():
+    #     # print off.fullname
+    #     counter += 1
+    #     # print "Found %s Press Releases to check." % (len(off.all_prs))
+    #     off.get_pr_urls()
+    #     off.add_pr_urls_to_db()
+    #     print "Gathered %s so far" % (counter)
 
     ### Download HTML for Press Releases ###
     dl_press_releases()

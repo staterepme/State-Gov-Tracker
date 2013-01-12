@@ -17,3 +17,6 @@ twitter_oauth_token_secret = ''
 ## Facebook Credentials ##
 fb_app_id = ''
 fb_app_secret = ''
+
+## Bing API Key ##
+BING_KEY = ''

@@ -5,11 +5,22 @@
 # Project:  State Gov Track
 # Task:     Function for Collecting last N tweets, returns tuple of text + post-date
 
-from twython_oembed import Twython
-from login_credentials import *
-from load_database import *
+from twython import Twython
 from datetime import datetime
 from dateutil import tz
+
+import os, sys
+
+# Need to add django application to path #
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+split_path = os.path.split(parentdir)
+sys.path.insert(0, split_path[0]) 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+
+from state_gov_tracker_app.models import *
+from state_gov_tracker_app.login_credentials import *
+
+
 t = Twython(app_key=twitter_app_key,
             app_secret=twitter_app_secret,
             oauth_token=twitter_oauth_token,
@@ -26,18 +37,14 @@ def get_official_timeline(handle, num_tweets):
 
 def download_first_tweets(num_tweets=100):
     """
-    Takes input_file that is a .csv file delimited
-    with commas where the first column is the
-    legislator ID, second column is their facebook
-    ID, and the third column is their twitter handle.
-
     Calls to the twitter API for each member,
-    downloading their last 20 tweets and returns them into a dictionary.
+    downloading their last 100 tweets and returns them into a dictionary.
     """
-    member_data = session.query(social_media_ids).all()
+    member_data = Officials.objects.filter(active='True').only('legid', 'twitter')
     dict_list = []
-    for member in member_data:
-        if member.twitter != "":
+    for counter, member in enumerate(member_data):
+        print counter
+        if member.twitter != None and member.twitter != '':
             try:
                 user_tl = get_official_timeline(member.twitter, num_tweets)
             except:
@@ -82,7 +89,7 @@ def downloaded_tweets():
     """Returns list of tweet IDs that have
     already been downloaded"""
     tweet_ids = []
-    for tweet in session.query(official_tweets).all():
+    for tweet in OfficialTweets.objects.only('tweet_id').all():
         tweet_ids.append(tweet.tweet_id)
     return tweet_ids
 
@@ -93,20 +100,18 @@ def add_tweets_to_db(list_of_dictionary_tweets):
         if tweet['tweet_id'] in existing_tweets:
             continue
         else:
-            new_tweet = official_tweets(legid=tweet['legid'],
+            new_tweet = OfficialTweets(legid=tweet['legid'],
                 tweet=tweet['text'].encode('utf-8'),
                 tweet_id=tweet['tweet_id'],
                 timestamp=tweet['timestamp'])
-            session.add(new_tweet)
-            session.commit()
+            new_tweet.save()
 
 
 def add_oembed_codes():
-    for entry in session.query(official_tweets).filter(official_tweets.oembed == None).order_by(official_tweets.timestamp.desc()).all():
-        # print entry.timestamp
+    for counter, entry in enumerate(OfficialTweets.objects.filter(oembed='').order_by('-timestamp')):
+        print counter
         entry.oembed = getOembed(entry.tweet_id)
-        session.add(entry)
-        session.commit()
+        entry.save()
 
 
 def getOembed(id_str):

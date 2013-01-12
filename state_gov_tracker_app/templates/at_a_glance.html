@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+{% extends "base_full.html" %}
+
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+{% block page_content %}
+
+<section id="content"><!-- Start Main Content -->
+    <h1>Pennsylvania State Government at a Glance</h1>
+    <div class="row-fluid">
+        <div class="span12" id="big_graph">
+            <svg id="summary" style="height:250px;"></svg>
+            <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+            <script type="text/javascript">
+                function draw_graph(data) {
+                    var margin= 50,
+                    side_margin = 40,
+                    width = $("#big_graph").width(),
+                    height = 200;
+
+                    var x = d3.time.scale()
+                        .range([0+side_margin, width-side_margin]);
+
+                    var y = d3.scale.linear()
+                        .range([height, 0+margin]);
+
+                    var formatShortDate = d3.time.format("%m/%d")
+
+                    if(width<600)
+                    {
+                        var num_ticks = 4;
+                    }
+                    else
+                    {
+                        var num_ticks = 8;
+                    }
+
+                    var xAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient("bottom")
+                        .ticks(num_ticks)
+                        .tickFormat(formatShortDate);
+                    
+                    var line = d3.svg.line()
+                        .x(function(d) { return x(d.date); })
+                        .y(function(d) { return y(d.count); });
+
+                    var svg = d3.select("svg#summary")
+                        .append("svg")
+                        .attr("width", width)
+                        .attr("height", height);
+
+                    var line_graph = d3.select("svg#summary")
+                        .append("g")
+                        .attr("width", width)
+                        .attr("height", height);
+
+                    var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+                    data.forEach(function(d) {
+                        d.date = parseDate(d.date);
+                        d.count =  +d.count;
+                    });
+
+                    x.domain(d3.extent(data, function(d) { return d.date; }));
+                    y.domain(d3.extent(data, function(d) { return d.count; }));
+
+                    var y_scale = d3.scale.linear()
+                        .range([height, margin])
+                        .domain(d3.extent(data, function(d) { return d.count; }));
+
+                    var yAxis = d3.svg.axis()
+                        .scale(y_scale)
+                        .orient("left")
+                        .ticks(5);
+
+                    line_graph.append("g")
+                      .attr("class", "x axis")
+                      .attr("transform", "translate(0," + height + ")")
+                      .call(xAxis);
+
+
+                    line_graph.append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + 30 + ", 0 )")
+                        .call(yAxis);
+
+                    line_graph.append("path")
+                        .datum(data)
+                        .attr("class", "line")
+                        .attr("d", line);
+
+                    line_graph.selectAll("circle")
+                        .data(data)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", function(d) {return x(d.date)})
+                        .attr("cy", function(d) {return y_scale(d.count)})
+                        .attr("r",3)
+                        .attr("class", "circle");
+                };
+            </script>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6" id="top_graph">
+            <h2>Most Tweets in Last 7 Days</h2>
+
+            <div id="top_legislators" style="height:450px; margin-top:-50px;"></div>
+            <script type="text/javascript">
+                function draw_bars(data) {                    
+                    var margin= 50,
+                        side_margin = 40,
+                        width = $("#top_graph").width(),
+                        height = 400;
+
+                    var y = d3.scale.ordinal()
+                        .domain(data.map(function(d) { return d.legid; }))
+                        .rangeRoundBands([height, 0+margin], .1);
+
+                    var x = d3.scale.linear()
+                        .domain([0, d3.max(data, function(d) {return d.count})])
+                        .range([0, width-side_margin]);
+
+                    var xAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient("bottom");
+
+                    var yAxis = d3.svg.axis()
+                        .scale(y)
+                        .orient("left");
+
+                    var svg = d3.select("#top_legislators")
+                        .append("svg")
+                            .attr("width", width)
+                            .attr("height", height + margin)
+                        .append("svg:g")
+                            .attr("transform", "translate(20,0)");
+
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                    svg.selectAll("g.bar")
+                          .data(data)
+                        .enter().append("rect")
+                          .attr("class", "total_tweets")
+                          .attr("y", function(d) { return y(d.legid); })
+                          .attr("width", function(d) { return x(d.count); })
+                          // .attr("x", function(d) { return x(d.count); });
+                          .attr("height", y.rangeBand());
+
+                    svg.selectAll("g.text")
+                        .data(data)
+                        .enter().append("text")
+                        .attr("x", 0)
+                        .attr("y", function(d) {return y(d.legid); })
+                        .attr("dx", 1.5)
+                        .attr("dy", "1.75em")
+                        .attr("text-anchor", "start")
+                        .style("fill", "white")
+                        .text(function(d) {return d.name})
+                };
+
+
+                {% autoescape off %}
+                    var bar_data = {{ top_tweeters }};
+                {% endautoescape %}
+                draw_bars(bar_data);
+            </script>
+        </div>
+        <div class="span6">
+            <h2>Tweets</h2>
+        <div class="at_a_glance_div recent_tweets">
+            
+                <div class="activity_stuff">
+                {% if tweets %}
+                    {% autoescape off %}
+                    {% for tweet in tweets %}
+                        <div class="activity-entry">
+                            <div class="vote_div">
+                                <i class="icon-thumbs-up icon-white" onclick="vote('1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');"></i>
+                                <div style="text-align:center;" id="num_votes_{{tweet.pk}}_state_gov_tracker_appOfficialTweets">{{ tweet.vote_total }}</div>
+                                <i class="icon-thumbs-down icon-white" onclick="vote('-1', '{{tweet.pk}}', 'state_gov_tracker_app.OfficialTweets');"></i>
+                            </div>
+                            <div class="activity-text">
+                            {{ tweet.tweet|urlizetrunc:30 }} | <span class="leg_activity_nav"><a href="{{ tweet.url }}" target="_blank">{{ tweet.timestamp }}</a></span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% endautoescape %}
+                {% else %}
+                <div class="activity-entry">
+                    <p>We couldn't find any Tweets from your Representative. Contact them to let them know they should use Twitter to keep their constituents informed about their activities and state politics!</p>
+                    <p>If you think there is a Twitter account for this representative, send us an <a href="mailto:pastategovtracker@gmail.com">e-mail!</a></p>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End Main Content -->
+
+<script type="text/javascript">
+    {% autoescape off %}
+        var data_points = {{ tweet_list }};
+    {% endautoescape %}
+    draw_graph(data_points);
+</script>
+
+<script type="text/javascript">
+    $(window).resize( function() {
+        $('#summary').empty();
+        {% autoescape off %}
+            var new_data = {{ tweet_list }};
+        {% endautoescape %}
+        draw_graph(new_data);
+        $('#top_legislators').empty();
+        draw_bars(bar_data);
+    });
+</script>
+
+{% endblock %}

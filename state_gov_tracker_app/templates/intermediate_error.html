@@ -1,0 +1,29 @@
+{% extends "base_full.html" %}
+
+{% block page_content %}
+
+    <section id="content"><!-- Start Main Content -->
+        <div class="search_results">
+            <div class="row-fluid intermediate-info-wrapper">
+                <div class="span4 offset4">
+                    {% if places %}
+                        <p class="lead">We found a few addresses in Pennsylvania that matched your search. Are any of these correct?</p>
+                        {% for place in places %}
+                            <p><a href="/results?lat={{place.lat}}&lng={{place.lng}}">{{place.address}}</a></p>
+                        {% endfor %}
+                        <p class="lead">If none of these are correct, try again by adding a zipcode or city name to the search.</p>
+                    {% else %}
+                        <p class="lead">We could not match your search to an address in Pennsylvania. Please try again by adding the name of your city in Pennsylvania or a zipcode.</p>
+                    {% endif %}
+                    <form action="/results" method="get" class="form-inline address-search">
+                        <input type="text" name="q" placeholder="Enter Your Address" class="input-xlarge">
+                        <button type="submit" class="btn btn-success">Who's my rep?</button>
+                    </form>
+                </div>    
+                <div class="clear"></div>
+            </div>
+         </div>
+    </section><!-- End Main Content -->
+
+
+{% endblock %}

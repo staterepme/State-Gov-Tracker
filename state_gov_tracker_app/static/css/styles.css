@@ -108,6 +108,38 @@ form.address-search {
     margin-top: 200px;
 }
 
+.image-attribution2 {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+}
+
+.cicero-attribution {
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+    margin-top: 500px;
+}
+
+.powered_by_cicero {
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.attribution {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.powered_by_bing {
+    width: 50px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
 .image-attribution a, .image-attribution a:visited {
     color: #51A351;
 }
@@ -368,4 +400,54 @@ svg {
 /* Registration Pages */
 legend {
     color: white;
+}
+
+/* Browse Legislators Page */
+.browse_nav {
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+/* At A Glance Graph Elements */
+.line {
+  fill: none;
+  stroke: #426d9e;
+  stroke-width: 1.5px;
+}
+
+.circle {
+    fill: #426d9e;
+    stroke: #426d9e;
+}
+
+.total_tweets {
+    fill: #426d9e;
+}
+
+.graph_label {
+    color: white;
+}
+
+.at_a_glance_div {
+    padding: 5px;
+    height:400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.activity_stuff {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-right: 5px;
+    overflow: auto;
+    height: 390px;
+}
+
+.center { 
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
 }

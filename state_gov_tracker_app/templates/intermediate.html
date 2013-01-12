@@ -8,7 +8,11 @@
             <div class="row-fluid intermediate-info-wrapper">
                 <div class="span6 intermediate-info">
                     <h3>Senator</h3>
-                    <a href="/profile/{{upper.legid}}"><img src="{{ upper.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
+                    {% if upper.photourl %}
+                        <a href="/profile/{{upper.legid}}"><img src="{{ upper.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
+                    {% else %}
+                        <a href="/profile/{{upper.legid}}"><img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title=""></a>
+                    {% endif %}    
                     <h3>{{upper.fullname}}</a></h3>
                     <p>{{upperoffice.address|linebreaks}}</p>
                     <p>{{upperoffice.phone}}</p>
@@ -16,7 +20,11 @@
                 </div>
                 <div class="span6 intermediate-info">
                     <h3>Representative</h3>
-                    <a href="/profile/{{lower.legid}}"><img src="{{ lower.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
+                    {% if lower.photourl %}
+                        <a href="/profile/{{lower.legid}}"><img src="{{ lower.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
+                    {% else %}
+                        <a href="/profile/{{lower.legid}}"><img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title=""></a>
+                    {% endif %}    
                     <h3>{{lower.fullname}}</a></h3>
                     <p>{{loweroffice.address|linebreaks}}</p>
                     <p>{{loweroffice.phone}}</p>

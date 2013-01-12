@@ -7,7 +7,18 @@
 
 import sunlight
 import pprint
-from load_database import *
+
+import os
+import sys
+
+# Need to add django application to path #
+parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+split_path = os.path.split(parentdir)
+sys.path.insert(0, split_path[0])
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+
+from state_gov_tracker_app.models import *
+from state_gov_tracker_app.login_credentials import *
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -42,25 +53,6 @@ def get_recent_bills():
     return bills
 
 
-def get_vote_detail(bill_id_to_lookup):
-    """Takes a string bill_id from the pa_bills table, returns a list
-    whose first item is a dictionary with the bill's information and the
-    second item is a dictionary with keys=leg_id and values=vote"""
-    dl_votes = get_downloaded_votes()
-    bill = sunlight.openstates.bill_detail(bill_id=bill_id_to_lookup,
-        state="pa", session="2012-2013")
-    for vote in bill['votes']:
-        if vote['vote_id'] in dl_votes:
-            continue
-        new_vote = votes(bill_id=bill['bill_id'], vote_id=vote['vote_id'],
-            chamber=vote['chamber'], date=vote['date'], motion=vote['motion'],
-            num_no=vote['no_count'], num_yes=vote['yes_count'],
-            num_other=vote['other_count'], status=vote['passed'],
-            type=vote['type'], session=vote['session'])
-        session.add(new_vote)
-    session.commit()
-
-
 def get_legis_votes():
     """Takes vote id and downloads legislator votes and puts them in DB"""
     dl_votes = get_downloaded_votes()
@@ -75,7 +67,7 @@ def get_legis_votes():
         bill_id_to_lookup = session.query(votes).get(vote_id).bill_id
         # print bill_id_to_lookup
         bill_votes = sunlight.openstates.bill_detail(bill_id=bill_id_to_lookup,
-        state="pa", session="2012-2013")['votes']
+        state="pa", session="2013-2014")['votes']
         for vote in bill_votes:
             counter += 1
             if counter % 50 == 0:
@@ -100,39 +92,49 @@ def get_legis_votes():
 
 
 def add_bills_to_db():
-    dl_bills = get_downloaded_bills()
+    # Get Recent Bills from OpenStates #
     bills = get_recent_bills()
+    print "%s bills from current session" % (len(bills))
     counter = 0
     for bill in bills:
-        if bill['bill_id'] in dl_bills:
+        if PaBills.objects.filter(bill_id=bill['bill_id'], session=bill['session']).exists():
             continue
         counter += 1
-        new_bill = pa_bills(state="pa", session=bill['session'],
+        print counter
+        new_bill = PaBills(state="pa", session=bill['session'],
             title=bill['title'], type=bill['type'][0], chamber=bill['chamber'],
             created_at=bill['created_at'], updated_at=bill['updated_at'],
             bill_id=bill['bill_id'])
-        session.add(new_bill)
-    session.commit()
+        new_bill.save()
     print "Added a total of %s bills to database" % (counter)
 
 
 def add_vote_info_to_db():
-    dl_bills = get_downloaded_bills()
-    print "Must get %s bills and all their votes." % (len(dl_bills))
+    """Adds new votes to the database"""
     counter = 0
-    for bill_id in dl_bills:
+    for bill in PaBills.objects.filter(session="2013-2014"):
         counter += 1
-        if counter % 50 == 0:
-            print "Finished getting %s" % (counter)
-        get_vote_detail(bill_id)
+        print counter
+        bill_detail = sunlight.openstates.bill_detail(bill_id=bill.bill_id,
+            state="pa", session="2013-2014")
+        for vote in bill_detail['votes']:
+            if LegisVotes.objects.filter(vote_id=vote['vote_id']).exists():
+                continue
+            print "New Vote!"
+            new_vote = LegisVotes(bill_id=bill_detail['bill_id'], vote_id=vote['vote_id'],
+                chamber=vote['chamber'], date=vote['date'], motion=vote['motion'],
+                num_no=vote['no_count'], num_yes=vote['yes_count'],
+                num_other=vote['other_count'], status=vote['passed'],
+                type=vote['type'], session=vote['session'], pa_bills_pk=0)
+            new_vote.save()
 
 if __name__ == '__main__':
     # Add New Bills to DB #
-    add_bills_to_db()
+    # add_bills_to_db()
 
     # Download Vote Information for All Bills #
     add_vote_info_to_db()
 
     # Download Legislator Vote Information #
     # (How each individual actually voted) #
-    get_legis_votes()   
+    # get_legis_votes()
