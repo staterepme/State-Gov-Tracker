@@ -18,6 +18,12 @@ a, a:visited {
     height: 100%;
 }
 
+@media (max-width:600px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
 header {
     background: rgba(0, 0, 0, 0.5);
     padding: 10px;
