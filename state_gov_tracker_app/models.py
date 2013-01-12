@@ -164,6 +164,15 @@ class Officials(models.Model):
         db_table = u'officials'
 
 
+class LegsSocialmedia(models.Model):
+    legid = models.TextField(primary_key=True, blank=True)  # This field type is a guess.
+    twitter = models.TextField(blank=True)  # This field type is a guess.
+    facebook = models.TextField(blank=True)  # This field type is a guess.
+
+    class Meta:
+        db_table = u'legs_socialmedia'
+
+
 class PaBills(models.Model):
     state = models.TextField(blank=True)
     session = models.TextField(blank=True)
