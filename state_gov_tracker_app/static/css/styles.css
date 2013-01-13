@@ -457,3 +457,26 @@ legend {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* About Me Page */
+
+.staterep_team {
+    margin-top: 50px;
+}
+
+.staterep_team>p {
+    padding-left: 25px;
+}
+
+.staterep_team>h3 {
+    margin-top: 15px;
+}
+
+.basic_stats>ul {
+    list-style-type: none;
+}
+
+.basic_stats {
+    border-left: 1px solid white;
+}
+
