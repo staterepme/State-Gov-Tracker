@@ -56,11 +56,12 @@
                 </div>
             </div>
             <div class="span9" id="bio_right">
+            {% if ideology %}
                 <h2> Political Ideology in the State {{ official.chamber_name }} </h2>
                <p>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
                <svg id="pref_distribution">
                </svg>
-
+            {% endif %}
                <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
                 <script>
                     function draw_graph() {
