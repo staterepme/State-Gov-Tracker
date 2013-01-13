@@ -460,10 +460,6 @@ legend {
 
 /* About Me Page */
 
-.staterep_team {
-    margin-top: 50px;
-}
-
 .staterep_team>p {
     padding-left: 25px;
 }
@@ -472,12 +468,20 @@ legend {
     margin-top: 15px;
 }
 
-.basic_stats>ul {
-    list-style-type: none;
+.tabbable>li {
+    border: 1px solid white;
 }
 
-.basic_stats {
-    border-left: 1px solid white;
+.nav-tabs > li > a {
+    background: rgb(216, 216, 216);
+}
+
+.bio_text {
+    float: left;
+    width: 100%;
+    text-align: justify;
+}
+
 .pull_quote {
     float: right;
     max-width: 400px;
@@ -492,5 +496,13 @@ legend {
 }
 
 @media (max-width:600px) {
+  .pull_quote {
+    margin-left: 0;
+  }
+}
+
+.basic_stats>ul {
+    list-style-type: none;
+    padding-right: 5px;
 }
 
