@@ -478,5 +478,19 @@ legend {
 
 .basic_stats {
     border-left: 1px solid white;
+.pull_quote {
+    float: right;
+    max-width: 400px;
+    margin-left: 5px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+@media (max-width:600px) {
 }
 
