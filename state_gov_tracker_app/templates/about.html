@@ -6,24 +6,118 @@
 {% block page_content %}
 
 <section id="content"><!-- Start Main Content -->
-    <h1>About StateRep.Me</h1>
-	<article style="color:#FFFFFF">
-        <h2>Who We Are</h2>
-            <p>StateRep.Me started during the <a href="http://www.azavea.com/a/hacks-for-democracy">Hacks4Democracy</a> hackathon organized by <a href="http://www.azavea.com/">Azavea</a> and the <a href="http://mozillaopennews.org/">Knight-Mozilla OpenNews Foundation</a>. The goal is to provide an easy to use web-app for Pennsylvanians to monitor their state representatives' activities on the web and in government! To that end, StateRep.Me seeks to provide not only raw information similar to websites and services like <a href="http://openstates.org/">OpenStates</a>, <a href="http://votesmart.org/">Project Vote Smart</a>, and <a href="http://www.followthemoney.org/">Follow the Money</a> - which we rely on for some of our data - but to also provide context to this information for Pennsylvanians. Much of the data on our site is already out there; however, we feel it is hard for average citizens to aggregate and monitor the activities of their state representatives. If you have questions, comments, or concerns send us an <a href="mailto:pastategovtracker@gmail.com">e-mail</a>.</p>
-        <h2>Future Plans</h2>
-        <p>This is only the beginning for StateRep.Me - we have a number of ideas for how to help Pennsylvanians become better informed about politics in Harrisburg. We have a number of new features and plans in the works to keep Pennsylvanians informed and elected officials accountable.</p>
-        <br>
-        <dl>
-            <dt><i>Browse by Topics</i></dt>
-                <dd>Right now information for representatives is ordered chronologically. In the next few weeks we also want to organize information by topics to let you browse the activity of your representatives according to the issues you value most.</dd>
-            <dt><i>User Registration and Voting</i></dt>
-                <dd>We wish to allow users of MyRep.is to register with screenames and allow them to express their approval or disapproval of their representative's actions through "digital votes." These votes can serve as a running tally on your state representatives for when it comes time to vote.</dd>
-            <dt><i>Campaign Finance and Donations</i></dt>
-                <dd>Add date from Follow the Money and Influence Explorer.</dd>
-        </dl>
-        <h2>Services We Use</h2>
-
-        </article>
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="tabbable">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#about_staterepme" data-toggle="tab">About StateRep.Me</a></li>
+                    <li><a href="#staterepme_team" data-toggle="tab">The Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+    <div id="tab-content about_me" class="span10 offset1">
+        <div id="about_staterepme" class="tab-pane-active">
+        <h2>What is StateRep.Me?</h2>
+        <p>StateRep.Me was conceived and developed during Hacks4Democracy, a Fall 2012 Azavea-sponsored civic hackathon in Philadelphia, PA.  A collaborative project from Jason Blanchard, Josh Borkowski, Christopher Brown, Joshua Darr, Lauren Gilchrist, Christopher Nies, Andrew Thompson, and Nickolas Weingartner, StateRep.me compiles the votes, press releases, tweets, and Facebook posts of all Pennsylvania state legislators in one simple web portal to enable easy tracking of legislative actions by individual representatives. Searchable by address, the goal of the application is to increase legislator accountability and constituent engagement by reducing the time and effort it takes to monitor the Pennsylvania state legislature.</p>
+        <div class="tab-pane staterep_team" id="staterepme_team"> 
+            <h2>The StateRep.Me Team</h2>
+            <h3>Jason Blanchard</h3>
+            <div class="row-fluid">
+                <div class="span7">
+                    Jason is an education technologist that's fascinated by media/tech/code literacy and social empowerment through technology. He's originally from rural Massachusetts but does, in fact, pronounce his R's (even when drinkin' beeahs at a pahty). He loves being in Philly surrounded by so much open data and talented civic hackers.
+                </div>
+                <div class="span5 basic_stats">
+                    <ul>
+                        <li>Email: jas.blanchard [at] gmail.com</li>
+                        <li>Twitter: <a href="https://twitter.com/about__blank" target="_blank">@about__blank</a></li>
+                        <li>Day Job: Instructional Designer at Drexel University</li>
+                        <li>StateRep.Me Job: DevOps, UI/UX, organizing and finagling</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Chris Brown</h3>
+            <div class="row-fluid">
+                <div class="span7">
+                    Chris #1 is a PhD candidate in the Political Science Department at the University of Pennsylvania.  His research focuses on Congress and the application of natural language processing to help answer enduring questions about legislative activity.  Chris #1’s academic experience ranges from research to predict the spread of conventional weapons to using text from the Congressional Record to measure partisan rhetoric on political blogs.  Chris uses a variety of tools to get his work done, including R and Stata for statistical analyses; Python for text processing, web-scraping, and machine learning; and D3.js to produce visualizations for StateRep.Me.  When Chris #1 isn’t working on StateRep.Me he can be found obsessing over his NBA fantasy basketball team, finding some interesting data to scrape off the web, or baking cheesecakes.
+                </div>
+                <div class="span5 basic_stats">
+                    <ul>
+                        <li>Email: chris [at] cmbrown.org</li>
+                        <li>Twitter: <a href="https://twitter.com/notthatbreezy" target="_blank">@NotThatBreezy</a></li>
+                        <li>Day Job: Political Science PhD candidate, University of Pennsylvania</li>
+                        <li>StateRep.Me Job: Python Programmer, Analytics, Dataviz, and Cheesecake Baker</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Lauren Gilchrist</h3>
+            <div class="row-fluid">
+                <div class="span7">
+                    Lauren is the Manager of Research &amp; Analysis at Center City District (CCD), where she oversees demographic, economic, and real estate research for the city's largest business improvement district (check out some recent work on housing and retail).  A data producer and data user, Lauren brings a unique analytical perspective to the StateRep.Me team and other development projects.  Prior to moving to Philadelphia and joining CCD in September 2012, Lauren was a Research Analyst/Program Manager at the Center for Regional Economic Competitiveness (CREC) in Arlington, VA.  At CREC, Lauren managed a federal data delivery innovation project involving the Census Bureau, Bureau of Labor Statistics, and  Bureau of Economic Analysis; co-authored a study of U.S. manufacturing using real-time labor market information derived from web scraped job openings and a profile of Arizona's aerospace and defense sector; and supervised web redevelopment projects for the Council for Community &amp; Economic Research and Association of Public Data Users.  Lauren holds an MS in Public Policy &amp; Management from Carnegie Mellon, has lots of opinions about cities and economic development, and tries to keep the StateRep.Me fridge stocked with an excellent selection of beer and cheeses.
+                </div>
+                <div class="span5 basic_stats">
+                    <ul>
+                        <li>Email: lauren [at] staterep.me</li>
+                        <li>Twitter: <a href="https://twitter.com/lmgilchrist" target="_blank">@lmgilchrist</a></li>
+                        <li>Day Job: Manager of Research &amp; Analysis, Center City District</li>
+                        <li>StateRep.Me Job:Project Coordination/Organization, Marketing and Outreach, Big Picture Policy Thinking, Provider of Snacks &amp; Giver of Numbered Nicknames</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Christopher Nies</h3>
+            <div class="row-fluid">
+                <div class="span7">
+                    Chris #2 is a QA Engineer at DLC Solutions, where he ensures website quality (using both manual and automated testing), provides UI/UX feedback and design, and generally raises a ruckus.  Comfortable as a coder as well as a tester, Chris #2 works primarily in Python and JavaScript to develop tools to automate tasks that he doesn't really feel like doing manually (such as API testing and data analysis).  He's put his tool-building skills to work in industries as diverse as locomotive manufacture (GE Transportation), Pharmaceuticals (AstraZeneca), intellectual property law, and (of course) web design.  Passionate about the intersection of technology and urban life, Chris #2 wrote, recorded, and edited a podcast on urbanism and design for over a year, and has since brought his passion for urban living to the Philadelphia civic hacking community.  He enjoys coding, writing about bags, urban cycling, and a good IPA.
+                </div>
+                <div class="span5 basic_stats">
+                    <ul>
+                        <li>Email: chris [at] staterep.me</li>
+                        <li>Twitter: <a href="https://twitter.com/christophernies" target="_blank">@christophernies</a></li>
+                        <li>Day Job: QA Engineer, DLC Solutions</li>
+                        <li>StateRep.Me Job: Python Programmer, Site Tester, Snark artisan</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Andrew Thompson</h3>
+            <div class="row-fluid">
+                <div class="span7">
+                    Andrew is the Community Evangelist at Azavea, where he organizes and attends hackathons (like the Hacks for Democracy where StateRep.me was founded) and fosters growing user communities around Azavea's geospatial open source and API products.  The youngest member of the team, Andrew came to the Philadelphia area from Massachusetts 4 years ago to attend Haverford College.  He graduated in 2012 with a BA in Growth and Structure of Cities and a minor in Computer Science with more than enough other classes in between. The quintessential liberal arts grad, Andrew can talk urban policy and marketing with Lauren, politics with Chris #1, code with Jason and Chris #2, and even handle journalists given his former life as a reporter and editor with The Bi-College News. También, él puede hacer todas estas cosas en español si alguien quiere.  But that doesn't happen often. When he's not helping StateRep.me or at a hackathon for Azavea, you'll probably find Andrew at a Quaker gathering.
+                </div>
+                <div class="span5 basic_stats">
+                    <ul>
+                        <li>Email: athompson [at] azavea.com</li>
+                        <li>Twitter: <a href="https://twitter.com/AndrewBT" target="_blank">@AndrewBT</a></li>
+                        <li>Day Job: Community Evangelist, Azavea</li>
+                        <li>StateRep.Me Job: Jack of all trades, Master of none</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Nick Weingartner</h3>
+            <div class="row-fluid">
+                <div class="span7">
+                    Nick is a front-end web developer who specializes in UI/UX.  He has an irrational love of Javascript and CSS, as well as auteur-driven cinema (and who doesn't?).  He's excited about the potential of technology to help in civic-minded areas and can be found talking about Linux to anyone who will pretend to listen.
+                </div>
+                <div class="span5 basic_stats">
+                    <ul>
+                        <li>Email: nweingartner [at] gmail.com</li>
+                        <li>Twitter: <a href="https://twitter.com/streetlight_nw" target="_blank">@streetlight_nw</a></li>
+                        <li>Day Job: </li>
+                        <li>StateRep.Me Job: </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="data">
+            <h2>About the StateRep.Me Data</h2>
+            <p>StateRep.Me is constructed using a combination of publicly available and unique web-scraped data:</p>
+            <dl>
+                <dt>Cicero</dt>
+                <dd>Azavea’s Cicero tool, a custom geocoder that matches addresses to legislative districts and elected official information, powers StateRep.Me’s address search functionality.  The StateRep.Me team has also used it to develop lists of Twitter and Facebook handles for Pennsylvania representatives. </dd>
+            </dl>
+        </div>
+    </div>
+    </div>
 	<div class="clear"></div>
 </section><!-- End Main Content -->
 
