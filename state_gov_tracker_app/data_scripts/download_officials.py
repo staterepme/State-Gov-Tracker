@@ -29,16 +29,17 @@ def download_current_legislators():
     for counter, leg in enumerate(pa_legislators):
         if counter % 5 == 0:
             print counter
-        try:
+        if Officials.objects.filter(pk=leg['id']).exists():
             off = Officials.objects.get(pk=leg['id'])
             off.chamber = leg['chamber']
             off.createdat = leg['created_at']
             off.updatedat = leg['updated_at']
-            off.photourl = leg['photo_url']
+            if 'photo_url' in leg:
+                off.photourl = leg['photo_url']
             off.district = leg['district']
             off.party = leg['party']
             off.save()
-        except:
+        else:
             new_off = Officials(legid=leg['leg_id'],
                 fullname=leg['full_name'],
                 firstname=leg['first_name'],
