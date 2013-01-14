@@ -144,7 +144,10 @@
 
                         svg.selectAll("g.bar")
                               .data(data)
-                            .enter().append("rect")
+                            .enter()
+                              .append("a").attr("xlink:href", function(d) {
+                                return "/profile/"+d.legid; }).attr("target", "_blank")
+                              .append("rect")
                               .attr("class", "total_tweets")
                               .attr("y", function(d) { return y(d.legid); })
                               .attr("width", function(d) { return x(d.count); })
