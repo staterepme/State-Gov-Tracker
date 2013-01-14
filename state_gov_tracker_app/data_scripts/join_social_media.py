@@ -1,4 +1,5 @@
-# join_social_media.py #
+# Instead of doing a SQL join query and replacing the table I used this script to join the social_media id
+# table to the Officials central table #
 
 import os, sys
 
@@ -10,6 +11,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 from state_gov_tracker_app.models import *
 from state_gov_tracker_app.login_credentials import *
+
 
 def update_social_media():
     """Function that updates social media data from original table"""
