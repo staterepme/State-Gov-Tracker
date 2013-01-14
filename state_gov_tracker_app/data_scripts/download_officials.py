@@ -72,3 +72,7 @@ def update_active_status():
         openstates_detail = openstates.legislator_detail(leg.legid)
         leg.active = openstates_detail['active']
         leg.save()
+
+if __name__ == '__main__':
+    download_current_legislators()
+    update_active_status()
