@@ -119,7 +119,7 @@ def getOembed(id_str):
         oembed_dict = t.getOembedTweet(id=id_str)
         html_to_encode = oembed_dict['html']
         return html_to_encode.encode('utf-8')
-    except:
+    except ConnectionError:
         return None
 
 if __name__ == '__main__':
