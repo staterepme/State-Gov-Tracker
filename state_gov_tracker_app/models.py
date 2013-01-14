@@ -247,7 +247,7 @@ class PaLegisVotes(models.Model):
 
 class OfficialOffices(models.Model):
     office_legid = models.TextField(blank=True)
-    pk = models.IntegerField(primary_key=True)
+    office_pk = models.IntegerField(primary_key=True)
     address = models.TextField(blank=True)
     phone = models.TextField(blank=True)
     name = models.TextField(blank=True)
