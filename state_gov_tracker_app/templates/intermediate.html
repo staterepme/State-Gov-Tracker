@@ -6,19 +6,23 @@
         <p class="lead">These are the people that represent you:</p>
         <div class="search_results">
             <div class="row-fluid intermediate-info-wrapper">
-                <div class="span6 intermediate-info">
+                <div class="span3 offset3 intermediate-info">
                     <h3>Senator</h3>
                     {% if upper.photourl %}
                         <a href="/profile/{{upper.legid}}"><img src="{{ upper.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
                     {% else %}
                         <a href="/profile/{{upper.legid}}"><img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title=""></a>
-                    {% endif %}    
+                    {% endif %}
                     <h3>{{upper.fullname}}</a></h3>
-                    <p>{{upperoffice.address|linebreaks}}</p>
-                    <p>{{upperoffice.phone}}</p>
+                    {% if upperoffice.address %}
+                        <p>{{upperoffice.address|linebreaks}}</p>
+                        <p>{{upperoffice.phone}}</p>
+                    {% else %}
+                        <p>No Contact Information Available</p>
+                    {% endif %}
                     <p><a href="/profile/{{upper.legid}}">Learn more...</a></p>
                 </div>
-                <div class="span6 intermediate-info">
+                <div class="span3 intermediate-info">
                     <h3>Representative</h3>
                     {% if lower.photourl %}
                         <a href="/profile/{{lower.legid}}"><img src="{{ lower.photourl }}" width="200" height="270" border="0" alt="" title=""></a>
@@ -26,8 +30,12 @@
                         <a href="/profile/{{lower.legid}}"><img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title=""></a>
                     {% endif %}    
                     <h3>{{lower.fullname}}</a></h3>
-                    <p>{{loweroffice.address|linebreaks}}</p>
-                    <p>{{loweroffice.phone}}</p>
+                    {% if loweroffice.address %}
+                        <p>{{loweroffice.address|linebreaks}}</p>
+                        <p>{{loweroffice.phone}}</p>
+                    {% else %}
+                        <p>No Contact Information Available</p>
+                    {% endif %}
                     <p><a href="/profile/{{lower.legid}}">Learn more...</a></p>
                 </div
                 <div class="clear"></div>
