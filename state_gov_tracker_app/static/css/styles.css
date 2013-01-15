@@ -468,12 +468,12 @@ legend {
     margin-top: 15px;
 }
 
-.tabbable>li {
-    border: 1px solid white;
+.nav-tabs {
+    border: none;
 }
 
 .nav-tabs > li > a {
-    background: rgb(216, 216, 216);
+    background: #707070;
 }
 
 .bio_text {
@@ -482,27 +482,51 @@ legend {
     text-align: justify;
 }
 
-.pull_quote {
+#staterepme_team>h3 {
+    font-weight: 100;
+    font-size: 24px;
+    font-style: italic;
+}
+
+.pull_quote_left {
+    float: left;
+    max-width: 400px;
+    margin-right: 5px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: left;
+    font-size: 11px;
+    line-height: 12px;
+}
+
+.pull_quote_right {
     float: right;
     max-width: 400px;
     margin-left: 5px;
     background-color: white;
     color: black;
     border-radius: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-bottom: 5px;
+    padding: 5px;
     text-align: left;
+    font-size: 11px;
+    line-height: 12px;
 }
 
 @media (max-width:600px) {
-  .pull_quote {
+  .pull_quote_right {
+    margin-right: 0;
+  }
+  .pull_quote_left {
     margin-left: 0;
   }
 }
 
-.basic_stats>ul {
-    list-style-type: none;
-    padding-right: 5px;
+dt {
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-weight: 100;
+    font-size: 24px;
+    font-style: italic;
 }
-
