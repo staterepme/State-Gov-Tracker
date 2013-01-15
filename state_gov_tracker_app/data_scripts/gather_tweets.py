@@ -45,6 +45,7 @@ def download_first_tweets(num_tweets=100):
     for counter, member in enumerate(member_data):
         print counter
         if member.twitter != None and member.twitter != '':
+            print member.twitter
             try:
                 user_tl = get_official_timeline(member.twitter, num_tweets)
             except:
@@ -115,12 +116,9 @@ def add_oembed_codes():
 
 
 def getOembed(id_str):
-    try:
-        oembed_dict = t.getOembedTweet(id=id_str)
-        html_to_encode = oembed_dict['html']
-        return html_to_encode.encode('utf-8')
-    except ConnectionError:
-        return None
+    oembed_dict = t.getOembedTweet(id=id_str)
+    html_to_encode = oembed_dict['html']
+    return html_to_encode.encode('utf-8')
 
 if __name__ == '__main__':
     print "----------------------------"
