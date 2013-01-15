@@ -323,13 +323,13 @@ def get_kdensity_data(chamber_to_get):
 ## Admin Stuff ##
 class OfficialAdmin(admin.ModelAdmin):
     search_fields = ["fullname"]
-    list_display = ('firstname', 'lastname', 'active', 'facebook', 'twitter', 'photourl')
+    list_display = ('firstname', 'lastname', 'active', 'chamber', 'district', 'facebook', 'twitter')
     list_filter = ['active', 'chamber']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '240'})},
         models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 540})},
         models.IntegerField: {'widget': Textarea(attrs={'rows': 1, 'cols': 240})},
     }
-    fields = ("fullname", "chamber", "district", "party", "facebook", "twitter", "homepage", "photourl")
+    fields = ("fullname", "chamber", "district", "party", "facebook", "twitter", "homepage")
 
 admin.site.register(Officials, OfficialAdmin)
