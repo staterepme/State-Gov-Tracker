@@ -130,7 +130,11 @@ if __name__ == '__main__':
     print datetime.now()
     # print getOembed('233584713019817984')
     new_tweets = download_first_tweets()
+    # Get last 15 tweets from members who have tweeted #
+    new_tweets = download_first_tweets(num_tweets=15)
+    # Add tweets not yet in database to DB #
     add_tweets_to_db(new_tweets)
+    # Download and add oEmbed codes #
     add_oembed_codes()
 
     ## Convert Tweet Timezones ##
