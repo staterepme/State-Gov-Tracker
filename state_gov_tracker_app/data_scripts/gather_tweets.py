@@ -99,7 +99,6 @@ def add_tweets_to_db(list_of_dictionary_tweets):
     counter = 0
     print "%s tweets to check" % (len(list_of_dictionary_tweets))
     for tweet in list_of_dictionary_tweets:
-        if tweet['tweet_id'] in existing_tweets:
         counter += 1
         if counter % 20 == 0:
             print "Went through %s tweets so far" % (counter)
@@ -129,7 +128,6 @@ if __name__ == '__main__':
     print "----------------------------"
     print datetime.now()
     # print getOembed('233584713019817984')
-    new_tweets = download_first_tweets()
     # Get last 15 tweets from members who have tweeted #
     new_tweets = download_first_tweets(num_tweets=15)
     # Add tweets not yet in database to DB #
