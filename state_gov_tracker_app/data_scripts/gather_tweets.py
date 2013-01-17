@@ -96,9 +96,14 @@ def downloaded_tweets():
 
 
 def add_tweets_to_db(list_of_dictionary_tweets):
-    existing_tweets = downloaded_tweets()
+    counter = 0
+    print "%s tweets to check" % (len(list_of_dictionary_tweets))
     for tweet in list_of_dictionary_tweets:
         if tweet['tweet_id'] in existing_tweets:
+        counter += 1
+        if counter % 20 == 0:
+            print "Went through %s tweets so far" % (counter)
+        if OfficialTweets.objects.filter(tweet_id=tweet['tweet_id']).exists():
             continue
         else:
             new_tweet = OfficialTweets(legid=tweet['legid'],
