@@ -1,14 +1,48 @@
+/* HTML Reset */
+
 html, body {
     height: 100%;
 }
 
 body {
-    color: white;
+    color: rgb(231, 225, 225);
+    font-family: 'Helvetica Neue';
+    font-size: 16px;
+    font-weight: 300;
+}
+
+p {
+  font-weight: lighter;
 }
 
 a, a:visited {
     color: #51A351;
 }
+
+h1, h2, h3 {
+  font-family: "Georgia";
+  font-weight: normal;
+  color: rgb(231, 225, 225);
+}
+
+/* Header */
+
+h1.home-page-header {
+  font-family: "Helvetica Neue";
+  font-weight: bold;
+  color: white;
+}
+
+p.home-page-subtitle {
+  color: white;
+  font-family: "Helvetica Neue";
+  font-weight: 300;
+}
+
+
+
+
+/* Layout */
 
 .wrapper {
     width: 90%;
@@ -376,7 +410,6 @@ svg {
 }
 
 .body_blog > p {
-    font-weight: lighter;
     font-size: 16px;
 }
 
