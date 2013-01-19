@@ -245,6 +245,7 @@ section#content {
 
 h3.profile-contact-info {
   margin-bottom: 0px;
+  border-radius: 6px;
 }
 
 .profile-contact-address {
