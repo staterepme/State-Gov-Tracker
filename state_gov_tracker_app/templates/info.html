@@ -38,16 +38,18 @@
                        <img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
                     {% endif %}
                    <div style="margin-top:30px;"></div>
-                    <H3><a href="{{official.homepage}}" target='_blank'>Homepage</a></H3>
-    				<h3>Contact Information</h3>
+                    <div class="profile-homepage-link"><a href="{{official.homepage}}" target='_blank'>Homepage</a></div>
+    				<h3 class='profile-contact-info'>Contact Information</h3>
                     {% if official.email %}
                         <h4><a rel="tooltip" id="email" title="first tooltip" href="mailto:{{ official.email }}">E-Mail</a></h4>
                     {% endif %}
                     {% if offices %}
-                        {% for office in offices %}                            
-                            <h3>{{ office.name }}</h3>
-                            <h4>{{ office.address }}</h4>
-                            <h4>{{ office.phone }}</h4>
+                        {% for office in offices %}
+                            <div class='profile-contact-address'>
+                            <h4>{{ office.name }}</h4>
+                            <p>{{ office.address }}</p>
+                            <p>{{ office.phone }}</p>
+                            </div>
                         {% endfor %}
                     {% else %}
                         <p>Sorry, we could not find information about their office location. We are still updating information for new members of the General Assembly so please check back soon!</p>
@@ -211,7 +213,7 @@
                 </script>
                 <div class="row-fluid">
                     <div class="span6 widget press-releases">
-                    	<h3>Press Releases</h3>
+                    	<h3 class="no-margins">Press Releases</h3>
                         <div class="leg_stuff">
     					{% if press_releases %}
                             {% for release in press_releases %}
@@ -232,7 +234,7 @@
                     </div>
                     </div>
                     <div class="span6 widget votes">
-                        <h3>Votes</h3>
+                        <h3 class="no-margins">Votes</h3>
                         <div class="leg_stuff">
                         {% if votes %}
                             {% for v in votes %}
@@ -256,7 +258,7 @@
                 </div>
                 <div class="row-fluid">                
                 <div class="span6 widget recent_tweets">
-                	<h3>Tweets</h3>
+                	<h3 class="no-margins">Tweets</h3>
                         <div class="leg_stuff">
                     	{% if tweets %}
                             {% autoescape off %}
@@ -283,7 +285,7 @@
                 </div>
                 
                 <div class="span6 widget fb-posts">
-                	<h3>Facebook Posts</h3>
+                	<h3 class="no-margins">Facebook Posts</h3>
                     <div class="leg_stuff">
                     	{% if fb_posts %}
                             {% for fb_post in fb_posts %}

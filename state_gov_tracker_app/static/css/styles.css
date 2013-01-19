@@ -44,9 +44,6 @@ p.home-page-subtitle {
   font-weight: 300;
 }
 
-
-
-
 /* Layout */
 
 .wrapper {
@@ -98,6 +95,8 @@ header {
 #push, #footer {
     height: 80px;
 }
+
+/* Footer */
 
 #footer {
     background: rgba(0, 0, 0, 0.5);
@@ -239,14 +238,18 @@ section#content {
     border-radius: 6px;
 }
 
-h3 {
-    margin-top: -5px;
-    margin-bottom: 0px;
+.profile-homepage-link {
+  font-size: 1.5em;
+  margin-bottom: 15px;
 }
 
-h4 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: lighter;
+h3.profile-contact-info {
+  margin-bottom: 0px;
+}
+
+.profile-contact-address {
+  border: 1px solid rgb(78, 78, 78);
+  margin-bottom: 10px;
 }
 
 .icon-thumbs-up {
@@ -261,6 +264,10 @@ h4 {
 
 .press-releases {
     background-color: #845029;
+}
+
+h3.no-margins {
+  margin: 0px;
 }
 
 .votes {
@@ -281,7 +288,7 @@ h4 {
     margin-right: 5px;
     padding-right: 5px;
     overflow: auto;
-    height: 200px;
+    height: 190px;
 }
 
 .leg_activity_nav {
