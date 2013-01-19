@@ -389,6 +389,10 @@ svg {
     border-width: 1px;
 }
 
+.blog_post h1, .blog_post h2, .blog_post h3 {
+  color: rgb(48, 48, 48);
+}
+
 /*.blog_header > h1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 38.5px;
