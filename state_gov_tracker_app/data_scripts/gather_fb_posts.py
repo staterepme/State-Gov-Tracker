@@ -98,13 +98,13 @@ def download_fb_posts(app_id, app_secret, list_of_fb_ids):
         #     break
         try:
             posts = facebook_news_feed(app_id, app_secret, member_tuple[1])
+            for post in posts:
+                # print pp.pprint(post)
+                post[u'legid'] = member_tuple[0]
+                post[u'created_time'] = fix_fb_timestamp(post[u'created_time'])
+                dict_list.append(post)
         except:
             print "Could not get FB posts for %s" % (member_tuple[0])
-        for post in posts:
-            # print pp.pprint(post)
-            post[u'legid'] = member_tuple[0]
-            post[u'created_time'] = fix_fb_timestamp(post[u'created_time'])
-            dict_list.append(post)
     return dict_list
 
 
