@@ -55,40 +55,33 @@ def get_recent_bills():
 
 def get_legis_votes():
     """Takes vote id and downloads legislator votes and puts them in DB"""
-    dl_votes = get_downloaded_votes()
-    dl_legis_votes = get_downloaded_legis_votes()
-    votes_to_get = list(set(dl_votes) - set(dl_legis_votes))
-    print "Need to gather %s Votes" % (len(votes_to_get))
+    votes = LegisVotes.objects.filter(session="2013-2014")
     counter = 0
-    already_processed = []
-    for vote_id in votes_to_get:
-        if vote_id in already_processed:
+    for v in votes:
+        if PaLegisVotes.objects.filter(vote_id=v.vote_id).exists():
             continue
-        bill_id_to_lookup = session.query(votes).get(vote_id).bill_id
-        # print bill_id_to_lookup
-        bill_votes = sunlight.openstates.bill_detail(bill_id=bill_id_to_lookup,
-        state="pa", session="2013-2014")['votes']
+        bill_votes = sunlight.openstates.bill_detail(bill_id=v.bill_id, state="pa", session="2013-2014")['votes']
         for vote in bill_votes:
             counter += 1
+            print counter
             if counter % 50 == 0:
                 print "Finished getting %s Votes" % (counter)
-            already_processed.append(vote['id'])
+            bill = PaBills.objects.filter(bill_id=v.bill_id, session=vote['session']).get()
             for yes_vote in vote['yes_votes']:
-                new_legis_vote_yes = legis_votes(legid=yes_vote['leg_id'],
-                    bill_id=bill_id_to_lookup, vote=1, date=vote['date'],
-                    vote_id=vote['id'])
-                session.add(new_legis_vote_yes)
+                new_legis_vote_yes = PaLegisVotes(legid=yes_vote['leg_id'],
+                    bill_id=bill, vote=1, date=vote['date'],
+                    vote_id=v)
+                new_legis_vote_yes.save()
             for no_vote in vote['no_votes']:
-                new_legis_vote_no = legis_votes(legid=no_vote['leg_id'],
-                    bill_id=bill_id_to_lookup, vote=0, date=vote['date'],
-                    vote_id=vote['id'])
-                session.add(new_legis_vote_no)
+                new_legis_vote_no = PaLegisVotes(legid=no_vote['leg_id'],
+                    bill_id=bill, vote=0, date=vote['date'],
+                    vote_id=v)
+                new_legis_vote_no.save()
             for other_vote in vote['other_votes']:
-                new_legis_vote_other = legis_votes(legid=other_vote['leg_id'],
-                    bill_id=bill_id_to_lookup, vote=99, date=vote['date'],
-                    vote_id=vote['id'])
-                session.add(new_legis_vote_other)
-            session.commit()
+                new_legis_vote_other = PaLegisVotes(legid=other_vote['leg_id'],
+                    bill_id=bill, vote=99, date=vote['date'],
+                    vote_id=v)
+                new_legis_vote_other.save()
 
 
 def add_bills_to_db():
@@ -112,7 +105,7 @@ def add_bills_to_db():
 def add_vote_info_to_db():
     """Adds new votes to the database"""
     counter = 0
-    for bill in PaBills.objects.filter(session="2013-2014"):
+    for bill in PaBills.objects.filter(session="2013-2014")[240:]:
         counter += 1
         print counter
         bill_detail = sunlight.openstates.bill_detail(bill_id=bill.bill_id,
@@ -125,7 +118,7 @@ def add_vote_info_to_db():
                 chamber=vote['chamber'], date=vote['date'], motion=vote['motion'],
                 num_no=vote['no_count'], num_yes=vote['yes_count'],
                 num_other=vote['other_count'], status=vote['passed'],
-                type=vote['type'], session=vote['session'], pa_bills_pk=0)
+                type=vote['type'], session=vote['session'])
             new_vote.save()
 
 if __name__ == '__main__':
@@ -133,8 +126,8 @@ if __name__ == '__main__':
     # add_bills_to_db()
 
     # Download Vote Information for All Bills #
-    add_vote_info_to_db()
+    # add_vote_info_to_db()
 
     # Download Legislator Vote Information #
     # (How each individual actually voted) #
-    # get_legis_votes()
+    get_legis_votes()
