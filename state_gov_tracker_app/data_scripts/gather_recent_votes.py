@@ -47,12 +47,6 @@ def get_downloaded_legis_votes():
     return legis_vote_ids
 
 
-def get_recent_bills():
-    """Returns a List of Recent Bills."""
-    bills = sunlight.openstates.bills(state="PA", search_window="term")
-    return bills
-
-
 def get_legis_votes():
     """Takes vote id and downloads legislator votes and puts them in DB"""
     votes = LegisVotes.objects.filter(session="2013-2014")
@@ -64,6 +58,10 @@ def get_legis_votes():
         for vote in bill_votes:
             counter += 1
             print counter
+            print vote['id']
+            if PaLegisVotes.objects.filter(vote_id=vote['id']).exists():
+                print "Vote Already Entered"
+                continue
             if counter % 50 == 0:
                 print "Finished getting %s Votes" % (counter)
             bill = PaBills.objects.filter(bill_id=v.bill_id, session=vote['session']).get()
@@ -86,7 +84,7 @@ def get_legis_votes():
 
 def add_bills_to_db():
     # Get Recent Bills from OpenStates #
-    bills = get_recent_bills()
+    bills = sunlight.openstates.bills(state="PA", search_window="term")
     print "%s bills from current session" % (len(bills))
     counter = 0
     for bill in bills:
