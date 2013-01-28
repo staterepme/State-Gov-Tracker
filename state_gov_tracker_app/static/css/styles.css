@@ -165,8 +165,16 @@ header {
     padding: 3px;
     border-radius: 5px;
     color: white;
-    margin-bottom: 10px;
-    font-size: 0.7em;
+    margin-bottom: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 27px;
 }
 
 form.address-search {
