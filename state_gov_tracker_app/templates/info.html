@@ -58,9 +58,17 @@
             </div>
             <div class="span9" id="bio_right">
             {% if ideology %}
-                <h2> Political Ideology in the State {{ official.chamber_name }} </h2>
-                <p>Calculated using roll call votes in previous session</p>
-               <p>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</p>
+                <div class="row-fluid">
+                    <h2> Political Ideology in the State {{ official.chamber_name }}</h2>
+                </div>
+                <div class="row-fluid" style="margin-top:-20px;">
+                    <div class="span6">
+                        <h4>Calculated using roll call votes in previous session</h4>
+                    </div>
+                    <div class="span6">
+                        <h4>{{ official.rank_type }} Ranking of {{ official.fullname }}<br>{{ official.rank }} out of {{ official.num_rank }} (1 = most {{ official.rank_type }})</h4>
+                    </div>
+                </div>
                <svg id="pref_distribution">
                </svg>
             {% endif %}
