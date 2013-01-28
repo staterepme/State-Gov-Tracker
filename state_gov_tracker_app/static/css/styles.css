@@ -124,11 +124,17 @@ header {
 
 /* Footer */
 
-#footer {
+.footer {
     background: rgba(0, 0, 0, 0.5);
     width: 90%;
     margin: 0 auto;
     margin-top: 10px;
+}
+
+@media (max-width:600px) {
+    .footer {
+       width: 99%;
+    }
 }
 
 .footer-content {
