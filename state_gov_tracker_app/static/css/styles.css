@@ -34,6 +34,16 @@ h1 {
     word-spacing: 0em;
 }
 
+h2 {
+    font-family: 'Istok Web', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.4;
 }
 
 h3 {
