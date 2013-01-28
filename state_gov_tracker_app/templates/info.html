@@ -38,8 +38,7 @@
                        <img class="img-polaroid" src="/static/images/PhotoUnavailable.png" width="200" height="270" border="0" alt="Picture of {{ official.fullname }}" title="">
                     {% endif %}
                    <div style="margin-top:30px;"></div>
-                    <div class="profile-homepage-link"><a href="{{official.homepage}}" target='_blank'>Homepage</a></div>
-    				<h3 class='profile-contact-info'>Contact Information</h3>
+                    <div class="profile-homepage-link"><h3><a href="{{official.homepage}}" target='_blank'>Homepage</a></h3></div>
                     {% if official.email %}
                         <h4><a rel="tooltip" id="email" title="first tooltip" href="mailto:{{ official.email }}">E-Mail</a></h4>
                     {% endif %}
