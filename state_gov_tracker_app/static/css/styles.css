@@ -11,9 +11,6 @@ body {
     font-weight: 300;
 }
 
-p {
-  font-weight: lighter;
-}
 
 a, a:visited {
     color: #51A351;
@@ -360,6 +357,23 @@ h3.no-margins {
     letter-spacing: 0em;
     word-spacing: 0em;
     line-height: 1.4;
+}
+
+p {
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.4;
+    margin-bottom: 0px;
+}
+
+.body_blog>p {
+    margin-bottom: 10px;
 }
 }
 
