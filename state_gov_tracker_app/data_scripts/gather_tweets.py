@@ -109,14 +109,20 @@ def add_tweets_to_db(list_of_dictionary_tweets):
                 tweet=tweet['text'].encode('utf-8'),
                 tweet_id=tweet['tweet_id'],
                 timestamp=tweet['timestamp'])
-            new_tweet.save()
+            try:
+                new_tweet.save()
+            except:
+                continue
 
 
 def add_oembed_codes():
     for counter, entry in enumerate(OfficialTweets.objects.filter(oembed='').order_by('-timestamp')):
         print counter
         entry.oembed = getOembed(entry.tweet_id)
-        entry.save()
+        try:
+            entry.save()
+        except:
+            print "Could not save oEmbed Code! %s %s" % (entry.tweet, entry.tweet_id)
 
 
 def getOembed(id_str):
