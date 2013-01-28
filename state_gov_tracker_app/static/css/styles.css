@@ -351,6 +351,16 @@ h3.no-margins {
 
 .activity-text {
     margin-left: 28px;
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.4;
+}
 }
 
 /* Ideology Graphs */
