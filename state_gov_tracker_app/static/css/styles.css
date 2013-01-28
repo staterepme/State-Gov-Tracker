@@ -512,6 +512,18 @@ svg {
     color: black;
 }
 
+.byline {
+    font-family: 'Istok Web', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: .9;
+}
+
 .blog_time {
     font-variant: small-caps;
     margin-top: -15px;
