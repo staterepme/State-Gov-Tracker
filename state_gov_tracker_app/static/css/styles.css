@@ -89,6 +89,14 @@ header {
 
 .header-links li {
     display: inline;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
 }
 
 .search-again-form {
