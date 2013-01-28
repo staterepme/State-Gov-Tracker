@@ -60,10 +60,10 @@ h1.home-page-header {
   color: white;
 }
 
-p.home-page-subtitle {
-  color: white;
-  font-family: "Helvetica Neue";
-  font-weight: 300;
+h2.home-page-subtitle {
+    color: white;
+    margin-top: -5px;
+    margin-bottom: -5px;
 }
 
 /* Layout */
