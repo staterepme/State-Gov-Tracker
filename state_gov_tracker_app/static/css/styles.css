@@ -526,12 +526,12 @@ svg {
 
 .blog_time {
     font-variant: small-caps;
-    margin-top: -15px;
+    margin-top: -10px;
     text-align: left;
     border-bottom: solid;
     border-width: 1px;
-    width: 90px;
-    margin-bottom: 25px;
+    width: 100px;
+    margin-bottom: 20px;
 }
 
 /* Registration Pages */
