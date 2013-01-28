@@ -306,7 +306,7 @@ h3.profile-contact-info {
 }
 
 h3.no-margins {
-  margin: 0px;
+  padding-left: 5px;
 }
 
 .votes {
