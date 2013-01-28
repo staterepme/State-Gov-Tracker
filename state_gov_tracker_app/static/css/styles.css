@@ -23,6 +23,17 @@ h1, h2 {
   font-family: "Georgia";
   font-weight: normal;
   color: rgb(231, 225, 225);
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+}
+
 }
 
 h3 {
