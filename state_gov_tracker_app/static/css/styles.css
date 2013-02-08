@@ -79,6 +79,26 @@ h2.home-page-subtitle {
   }
 }
 
+/* Homepage */
+
+.home-search-bar {
+  margin-bottom: 10px !important;
+}
+
+#search-form {
+    margin-top: 60px;
+}
+
+.home-logo {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+
+/* Pages */
+
 header {
     background: rgba(0, 0, 0, 0.5);
     padding: 10px;
@@ -100,14 +120,6 @@ header {
     margin-bottom: 0px;
     margin-top: 30px;
     float: right;
-}
-
-.home-header {
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
 }
 
 .home-header h1 {
@@ -132,6 +144,10 @@ header {
     margin-top: 10px;
 }
 
+.footer .home-footer {
+  background-color: none;
+}
+
 @media (max-width:600px) {
     .footer {
        width: 99%;
@@ -153,10 +169,6 @@ header {
 
 .footer-links a, .footer-links a:visited {
     color: white;
-}
-
-#search-form {
-    margin-top: 100px;
 }
 
 .small-help-text a {
