@@ -68,7 +68,7 @@ h2.home-page-subtitle {
 .wrapper {
     width: 90%;
     margin: 0 auto -80px;;
-    min-height: 100%;
+    min-height: 90%;
     height: auto !important;
     height: 100%;
 }
@@ -96,6 +96,18 @@ h2.home-page-subtitle {
   margin-bottom: 10px;
 }
 
+.search-help .browse-legislators {
+  float: left;
+}
+
+.search-help .how-does-this-work {
+  float: right;
+}
+
+.search-help .example-address {
+  margin: 0 auto;
+  margin-top: 20px;
+}
 
 /* Pages */
 
@@ -142,6 +154,7 @@ header {
     width: 90%;
     margin: 0 auto;
     margin-top: 10px;
+    min-height: 80px;
 }
 
 .footer .home-footer {
@@ -184,7 +197,7 @@ header {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: none;
     text-decoration: none;
     letter-spacing: 0em;
