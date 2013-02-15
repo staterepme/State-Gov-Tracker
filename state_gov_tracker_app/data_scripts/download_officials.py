@@ -38,6 +38,8 @@ def download_current_legislators():
                 off.photourl = leg['photo_url']
             off.district = leg['district']
             off.party = leg['party']
+            if 'transparencydata_id' in leg:
+                off.transparencydataid = leg['transparencydata_id']
             off.save()
         else:
             new_off = Officials(legid=leg['leg_id'],
