@@ -121,10 +121,10 @@ def add_vote_info_to_db():
 
 if __name__ == '__main__':
     # Add New Bills to DB #
-    # add_bills_to_db()
+    add_bills_to_db()
 
     # Download Vote Information for All Bills #
-    # add_vote_info_to_db()
+    add_vote_info_to_db()
 
     # Download Legislator Vote Information #
     # (How each individual actually voted) #
