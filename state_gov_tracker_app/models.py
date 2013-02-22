@@ -283,9 +283,11 @@ def filter_press_releases(press_releases):
         if pr.pr_date == None:
             continue
         date_split = pr.pr_date.timetuple()
-        if int(date_split[0]) > 2012:
+        if int(date_split[0]) > 2013:
             continue
         if pr.pr_title == "":
+            continue
+        if len(pr.pr_title.split(" ")) < 2:
             continue
         if pr.pr_title != None:
             pr.pr_title = pr.pr_title
