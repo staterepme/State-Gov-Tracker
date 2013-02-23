@@ -124,6 +124,11 @@ class Officials(models.Model):
     homepage = models.TextField(blank=True)
     twitter = models.TextField(blank=True)
     facebook = models.TextField(blank=True)
+    personal_homepage = models.TextField(blank=True)
+    press_release_url = models.TextField(blank=True)
+    notes = models.TextField(blank=True)
+    xpath = models.TextField(blank=True)
+    press_release_url_dl = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.fullname
@@ -278,9 +283,11 @@ def filter_press_releases(press_releases):
         if pr.pr_date == None:
             continue
         date_split = pr.pr_date.timetuple()
-        if int(date_split[0]) > 2012:
+        if int(date_split[0]) > 2013:
             continue
         if pr.pr_title == "":
+            continue
+        if len(pr.pr_title.split(" ")) < 2:
             continue
         if pr.pr_title != None:
             pr.pr_title = pr.pr_title

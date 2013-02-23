@@ -141,6 +141,6 @@ if __name__ == '__main__':
     print datetime.now()
     pp = pprint.PrettyPrinter(indent=4)
     mem_list = get_facebook_ids()
-    print mem_list
+    # print mem_list
     new_posts = download_fb_posts(fb_app_id, fb_app_secret, mem_list)
     add_posts_to_db(new_posts)

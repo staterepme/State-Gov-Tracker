@@ -15,8 +15,8 @@ import Queue
 from urlparse import urlparse
 from hashlib import md5
 
-settings_dict = {'upper': {'Republican': {'xpath': '//p/a'},
-    'Democratic': {'xpath': '//h2/a'}}}
+x_path_dict = {'Republican': '//p/a',
+    'Democratic': '//h2/a'}
 
 
 def get_urls_with_prs_counter(first_url):
@@ -109,7 +109,7 @@ def get_urls_with_prs_repsen(first_url):
     # Not Pretty At All...3 potential ways senate republicans format urls for pages with press releases from a given year. Not surprisingly, a single Senator may have multiple formats as well. I try all 3 different ways, if the response for urllib2 isn't a 404 error I add it to the list. #
     link_patterns = [r"%s/press/%s/news-%s.htm", r"%s/press-%s/news-%s.htm", r"%s/%s-press/news-%s.htm"]
     for link_pattern in link_patterns:
-        for year in range(2007, 2012):
+        for year in range(2007, 2013):
             # print year
             try:
                 urllib2.urlopen(link_pattern % (base_url, year, year))
