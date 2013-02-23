@@ -161,6 +161,10 @@ header {
     min-height: 80px;
 }
 
+.no-background {
+    background: none;
+}
+
 .footer .home-footer {
   background-color: none;
 }
