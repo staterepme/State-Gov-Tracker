@@ -52,14 +52,12 @@ def get_legis_votes():
     votes = LegisVotes.objects.filter(session="2013-2014")
     counter = 0
     for v in votes:
-        if PaLegisVotes.objects.filter(vote_id=v.vote_id).exists():
-            continue
         bill_votes = sunlight.openstates.bill_detail(bill_id=v.bill_id, state="pa", session="2013-2014")['votes']
         for vote in bill_votes:
             counter += 1
             print counter
             print vote['id']
-            if PaLegisVotes.objects.filter(vote_id=vote['id']).exists():
+            if PaLegisVotes.objects.filter(vote_id=vote['id'], date=vote['date']).exists():
                 print "Vote Already Entered"
                 continue
             if counter % 50 == 0:

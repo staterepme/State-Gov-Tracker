@@ -31,7 +31,10 @@ def WhichRep(request):
     if 'lat' in request.GET:
         l.find_leg_districts(lat=request.GET['lat'], lng=request.GET['lng'])
     upper_leg = Officials.objects.filter(district=l.upper).filter(chamber="upper").filter(active="True")[0]
-    lower_leg = Officials.objects.filter(district=l.lower).filter(chamber="lower").filter(active="True")[0]
+    try:
+        lower_leg = Officials.objects.filter(district=l.lower).filter(chamber="lower").filter(active="True")[0]
+    except:
+        lower_leg = None
     try:
         upper_office = OfficialOffices.objects.filter(office_legid=upper_leg.legid).order_by('name').values()[0]
     except:
@@ -109,7 +112,7 @@ def profile(request, profile_legid):
     fb_posts = FbData.objects.filter(legid=profile_legid).order_by('-timestamp').select_related()[:10]
 
     ## Get Press Releases ##
-    press_releases = OfficialPressReleases.objects.only("pr_title", "pr_date", "pr_url").filter(pr_legid=profile_legid).order_by('-pr_date').select_related()[:10]
+    press_releases = OfficialPressReleases.objects.only("pr_title", "pr_date", "pr_url").filter(pr_legid=profile_legid).order_by('-pr_date').select_related()[:30]
     filtered_press_releases = filter_press_releases(press_releases)
 
     ## Ideology and Graph Data ##
