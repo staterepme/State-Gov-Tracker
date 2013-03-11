@@ -26,7 +26,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     ('^$', search_form),
     ('^results$', WhichRep),
-    ('^profile/(PAL\d+)/?', profile),
+    ('^profile/([A-Z][A-Z]L\d+)/?', profile),
     ('^pa-tweets$', pa_tweets),
     ('^about$', about_myrep),
     url(r'^blog$', Blog),
