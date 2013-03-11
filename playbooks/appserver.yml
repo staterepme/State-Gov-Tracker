@@ -1,0 +1,79 @@
+---
+- hosts: appserver
+
+  user: staterep
+  sudo: True
+
+  vars_files:
+    - ansible_vars.yml
+
+  vars:
+    static_path: $deploy_dir/static
+    media_path: $deploy_dir/media
+    env_dir: $deploy_dir/env
+    app_dir: $deploy_dir/app
+
+    unicorn_exec: $env_dir/bin/gunicorn
+
+  tasks:
+  - name: Git required
+    apt: pkg=git state=latest
+
+  - name: R-base
+    apt: pkg=r-base state=latest
+
+  - name: Install virtual env
+    pip: name=virtualenv
+
+  - name: Create dirs
+    file: dest=$item owner=staterep state=directory
+    with_items:
+      - $deploy_dir
+      - $static_path
+      - $media_path
+
+  - name: Deploy the Unicorns
+    template: src=assets/unicorn.j2 dest=/etc/init/staterep-unicorn.conf
+    notify:
+      - restart unicorns
+
+  - name: Grab code
+    git: dest=$app_dir
+         repo=$git_url
+         version=$git_branch
+    when_unset: $dev
+    notify:
+      - restart unicorns
+
+  - name: Create virtual env
+    command: virtualenv "$env_dir"
+             creates=$env_dir
+
+  - name: Install postgres (python)
+    pip: name=psycopg2
+         virtualenv=$env_dir
+
+  - name: Install app requirements
+    pip: requirements=$app_dir/requirements.txt
+         virtualenv=$env_dir
+
+  - name: Update local settings
+    template: src=assets/local_settings.j2
+              dest=$app_dir/local_settings.py
+    notify:
+      - restart unicorns
+
+  - name: Sync database
+    command: $env_dir/bin/python manage.py syncdb --noinput
+             chdir=$app_dir
+
+  - name: Update static files
+    command: $env_dir/bin/python manage.py collectstatic --noinput
+             chdir=$app_dir
+
+  - name: Make sure the unicorns are in flight
+    service: name=staterep-unicorn state=running
+
+  handlers:
+  - name: restart unicorns
+    action: service name=staterep-unicorn state=restarted

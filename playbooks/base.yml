@@ -1,0 +1,17 @@
+---
+- hosts: all
+  user: staterep
+  sudo: True
+
+  tasks:
+  - name: Install python dev dependencies
+    apt: pkg=python-dev state=latest
+
+  - name: Install python installers
+    apt: pkg=python-setuptools state=latest
+
+  - name: Hello pip!
+    easy_install: name=pip
+
+  - name: Install baseline compilers
+    apt: pkg=build-essential state=latest
