@@ -185,21 +185,23 @@ if __name__ == '__main__':
     pool = Pool(processes=10)
 
     # Download Press Release Links #
-    # print "Downloading Press Release Links"
-    # legids = [official.legid for official in Officials.objects.filter(active="True")]
-    # result = pool.map(get_press_release_links, legids)
+    print "Downloading Press Release Links"
+    legids = [official.legid for official in Officials.objects.filter(active="True")]
+    result = pool.map(get_press_release_links, legids)
 
     # Download Press Releases #
-    # print "Downloading Press Release Texts"
-    # press_release_ids = [pr.pr_key for pr in OfficialPressReleases.objects.filter(pr_html="")]
-    # print "%s press releases to download" % (len(press_release_ids))
-    # result = pool.map(download_press_release_text, press_release_ids)
+    print "Downloading Press Release Texts"
+    press_release_ids = [pr.pr_key for pr in OfficialPressReleases.objects.filter(pr_html="")]
+    print "%s press releases to download" % (len(press_release_ids))
+    result = pool.map(download_press_release_text, press_release_ids)
 
     # Find Missing Dates #
-    # find_missing_dates()
+    find_missing_dates()
 
     # Process HTML from Press Releases #
     print "Parsing Press Release HTML"
     pr_ids = [pr.pr_key for pr in OfficialPressReleases.objects.exclude(pr_date=None).filter(pr_text="")]
     print "%s press releases to parse for html" % (len(pr_ids))
     result = pool.map(parse_press_releases, pr_ids)
+    from django import db
+    db.close_connection()
