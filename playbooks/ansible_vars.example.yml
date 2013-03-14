@@ -1,0 +1,25 @@
+---
+postgres_name: staterep
+postgres_user: staterep
+postgres_password: staterep
+
+deploy_dir: /usr/local/staterep
+django_debug: False
+
+admin_name: 'Admin'
+admin_email: 'user@local.host'
+
+django_secret_key: 'your-secret-key-here'
+sunlight_key: 'your-sunlight-key'
+
+git_branch: 'master'
+git_url: 'https://github.com/staterepme/State-Gov-Tracker'
+
+cicero_key: ''
+cicero_user: ''
+
+bing_key: ''
+
+unicorn_log: /var/log/unicorn.log
+unicorn_port: 12000
+http_port: 80
