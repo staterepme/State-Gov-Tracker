@@ -244,7 +244,7 @@ class PaLegisVotes(models.Model):
     vote = models.IntegerField(null=True, blank=True)
     date = models.TextField(blank=True)
     vote_id = models.ForeignKey(LegisVotes)
-    legis_vote_key = models.IntegerField(primary_key=True)
+    legis_vote_key = models.AutoField(primary_key=True)
 
     class Meta:
         db_table = u'pa_legis_votes'
@@ -272,7 +272,7 @@ secretballot.enable_voting_on(OfficialPressReleases)
 ####################################
 
 ## Filters Press Releases that have incorrect dates ##
-## and incorrect titles                           
+## and incorrect titles
 
 
 def filter_press_releases(press_releases):
