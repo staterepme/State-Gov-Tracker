@@ -664,7 +664,7 @@ legend {
 .bio_text {
     float: left;
     width: 100%;
-    text-align: justify;
+    text-align: left;
 }
 
 .pull_quote_left {

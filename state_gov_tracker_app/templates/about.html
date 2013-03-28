@@ -1,63 +1,12 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-36138609-1']);_gaq.push(['_setDomainName','beta.staterep.me']);_gaq.push(['_setAllowLinker',true]);_gaq.push(['_setSiteSpeedSampleRate',100]);</script>
-        <!DOCTYPE HTML>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>StateRep.Me | Find Out Who Represents You</title>
-        <link rel="stylesheet" href="/static/css/colorbox.css"/>
-            <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-            <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-            <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
-            <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-        <link rel="stylesheet" href="http://beta.staterep.me/static/bootstrap/css/W.bootstrap.css.pagespeed.cf.Ol9tQAWAGc.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="http://beta.staterep.me/static/bootstrap/css/W.bootstrap-responsive.css.pagespeed.cf.pqLzRn0UPv.css" rel="stylesheet">
-        <link rel="stylesheet" href="http://beta.staterep.me/static/css/background-clean.css+styles.css.pagespeed.cc.Q88fdmmjvA.css"/>
-        <script src="http://beta.staterep.me/static/js/less-1.3.0.min.js.pagespeed.jm.gFt5T5NWtP.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic|Istok+Web|Open+Sans|Droid+Serif|Playfair+Display:400' rel='stylesheet' type='text/css'>
-        <script src="http://beta.staterep.me/static/js/jquery.colorbox-min.js.pagespeed.jm.tGB2Q2pquv.js"></script>
-        <script src="/static/js/keypress.js"></script>
-        <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src='http://www.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
-    </head>
-    <body data-spy="scroll" data-target=".bs-docs-sidebar">
-        <div class="wrapper full-page">
-                <!-- Being Wrapper -->
-                <div id="main_container" class="internal">
-                        <!-- Begin Main Container -->
-                        <header>
-                        <div class="row-fluid">
-                                <div class="header-title span6">
-                                        <h1 class="home-page-header"><a href="/">StateRep.Me</a></h1>
-                                </div>
-                                <div id="search_again" class="span6">
-                                        <!-- Start Search Again -->
-                                        <!--<h3>Search at a Different Address</h3>-->
-                                        <form action="/results" method="get" class="form-inline search-again-form">
-                                                <input type="text" name="q" placeholder="Search another address" class="field">
-                                                <button type="submit" class="btn btn-success">Who's my rep?</button>
-                                        </form>
-                                </div>
-                                <!-- End Search Again -->
-                        </div>
-                        <div class="header-links">
-                                <ul>
-                                        <li><a href="/">Home</a></li>
-                                         |
-                                        <li><a href="/about">About</a></li>
-                                         |
-                                        <li><a href="/blog">Blog</a></li>
-                                         |
-                                        <li><a href="/pa-tweets">PA Tweets</a></li>
-                                         |
-                                        <li><a href="/accounts/login">Login</a></li>
-                                </ul>
-                        </div>
-                        </header>
+<!DOCTYPE HTML>
+<html>
+{% extends "base_full.html" %}
+{% load comments %}
+{% block page_content %}
+{% load markup %}
+{% load humanize %}
                         <section id="content">
                         <!-- Start Main Content -->
                         <div class="row-fluid">
@@ -87,7 +36,7 @@
                                                                                  Day Job: Instructional Designer at Drexel University<br>
                                                                                  StateRep.Me Job: DevOps, UI/UX, organizing and finagling
                                                                         </div>
-                                                                         Jason is an education technologist that's fascinated by media/tech/code literacy and social empowerment through technology. He's originally from rural Massachusetts but does, in fact, pronounce his R's (even when drinkin' beeahs at a pahty). He loves being in Philly surrounded by so much open data and talented civic hackers.
+                                                                         <p>Jason is an education technologist that's fascinated by media/tech/code literacy and social empowerment through technology. He's originally from rural Massachusetts but does, in fact, pronounce his R's (even when drinkin' beeahs at a pahty). He loves being in Philly surrounded by so much open data and talented civic hackers.</p>
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -187,55 +136,4 @@
                         </div>
                         </section>
                         <!-- End Main Content -->
-                </div>
-                <div id="push">
-                </div>
-        </div>
-        <!-- End Wrapper -->
-        <div class="footer">
-                <div class="footer-content">
-                        <div class="row-fluid">
-                                <div class="span6">
-                                        <h4>Fork us on <a href="https://github.com/staterepme/State-Gov-Tracker" target="_blank">Github</a>.</h4>
-                                        <h4><a href="http://www.azavea.com/products/cicero/" target="_blank"><img class="powered_by_cicero" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIMAAAAXCAMAAAAftAwBAAAAq1BMVEX///8AAABubm5ubm4jHyBubm4jHyAjHyBubm5ubm5ubm5ubm5ubm5ubm5ubm4jHyAjHyBubm5ubm4jHyClnURubm5ubm6lnUR0lmUjHyAjHyAjHyAjHyAjHyAjHyAjHyAjHyBubm50lmUjHyClnUSlnUR0lmV0lmWlnUR0lmWlnUSlnUR0lmV0lmWlnUSlnUR0lmWlnUR0lmV0lmV0lmVubm4jHyB0lmWlnUSf6PM/AAAANXRSTlMAAAB3QESAv2bMEe4zu5nvnyKIIEBV3b9AEI8w31DPcK+q72BgMDBwn6/vIFAQz3AggIBgv/m1MsMAAAJYSURBVHhe7dNrb5swFAbgHRts7tfBBgGSNMvatWt3Pc7+/y/bOZjUqbZKW1UpUtVXCj554cMjY968pLwG/iv7dy7fuDiD4e2vY66/wLkNd3vg3J7RcGWLy/fnM3ywxdeLZzL0xuQ9gGc8gHEwRncAK1pzxeVaU7/OqV4tBkeAn4fnMSiz9grjzYbaTN6YF9Dlk7eURqt6NAXVw9FwvQeb74fF4CNiKsU/RKIvhI/SNWwYJoDOqNmgzAqgGGDHKxDGMxsaNjkAdd5scLvw4+AMmb/F4MkGUwCAVy8GmutlBa2pHO1AtVmzwRE+XpwYpGhQRjKVZSR9UcqGfgn/55VKnkRSZVtryLIqEZLQspkNCjjOQFFGUQY9lwCm59Ko2XDlCCeGVLaYpHETxlGbiioOhcQyTIO48rFFf56iOGxaa2j5wQyjBIPHDZrTHw3KGe4c4dTQpllTohQ+BhWKsMJyGyaYyTb2cSvsFGDj3kWDAQFkLB43gCv5YNwbbm4s4TMRnMG+4GQ2yAQbLOMgDnwySMn37CTRdwau222YufOgd86w1rR2NPQ9l8fzsDI7uM8lAf4wiDgVEhPRtqHIWowiDERWscFODU2pNfCDvCmYzAY92PPGhh0fwWmidQ3Q5cViKJjE38yS20+HvxqCGLESoqJLgFseQt4NuUwECENroDUVRAvFbBjNRk25/S66PFeFUdBNplcDFdZQ55Pq+St17+GhQSyJ/FKcJkoeTqW9bSc2SGuAUevNCqBWNV0KrRUAdD2Vni0pK647sHGb4AxPi8SEDC8rr/kNYbJaWGaiNlYAAAAASUVORK5CYII="></a> | Geocoding provided by <a href="http://www.bing.com/maps/" target="_blank"><img class="powered_by_bing" src="/static/images/bing_rgb.png" </a></h4>
-                                </div>
-                                <div class="span6 header-links footer-links">
-                                        <ul>
-                                                <li><a href="/">Home</a> |</li>
-                                                <li><a href="/about">About</a> |</li>
-                                                <li><a href="#">Blog</a> |</li>
-                                                <li><a href="/pa-tweets">PA Tweets</a> |</li>
-                                                <li><a href="mailto:pastategovtracker@gmail.com">Contact</a></li>
-                                        </ul>
-                                </div>
-                                <div class="clear">
-                                </div>
-                        </div>
-                </div>
-        </div>
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
-
-    <script src="http://twitter.github.com/bootstrap/assets/js/holder/holder.js"></script>
-    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-
-    <script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
-    </body>
-</html>
+{% endblock %}
