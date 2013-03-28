@@ -416,6 +416,19 @@ p {
     margin-bottom: 10px;
 }
 
+.body_blog>ul>li {
+    font-family: 'PT Serif', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.4;
+    margin-bottom: 0px;
+}
+
 h4 {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
