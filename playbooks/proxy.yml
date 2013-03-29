@@ -1,0 +1,33 @@
+---
+- hosts: proxy
+
+  user: staterep
+  sudo: True
+
+  vars_files:
+    - ansible_vars.yml
+
+  vars:
+    static_path: $deploy_dir/static/
+    media_path: $deploy_dir/media/
+
+  tasks:
+  - name: ensure nginx is at the latest version
+    apt: pkg=nginx state=latest
+
+  - name: Write the nginx site config file
+    template: src=assets/nginx.j2 dest=/etc/nginx/sites-available/staterep.conf
+    notify:
+      - restart nginx
+
+  - name: and make it active
+    file: state=link src=/etc/nginx/sites-available/staterep.conf path=/etc/nginx/sites-enabled/staterep
+    notify:
+      - restart nginx
+
+  - name: Turn off Default
+    file: state=absent path=/etc/nginx/sites-enabled/default
+
+  handlers:
+  - name: restart nginx
+    action: service name=nginx state=restarted

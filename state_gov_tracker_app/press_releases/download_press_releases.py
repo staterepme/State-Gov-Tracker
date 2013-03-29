@@ -4,7 +4,6 @@
 Downloads press releases and enters raw HTML into the database
 """
 
-from datetime import datetime
 import dateutil.parser as dup
 from readability.readability import Document
 import html2text
@@ -42,36 +41,39 @@ def get_press_release_links(legid):
     official = Officials.objects.get(pk=legid)
     print "Getting Legislator ID %s" % (official.legid)
     # If they have RSS feed link #
-    if official.press_release_url_dl:
-        rss_feed = feedparser.parse(official.press_release_url_dl)
-        for entry in rss_feed['entries']:
-            link_md5 = md5(entry['link']).hexdigest()
-            if OfficialPressReleases.objects.filter(pr_md5=link_md5).exists():
-                continue
-            else:
-                new_pr = OfficialPressReleases(pr_legid=legid,
-                    pr_url=entry['link'],
-                    pr_date=dup.parse(entry['published']),
-                    pr_title=entry['title'],
-                    pr_md5=link_md5)
-                new_pr.save()
-
-    # Download Links to Republican/Dem Senator Press Releases #
-    elif official.chamber == 'upper':
-        x_path_dict = {'Republican': '//p/a', 'Democratic': '//h2/a'}
-        html = urllib2.urlopen(official.press_release_url).read()
-        new_html = make_links_absolute(html, official.press_release_url)
-        html_tree = parse(StringIO(new_html))
-        for element in html_tree.xpath(x_path_dict[official.party]):
-            for links in element.iterlinks():
-                link_md5 = md5(links[2]).hexdigest()
+    try:
+        if official.press_release_url_dl:
+            rss_feed = feedparser.parse(official.press_release_url_dl)
+            for entry in rss_feed['entries']:
+                link_md5 = md5(entry['link']).hexdigest()
                 if OfficialPressReleases.objects.filter(pr_md5=link_md5).exists():
                     continue
                 else:
                     new_pr = OfficialPressReleases(pr_legid=legid,
-                        pr_url=links[2],
+                        pr_url=entry['link'],
+                        pr_date=dup.parse(entry['published']),
+                        pr_title=entry['title'],
                         pr_md5=link_md5)
                     new_pr.save()
+
+        # Download Links to Republican/Dem Senator Press Releases #
+        elif official.chamber == 'upper':
+            x_path_dict = {'Republican': '//p/a', 'Democratic': '//h2/a'}
+            html = urllib2.urlopen(official.press_release_url).read()
+            new_html = make_links_absolute(html, official.press_release_url)
+            html_tree = parse(StringIO(new_html))
+            for element in html_tree.xpath(x_path_dict[official.party]):
+                for links in element.iterlinks():
+                    link_md5 = md5(links[2]).hexdigest()
+                    if OfficialPressReleases.objects.filter(pr_md5=link_md5).exists():
+                        continue
+                    else:
+                        new_pr = OfficialPressReleases(pr_legid=legid,
+                            pr_url=links[2],
+                            pr_md5=link_md5)
+                        new_pr.save()
+    except:
+        print "Could not get press release for %s" % (legid)
     return official.legid
 
 
@@ -183,21 +185,23 @@ if __name__ == '__main__':
     pool = Pool(processes=10)
 
     # Download Press Release Links #
-    # print "Downloading Press Release Links"
-    # legids = [official.legid for official in Officials.objects.filter(active="True")]
-    # result = pool.map(get_press_release_links, legids)
+    print "Downloading Press Release Links"
+    legids = [official.legid for official in Officials.objects.filter(active="True")]
+    result = pool.map(get_press_release_links, legids)
 
     # Download Press Releases #
-    # print "Downloading Press Release Texts"
-    # press_release_ids = [pr.pr_key for pr in OfficialPressReleases.objects.filter(pr_html="")]
-    # print "%s press releases to download" % (len(press_release_ids))
-    # result = pool.map(download_press_release_text, press_release_ids)
+    print "Downloading Press Release Texts"
+    press_release_ids = [pr.pr_key for pr in OfficialPressReleases.objects.filter(pr_html="")]
+    print "%s press releases to download" % (len(press_release_ids))
+    result = pool.map(download_press_release_text, press_release_ids)
 
     # Find Missing Dates #
-    # find_missing_dates()
+    find_missing_dates()
 
     # Process HTML from Press Releases #
     print "Parsing Press Release HTML"
     pr_ids = [pr.pr_key for pr in OfficialPressReleases.objects.exclude(pr_date=None).filter(pr_text="")]
     print "%s press releases to parse for html" % (len(pr_ids))
     result = pool.map(parse_press_releases, pr_ids)
+    from django import db
+    db.close_connection()

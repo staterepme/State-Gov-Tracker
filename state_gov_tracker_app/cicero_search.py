@@ -1,7 +1,7 @@
 ## Functions to login to cicero
 ## Identify state representatives by address using cicero
 
-from login_credentials import BING_KEY, cicero_user, cicero_password
+from django.conf import settings
 import urllib, httplib2, mimetypes, os, sys, re, random, string
 from geopy import geocoders
 
@@ -24,8 +24,8 @@ def _filter_addresses(list_of_tuples):
 class LegislatorFinder():
     """Class to upper and lower state level districts for pennsylvania"""
     def __init__(self):
-        self.user = cicero_user
-        self.password = cicero_password
+        self.user = settings.CICERO_USER
+        self.password = settings.CICERO_KEY
         self.cicero_url = 'http://cicero.azavea.com'
         self.headers = {'Content-type': 'application/x-www-form-urlencoded'}
 
@@ -46,7 +46,7 @@ class LegislatorFinder():
 
     def geocode_address(self, origin_address):
         self.places = []
-        b = geocoders.Bing(BING_KEY)
+        b = geocoders.Bing(settings.BING_KEY)
         try:
             place, (lat, lng) = b.geocode(origin_address)
             self.places.append((place, lat, lng))

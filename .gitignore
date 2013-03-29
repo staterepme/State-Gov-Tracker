@@ -3,21 +3,13 @@
 *.db
 *.pyc
 *login_credentials.py
-settings.py
-<<<<<<< HEAD
 *.DS_Store
-<<<<<<< HEAD
 *settings.py
 StateGovTracker_Django
-=======
->>>>>>> f28983fe8b91dfc5812fb0ae6d2f628f01d7a6fc
-=======
-*DS_Store
->>>>>>> 3122056aca369f4be81356ed708a9d2d3fc74b1b
-
-.DS_Store
-
 data_scripts/load_database.py
+
+ansible_vars.yml
+local_settings.yml
 
 state_gov_tracker_app/.DS_Store
 
