@@ -6,6 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="static/js/less-1.3.0.min.js"></script>
 <script src="static/js/background-stretch.js"></script>
+<script src="static/js/disable_search.js"></script>
 <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/static/css/background-statehouse.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,13 +43,38 @@
 <body>
     <a href="https://github.com/staterepme/State-Gov-Tracker" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 1000" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
-    <img src="/static/images/harrisburg.jpg" id="bg" alt="">
-
-    <div class="wrapper"><!-- Being Wrapper -->
+    <div class="wrapper full-page"><!-- Being Wrapper -->
 
         {% block page_content %}{% endblock %}
 
     </div><!-- End Wrapper -->
+    </div>
+    </div>
+
+    <div id="push"></div>
+
+<div class="footer no-background">
+        <div class="footer-content">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="example-address"><span class="small-help-text">Example address: <a href="/results?q=1+Beaver+Stadium++University+Park%2C+PA+16802">1 Beaver Stadium  University Park, PA 16802</a></span></div>
+                    <h4><a href="http://www.azavea.com/products/cicero/" target="_blank"><img class="powered_by_cicero" src="/static/images/powered-by-cicero.png"></a> | Geocoding provided by <a href="http://www.bing.com/maps/" target="_blank"><img class="powered_by_bing" src="/static/images/bing_rgb.png"</a></h4>
+                </div>
+                <div class="span6 header-links footer-links">
+                    <ul>
+                        <li><a href="/">Home</a> |</li>
+                        <li><a href="/about">About</a> |</li>
+                        <li><a href="#">Blog</a> |</li>                
+                        <li><a href="/pa-tweets">PA Tweets</a> |</li>
+                        <li><a href="mailto:pastategovtracker@gmail.com">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+
 
 </body>
 </html>
