@@ -8,7 +8,7 @@
 
   tasks:
   - name: Install postgres 9.1
-    apt: pkg=postgresql state=latest
+    apt: pkg=postgresql state=latest update_cache=yes
 
   - name: Install postgres 9.1 (dev - for pythons psycopg2)
     apt: pkg=postgresql-server-dev-9.1 state=latest
