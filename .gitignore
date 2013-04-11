@@ -20,3 +20,4 @@ env/bin/activate.csh
 env/bin/activate.fish
 
 env/*
+/playbooks/ansible_vars.yml~
