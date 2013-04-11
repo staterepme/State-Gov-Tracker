@@ -15,7 +15,7 @@ Installation Notes
 ## Overview ##
 The following instructions will set up and install a StateRep.Me instance on a VM. The project will not have data in the database, but will include at least serve the homepage. (We are currently working on automating data deployment as well). If you run into issues, check the troubleshooting instructions below or open an issue on the bug tracker.
 
-The preferred installation also requires that you have (Vagrant)[http://www.vagrantup.com/] and (Ansible)[http://ansible.cc/]. See the documentation for those tools for installation instructions.
+The preferred installation also requires that you have [Vagrant](http://www.vagrantup.com/) and [Ansible](http://ansible.cc/). See the documentation for those tools for installation instructions.
 
 ## The Details ##
 Clone the repo (`git clone https://github.com/staterepme/State-Gov-Tracker.git`).
@@ -25,10 +25,10 @@ Copy and edit the example Ansible configuration file from the playbooks director
 
 Open `ansible_vars.yml` in your favorite text editor and fill in the following settings.
 
-+ `django_secret_key`: Your secret key - do not share this. See Django (documentation)[https://docs.djangoproject.com/en/dev/ref/settings/#secret-key].
-+ `sunlight_key`: StateRep.Me relies on some of the OpenStates APIs which require an API key. You can register (here)[http://services.sunlightlabs.com/accounts/register/] (don't worry it is free).
-+ `cicero_key` and `cicero_user`: You will also need Cicero API keys through [Azavea](http://www.azavea.com/products/cicero/). This service powers the matching of state legislators to longitude and latitude coordinates. You can register for a free trial (here)[http://www.azavea.com/products/cicero/free-trial/].
-+ `bing_key`: We use the Bing Maps API to geocode addresses. To use this service requires registration. Instructions to obtain an API key go (here)[http://msdn.microsoft.com/en-us/library/ff428642.aspx].
++ `django_secret_key`: Your secret key - do not share this. See Django [documentation](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key).
++ `sunlight_key`: StateRep.Me relies on some of the OpenStates APIs which require an API key. You can register [here](http://services.sunlightlabs.com/accounts/register/) (don't worry it is free).
++ `cicero_key` and `cicero_user`: You will also need Cicero API keys through [Azavea](http://www.azavea.com/products/cicero/). This service powers the matching of state legislators to longitude and latitude coordinates. You can register for a free trial [here](http://www.azavea.com/products/cicero/free-trial/).
++ `bing_key`: We use the Bing Maps API to geocode addresses. To use this service requires registration. Instructions to obtain an API key go [here](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
 
 After specifing the settings you are ready to run the `scripts/vagrant-ansible.sh` script. This will create an Ubuntu 12.04 VM for StateRep.Me that will have a local instance of StateRep.Me running and available at http://localhost:6060/.
 
