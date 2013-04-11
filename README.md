@@ -7,7 +7,7 @@ The goal of this project is to create a simple-to-use web application that makes
 
 This web application will allow users to identify state-level elected officials who represent them based on the user's address. Then users can follow links to web pages that have information on their state legislators. The web page includes basic information about the legislator in addition to other data a user may want to use to assess their behavior such as roll call votes, social media messages (Twitter, Facebook), campaign finance, etc.
 
-You can visit an example of this application that focuses on Pennsylvania at (StateRep.Me)[www.staterep.me]. We are currently working on cleaning up the project layout and making it easier to use in locales besides Pennsylvania.
+You can visit an example of this application that focuses on Pennsylvania at [StateRep.Me](www.staterep.me). We are currently working on cleaning up the project layout and making it easier to use in locales besides Pennsylvania.
 
 Installation Notes
 ------------
