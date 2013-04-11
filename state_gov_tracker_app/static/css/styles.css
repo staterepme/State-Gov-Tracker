@@ -9,6 +9,7 @@ body {
     font-family: 'Helvetica Neue';
     font-size: 16px;
     font-weight: 300;
+    background:url(../images/thatch.png) fixed;
 }
 
 a, a:visited {
@@ -67,7 +68,7 @@ h2.home-page-subtitle {
 .wrapper {
     width: 90%;
     margin: 0 auto -80px;;
-    min-height: 100%;
+    min-height: 90%;
     height: auto !important;
     height: 100%;
 }
@@ -77,6 +78,42 @@ h2.home-page-subtitle {
     width: 100%;
   }
 }
+
+/* Homepage */
+
+.home-search-bar {
+  margin-bottom: 10px !important;
+}
+
+#search-form {
+    margin-top: 60px;
+}
+
+.home-logo {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.search-help .browse-legislators {
+  float: left;
+}
+
+.search-help .how-does-this-work {
+  float: right;
+}
+
+.search-help .example-address {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.homepage p {
+  margin-top: 10px;
+}
+
+/* Pages */
 
 header {
     background: rgba(0, 0, 0, 0.5);
@@ -101,14 +138,6 @@ header {
     float: right;
 }
 
-.home-header {
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-}
-
 .home-header h1 {
     margin-bottom: 0px;
 }
@@ -129,6 +158,15 @@ header {
     width: 90%;
     margin: 0 auto;
     margin-top: 10px;
+    min-height: 80px;
+}
+
+.no-background {
+    background: none;
+}
+
+.footer .home-footer {
+  background-color: none;
 }
 
 @media (max-width:600px) {
@@ -154,10 +192,6 @@ header {
     color: white;
 }
 
-#search-form {
-    margin-top: 100px;
-}
-
 .small-help-text a {
     color: #51A351;
 }
@@ -171,7 +205,7 @@ header {
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: none;
     text-decoration: none;
     letter-spacing: 0em;
@@ -354,10 +388,10 @@ h3.no-margins {
 
 .activity-text {
     margin-left: 28px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'PT Serif', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: none;
     text-decoration: none;
     letter-spacing: 0em;
@@ -366,10 +400,10 @@ h3.no-margins {
 }
 
 p {
-    font-family: 'Playfair Display', serif;
+    font-family: 'PT Serif', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: none;
     text-decoration: none;
     letter-spacing: 0em;
@@ -380,6 +414,19 @@ p {
 
 .body_blog>p {
     margin-bottom: 10px;
+}
+
+.body_blog>ul>li {
+    font-family: 'PT Serif', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.4;
+    margin-bottom: 0px;
 }
 
 h4 {
@@ -617,7 +664,7 @@ legend {
 .bio_text {
     float: left;
     width: 100%;
-    text-align: justify;
+    text-align: left;
 }
 
 .pull_quote_left {
