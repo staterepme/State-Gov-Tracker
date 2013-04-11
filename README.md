@@ -67,15 +67,15 @@ Contributors and the StateRep.Me Team
 ------------
 StateRep.Me would not be possible without the help of many individuals and organizations who have provided advice, answered questions, and helped with some of the coding.
 
-Jason Blanchard
-Chris Brown
-Joshua Darr
-Lauren Gilchrist
-Adam Hinz
-Charlie Milner
-Christopher Nies
-Andrew Thompson
-Nick Weingartner
+Jason Blanchard  
+Chris Brown  
+Joshua Darr  
+Lauren Gilchrist  
+Adam Hinz  
+Charlie Milner  
+Christopher Nies  
+Andrew Thompson  
+Nick Weingartner  
 
 License
 ------------
