@@ -29,7 +29,7 @@ class Command(BaseCommand):
             o = OfficialOffices()
             o.office_pk = pk
             o.office_legid=legid
-            o.address=office['address'],
+            o.address=office['address']
             o.phone=office['phone']
             o.name=office['name']
             o.save()
