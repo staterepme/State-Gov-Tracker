@@ -254,7 +254,7 @@ class OfficialOffices(models.Model):
     office_legid = models.TextField(blank=True)
     office_pk = models.IntegerField(primary_key=True)
     address = models.TextField(blank=True)
-    phone = models.TextField(blank=True)
+    phone = models.TextField(blank=True, null=True)
     name = models.TextField(blank=True)
 
     class Meta:
