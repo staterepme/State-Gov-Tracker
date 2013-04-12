@@ -119,9 +119,11 @@ def profile(request, profile_legid):
     official_object.get_pref_rank()
     try:
         ideology = Preferences.objects.get(legid=profile_legid).ideology
+        graph_data = get_kdensity_data(chamber_to_get=official_object.chamber)
     except:
         ideology = None
-    graph_data = get_kdensity_data(chamber_to_get=official_object.chamber)
+        graph_data = None
+
     return render_to_response('info.html',
         {'official': official_object,
         "legid": profile_legid,
