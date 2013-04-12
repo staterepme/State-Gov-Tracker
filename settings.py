@@ -146,11 +146,6 @@ LOGGING = {
     }
 }
 
-## STATE FILTER ##
-## Used to filter ambiguous addresses
-## When Geocoding
-STATE_FILTER = "CT"
-
 try:
     from local_settings import *
 except ImportError, e:

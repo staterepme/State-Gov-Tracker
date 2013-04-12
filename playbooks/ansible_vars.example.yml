@@ -23,3 +23,5 @@ bing_key: ''
 unicorn_log: /var/log/unicorn.log
 unicorn_port: 12000
 http_port: 80
+
+state: ''
