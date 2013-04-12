@@ -32,6 +32,11 @@ Open `ansible_vars.yml` in your favorite text editor and fill in the following s
 
 After specifing the settings you are ready to run the `scripts/vagrant-ansible.sh` script. This will create an Ubuntu 12.04 VM for StateRep.Me that will have a local instance of StateRep.Me running and available at http://localhost:6060/.
 
+Lastly, you will need to SSH into the VM (e.g. `vagrant ssh`) and adjust some settings for the Postgresql database. Specifically, because Postgres does not compare ints and integers by default, this can cause some errors with the current set up. If you do the following, error messages should clear up:
++ Sign into the DB as the superuser (postgres)
++ Select the staterep database (`\c staterep`)
++ Run the following command (`CREATE CAST (integer AS text) WITH INOUT AS IMPLICIT`)
+
 Let us know if you run into any other issues!
 
 ## Common Issues ##
