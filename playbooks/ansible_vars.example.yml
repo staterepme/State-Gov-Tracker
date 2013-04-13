@@ -24,7 +24,11 @@ unicorn_log: /var/log/unicorn.log
 unicorn_port: 12000
 http_port: 80
 
+
 twitter_app_key: ''
 twitter_app_secret: ''
 twitter_oauth_token: ''
 twitter_oauth_secret: ''
+
+state: ''
+

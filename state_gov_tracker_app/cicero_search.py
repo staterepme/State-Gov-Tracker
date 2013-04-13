@@ -16,7 +16,7 @@ def _filter_addresses(list_of_tuples):
     """ Helper function to filter out addresses not in PA """
     filtered_list = []
     for geocoded_address in list_of_tuples:
-        if geocoded_address[0].find(', PA ') != -1:
+        if geocoded_address[0].find(', {0} '.format(settings.STATE_FILTER)) != -1:
             filtered_list.append(geocoded_address)
     return filtered_list
 
