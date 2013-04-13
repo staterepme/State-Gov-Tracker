@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.db.models import Max
 
-from state_gov_tracker_app.models import Officials, OfficialOffices
+from state_gov_tracker_app.models import Officials
 from django.conf import settings
 
 import csv
@@ -23,12 +22,12 @@ class Command(BaseCommand):
         twitter_csv = open(args[0], 'r')
         csv_reader = csv.DictReader(twitter_csv)
         for obs in csv_reader:
-            try:
-                o = Officials.objects.only('legid', 'twitter')\
-                              .get(legid=obs['legid'])
-                o.twitter=obs['twitter']
-                o.save()
-            except:
-                print obs['legid']
-                print obs['fullname']
-                
+            if obs['legid'] != '':
+                try:
+                    o = Officials.objects.only('legid', 'twitter')\
+                                         .get(legid=obs['legid'])
+                    o.twitter=obs['twitter']
+                    o.save()
+                except:
+                    print "Warning: Failed to find {0} (id: {1}) in database"\
+                        .format(obs['fullname'], obs['legid'])
