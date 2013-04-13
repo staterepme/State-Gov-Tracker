@@ -35,7 +35,18 @@ After specifing the settings you are ready to run the `scripts/vagrant-ansible.s
 Lastly, you will need to SSH into the VM (e.g. `vagrant ssh`) and adjust some settings for the Postgresql database. Specifically, because Postgres does not compare ints and integers by default, this can cause some errors with the current set up. If you do the following, error messages should clear up:
 + Sign into the DB as the superuser (postgres)
 + Select the staterep database (`\c staterep`)
-+ Run the following command (`CREATE CAST (integer AS text) WITH INOUT AS IMPLICIT`)
++ Run the following command (`CREATE CAST (integer AS text) WITH INOUT AS IMPLICIT;`)
+
+## Loading Data ##
+We are working on making the initial loading and updates for data as easy as possible. Currently, loading legislators, loading their contact/office information, uploading twitter handles from a CSV, and downloading tweets are available through custom Django commands. Descriptions on how to get started for your state are below.
+
+First you need to SSH into the VM (`vagrant ssh`), activate your virtualenv (`source /usr/local/staterep/env/bin/activate`), and then navigate to the app (`cd /usr/local/staterep/app`).
+
+After you are in the correct directory you can begin loading data on the legislators for your state. To load a list of legislators and their offices into the database run  `python manage.py load_leg_data <2-letter state abbreviation>`. The 2-letter abbreviation tells the command which state to query OpenStates for.
+
+To set up twitter monitoring you need to create (or use the example file for PA) a CSV that has atleast 2 columns: `legid` and `twitter` that has the unique legislator id used in the Officials table and the Twitter handles for legislators. Each row in the CSV should be a legislator. Then run `python manage.py load_twitter_handles <path/to/csv>` where you specify the path to the CSV that you created in the previous step. This loads all twitter handles into the database. Lastly, to add actual tweets to the database you can run `python manage.py update_tweets`. This will download recent tweets for all the twitter handles you downloaded. Be aware - this is rate limited so if you do this too often you will hit the limit and have to wait to do it again.
+
+That is currently all we have set up in an easy to use format. We will be adding similar functionality for press-releases, votes, and facebook posts as well.
 
 Let us know if you run into any other issues!
 
