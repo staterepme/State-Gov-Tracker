@@ -89,10 +89,9 @@ class OfficialPressReleases(models.Model):
 class OfficialTweets(models.Model):
     legid = models.TextField(blank=True)
     tweet = models.TextField(blank=True)
-    tweet_key = models.IntegerField(primary_key=True)
     tweet_id = models.TextField(blank=True)
     oembed = models.TextField(blank=True)
-    timestamp = models.TextField(blank=True)
+    timestamp = models.DateTimeField(blank=True)
 
     def form_url(self, twitter_id):
         self.url = "https://twitter.com/%s/status/%s" % (twitter_id, self.tweet_id)
