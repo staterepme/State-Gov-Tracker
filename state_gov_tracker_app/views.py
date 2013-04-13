@@ -73,7 +73,7 @@ def pa_tweets(request):
     today = date.today()
     d = timedelta(days=30)
     filter_date = today - d
-    tweets = OfficialTweets.objects.filter(timestamp__gte=filter_date).extra({'created': "date(timestamp)"}).values('created').annotate(created_count=Count('tweet_key')).order_by('-created')
+    tweets = OfficialTweets.objects.filter(timestamp__gte=filter_date).extra({'created': "date(timestamp)"}).values('created').annotate(created_count=Count('id')).order_by('-created')
     tweet_list = []
     for tweet in tweets:
         x = tweet['created'].strftime("%Y-%m-%d")
