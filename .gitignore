@@ -21,3 +21,4 @@ env/bin/activate.fish
 
 env/*
 /playbooks/ansible_vars.yml~
+/scripts/do-ansible.sh
