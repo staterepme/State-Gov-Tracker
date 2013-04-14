@@ -124,10 +124,10 @@ class Officials(models.Model):
     twitter = models.TextField(blank=True)
     facebook = models.TextField(blank=True)
     personal_homepage = models.TextField(blank=True)
-    rss = models.TextField(blank=True)
-    xpath_pr = models.TextField(blank=True)
-    xpath_date = models.TextField(blank=True)
-    pr_url = models.TextField(blank=True)
+    press_release_url = models.TextField(blank=True)
+    notes = models.TextField(blank=True)
+    xpath = models.TextField(blank=True)
+    press_release_url_dl = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.fullname
