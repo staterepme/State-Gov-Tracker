@@ -33,7 +33,7 @@ Open `ansible_vars.yml` in your favorite text editor and fill in the following s
 + `sunlight_key`: StateRep.Me relies on some of the OpenStates APIs which require an API key. You can register [here](http://services.sunlightlabs.com/accounts/register/) (don't worry it is free).
 + `cicero_key` and `cicero_user`: You will also need Cicero API keys through [Azavea](http://www.azavea.com/products/cicero/). This service powers the matching of state legislators to longitude and latitude coordinates. You can register for a free trial [here](http://www.azavea.com/products/cicero/free-trial/).
 + `bing_key`: We use the Bing Maps API to geocode addresses. To use this service requires registration. Instructions to obtain an API key go [here](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
-
++ `state`: 2 letter postal abbreviation 
 After specifing the settings you are ready to run the `scripts/vagrant-ansible.sh` script. This will create an Ubuntu 12.04 VM for StateRep.Me that will have a local instance of StateRep.Me running and available at http://localhost:6060/.
 
 Lastly, you will need to SSH into the VM (e.g. `vagrant ssh`) and adjust some settings for the Postgresql database. Specifically, because Postgres does not compare ints and integers by default, this can cause some errors with the current set up. If you do the following, error messages should clear up:
@@ -90,8 +90,10 @@ StateRep.Me would not be possible without the help of many individuals and organ
 Jason Blanchard  
 Chris Brown  
 Joshua Darr  
-Lauren Gilchrist  
+Lauren Gilchrist 
+Georgia Guthrie
 Adam Hinz  
+Bennet Huber
 Charlie Milner  
 Christopher Nies  
 Andrew Thompson  
