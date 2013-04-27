@@ -20,6 +20,10 @@ The preferred installation also requires that you have [Vagrant](http://www.vagr
 ## The Details ##
 Clone the repo (`git clone https://github.com/staterepme/State-Gov-Tracker.git`).
 
+Install ansible and vagrant
++ `sudo apt-get install vagrant`
++ `pip install ansible`
+
 Copy and edit the example Ansible configuration file from the playbooks directory.
     cp playbooks/ansible_vars.example.yml playbooks/ansible_vars.yml
 
