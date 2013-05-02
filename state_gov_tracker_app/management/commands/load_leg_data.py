@@ -6,7 +6,7 @@ from django.conf import settings
 from sunlight import openstates
 
 class Command(BaseCommand):
-    args = '<two-digit state abbr>'
+    args = 'None'
     help = 'Load legislators for a given state'
 
     def add_specific_details(self, obj):
@@ -38,10 +38,10 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        if len(args) != 1:
+        if settings.STATE_FILTER == '':
             raise CommandError('Expected two digit state prefix')
 
-        legs = openstates.legislators(state=args[0],active=True)
+        legs = openstates.legislators(state=settings.STATE_FILTER ,active=True)
         self.stdout.write('Updating %s records\n' % len(legs))
 
         for leg in legs:
@@ -52,7 +52,7 @@ class Command(BaseCommand):
             o.middlename = ""
             o.fullname = " ".join([o.firstname, o.middlename, o.lastname])
             o.active = "True"
-            o.state = args[0]
+            o.state = settings.STATE_FILTER
             o.chamber = leg['chamber']
             o.district = leg['district']
             o.party = leg['party']
