@@ -4,6 +4,7 @@ from state_gov_tracker_app.models import PaBills, LegisVotes, PaLegisVotes
 from django.conf import settings
 from sunlight import openstates
 
+import sys
 ###
 # originally based on
 # gather_recent_votes.py:
@@ -15,17 +16,12 @@ from sunlight import openstates
 # Moved to django management command by Adam Hinz
 ###
 class Command(BaseCommand):
-    args = '<two-digit state abbr>'
+    args = 'None - uses state in local_settings.py'
     help = 'Update most recent bills for a given state'
 
     def handle(self, *args, **options):
-        if len(args) != 1:
-            raise CommandError('Expected two digit state prefix')
-
-        state = args[0]
-
-        self.update_bills(state)
-        self.update_votes(state)
+        self.update_bills(settings.STATE_FILTER)
+        self.update_votes(settings.STATE_FILTER)
 
     def votes_for_bill(self, bill):
         return openstates.bill_detail(bill_id=bill.bill_id, state=bill.state, session=bill.session)['votes']
@@ -33,7 +29,13 @@ class Command(BaseCommand):
     def update_votes(self, state):
         all_votes = []
         downloaded_votes = set([v.vote_id for v in LegisVotes.objects.all()])
+        sys.stdout.write("Downloading Votes for Bills Now\n")
+        sys.stdout.flush()
+        counter = 0
         for bill in PaBills.objects.all():
+            counter += 1
+            sys.stdout.write('\rFinished downloading votes for {0} bills'.format(counter))
+            sys.stdout.flush()
             bill_id = bill.bill_id
             for vote in self.votes_for_bill(bill):
                 vote_instance = LegisVotes(bill_id=bill, vote_id=vote['vote_id'],
