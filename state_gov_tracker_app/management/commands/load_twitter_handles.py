@@ -16,10 +16,7 @@ class Command(BaseCommand):
         the database with twitter handles.
         """
 
-        if len(args) != 1:
-            raise CommandError('Expected path to csv file')
-        
-        twitter_csv = open(args[0], 'r')
+        twitter_csv = open('raw_data/twitter/{0}.csv'.format(settings.STATE_FILTER), 'r')
         csv_reader = csv.DictReader(twitter_csv)
         for obs in csv_reader:
             if obs['legid'] != '':
