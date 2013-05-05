@@ -48,7 +48,7 @@ class Preferences(models.Model):
 
 class FbData(models.Model):
     legid = models.TextField(blank=True)
-    timestamp = models.TextField(blank=True)
+    timestamp = models.DateTimeField(blank=True)
     post = models.TextField(blank=True)
     post_id = models.TextField(blank=True)
     row_pk = models.IntegerField(primary_key=True)
