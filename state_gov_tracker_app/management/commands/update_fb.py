@@ -68,14 +68,16 @@ class Command(BaseCommand):
         total_o = len(officials)
         print "Downloading Facebook posts for {0} officials".format(total_o)
         for counter, o in enumerate(officials):
-            sys.stdout.write('\r{0} percent complete ({1}/{2})'\
-                         .format(counter/float(total_o), counter, total_o))
+            counter += 1
+            sys.stdout.write('\r{0:.2f} percent complete ({1}/{2})'\
+                         .format((counter/float(total_o))*100, counter, total_o))
             sys.stdout.flush()
             # Get legislator's Facebook identifier #
             leg_fb = self.parse_facebook_info(o.facebook)
             token = self.facebook_token(FB_ID, FB_SECRET)
             posts = self.news_feed(token, leg_fb)
             self.add_posts(o.legid, posts)
+        sys.stdout.write('\n')
 
     def news_feed(self, fb_token, leg_fb):
         """
