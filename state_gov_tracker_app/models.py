@@ -51,7 +51,6 @@ class FbData(models.Model):
     timestamp = models.DateTimeField(blank=True)
     post = models.TextField(blank=True)
     post_id = models.TextField(blank=True)
-    row_pk = models.IntegerField(primary_key=True)
     fb_time_added = models.DateTimeField(auto_now=True, auto_now_add=True)
 
     class Meta:
