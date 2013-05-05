@@ -38,6 +38,7 @@ class Command(BaseCommand):
         try:
             os.makedirs(os.path.split(path_to_file)[0])
         except OSError, e:
+            print e
             pass
     
     def write_csv(self):

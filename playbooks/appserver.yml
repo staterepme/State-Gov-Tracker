@@ -12,6 +12,7 @@
     media_path: $deploy_dir/media
     env_dir: $deploy_dir/env
     app_dir: $deploy_dir/app
+    data_dir: $deploy_dir/app/raw_data
 
     unicorn_exec: $env_dir/bin/gunicorn
 
@@ -31,6 +32,7 @@
       - $deploy_dir
       - $static_path
       - $media_path
+      - $data_dir
 
   - name: Deploy the Unicorns
     template: src=assets/unicorn.j2 dest=/etc/init/staterep-unicorn.conf
