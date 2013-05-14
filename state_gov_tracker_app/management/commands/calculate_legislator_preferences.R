@@ -74,8 +74,6 @@ if (up_sum$m > 15) {
     for (i in 1:length(combined$D1)) {
         combined$D1[i] <- -1*combined$D1[i]
     }
-    
-    dbWriteTable(conn, "preferences", combined_upper, overwrite=TRUE)
 } else {
     print("Not enough votes to calculate ideal points for upper chamber...")
 }
