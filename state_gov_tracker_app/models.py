@@ -37,11 +37,11 @@ class PreferencesKdensity(models.Model):
 
 class Preferences(models.Model):
     row_names = models.TextField(blank=True)
-    legid = models.TextField(blank=True, primary_key=True)
+    legid = models.TextField(blank=True)
     party = models.TextField(blank=True)
     chamber = models.TextField(blank=True)
     ideology = models.FloatField(null=True, blank=True)
-
+    time_added = models.DateTimeField(auto_now=True, auto_now_add=True)
     class Meta:
         db_table = u'preferences'
 
