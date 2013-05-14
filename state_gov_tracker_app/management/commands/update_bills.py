@@ -19,10 +19,10 @@ class Command(BaseCommand):
     help = 'Update most recent bills for a given state'
 
     def handle(self, *args, **options):
-        if len(args) != 1:
+        if len(settings.STATE_FILTER) != 2:
             raise CommandError('Expected two digit state prefix')
 
-        state = args[0]
+        state = settings.STATE_FILTER
 
         self.update_bills(state)
         self.update_votes(state)
