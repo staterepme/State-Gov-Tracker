@@ -25,3 +25,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.delete_csv()
+        self.calculate_preferences()
